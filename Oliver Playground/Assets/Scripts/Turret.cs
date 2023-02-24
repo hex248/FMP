@@ -7,13 +7,15 @@ public class Turret : MonoBehaviour
     [Header("Turret Details")]
     public int level = 1;
 
-    [Header("Settings")]
+    [Header("Turret Settings")]
     public LayerMask enemyLayer;
     public float shootSpeed = 0.5f;
-    public float bulletVelocity = 5.0f;
-    [Range(0.0f, 360.0f)]
-    public float turretHeadRotation;
     public float rotationSpeed = 5.0f;
+
+    public float projectileVelocity = 5.0f;
+    public float projectileLifetime = 5.0f;
+    public AnimationCurve projectileDecay;
+    public GameObject projectilePrefab;
 
     [Header("Detection Radius")]
     public float detectionRadius = 10.0f;
@@ -23,7 +25,7 @@ public class Turret : MonoBehaviour
     public LineRenderer detectionRadiusLineRenderer;
 
     [Header("Components")]
-    public GameObject turretHead;
+    public GameObject turretOrb;
 
     [Header("Internal Variables")]
     public GameObject target;
@@ -59,8 +61,7 @@ public class Turret : MonoBehaviour
     {
         detectionRadiusLineRenderer.positionCount = circleVertexCount + 1;
         detectionRadiusLineRenderer.useWorldSpace = false;
-        detectionRadiusLineRenderer.startColor = lineColor;
-        detectionRadiusLineRenderer.endColor = lineColor;
+        detectionRadiusLineRenderer.material.color = lineColor;
 
         float x;
         float y;
@@ -108,7 +109,7 @@ public class Turret : MonoBehaviour
     void RotateTowardsTarget()
     {
         // calculate target rotation with only y axis affected
-        Quaternion targetRotation = Quaternion.Euler(turretHead.transform.rotation.eulerAngles.x, Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up).eulerAngles.y + 180, turretHead.transform.rotation.eulerAngles.z);
-        turretHead.transform.rotation = Quaternion.Slerp(turretHead.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.Euler(turretOrb.transform.rotation.eulerAngles.x, Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up).eulerAngles.y + 180, turretOrb.transform.rotation.eulerAngles.z);
+        turretOrb.transform.rotation = Quaternion.Slerp(turretOrb.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }
