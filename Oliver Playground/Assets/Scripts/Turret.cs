@@ -7,15 +7,16 @@ public class Turret : MonoBehaviour
     [Header("Turret Details")]
     public int level = 1;
 
-    [Header("Turret Settings")]
+    [Header("Settings")]
     public LayerMask enemyLayer;
-    public float shootSpeed = 0.5f;
-    public float rotationSpeed = 5.0f;
-
+    public Transform projectileParent;
+    public float projectileHomingAmount = 1.0f;
+    public float projectileMaxVelocity = 5.0f;
     public float projectileVelocity = 5.0f;
     public float projectileLifetime = 5.0f;
     public AnimationCurve projectileDecay;
     public GameObject projectilePrefab;
+    public LayerMask crashLayer;
 
     [Header("Detection Radius")]
     public float detectionRadius = 10.0f;
@@ -29,6 +30,7 @@ public class Turret : MonoBehaviour
 
     [Header("Internal Variables")]
     public GameObject target;
+    bool canShoot = true;
 
     void Update()
     {
@@ -44,10 +46,18 @@ public class Turret : MonoBehaviour
         }
         else
         {
-            if (TargetInRange())
+            if (TargetInRange() && canShoot)
             {
-                Debug.Log("rotating towards target");
-                RotateTowardsTarget();
+                canShoot = false;
+                GameObject spawnedObj = Instantiate(projectilePrefab, turretOrb.transform.position, Quaternion.identity, projectileParent);
+                Projectile spawnedProjectile = spawnedObj.GetComponent<Projectile>();
+                spawnedProjectile.homingAmount = projectileHomingAmount;
+                spawnedProjectile.maxVelocity = projectileMaxVelocity;
+                spawnedProjectile.velocityDecay = projectileDecay;
+                spawnedProjectile.target = target;
+                spawnedProjectile.maxLifeTime = projectileLifetime;
+                spawnedProjectile.parentTurret = this;
+                spawnedProjectile.crashLayer = crashLayer;
             }
             else
             {
@@ -55,6 +65,11 @@ public class Turret : MonoBehaviour
                 target = GetClosestTarget();
             }
         }
+    }
+
+    public void ProjectileDestroyed()
+    {
+        canShoot = true;
     }
 
     void DrawDetectionArea()
@@ -91,7 +106,6 @@ public class Turret : MonoBehaviour
         GameObject closestTarget = null;
         foreach (Collider enemy in enemiesInRange)
         {
-            Debug.Log(enemy.gameObject.tag);
             if (closestTarget != null)
             {
                 // if this enemy is closer than the previous closest target
@@ -104,12 +118,5 @@ public class Turret : MonoBehaviour
         }
 
         return closestTarget;
-    }
-
-    void RotateTowardsTarget()
-    {
-        // calculate target rotation with only y axis affected
-        Quaternion targetRotation = Quaternion.Euler(turretOrb.transform.rotation.eulerAngles.x, Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up).eulerAngles.y + 180, turretOrb.transform.rotation.eulerAngles.z);
-        turretOrb.transform.rotation = Quaternion.Slerp(turretOrb.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 }

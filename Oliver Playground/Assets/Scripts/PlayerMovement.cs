@@ -84,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 totalDashVector = dashDirection * dashSpeed * dashTime;
         bool foundDashLocation = false;
         float checkValue = 1.0f;
-        Debug.Log("Start Dash Check");
         
 
         while (!foundDashLocation)
@@ -112,17 +111,14 @@ public class PlayerMovement : MonoBehaviour
                 //probably a way to have to avoid doing this check for each location
                 //and instead just do this once, and compare the values
                 
-                Debug.Log("Check if " + checkValue + " is in collider:");
                 if (!DashEndsInCollider(playerLocationWithOffset, checkLocation))
                 {
                     //check if near enough to collider
-                    Debug.Log("Check if " + checkValue + " is in near enough to collider:");
                     Collider[] collidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer);
 
                     if (collidersAtPoint.Length == 0)
                     {
                         foundDashLocation = true;
-                        Debug.Log("Dash to value" + checkValue);
                         dashEnd = dashEndLocation;
                         return dashEndLocation;
                     }
