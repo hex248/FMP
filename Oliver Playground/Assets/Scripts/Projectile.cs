@@ -40,8 +40,12 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        Debug.Log(Crash(col.gameObject.layer));
-        if (col.gameObject.GetInstanceID() == target.GetInstanceID() || Crash(col.gameObject.layer))
+        if (col.gameObject.GetInstanceID() == target.GetInstanceID())
+        {
+            StartCoroutine(Destroy());
+        }
+        // if crashes into environment, and has been active for at least half a second (stops crashing into turret tower straight away
+        if (Crash(col.gameObject.layer) && lifeTime >= 1.5f)
         {
             StartCoroutine(Destroy());
         }

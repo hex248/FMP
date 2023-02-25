@@ -24,8 +24,13 @@ public class PlayerMovement : MonoBehaviour
     float enableColliderTime;
     Vector3 currentDashDirection;
 
+    public Camera camera;
+    [Header("Player Details")]
+    public int playerNumber;
+
     [Header("Visuals Settings")]
     [SerializeField] GameObject playerVisuals;
+    public GameObject mainModel;
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
     float timeSinceDash;
 
@@ -33,12 +38,24 @@ public class PlayerMovement : MonoBehaviour
     Vector3 dashEnd;
 
 
-
+    ScreenManager screenManager;
+    PlayerManager playerManager;
+    PlayerInput playerInput;
+    PlayerInputManager playerInputManager;
+    float spawnSpacing = 1.0f;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+
+        playerInput = GetComponent<PlayerInput>();
+        playerManager = FindObjectOfType<PlayerManager>();
+        playerInputManager = FindObjectOfType<PlayerInputManager>();
+        playerNumber = playerInput.playerIndex + 1;
+        playerManager.PlayerSpawned(this);
+        screenManager = FindObjectOfType<ScreenManager>();
+        transform.position = new Vector3(0f, 2.5f, 0f) + new Vector3(playerNumber * spawnSpacing, 0, -playerNumber * spawnSpacing);
     }
 
     public void OnMove(InputAction.CallbackContext context)
