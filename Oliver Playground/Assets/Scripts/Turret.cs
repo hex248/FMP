@@ -41,7 +41,7 @@ public class Turret : MonoBehaviour
 
         if (target == null)
         {
-            Debug.Log("getting closest target");
+            //Debug.Log("getting closest target");
             target = GetClosestTarget();
         }
         else
@@ -61,7 +61,7 @@ public class Turret : MonoBehaviour
             }
             else
             {
-                Debug.Log("lost target");
+                //Debug.Log("lost target");
                 target = GetClosestTarget();
             }
         }

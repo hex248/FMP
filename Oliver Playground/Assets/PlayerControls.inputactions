@@ -28,9 +28,36 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Pause/Resume",
+                    "type": "Button",
+                    "id": "b7eea25a-87ca-4f53-8820-9a09f00813df",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "f4838544-2a0b-4a5f-85f6-68f9ce7dcebd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
+                {
+                    "name": "",
+                    "id": "fe69b0f5-58fd-4943-b920-b28b04833f30",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "",
                     "id": "5c4b80e0-6319-4f1a-8632-c4df948a9bb2",
@@ -44,12 +71,12 @@
                 },
                 {
                     "name": "",
-                    "id": "fe69b0f5-58fd-4943-b920-b28b04833f30",
-                    "path": "<Gamepad>/buttonWest",
+                    "id": "ad129a1c-62f1-47dd-9c94-061a743de565",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Attack",
+                    "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -110,17 +137,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ad129a1c-62f1-47dd-9c94-061a743de565",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cce67dfe-44a4-48e5-9f5f-118e9bada49b",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -138,6 +154,39 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8e9e39e-d271-4694-8cb7-4cf638ba48fb",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause/Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1522b92-af43-47f1-b7db-b52afd78207e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pause/Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4971513-c420-46aa-a141-9272d57b1c93",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

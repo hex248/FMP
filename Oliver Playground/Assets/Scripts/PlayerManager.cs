@@ -32,6 +32,12 @@ public class PlayerManager : MonoBehaviour
         UpdateRenderTextures();
     }
 
+    public void DisconnectPlayer(PlayerMovement player)
+    {
+        players.RemoveAt(player.playerNumber - 1);
+        playerCount--;
+    }
+
     public void UpdateRenderTextures()
     {
         switch (playerCount)

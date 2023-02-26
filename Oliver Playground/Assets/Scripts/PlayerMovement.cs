@@ -44,12 +44,15 @@ public class PlayerMovement : MonoBehaviour
     PlayerInputManager playerInputManager;
     float spawnSpacing = 1.0f;
 
+    PlayerUI playerUI;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
 
         playerInput = GetComponent<PlayerInput>();
+        playerUI = FindObjectOfType<PlayerUI>();
         playerManager = FindObjectOfType<PlayerManager>();
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         playerNumber = playerInput.playerIndex + 1;
@@ -65,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (playerUI.paused) return; // disable attack if paused
         bool triggered = context.action.triggered;
         if (triggered)
         {
@@ -74,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (playerUI.paused) return; // disable dash if paused
         if (context.performed)
         {
             if (!isDashing)
@@ -84,6 +89,22 @@ public class PlayerMovement : MonoBehaviour
                 
             }
         }
+    }
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        // go back if paused and the button press has just started
+        if (playerUI.paused && context.started) playerUI.OnBack();
+        else
+        {
+
+        }
+    }
+
+    public void Disconnect()
+    {
+        playerManager.DisconnectPlayer(this);
+        Destroy(gameObject);
     }
 
     Vector3 GetDashEndPoint()
@@ -329,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movementLocked = isDashing;
 
-        if (!movementLocked)
+        if (!movementLocked && !playerUI.paused)
         {
             //normal movement
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
