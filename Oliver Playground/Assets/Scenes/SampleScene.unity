@@ -283,7 +283,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 7ded0385f3b0c2748960a691b678d166, type: 2}
+  m_Texture: {fileID: 8400000, guid: 0f593b1bd23484142951383ed7f5be67, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -353,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290275493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 971244492}
@@ -420,17 +420,17 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.16785331, g: 0.8679245, b: 0.25486782, a: 1}
-      key1: {r: 0, g: 0.6698113, b: 0.084054746, a: 1}
-      key2: {r: 0, g: 0.0627451, b: 0.009161986, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0.6698113, b: 0.084054746, a: 0}
       key3: {r: 0, g: 0.039215688, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 4241
-      ctime2: 55127
+      ctime1: 65535
+      ctime2: 65535
       ctime3: 65535
       ctime4: 0
       ctime5: 0
@@ -445,7 +445,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 4
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
@@ -746,16 +746,17 @@ MonoBehaviour:
   - {fileID: 2100000, guid: dbe55e09676e26843b6a192531e89698, type: 2}
   - {fileID: 2100000, guid: c34b63a7cb1a53f42a022d27b6723fe1, type: 2}
   - {fileID: 2100000, guid: 0dc0f9d44ffe52a47b462b9e0964fcdc, type: 2}
-  normalRenderTextures:
-  - {fileID: 8400000, guid: 202cbbb04fb922a42adfa56199469584, type: 2}
-  - {fileID: 8400000, guid: 802792ca96e13e042927fd362afd5011, type: 2}
-  - {fileID: 8400000, guid: 7ded0385f3b0c2748960a691b678d166, type: 2}
-  - {fileID: 8400000, guid: 02a7bf153077c0149bcc02b86f6c3584, type: 2}
+  normalRenderTexture: {fileID: 8400000, guid: 202cbbb04fb922a42adfa56199469584, type: 2}
   tallRenderTextures:
   - {fileID: 8400000, guid: a4133fce24c54aa47ace58d84fb17abd, type: 2}
   - {fileID: 8400000, guid: 002a0b22455ccb5468b31e3090f5d0cd, type: 2}
   - {fileID: 8400000, guid: 3ddb75d34100e5f41b3f20e84fabefb4, type: 2}
   - {fileID: 8400000, guid: a07f0f91ad3a0324998c92597462c7d8, type: 2}
+  smallRenderTextures:
+  - {fileID: 8400000, guid: a75a78ae99d67dc4f936f4180f625273, type: 2}
+  - {fileID: 8400000, guid: 02b9d2cab4a012b4e98decdadfc6a467, type: 2}
+  - {fileID: 8400000, guid: 0f593b1bd23484142951383ed7f5be67, type: 2}
+  - {fileID: 8400000, guid: db9f052866974b9459fe9787ca707623, type: 2}
 --- !u!114 &595278055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,7 +962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 802792ca96e13e042927fd362afd5011, type: 2}
+  m_Texture: {fileID: 8400000, guid: 02b9d2cab4a012b4e98decdadfc6a467, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1283,7 +1284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 202cbbb04fb922a42adfa56199469584, type: 2}
+  m_Texture: {fileID: 8400000, guid: a75a78ae99d67dc4f936f4180f625273, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1594,7 +1595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 02a7bf153077c0149bcc02b86f6c3584, type: 2}
+  m_Texture: {fileID: 8400000, guid: db9f052866974b9459fe9787ca707623, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1989,6 +1990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret block out
       objectReference: {fileID: 0}
+    - target: {fileID: 7193406786830014440, guid: fae736241a888334faf682cbc447dc1a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fae736241a888334faf682cbc447dc1a, type: 3}
 --- !u!4 &1737528591 stripped
@@ -2128,7 +2133,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 7ded0385f3b0c2748960a691b678d166, type: 2}
+  m_Texture: {fileID: 8400000, guid: 0f593b1bd23484142951383ed7f5be67, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2375,7 +2380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 202cbbb04fb922a42adfa56199469584, type: 2}
+  m_Texture: {fileID: 8400000, guid: a75a78ae99d67dc4f936f4180f625273, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2465,6 +2470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2138677393}
   - component: {fileID: 2138677392}
+  - component: {fileID: 2138677394}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2490,12 +2496,12 @@ Light:
   m_InnerSpotAngle: 21.802082
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.02
-    m_NormalBias: 0.1
+    m_Bias: 2
+    m_NormalBias: 0
     m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
@@ -2548,3 +2554,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 130, z: 90}
+--- !u!114 &2138677394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138677391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 0

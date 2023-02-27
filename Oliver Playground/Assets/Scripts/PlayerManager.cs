@@ -13,8 +13,9 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Rendering")]
     [SerializeField] Material[] playerMaterials;
-    [SerializeField] RenderTexture[] normalRenderTextures;
+    [SerializeField] RenderTexture normalRenderTexture;
     [SerializeField] RenderTexture[] tallRenderTextures;
+    [SerializeField] RenderTexture[] smallRenderTextures;
     ScreenManager screenManager;
 
     private void Start()
@@ -43,22 +44,22 @@ public class PlayerManager : MonoBehaviour
         switch (playerCount)
         {
             case 1:
-                players[0].camera.targetTexture = normalRenderTextures[0];
+                players[0].camera.targetTexture = normalRenderTexture;
                 break;
             case 2:
                 players[0].camera.targetTexture = tallRenderTextures[0];
                 players[1].camera.targetTexture = tallRenderTextures[1];
                 break;
             case 3:
-                players[0].camera.targetTexture = normalRenderTextures[0];
+                players[0].camera.targetTexture = smallRenderTextures[0];
                 players[1].camera.targetTexture = tallRenderTextures[1];
-                players[2].camera.targetTexture = normalRenderTextures[2];
+                players[2].camera.targetTexture = smallRenderTextures[2];
                 break;
             case 4:
-                players[0].camera.targetTexture = normalRenderTextures[0];
-                players[1].camera.targetTexture = normalRenderTextures[1];
-                players[2].camera.targetTexture = normalRenderTextures[2];
-                players[3].camera.targetTexture = normalRenderTextures[3];
+                players[0].camera.targetTexture = smallRenderTextures[0];
+                players[1].camera.targetTexture = smallRenderTextures[1];
+                players[2].camera.targetTexture = smallRenderTextures[2];
+                players[3].camera.targetTexture = smallRenderTextures[3];
                 break;
         }
     }
