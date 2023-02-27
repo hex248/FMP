@@ -31,23 +31,37 @@ public class ColorTable
     public static float[] Achromatomaly = {61.8f, 32.0f, 6.2f, 16.3f, 77.5f, 6.2f, 16.3f, 32.0f, 51.6f};
 }
 
-[ExecuteAlways]
+[RequireComponent(typeof(Camera))]
 public class ColorblindFilters : MonoBehaviour
 {
     public Modes mode;
     public Volume volume;
     ChannelMixer channelMixer;
+    PlayerMovement player;
+    Camera camera;
+    bool layersSetup = false;
 
     private void Start()
     {
-        if (volume.sharedProfile.TryGet<ChannelMixer>(out channelMixer))
-        {
-            Debug.Log("a");
-        }
+        volume.profile = new VolumeProfile(); // create new volume profile
+        channelMixer = volume.profile.Add<ChannelMixer>(); // add channel mixer effect
+        player = transform.parent.GetComponent<PlayerMovement>();
+        camera = GetComponent<Camera>();
     }
 
-    void Update()
+    void LateUpdate()
     {
+        if (!layersSetup)
+        {
+            gameObject.layer = LayerMask.NameToLayer($"Colorblind{player.playerNumber}"); // set layer to independent colorblind layer
+
+            UniversalAdditionalCameraData cameraData = camera.GetUniversalAdditionalCameraData(); // get camera data
+            cameraData.volumeLayerMask |= (1 << LayerMask.NameToLayer("MainVolume"));
+            cameraData.volumeLayerMask |= (1 << LayerMask.NameToLayer($"Colorblind{player.playerNumber}"));
+            //camera.UpdateVolumeStack(cameraData); // update volume masks
+
+            layersSetup = true;
+        }
         SetColors();
     }
 
