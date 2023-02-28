@@ -67,7 +67,7 @@ public class OutlinePass : ScriptableRenderPass
         {
             // Blit from the color buffer to a temporary buffer and back. This is needed for a two-pass shader.
             Blit(cmd, colorBuffer, temporaryBuffer, material, 0); // shader pass 0
-            Blit(cmd, temporaryBuffer, colorBuffer, material, 0);
+            Blit(cmd, temporaryBuffer, colorBuffer, material, 1);
         }
 
         // Execute the command buffer and release it.
