@@ -3,14 +3,13 @@ Shader "Kazi/Sobel Filter"
 
 	Properties{
 		_MainTex("Base (RGB)", 2D) = "white" {}
-		_SecondaryTex("Secondary (RGB)", 2D) = "white" {}
 		_Threshold("Line Clip Threshold", Float) = 0.5
 		_Color("Color", Color) = (0.0, 0.0, 0.0, 1.0)
 	}
 
 		SubShader
 		{
-			Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline"}
+			Tags {"RenderPipeline" = "UniversalPipeline"}
 
 			HLSLINCLUDE
 
@@ -36,9 +35,6 @@ Shader "Kazi/Sobel Filter"
 			float _Threshold;
 			float4 _Color;
 			float4 _MainTex_ST;
-
-			TEXTURE2D(_SecondaryTex);
-			SAMPLER(sampler_SecondaryTex);
 
 			TEXTURE2D(_MainTex);
 			SAMPLER(sampler_MainTex);
@@ -88,15 +84,29 @@ Shader "Kazi/Sobel Filter"
 				half4 frag(Varyings IN) : SV_TARGET
 				{
 					float s = sobel(_MainTex, IN.uv,_DeltaX,_DeltaY);
-					float isolatedLine = s;
-					if (isolatedLine > _Threshold)
+					half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
+					if (s > _Threshold)
 					{
-						return _Color;
+						return 1.0;
 					}
 					else
 					{
-						return SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
+						return 0.0;
 					}
+				}
+				ENDHLSL
+			}
+			Pass
+			{
+				HLSLPROGRAM
+				half4 frag(Varyings IN) : SV_TARGET
+				{
+					half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
+					if (col.r == 0.0) 
+					{
+						discard;
+					}
+					return col * _Color;
 				}
 				ENDHLSL
 			}
