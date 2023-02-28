@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class Menu : MonoBehaviour
@@ -20,6 +21,8 @@ public class Menu : MonoBehaviour
     public void OpenMainMenu()
     {
         menuIsOpen = true;
+        currentPage = MenuPage.MainMenu;
+
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(false);
@@ -31,6 +34,8 @@ public class Menu : MonoBehaviour
     public void CloseMenu()
     {
         menuIsOpen = false;
+        currentPage = MenuPage.None;
+
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(false);
@@ -40,6 +45,8 @@ public class Menu : MonoBehaviour
 
     public void OpenSettingsMenu()
     {
+        currentPage = MenuPage.SettingsMenu;
+
         mainMenu.SetActive(false);
         settingsMenu.SetActive(true);
         controlsMenu.SetActive(false);
@@ -50,6 +57,8 @@ public class Menu : MonoBehaviour
 
     public void OpenControlsMenu()
     {
+        currentPage = MenuPage.ControlsMenu;
+
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(true);
@@ -72,6 +81,7 @@ public class Menu : MonoBehaviour
 
     public void GoToPrevious()
     {
+        
         switch(currentPage)
         {
             case MenuPage.MainMenu:
@@ -91,9 +101,25 @@ public class Menu : MonoBehaviour
         }
     }
 
+    public void ReturnKeyPressed(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+        if (triggered)
+        {
+            if(menuIsOpen)
+            {
+                GoToPrevious();
+            }
+        }
+    }
+
+    public void Test()
+    {
+        Debug.Log(currentPage);
+    }
+
     void Start()
     {
         CloseMenu();
     }
-
 }
