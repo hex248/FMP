@@ -16,9 +16,15 @@ public class Projectile : MonoBehaviour
 
     public LayerMask crashLayer;
 
+    public GameObject crashVFXPrefab;
+
+    public GameObject visuals;
+
     Rigidbody rb;
 
     Quaternion targetRotation;
+
+    bool locked = false;
 
     private void Start()
     {
@@ -33,9 +39,16 @@ public class Projectile : MonoBehaviour
         lifeTime += Time.deltaTime;
         //velocity = maxVelocity * velocityDecay.Evaluate(lifeTime / maxLifeTime);
 
-        targetRotation = Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, homingAmount * Time.deltaTime);
-        rb.velocity = transform.forward * velocity;
+        if (!locked)
+        {
+            targetRotation = Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, homingAmount * Time.deltaTime);
+            rb.velocity = transform.forward * velocity;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -53,14 +66,23 @@ public class Projectile : MonoBehaviour
 
     IEnumerator Destroy()
     {
+        locked = true;
+        GetComponent<Collider>().enabled = false;
+        visuals.SetActive(false);
+
         // notify tower
         parentTurret.ProjectileDestroyed();
 
         // trigger vfx
+        CrashDecal();
+        GameObject particleSys = CrashVFX(transform);
 
-        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.0f);
+        
+        Destroy(particleSys);
 
         // destroy gameObject
+
         Destroy(gameObject);
 
         yield return null;
@@ -69,5 +91,20 @@ public class Projectile : MonoBehaviour
     bool Crash(int layer)
     {
         return crashLayer == (crashLayer | (1 << layer));
+    }
+
+    GameObject CrashVFX(Transform impact)
+    {
+        // vfx
+        GameObject spawned = Instantiate(crashVFXPrefab, impact.position, Quaternion.LookRotation(impact.forward * -1));
+
+        return spawned;
+    }
+    void CrashDecal()
+    {
+        // decal
+
+
+
     }
 }

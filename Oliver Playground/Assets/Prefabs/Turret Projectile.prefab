@@ -188,6 +188,12 @@ MonoBehaviour:
   target: {fileID: 0}
   lifeTime: 0
   maxLifeTime: 5
+  parentTurret: {fileID: 0}
+  crashLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  crashVFXPrefab: {fileID: 5579819485217325541, guid: 7bc604c61cb63d1438c61deae8356c87, type: 3}
+  visuals: {fileID: 5422567535784580302}
 --- !u!54 &5422567537105359512
 Rigidbody:
   m_ObjectHideFlags: 0
