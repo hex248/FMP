@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Menu : MonoBehaviour
 {
-    enum MenuPage {MainMenu, SettingsMenu, ControlsMenu, None}
+    enum MenuPage {MainMenu, SettingsMenu, ControlsMenu, AccessibilityMenu, None}
     MenuPage currentPage;
 
     [SerializeField] GameObject mainMenu;
@@ -15,6 +15,8 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject settingsFirstSelected;
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject controlsFirstSelected;
+    [SerializeField] GameObject accessibiltyMenu;
+    [SerializeField] GameObject accessibilityFirstSelected;
 
     bool menuIsOpen;
 
@@ -26,9 +28,24 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+        accessibiltyMenu.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(mainMenuFirstSelected);
+    }
+
+    public void OpenAccessiblityMenu()
+    {
+        currentPage = MenuPage.AccessibilityMenu;
+
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+        accessibiltyMenu.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(accessibilityFirstSelected);
     }
 
     public void CloseMenu()
@@ -39,6 +56,7 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(false);
+        accessibiltyMenu.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
     }
@@ -50,6 +68,7 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(false);
         settingsMenu.SetActive(true);
         controlsMenu.SetActive(false);
+        accessibiltyMenu.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(settingsFirstSelected);
@@ -62,6 +81,7 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(true);
+        accessibiltyMenu.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(controlsFirstSelected);
@@ -91,6 +111,9 @@ public class Menu : MonoBehaviour
                 OpenMainMenu();
                 break;
             case MenuPage.ControlsMenu:
+                OpenSettingsMenu();
+                break;
+            case MenuPage.AccessibilityMenu:
                 OpenSettingsMenu();
                 break;
             case MenuPage.None:
