@@ -57,7 +57,7 @@ public class Turret : MonoBehaviour
                 spawnedProjectile.target = target;
                 spawnedProjectile.maxLifeTime = projectileLifetime;
                 spawnedProjectile.parentTurret = this;
-                spawnedProjectile.crashLayer = crashLayer;
+                spawnedProjectile.crashLayers = crashLayer;
             }
             else
             {
