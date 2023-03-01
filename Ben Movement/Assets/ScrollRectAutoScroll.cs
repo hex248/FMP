@@ -12,6 +12,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     private List<float> selectableYPositions = new List<float>();
     private ScrollRect m_ScrollRect;
 
+    bool selectedIsInList = false;
     bool hasBeenOpened;
 
     private Vector2 m_NextScrollPosition = Vector2.up;
@@ -53,14 +54,17 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         // Scroll via input.
         InputScroll();
-        if (!mouseOver)
+        if(selectedIsInList)
         {
-            // Lerp scrolling code.
-            m_ScrollRect.normalizedPosition = Vector2.Lerp(m_ScrollRect.normalizedPosition, m_NextScrollPosition, scrollSpeed * Time.deltaTime);
-        }
-        else
-        {
-            m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+            if (!mouseOver)
+            {
+                // Lerp scrolling code.
+                m_ScrollRect.normalizedPosition = Vector2.Lerp(m_ScrollRect.normalizedPosition, m_NextScrollPosition, scrollSpeed * Time.deltaTime);
+            }
+            else
+            {
+                m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+            }
         }
     }
     
@@ -74,15 +78,11 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     
     void ScrollToSelected(bool quickScroll)
     {
-        int selectedIndex = -1;
         Selectable selectedElement = EventSystem.current.currentSelectedGameObject ? EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>() : null;
+        selectedIsInList = (selectedElement != null) && m_Selectables.Contains(EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>());
+        if (selectedIsInList)
+        {
 
-        if (selectedElement)
-        {
-            selectedIndex = m_Selectables.IndexOf(selectedElement);
-        }
-        if (selectedIndex > -1)
-        {
             if (quickScroll)
             {
                 m_ScrollRect.normalizedPosition = new Vector2(0, 1 - GetNormalizedPosition(selectedElement));
@@ -99,8 +99,9 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         m_ScrollRect.normalizedPosition = new Vector2(0, 1);
         m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+        EventSystem.current.SetSelectedGameObject(m_Selectables[0].gameObject);
     }
-    
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         mouseOver = true;

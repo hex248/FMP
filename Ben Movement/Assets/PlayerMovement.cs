@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     List<Vector3> gizmosLocation = new List<Vector3>();
     Vector3 dashEnd;
 
+    public int playerNumber = 1;
+
 
 
 
