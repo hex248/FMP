@@ -14,9 +14,10 @@ public class Projectile : MonoBehaviour
 
     public Turret parentTurret;
 
-    public LayerMask crashLayer;
+    public LayerMask crashLayers;
 
     public GameObject crashVFXPrefab;
+    public GameObject crashDecalPrefab;
 
     public GameObject visuals;
 
@@ -37,7 +38,6 @@ public class Projectile : MonoBehaviour
     private void Update()
     {
         lifeTime += Time.deltaTime;
-        //velocity = maxVelocity * velocityDecay.Evaluate(lifeTime / maxLifeTime);
 
         if (!locked)
         {
@@ -55,16 +55,16 @@ public class Projectile : MonoBehaviour
     {
         if (col.gameObject.GetInstanceID() == target.GetInstanceID())
         {
-            StartCoroutine(Destroy());
+            StartCoroutine(Destroy(col));
         }
-        // if crashes into environment, and has been active for at least half a second (stops crashing into turret tower straight away
+        // if crashes into environment, and has been active for at least half a second (stops crashing into turret tower straight away)
         if (Crash(col.gameObject.layer) && lifeTime >= 1.5f)
         {
-            StartCoroutine(Destroy());
+            StartCoroutine(Destroy(col));
         }
     }
 
-    IEnumerator Destroy()
+    IEnumerator Destroy(Collider col)
     {
         locked = true;
         GetComponent<Collider>().enabled = false;
@@ -73,16 +73,20 @@ public class Projectile : MonoBehaviour
         // notify tower
         parentTurret.ProjectileDestroyed();
 
-        // trigger vfx
-        CrashDecal();
+        // trigger vfx and decal
         GameObject particleSys = CrashVFX(transform);
+        yield return new WaitForSeconds(0.3f);
+
+        // apply decal slightly after explosion starts, to hide it in the explosion
+        // only apply to layers marked for crash - mostly environment
+        if (Crash(col.gameObject.layer))
+        {
+            CrashDecal(transform, col);
+        }
 
         yield return new WaitForSeconds(2.0f);
         
         Destroy(particleSys);
-
-        // destroy gameObject
-
         Destroy(gameObject);
 
         yield return null;
@@ -90,7 +94,7 @@ public class Projectile : MonoBehaviour
 
     bool Crash(int layer)
     {
-        return crashLayer == (crashLayer | (1 << layer));
+        return crashLayers == (crashLayers | (1 << layer));
     }
 
     GameObject CrashVFX(Transform impact)
@@ -100,11 +104,13 @@ public class Projectile : MonoBehaviour
 
         return spawned;
     }
-    void CrashDecal()
+    GameObject CrashDecal(Transform impact, Collider crashedCollider)
     {
         // decal
 
+        //GameObject spawned = Instantiate(crashDecalPrefab, impact.position, Quaternion.LookRotation(impact.forward), crashedCollider.transform);
+        GameObject spawned = Instantiate(crashDecalPrefab, impact.position, Quaternion.LookRotation(impact.forward));
 
-
+        return spawned;
     }
 }

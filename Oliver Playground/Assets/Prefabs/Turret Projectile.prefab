@@ -189,10 +189,14 @@ MonoBehaviour:
   lifeTime: 0
   maxLifeTime: 5
   parentTurret: {fileID: 0}
-  crashLayer:
+  crashLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  decalLayers:
+    serializedVersion: 2
+    m_Bits: 8
   crashVFXPrefab: {fileID: 5579819485217325541, guid: 7bc604c61cb63d1438c61deae8356c87, type: 3}
+  crashDecalPrefab: {fileID: 3993269978879355469, guid: 22c8c6e8f6878ee4e8d249277ea3befd, type: 3}
   visuals: {fileID: 5422567535784580302}
 --- !u!54 &5422567537105359512
 Rigidbody:
