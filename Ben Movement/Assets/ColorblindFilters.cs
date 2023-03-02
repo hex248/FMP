@@ -39,7 +39,7 @@ public class ColorblindFilters : MonoBehaviour
     public Modes mode;
     public Volume volume;
     ChannelMixer channelMixer;
-    PlayerMovement player;
+    Player player;
     Camera camera;
     bool layersSetup = false;
 
@@ -49,7 +49,7 @@ public class ColorblindFilters : MonoBehaviour
     {
         volume.profile = new VolumeProfile(); // create new volume profile
         channelMixer = volume.profile.Add<ChannelMixer>(); // add channel mixer effect
-        player = FindObjectOfType<PlayerMovement>();
+        player = FindObjectOfType<Player>();
         camera = GetComponent<Camera>();
     }
 

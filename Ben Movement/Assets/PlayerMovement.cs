@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 currentDashDirection;
 
     [Header("Visuals Settings")]
-    [SerializeField] GameObject playerVisuals;
+    public GameObject playerVisuals;
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
     float timeSinceDash;
 

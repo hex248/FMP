@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
 {
     enum MenuPage {MainMenu, SettingsMenu, ControlsMenu, AccessibilityMenu, None}
     MenuPage currentPage;
+    [SerializeField] EventSystem eventSystem;
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject mainMenuFirstSelected;
@@ -18,11 +19,20 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject accessibiltyMenu;
     [SerializeField] GameObject accessibilityFirstSelected;
 
-    bool menuIsOpen;
+    PlayerManager playerManager;
+
+    bool isMenuOpen;
+
+    void Start()
+    {
+        playerManager = FindObjectOfType<PlayerManager>();
+        CloseMenu();
+    }
 
     public void OpenMainMenu()
     {
-        menuIsOpen = true;
+        isMenuOpen = true;
+        playerManager.isMenuOpen = true;
         currentPage = MenuPage.MainMenu;
 
         mainMenu.SetActive(true);
@@ -31,8 +41,8 @@ public class Menu : MonoBehaviour
         controlsMenu.SetActive(false);
         accessibiltyMenu.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(mainMenuFirstSelected);
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(mainMenuFirstSelected);
     }
 
     public void OpenAccessiblityMenu()
@@ -44,13 +54,16 @@ public class Menu : MonoBehaviour
         controlsMenu.SetActive(false);
         accessibiltyMenu.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(accessibilityFirstSelected);
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(accessibilityFirstSelected);
     }
 
     public void CloseMenu()
     {
-        menuIsOpen = false;
+        isMenuOpen = false;
+        playerManager.isMenuOpen = false;
+        Debug.Log("close menu");
+
         currentPage = MenuPage.None;
 
         mainMenu.SetActive(false);
@@ -58,7 +71,7 @@ public class Menu : MonoBehaviour
         controlsMenu.SetActive(false);
         accessibiltyMenu.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(null);
     }
 
     public void OpenSettingsMenu()
@@ -70,8 +83,8 @@ public class Menu : MonoBehaviour
         controlsMenu.SetActive(false);
         accessibiltyMenu.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(settingsFirstSelected);
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(settingsFirstSelected);
     }
 
     public void OpenControlsMenu()
@@ -83,57 +96,70 @@ public class Menu : MonoBehaviour
         controlsMenu.SetActive(true);
         accessibiltyMenu.SetActive(false);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(controlsFirstSelected);
+        eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(controlsFirstSelected);
     }
 
     public void ToggleMenu()
     {
-        if(menuIsOpen)
+        if(isMenuOpen)
         {
             CloseMenu();
         }
         else
         {
-            OpenMainMenu();
+            if(!playerManager.isMenuOpen)
+            {
+               OpenMainMenu();
+            }
+            
         }
     }
 
-    public void GoToPrevious()
+    public void MenuReturn()
     {
-        
-        switch(currentPage)
+        if(isMenuOpen)
         {
-            case MenuPage.MainMenu:
-                CloseMenu();
-                break;
-            case MenuPage.SettingsMenu:
-                OpenMainMenu();
-                break;
-            case MenuPage.ControlsMenu:
-                OpenSettingsMenu();
-                break;
-            case MenuPage.AccessibilityMenu:
-                OpenSettingsMenu();
-                break;
-            case MenuPage.None:
-                break;
-            default:
-                break;
+            switch(currentPage)
+            {
+                case MenuPage.MainMenu:
+                    CloseMenu();
+                    break;
+                case MenuPage.SettingsMenu:
+                    OpenMainMenu();
+                    break;
+                case MenuPage.ControlsMenu:
+                    OpenSettingsMenu();
+                    break;
+                case MenuPage.AccessibilityMenu:
+                    OpenSettingsMenu();
+                    break;
+                case MenuPage.None:
+                    break;
+                default:
+                    break;
 
+            }
         }
     }
 
-    public void ReturnKeyPressed(InputAction.CallbackContext context)
+    public void ReturnButtonPressed(InputAction.CallbackContext context)
     {
         bool triggered = context.action.triggered;
         if (triggered)
         {
-            if(menuIsOpen)
-            {
-                GoToPrevious();
-            }
+            MenuReturn();
         }
+    }
+
+    public void ToggleButtonPressed(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+        if (triggered)
+        {
+            ToggleMenu();
+        }
+
     }
 
     public void Test()
@@ -141,8 +167,13 @@ public class Menu : MonoBehaviour
         Debug.Log(currentPage);
     }
 
-    void Start()
+
+    public void ChangeControlScheme()
     {
-        CloseMenu();
+        
     }
+
+    
+
+    
 }
