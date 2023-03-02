@@ -25,8 +25,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 currentDashDirection;
 
     public Camera camera;
-    [Header("Player Details")]
-    public int playerNumber;
+    
 
     [Header("Visuals Settings")]
     [SerializeField] GameObject playerVisuals;
@@ -55,10 +54,8 @@ public class PlayerMovement : MonoBehaviour
         playerUI = FindObjectOfType<PlayerUI>();
         playerManager = FindObjectOfType<PlayerManager>();
         playerInputManager = FindObjectOfType<PlayerInputManager>();
-        playerNumber = playerInput.playerIndex + 1;
         playerManager.PlayerSpawned(this);
         screenManager = FindObjectOfType<ScreenManager>();
-        transform.position = new Vector3(0f, 2.5f, 0f) + new Vector3(playerNumber * spawnSpacing, 0, -playerNumber * spawnSpacing);
     }
 
     public void OnMove(InputAction.CallbackContext context)
