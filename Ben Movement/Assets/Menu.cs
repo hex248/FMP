@@ -62,6 +62,8 @@ public class Menu : MonoBehaviour
     {
         isMenuOpen = false;
         playerManager.isMenuOpen = false;
+        Debug.Log("close menu");
+
         currentPage = MenuPage.None;
 
         mainMenu.SetActive(false);
