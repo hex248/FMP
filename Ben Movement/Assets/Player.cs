@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
 {
     ScreenManager screenManager;
     PlayerManager playerManager;
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
     PlayerInputManager playerInputManager;
     PlayerMovement playerMovement;
+    ColorblindFilters filterController;
 
     [Header("Player Details")]
     public int playerNumber;
@@ -30,6 +31,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

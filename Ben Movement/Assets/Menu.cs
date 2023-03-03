@@ -10,13 +10,19 @@ public class Menu : MonoBehaviour
     enum MenuPage {MainMenu, SettingsMenu, ControlsMenu, AccessibilityMenu, None}
     MenuPage currentPage;
     [SerializeField] EventSystem eventSystem;
+    [SerializeField] Player player;
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject mainMenuFirstSelected;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject settingsFirstSelected;
+
     [SerializeField] GameObject controlsMenu;
-    [SerializeField] GameObject controlsFirstSelected;
+    [SerializeField] GameObject gamepadMenu;
+    [SerializeField] GameObject gamepadFirstSelected;
+    [SerializeField] GameObject keyboardMenu;
+    [SerializeField] GameObject keyboardFirstSelected;
+
     [SerializeField] GameObject accessibiltyMenu;
     [SerializeField] GameObject accessibilityFirstSelected;
 
@@ -63,7 +69,6 @@ public class Menu : MonoBehaviour
     {
         isMenuOpen = false;
         playerManager.isMenuOpen = false;
-        Debug.Log("close menu");
 
         currentPage = MenuPage.None;
 
@@ -96,9 +101,21 @@ public class Menu : MonoBehaviour
         settingsMenu.SetActive(false);
         controlsMenu.SetActive(true);
         accessibiltyMenu.SetActive(false);
-
         eventSystem.SetSelectedGameObject(null);
-        eventSystem.SetSelectedGameObject(controlsFirstSelected);
+
+        if(player.playerInput.currentControlScheme == "Keyboard")
+        {
+            gamepadMenu.SetActive(false);
+            keyboardMenu.SetActive(true);
+            eventSystem.SetSelectedGameObject(keyboardFirstSelected);
+        }
+
+        else if(player.playerInput.currentControlScheme == "Gamepad")
+        {
+            gamepadMenu.SetActive(true);
+            keyboardMenu.SetActive(false);
+            eventSystem.SetSelectedGameObject(gamepadFirstSelected);
+        }
     }
 
     public void ToggleMenu()

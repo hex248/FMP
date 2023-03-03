@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         bool triggered = context.action.triggered;
         if (triggered)
         {
-            Debug.Log("Attack!");
+            
         }
     }
 

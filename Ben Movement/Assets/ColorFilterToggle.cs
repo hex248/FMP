@@ -7,12 +7,13 @@ public class ColorFilterToggle : MonoBehaviour
 {
     ColorblindFilters filters;
     Modes colorblindnessMode;
+    [SerializeField] Player attatchedPlayer;
     bool active;
 
     private void Awake()
     {
         active = false;
-        filters = FindObjectOfType<ColorblindFilters>();
+        filters = attatchedPlayer.GetComponentInChildren<ColorblindFilters>();
     }
 
     private void Start()

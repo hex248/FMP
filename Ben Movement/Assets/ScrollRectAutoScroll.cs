@@ -16,6 +16,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     bool hasBeenOpened;
 
     private Vector2 m_NextScrollPosition = Vector2.up;
+    [SerializeField] EventSystem eventSystem;
     
     void OnEnable()
     {
@@ -78,8 +79,8 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     
     void ScrollToSelected(bool quickScroll)
     {
-        Selectable selectedElement = EventSystem.current.currentSelectedGameObject ? EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>() : null;
-        selectedIsInList = (selectedElement != null) && m_Selectables.Contains(EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>());
+        Selectable selectedElement = eventSystem.currentSelectedGameObject ? eventSystem.currentSelectedGameObject.GetComponent<Selectable>() : null;
+        selectedIsInList = (selectedElement != null) && m_Selectables.Contains(eventSystem.currentSelectedGameObject.GetComponent<Selectable>());
         if (selectedIsInList)
         {
 
@@ -99,7 +100,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         m_ScrollRect.normalizedPosition = new Vector2(0, 1);
         m_NextScrollPosition = m_ScrollRect.normalizedPosition;
-        EventSystem.current.SetSelectedGameObject(m_Selectables[0].gameObject);
+        eventSystem.SetSelectedGameObject(m_Selectables[0].gameObject);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
