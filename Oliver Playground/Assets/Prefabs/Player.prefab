@@ -2307,10 +2307,12 @@ MonoBehaviour:
   dashCheckResolution: 0.01
   playerColliderRadius: 0.25
   camera: {fileID: 463488568489342486}
-  playerNumber: 0
   playerVisuals: {fileID: 7954760808345882849}
-  mainModel: {fileID: 7954760808197019462}
+  mainModel: {fileID: 1849121225345137087}
+  coloredElements:
+  - {fileID: 8033442259714576789}
   squashAmount: 0.3
+  playerNumber: 0
 --- !u!54 &7954760809937148159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3265,16 +3267,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Silly Dancing
       objectReference: {fileID: 0}
+    - target: {fileID: 8796806643485496699, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40392ed86a141df4398c7289778cbcfd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
+--- !u!1 &1849121225345137087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
+  m_PrefabInstance: {fileID: 1542496225215497454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1360849433656599301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
   m_PrefabInstance: {fileID: 1542496225215497454}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1849121225345137087 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
+--- !u!137 &8033442259714576789 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8796806643485496699, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
   m_PrefabInstance: {fileID: 1542496225215497454}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1233110506985378303
