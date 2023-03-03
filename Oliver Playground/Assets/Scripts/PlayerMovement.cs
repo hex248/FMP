@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Visuals Settings")]
     [SerializeField] GameObject playerVisuals;
     public GameObject mainModel;
+    public Renderer[] coloredElements;
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
     float timeSinceDash;
 
@@ -43,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerInputManager playerInputManager;
     float spawnSpacing = 1.0f;
 
+    public int playerNumber;
+
     PlayerUI playerUI;
 
     private void Start()
@@ -51,11 +54,13 @@ public class PlayerMovement : MonoBehaviour
         col = GetComponent<Collider>();
 
         playerInput = GetComponent<PlayerInput>();
+        playerNumber = playerInput.playerIndex + 1;
         playerUI = FindObjectOfType<PlayerUI>();
         playerManager = FindObjectOfType<PlayerManager>();
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         playerManager.PlayerSpawned(this);
         screenManager = FindObjectOfType<ScreenManager>();
+        transform.position = new Vector3(playerNumber * spawnSpacing, 0, -playerNumber * spawnSpacing);
     }
 
     public void OnMove(InputAction.CallbackContext context)
