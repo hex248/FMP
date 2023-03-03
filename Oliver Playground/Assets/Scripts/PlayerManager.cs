@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         screenManager = FindObjectOfType<ScreenManager>();
+        System.Random random = new System.Random();
+        playerMaterials = playerMaterials.OrderBy(x => random.Next()).ToArray();
     }
 
     public void PlayerSpawned(PlayerMovement player)
@@ -28,7 +32,10 @@ public class PlayerManager : MonoBehaviour
         players.Add(player);
         playerCount++;
         StartCoroutine(screenManager.PlayerJoined(playerCount));
-        player.mainModel.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
+        foreach (Renderer renderer in player.coloredElements)
+        {
+            renderer.material = playerMaterials[player.playerNumber - 1];
+        }
 
         UpdateRenderTextures();
     }
