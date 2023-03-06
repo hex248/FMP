@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 0
+  m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -2131,6 +2131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7954760809937148154}
   - component: {fileID: 7954760809937148153}
+  - component: {fileID: 4546818017909957995}
   - component: {fileID: 5000484253255348958}
   - component: {fileID: 7300670183627909295}
   - component: {fileID: 7954760809937148159}
@@ -2270,6 +2271,22 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 463488568489342486}
+--- !u!114 &4546818017909957995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954760809937148157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d944c146af8ad4d89d35ddfa9acf47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decalPrefab: {fileID: 3993269978879355469, guid: c67b47a1237acaa4f9f03ff422127d0a, type: 3}
+  fade: 1
+  timeUntilFade: 0
+  fadeTime: 5
 --- !u!114 &5000484253255348958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,7 +2329,7 @@ MonoBehaviour:
   mainModel: {fileID: 6315496520867583486}
   coloredElements:
   - {fileID: 3437432618883624241}
-  squashAmount: 0.3
+  squashAmount: 0.7
   playerNumber: 0
 --- !u!54 &7954760809937148159
 Rigidbody:
@@ -3448,11 +3465,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: dbabc77902bcfcd468dff3635db451c4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
---- !u!1 &6315496520867583486 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
-  m_PrefabInstance: {fileID: 6585475751926704303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!137 &3437432618883624241 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8417361359673230750, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
@@ -3461,6 +3473,11 @@ SkinnedMeshRenderer:
 --- !u!4 &6696560396598726468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+  m_PrefabInstance: {fileID: 6585475751926704303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6315496520867583486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
   m_PrefabInstance: {fileID: 6585475751926704303}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &3730786916316276972
