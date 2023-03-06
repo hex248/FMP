@@ -79,7 +79,7 @@ Shader "Kazi/ToonShader"
                     {
                         value = 0.5;
                     }
-                    return value * _BaseColor * _MainLightColor;
+                    return value * _BaseColor * _MainLightColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
                 }
                 else 
                 {
@@ -95,7 +95,7 @@ Shader "Kazi/ToonShader"
                     {
                         value = 0.5;
                     }
-                    return value * _BaseColor * _MainLightColor;
+                    return value * _BaseColor * _MainLightColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
                 }
             }
             ENDHLSL
