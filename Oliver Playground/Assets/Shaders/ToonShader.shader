@@ -1,67 +1,104 @@
-Shader "Kazi/Toon Shader"
+Shader "Kazi/ToonShader"
 {
     Properties
-    { 
-        _MainTex("Base (RGB)", 2D) = "white" {}
+    {
+        [MainColor] _BaseColor("Base Color", Color) = (1,1,1,1)
+        [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
+        _NormalMap("Normal Map", 2D) = "black" {}
+        _ClipThreshold("Clip Threshold", FLOAT) = 0.5
     }
 
-    SubShader
+        // Universal Render Pipeline subshader. If URP is installed this will be used.
+        SubShader
     {
-        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
+        Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline"}
 
         Pass
         {
-            Tags { "LightMode" = "UniversalForward" }
+            Name "StandardLit"
+            Tags{"LightMode" = "UniversalForward"}
+
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile _ _SHADOWS_SOFT
-            #pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
+
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
-            float4 _MainTex_ST;
+
             struct Attributes
             {
                 float4 positionOS   : POSITION;
-                float3 normalOS     : NORMAL;
-                float4 tangentOS    : TANGENT;
+                float3 normal       : NORMAL;
                 float2 uv           : TEXCOORD0;
             };
+
             struct Varyings
             {
-                float4 positionHCS  : SV_POSITION;
                 float2 uv           : TEXCOORD0;
-                float4 shadowCoord  : TEXCOORD1;
-                half3  normalWS     : TEXCOORD2;
+                float3 normal       : TEXCOORD1;
+                float4 positionHCS  : SV_POSITION;
             };
+
+            TEXTURE2D(_BaseMap);
+            SAMPLER(sampler_BaseMap);
+
+            TEXTURE2D(_NormalMap);
+            SAMPLER(sampler_NormalMap);
+
+            CBUFFER_START(UnityPerMaterial)
+            float4 _BaseMap_ST;
+            float4 _NormalMap_ST;
+            float _ClipThreshold;
+            half4 _BaseColor;
+            CBUFFER_END
+
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
-                VertexPositionInputs vertexInput = GetVertexPositionInputs(IN.positionOS.xyz);
-                VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normalOS, IN.tangentOS);
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.uv = TRANSFORM_TEX(IN.uv, _MainTex);
-                OUT.shadowCoord = GetShadowCoord(vertexInput);
-                OUT.normalWS = normalize(vertexNormalInput.normalWS);
+                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.normal = IN.normal;
                 return OUT;
             }
+
             half4 frag(Varyings IN) : SV_Target
             {
-                Light mainLight = GetMainLight(IN.shadowCoord);
-                half3 attenuatedLightColor = mainLight.color * (mainLight.distanceAttenuation * mainLight.shadowAttenuation);
-                half diffuseColor = LightingLambert(attenuatedLightColor, mainLight.direction, IN.normalWS);
-                half4 customColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv) * diffuseColor;
-                return customColor;
+                //return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
+                float height, width;
+                _NormalMap.GetDimensions(height, width);
+                if (width < 512.0 || height < 512.0) 
+                {
+                    VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normal);
+                    IN.normal = vertexNormalInput.normalWS.xyz;
+                    float value = dot(IN.normal, _MainLightPosition.xyz);
+                    if (value > _ClipThreshold)
+                    {
+                        value = 1.0;
+                    }
+                    else
+                    {
+                        value = 0.5;
+                    }
+                    return value * _BaseColor * _MainLightColor;
+                }
+                else 
+                {
+                    float3 normal = (_NormalMap.Sample(sampler_NormalMap, IN.uv) - 0.5) * 2.0;
+                    VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(float3(normal.x, normal.z, -normal.y));
+                    IN.normal = vertexNormalInput.normalWS.xyz;
+                    float value = dot(IN.normal, _MainLightPosition.xyz);
+                    if (value > _ClipThreshold)
+                    {
+                        value = 1.0;
+                    }
+                    else 
+                    {
+                        value = 0.5;
+                    }
+                    return value * _BaseColor * _MainLightColor;
+                }
             }
             ENDHLSL
         }
-    UsePass "Universal Render Pipeline/Lit/ShadowCaster"
-    UsePass "Universal Render Pipeline/Lit/DepthOnly"
     }
 }
