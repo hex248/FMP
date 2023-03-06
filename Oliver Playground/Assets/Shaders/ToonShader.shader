@@ -20,6 +20,7 @@ Shader "Kazi/ToonShader"
 
             HLSLPROGRAM
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile_fog
             #pragma vertex vert
             #pragma fragment frag
 
@@ -88,7 +89,7 @@ Shader "Kazi/ToonShader"
                 }
                 else 
                 {
-                    float3 normal = (_NormalMap.Sample(sampler_NormalMap, IN.uv) - 0.5) * 2.0;
+                    float3 normal = (_NormalMap.Sample(sampler_NormalMap, IN.uv) / 0.5) - 0.5;
                     VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(float3(normal.x, normal.z, -normal.y));
                     IN.normal = vertexNormalInput.normalWS.xyz;
                     float value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
