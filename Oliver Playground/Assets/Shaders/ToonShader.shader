@@ -19,6 +19,7 @@ Shader "Kazi/ToonShader"
             Tags{"LightMode" = "UniversalForward"}
 
             HLSLPROGRAM
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
             #pragma vertex vert
             #pragma fragment frag
 
@@ -36,6 +37,7 @@ Shader "Kazi/ToonShader"
             {
                 float2 uv           : TEXCOORD0;
                 float3 normal       : TEXCOORD1;
+                float4 shadowCoord  : TEXCOORD2;
                 float4 positionHCS  : SV_POSITION;
             };
 
@@ -55,9 +57,11 @@ Shader "Kazi/ToonShader"
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(IN.positionOS.xyz);
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
                 OUT.normal = IN.normal;
+                OUT.shadowCoord = GetShadowCoord(vertexInput);
                 return OUT;
             }
 
@@ -66,11 +70,12 @@ Shader "Kazi/ToonShader"
                 //return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
                 float height, width;
                 _NormalMap.GetDimensions(height, width);
-                if (width < 512.0 || height < 512.0) 
+                Light mainLight = GetMainLight(IN.shadowCoord);
+                if (width < 32.0 || height < 32.0)
                 {
                     VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normal);
                     IN.normal = vertexNormalInput.normalWS.xyz;
-                    float value = dot(IN.normal, _MainLightPosition.xyz);
+                    float value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
                     if (value > _ClipThreshold)
                     {
                         value = 1.0;
@@ -79,14 +84,14 @@ Shader "Kazi/ToonShader"
                     {
                         value = 0.5;
                     }
-                    return value * _BaseColor * _MainLightColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
+                    return value * _BaseColor * float4(mainLight.color, 1.0) * _BaseMap.Sample(sampler_BaseMap, IN.uv);
                 }
                 else 
                 {
                     float3 normal = (_NormalMap.Sample(sampler_NormalMap, IN.uv) - 0.5) * 2.0;
                     VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(float3(normal.x, normal.z, -normal.y));
                     IN.normal = vertexNormalInput.normalWS.xyz;
-                    float value = dot(IN.normal, _MainLightPosition.xyz);
+                    float value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
                     if (value > _ClipThreshold)
                     {
                         value = 1.0;
@@ -95,10 +100,11 @@ Shader "Kazi/ToonShader"
                     {
                         value = 0.5;
                     }
-                    return value * _BaseColor * _MainLightColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
+                    return value * _BaseColor * float4(mainLight.color, 1.0) * _BaseMap.Sample(sampler_BaseMap, IN.uv);
                 }
             }
             ENDHLSL
         }
+        UsePass "Universal Render Pipeline/Lit/ShadowCaster"
     }
 }
