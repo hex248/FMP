@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 
 public class PlayerManager : MonoBehaviour
@@ -10,6 +11,11 @@ public class PlayerManager : MonoBehaviour
     public int playerCount = 0;
 
     public List<Player> players = new List<Player>();
+
+    [Header("Input")]
+    [SerializeField] InputActionAsset actionAsset;
+    InputSystemUIInputModule inputModule;
+    [SerializeField] InputActionReference menuMove;
 
     [Header("Rendering")]
     [SerializeField] Material[] playerMaterials;
@@ -29,6 +35,20 @@ public class PlayerManager : MonoBehaviour
     public void PlayerSpawned(Player player)
     {
         players.Add(player);
+
+        InputActionAsset newActionAsset = Instantiate(actionAsset);
+        player.GetComponentInChildren<PlayerInput>().actions = newActionAsset;
+
+        inputModule = player.GetComponentInChildren<InputSystemUIInputModule>();
+        inputModule.actionsAsset = newActionAsset;
+        InputActionMap actionMap = newActionAsset.FindActionMap("Player", true);
+
+        //have to rebind UI controls
+        Debug.Log(InputActionReference.Create(actionMap.FindAction("Menu Move", true)));
+        menuMove = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
+        inputModule.move = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
+        inputModule.submit = InputActionReference.Create(actionMap.FindAction("Menu Select", true));
+
         playerCount++;
         StartCoroutine(screenManager.PlayerJoined(playerCount));
         player.GetComponentInChildren<PlayerMovement>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];

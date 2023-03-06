@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0.99999946, b: 0.99999946, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27916
+  m_Name: pb_Mesh33428
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -608,19 +608,7 @@ MonoBehaviour:
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1456160843}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: PlayerSpawned
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: PlayerMovement, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -690,6 +678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCount: 0
   players: []
+  actionAsset: {fileID: -944628639613478452, guid: 1f478376e5c1ca741b15348663491b1b, type: 3}
   playerMaterials:
   - {fileID: 2100000, guid: d8333db8c3064e249bc6075d76aef8c4, type: 2}
   - {fileID: 2100000, guid: 4644cb8f4e32ed54684e8d6ff752b049, type: 2}
