@@ -9,7 +9,7 @@ Shader "Kazi/ToonShader"
     }
         SubShader
     {
-        Tags {"RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" "Queue" = "Geometry"}
+        Tags {"RenderPipeline" = "HighDefinitionPipeline" "RenderType" = "Opaque" "Queue" = "Geometry"}
 
         Pass
         {

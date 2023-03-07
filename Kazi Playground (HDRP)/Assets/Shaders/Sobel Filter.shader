@@ -16,7 +16,7 @@ Shader "Kazi/Sobel Filter"
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/Common.hlsl"
 
 			struct Attributes
 			{
