@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem.Samples.RebindUI;
 
 
 public class PlayerManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     InputSystemUIInputModule inputModule;
     [SerializeField] InputActionReference menuMove;
     string playerControlScheme;
+    InputDevice[] devices;
 
     [Header("Rendering")]
     [SerializeField] Material[] playerMaterials;
@@ -34,29 +36,50 @@ public class PlayerManager : MonoBehaviour
         screenManager = FindObjectOfType<ScreenManager>();
     }
 
+
     public void PlayerSpawned(Player player)
     {
         players.Add(player);
         playerInput = player.GetComponentInChildren<PlayerInput>();
+
+        //save important info before it's overidden by changing the asset
         playerControlScheme = playerInput.currentControlScheme;
+        devices = playerInput.devices.ToArray();
+
 
         InputActionAsset newActionAsset = Instantiate(actionAsset);
-        playerInput.actions = newActionAsset;
-
-        
-
 
         inputModule = player.GetComponentInChildren<InputSystemUIInputModule>();
-        inputModule.actionsAsset = newActionAsset;
-        InputActionMap actionMap = newActionAsset.FindActionMap("Player", true);
 
-        //have to rebind UI controls
-        Debug.Log(InputActionReference.Create(actionMap.FindAction("Menu Move", true)));
+        //SWAPPING THESE 2 LINES FOR SOME REASON MEANS THE UI STAYS UNBOUND - IT APPEARS UNBOUND IN THE INSPECTOR ANYWAY
+        inputModule.actionsAsset = newActionAsset;
+        playerInput.actions = newActionAsset;
+
+        InputActionMap actionMap = newActionAsset.FindActionMap("Player", true);
         menuMove = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.move = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.submit = InputActionReference.Create(actionMap.FindAction("Menu Select", true));
 
+
+
         //re-apply correct control scheme
+        playerInput.SwitchCurrentControlScheme(playerControlScheme, devices);
+
+        //update rebinding actions 
+        RebindActionUI[] rebindingActions = player.GetComponentsInChildren<RebindActionUI>();
+        foreach(RebindActionUI binding in rebindingActions)
+        {
+            string actionName = binding.actionReference.action.name;
+            string oldMapName = binding.actionReference.action.actionMap.name;
+
+            InputActionMap newMap = newActionAsset.FindActionMap(oldMapName, true);
+            InputActionReference newReference = InputActionReference.Create(newMap.FindAction(actionName, true));
+
+            binding.actionReference = newReference;
+
+            Debug.Log(newReference.ToString());
+        }
+
 
         playerCount++;
         StartCoroutine(screenManager.PlayerJoined(playerCount));
