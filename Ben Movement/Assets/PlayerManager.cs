@@ -13,9 +13,11 @@ public class PlayerManager : MonoBehaviour
     public List<Player> players = new List<Player>();
 
     [Header("Input")]
+    PlayerInput playerInput;
     [SerializeField] InputActionAsset actionAsset;
     InputSystemUIInputModule inputModule;
     [SerializeField] InputActionReference menuMove;
+    string playerControlScheme;
 
     [Header("Rendering")]
     [SerializeField] Material[] playerMaterials;
@@ -35,9 +37,14 @@ public class PlayerManager : MonoBehaviour
     public void PlayerSpawned(Player player)
     {
         players.Add(player);
+        playerInput = player.GetComponentInChildren<PlayerInput>();
+        playerControlScheme = playerInput.currentControlScheme;
 
         InputActionAsset newActionAsset = Instantiate(actionAsset);
-        player.GetComponentInChildren<PlayerInput>().actions = newActionAsset;
+        playerInput.actions = newActionAsset;
+
+        
+
 
         inputModule = player.GetComponentInChildren<InputSystemUIInputModule>();
         inputModule.actionsAsset = newActionAsset;
@@ -48,6 +55,8 @@ public class PlayerManager : MonoBehaviour
         menuMove = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.move = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.submit = InputActionReference.Create(actionMap.FindAction("Menu Select", true));
+
+        //re-apply correct control scheme
 
         playerCount++;
         StartCoroutine(screenManager.PlayerJoined(playerCount));

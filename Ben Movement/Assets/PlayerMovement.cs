@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         bool triggered = context.action.triggered;
         if (triggered)
         {
-            
+
         }
     }
 
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
                 //check dash direction
                 Vector3 dashEndLocation = GetDashEndPoint();
                 StartDash(dashEndLocation);
-                
+
             }
         }
     }
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 totalDashVector = dashDirection * dashSpeed * dashTime;
         bool foundDashLocation = false;
         float checkValue = 1.0f;
-        
+
 
         while (!foundDashLocation)
         {
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 foundDashLocation = true;
                 checkValue = 0f;
-            
+
                 return transform.position;
             }
             else
@@ -105,14 +105,14 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 checkLocation = transform.position + checkOffset + directionOffset;
                 Vector3 dashEndLocation = transform.position + directionOffset;
 
-                if(checkValue == 1f)
+                if (checkValue == 1f)
                 {
                     DashEndsInCollider(playerLocationWithOffset, checkLocation, true);
                 }
                 //check if it is in a collider
                 //probably a way to have to avoid doing this check for each location
                 //and instead just do this once, and compare the values
-                
+
                 if (!DashEndsInCollider(playerLocationWithOffset, checkLocation))
                 {
                     //check if near enough to collider
@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
                         return dashEndLocation;
                     }
                 }
-                
+
 
                 checkValue -= dashCheckResolution;
             }
@@ -137,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         Gizmos.color = Color.yellow;
-        if(gizmosLocation.Count != 0)
+        if (gizmosLocation.Count != 0)
         {
             for (int i = 0; i < gizmosLocation.Count; i++)
             {
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         }
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(dashEnd, 0.25f);
-        
+
     }
 
 
@@ -185,19 +185,19 @@ public class PlayerMovement : MonoBehaviour
     bool DashEndsInCollider(Vector3 location, Vector3 endPoint, bool withDebug = false)
     {
         int hitCount = 0;
-    
+
         //raycast positive direction
         Vector3 raycastStart = location;
         Vector3 raycastEnd = endPoint;
         bool reachedDestination = false;
         Vector3 dashOffset = raycastEnd - raycastStart;
 
-        if(withDebug)
+        if (withDebug)
         {
             gizmosLocation.Clear();
             Debug.DrawLine(raycastStart, raycastEnd, Color.red, 1f);
         }
-        
+
         while (!reachedDestination)
         {
             Vector3 raycastDirection = raycastEnd - raycastStart;
@@ -218,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //raycast backwards
-        
+
         //swap
         raycastStart = endPoint;
         raycastEnd = location;
@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 raycastDirection = raycastEnd - raycastStart;
             RaycastHit hit;
             bool hasHit = Physics.Raycast(raycastStart, raycastDirection.normalized, out hit, raycastDirection.magnitude, environmentLayer);
-            
+
 
             if (hasHit)
             {
@@ -273,7 +273,7 @@ public class PlayerMovement : MonoBehaviour
         xMax = Mathf.Sqrt(1f / yMin);
         col.enabled = false;
     }
-    
+
     void DoDashMove()
     {
         float horizontalScale = 1f;
@@ -285,12 +285,12 @@ public class PlayerMovement : MonoBehaviour
             yScale = 1f;
             horizontalScale = 1f;
             col.enabled = true;
-            
+
         }
 
         else if (timeSinceDash >= enableColliderTime)
         {
-            
+
             col.enabled = true;
             yScale = Mathf.SmoothStep(yMin, 1f, timeSinceDash / dashTime);
             horizontalScale = Mathf.SmoothStep(xMax, 1f, timeSinceDash / dashTime);
@@ -320,7 +320,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed);
         }
-        if(isDashing)
+        if (isDashing)
         {
             DoDashMove();
         }
@@ -331,9 +331,26 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude >= 1f)
         {
             direction = direction.normalized;
+            
         }
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
         rb.velocity = desiredVelocity;
+
+        Vector2 vec2Direction = new Vector2(direction.x, direction.z);
+        if(vec2Direction.magnitude >= 0.1f)
+        {
+            RotateTowardsDirection(direction);
+        }
+        
+
+
+    }
+
+    void RotateTowardsDirection(Vector3 direction)
+    {
+        direction = direction.normalized;
+        //Vector3.RotateTowards(Vector3.forward, direction, Mathf.Infinity, 0.0f);
+        playerVisuals.transform.rotation = Quaternion.LookRotation(direction);
     }
 
 }
