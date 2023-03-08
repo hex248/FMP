@@ -8,6 +8,9 @@ public class SnowManager : MonoBehaviour
     public List<Vector3> vertices = new List<Vector3>();
     public List<Vector3> currentMeshVertices = new List<Vector3>();
     List<Color> colors = new List<Color>();
+    public GameObject vertexIndicator;
+    public int indicatedVertex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,12 +28,14 @@ public class SnowManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         //mesh.Clear();
 
-        //mesh.SetVertices(vertices);
+        meshFilter.mesh.SetVertices(vertices);
         meshFilter.mesh.GetVertices(currentMeshVertices);
+
+        vertexIndicator.transform.position = transform.position + currentMeshVertices[indicatedVertex];
 
         //mesh.SetColors(colors);
         //mesh.RecalculateNormals();
@@ -55,6 +60,7 @@ public class SnowManager : MonoBehaviour
         Mesh clonedMesh = new Mesh();
 
         clonedMesh.name = "clone";
+        clonedMesh.vertices = originalMesh.vertices;
         clonedMesh.triangles = originalMesh.triangles;
         clonedMesh.normals = originalMesh.normals;
         clonedMesh.uv = originalMesh.uv;
@@ -73,6 +79,7 @@ public class SnowManager : MonoBehaviour
         }
 
         clonedMesh.vertices = vertices.ToArray();
+        clonedMesh.RecalculateNormals();
 
         meshFilter.mesh = clonedMesh;
 
