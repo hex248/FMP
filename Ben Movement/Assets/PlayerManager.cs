@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
         playerInput.SwitchCurrentControlScheme(playerControlScheme, devices);
 
         //update rebinding actions 
-        RebindActionUI[] rebindingActions = player.GetComponentsInChildren<RebindActionUI>();
+        RebindActionUI[] rebindingActions = player.GetComponentsInChildren<RebindActionUI>(true);
         foreach(RebindActionUI binding in rebindingActions)
         {
             string actionName = binding.actionReference.action.name;
