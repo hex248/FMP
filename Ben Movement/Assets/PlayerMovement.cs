@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Visuals Settings")]
     public GameObject playerVisuals;
+    Vector3 lastMovementDirection;
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
     float timeSinceDash;
 
@@ -336,11 +337,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
         rb.velocity = desiredVelocity;
 
-        Vector2 vec2Direction = new Vector2(direction.x, direction.z);
-        if(vec2Direction.magnitude >= 0.1f)
-        {
-            RotateTowardsDirection(direction);
-        }
+        
+        RotateTowardsDirection(direction);
+        
         
 
 
@@ -348,9 +347,13 @@ public class PlayerMovement : MonoBehaviour
 
     void RotateTowardsDirection(Vector3 direction)
     {
-        direction = direction.normalized;
-        //Vector3.RotateTowards(Vector3.forward, direction, Mathf.Infinity, 0.0f);
-        playerVisuals.transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 walkDirection = new Vector3(direction.x, 0f, direction.z);
+        if (walkDirection.magnitude >= 0.1f)
+        {
+            lastMovementDirection = walkDirection.normalized;
+        }
+        Quaternion targetRotation = Quaternion.LookRotation(lastMovementDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
     }
 
 }
