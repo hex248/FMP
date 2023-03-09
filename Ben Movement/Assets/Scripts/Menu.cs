@@ -39,7 +39,7 @@ public class Menu : MonoBehaviour
     public void OpenMainMenu()
     {
         isMenuOpen = true;
-        playerManager.isMenuOpen = true;
+        playerManager.IsMenuOpen = true;
         currentPage = MenuPage.MainMenu;
 
         mainMenu.SetActive(true);
@@ -68,7 +68,7 @@ public class Menu : MonoBehaviour
     public void CloseMenu()
     {
         isMenuOpen = false;
-        playerManager.isMenuOpen = false;
+        playerManager.IsMenuOpen = false;
 
         currentPage = MenuPage.None;
 
@@ -126,7 +126,7 @@ public class Menu : MonoBehaviour
         }
         else
         {
-            if(!playerManager.isMenuOpen)
+            if(!playerManager.IsMenuOpen)
             {
                OpenMainMenu();
             }

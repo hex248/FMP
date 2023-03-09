@@ -10,7 +10,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
     Vector2 movementInput;
-    bool movementLocked;
+
+    public bool movementDashLocked;
+    public bool movementMenuLocked;
+    public bool movementAttackLocked;
+
     bool isDashing;
     Rigidbody rb;
     Collider col;
@@ -37,11 +41,26 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+    }
+
+    private void FixedUpdate()
+    {
+        movementDashLocked = isDashing;
+
+        if (!isMovementLocked())
+        {
+            //normal movement
+            Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
+            DoMovement(moveDirection, moveSpeed);
+        }
+        if (isDashing)
+        {
+            DoDashMove();
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -49,20 +68,13 @@ public class PlayerMovement : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        bool triggered = context.action.triggered;
-        if (triggered)
-        {
 
-        }
-    }
 
     public void OnDash(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (!isDashing)
+            if (!isMovementLocked())
             {
                 //check dash direction
                 Vector3 dashEndLocation = GetDashEndPoint();
@@ -70,6 +82,11 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+    }
+
+    bool isMovementLocked()
+    {
+        return (movementDashLocked || movementMenuLocked || movementAttackLocked);
     }
 
     Vector3 GetDashEndPoint()
@@ -311,21 +328,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        movementLocked = isDashing;
-
-        if (!movementLocked)
-        {
-            //normal movement
-            Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
-            DoMovement(moveDirection, moveSpeed);
-        }
-        if (isDashing)
-        {
-            DoDashMove();
-        }
-    }
+    
 
     void DoMovement(Vector3 direction, float speed)
     {

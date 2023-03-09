@@ -29,13 +29,47 @@ public class PlayerManager : MonoBehaviour
     ScreenManager screenManager;
 
     [Header("UI")]
-    public bool isMenuOpen;
+    bool isMenuOpen;
+    public bool IsMenuOpen
+    {
+        get
+        {
+            return isMenuOpen;
+        }
+
+        set
+        {
+            if (value == true)
+            {
+                PauseGame();
+                isMenuOpen = value;
+            }
+            else
+            {
+                UnpauseGame();
+                isMenuOpen = value;
+            }
+        }
+    }
+
+    public bool isPaused;
 
     private void Start()
     {
         screenManager = FindObjectOfType<ScreenManager>();
     }
 
+    void PauseGame()
+    {
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    void UnpauseGame()
+    {
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
 
     public void PlayerSpawned(Player player)
     {
