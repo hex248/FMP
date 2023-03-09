@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     PlayerManager playerManager;
     public PlayerInput playerInput;
     PlayerInputManager playerInputManager;
-    PlayerMovement playerMovement;
+    PlayerController playerMovement;
     ColorblindFilters filterController;
 
     [Header("Player Details")]
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     {
         playerInput = GetComponentInChildren<PlayerInput>();
         playerManager = FindObjectOfType<PlayerManager>();
-        playerMovement = GetComponentInChildren<PlayerMovement>();
+        playerMovement = GetComponentInChildren<PlayerController>();
 
         playerInputManager = FindObjectOfType<PlayerInputManager>();
         playerNumber = playerInput.playerIndex + 1;

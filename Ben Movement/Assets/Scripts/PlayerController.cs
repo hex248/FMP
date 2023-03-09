@@ -4,52 +4,70 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField] float dashSpeed;
-    [SerializeField] float dashTime;
-    Vector2 movementInput;
-
-    public bool movementDashLocked;
-    public bool movementMenuLocked;
-    public bool movementAttackLocked;
-
-    bool isDashing;
     Rigidbody rb;
     Collider col;
+    PlayerManager playerManager;
+    
+
+    [Header("Move Settings")]
+    [SerializeField] float moveSpeed;
+    Vector2 movementInput;
+
+    [Header("Dash Settings")]
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
     [SerializeField] LayerMask environmentLayer;
     [SerializeField] float dashCheckRadius = 0.1f;
     [SerializeField] float dashCheckResolution = 0.05f;
     [SerializeField] float playerColliderRadius = 0.25f;
 
+    bool isDashing;
     float yMin;
     float xMax;
     float enableColliderTime;
     Vector3 currentDashDirection;
+    List<Vector3> gizmosLocation = new List<Vector3>();
+    Vector3 dashEnd;
+    float timeSinceDash;
+
+    [Header("Attack Settings")]
+    [SerializeField] float attackMoveDistance;
+    [SerializeField] float attackMoveTime;
+    [SerializeField] float postAttackDelay;
+
+    Vector3 currentAttackDirection;
+    Vector3 mostRecentMoveDirection;
+    bool isAttacking;
+    float timeSinceAttack;
+    float attackSpeed;
 
     [Header("Visuals Settings")]
     public GameObject playerVisuals;
     Vector3 lastMovementDirection;
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
-    float timeSinceDash;
-
-    List<Vector3> gizmosLocation = new List<Vector3>();
-    Vector3 dashEnd;
-
     public int playerNumber = 1;
+   
 
+    
+    [Header("Movement Lock Settings")]
+    public bool movementDashLocked;
+    public bool movementMenuLocked;
+    public bool movementAttackLocked;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        playerManager = FindObjectOfType<PlayerManager>();
     }
 
     private void FixedUpdate()
     {
         movementDashLocked = isDashing;
+        movementAttackLocked = isAttacking;
 
         if (!isMovementLocked())
         {
@@ -57,18 +75,113 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed);
         }
+        else
+        {
+            Vector3 moveDirection = Vector3.zero;
+            DoMovement(moveDirection, moveSpeed);
+        }
         if (isDashing)
         {
             DoDashMove();
         }
+        if(isAttacking)
+        {
+            DoAttackMove();
+        }
     }
+
+    //Movement Code
 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
     }
 
+    Vector3 GetRotatedDirectionFromInput(Vector2 inDirection)
+    {
+        Vector3 inDirection3D = new Vector3(inDirection.x, 0f, inDirection.y);
+        Quaternion rotationAngle = Quaternion.Euler(0f, 45f, 0f);
+        Matrix4x4 matrix = Matrix4x4.Rotate(rotationAngle);
+        Vector3 outDirection = matrix.MultiplyPoint3x4(inDirection3D);
+        return outDirection;
+    }
 
+    void DoMovement(Vector3 direction, float speed)
+    {
+        if (direction.magnitude >= 1f)
+        {
+            direction = direction.normalized;
+
+        }
+        if(direction.magnitude >= 0.1f)
+        {
+            mostRecentMoveDirection = direction;
+        }
+        
+        Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
+        rb.velocity = desiredVelocity;
+
+
+        RotateTowardsDirection(direction);
+    }
+
+    void RotateTowardsDirection(Vector3 direction)
+    {
+        Vector3 walkDirection = new Vector3(direction.x, 0f, direction.z);
+        if (walkDirection.magnitude >= 0.1f)
+        {
+            lastMovementDirection = walkDirection.normalized;
+        }
+        Quaternion targetRotation = Quaternion.LookRotation(lastMovementDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+    }
+
+    //Attack Code
+
+    public void OnAttackButtonPressed(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+        if (triggered)
+        {
+            if(!isMovementLocked())
+            {
+                StartAttack();
+            }
+        }
+    }
+
+    void StartAttack()
+    {
+        timeSinceAttack = 0f;
+        isAttacking = true;
+
+        Vector2 attackInputDirection;
+        currentAttackDirection = mostRecentMoveDirection;
+
+    }
+
+    void DoAttackMove()
+    {
+        if (timeSinceAttack >= attackMoveTime + postAttackDelay)
+        {
+            isAttacking = false;
+        }
+        else if (timeSinceAttack >= attackMoveTime)
+        {
+            //finished attack movement
+        }
+        else
+        {
+            //move player
+            attackSpeed = attackMoveDistance / attackMoveTime;
+            DoMovement(currentAttackDirection, attackSpeed);
+        }
+        timeSinceAttack += Time.deltaTime;
+
+    }
+
+
+    //Dash Code
 
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -82,11 +195,6 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
-    }
-
-    bool isMovementLocked()
-    {
-        return (movementDashLocked || movementMenuLocked || movementAttackLocked);
     }
 
     Vector3 GetDashEndPoint()
@@ -105,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
         bool foundDashLocation = false;
         float checkValue = 1.0f;
 
-
+        
         while (!foundDashLocation)
         {
             if (checkValue <= 0f)
@@ -151,23 +259,6 @@ public class PlayerMovement : MonoBehaviour
         return Vector3.zero;
     }
 
-    void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.yellow;
-        if (gizmosLocation.Count != 0)
-        {
-            for (int i = 0; i < gizmosLocation.Count; i++)
-            {
-                Gizmos.DrawSphere(gizmosLocation[i], 0.1f);
-            }
-        }
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(dashEnd, 0.25f);
-
-    }
-
-
     List<Vector3> GetPossibleDashEndPoints(Vector3 location, Vector3 dashDirection)
     {
         List<Vector3> points = new List<Vector3>();
@@ -197,8 +288,6 @@ public class PlayerMovement : MonoBehaviour
         }
         return points;
     }
-
-
 
     bool DashEndsInCollider(Vector3 location, Vector3 endPoint, bool withDebug = false)
     {
@@ -266,13 +355,25 @@ public class PlayerMovement : MonoBehaviour
         return (!(hitCount == 0));
     }
 
-    Vector3 GetRotatedDirectionFromInput(Vector2 inDirection)
+    bool isMovementLocked()
     {
-        Vector3 inDirection3D = new Vector3(inDirection.x, 0f, inDirection.y);
-        Quaternion rotationAngle = Quaternion.Euler(0f, 45f, 0f);
-        Matrix4x4 matrix = Matrix4x4.Rotate(rotationAngle);
-        Vector3 outDirection = matrix.MultiplyPoint3x4(inDirection3D);
-        return outDirection;
+        return (movementDashLocked || playerManager.isPaused || movementAttackLocked);
+    }
+
+    void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.yellow;
+        if (gizmosLocation.Count != 0)
+        {
+            for (int i = 0; i < gizmosLocation.Count; i++)
+            {
+                Gizmos.DrawSphere(gizmosLocation[i], 0.1f);
+            }
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(dashEnd, 0.25f);
+
     }
 
     void StartDash(Vector3 dashEndLocation)
@@ -328,35 +429,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
-
-    void DoMovement(Vector3 direction, float speed)
-    {
-        if (direction.magnitude >= 1f)
-        {
-            direction = direction.normalized;
-            
-        }
-        Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
-        rb.velocity = desiredVelocity;
-
-        
-        RotateTowardsDirection(direction);
-        
-        
-
-
-    }
-
-    void RotateTowardsDirection(Vector3 direction)
-    {
-        Vector3 walkDirection = new Vector3(direction.x, 0f, direction.z);
-        if (walkDirection.magnitude >= 0.1f)
-        {
-            lastMovementDirection = walkDirection.normalized;
-        }
-        Quaternion targetRotation = Quaternion.LookRotation(lastMovementDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
-    }
 
 }

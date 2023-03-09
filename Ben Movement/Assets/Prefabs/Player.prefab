@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 4516365663885039616}
   - component: {fileID: 7478775978707637640}
   - component: {fileID: 701379450548987467}
+  - component: {fileID: 2989836245790552901}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -354,9 +355,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4516365663885039616}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnAttack
+      - m_Target: {fileID: 2989836245790552901}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnAttackButtonPressed
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -464,6 +465,9 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeed: 20
   dashTime: 0.2
+  movementDashLocked: 0
+  movementMenuLocked: 0
+  movementAttackLocked: 0
   environmentLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -503,6 +507,18 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &2989836245790552901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7016549952370542837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fab86bbad6f3e947bf45c6b07a65b02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7238103672931334040
 GameObject:
   m_ObjectHideFlags: 0

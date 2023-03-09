@@ -117,7 +117,7 @@ public class PlayerManager : MonoBehaviour
 
         playerCount++;
         StartCoroutine(screenManager.PlayerJoined(playerCount));
-        player.GetComponentInChildren<PlayerMovement>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
+        player.GetComponentInChildren<PlayerController>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
 
         UpdateRenderTextures();
     }
