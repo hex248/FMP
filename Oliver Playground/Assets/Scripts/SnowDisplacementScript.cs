@@ -5,12 +5,19 @@ using UnityEngine;
 public class SnowDisplacementScript : MonoBehaviour
 {
     Mesh mesh;
+    MeshFilter meshFilter;
     List<Vector3> vertices = new List<Vector3>();
     List<Color> colors = new List<Color>();
+
+    SnowManager snowManager;
+
+    bool highPoly = false;
     // Start is called before the first frame update
     void Start()
     {
-        mesh = GetComponent<MeshFilter>().mesh;
+        snowManager = FindObjectOfType<SnowManager>();
+        meshFilter = GetComponent<MeshFilter>();
+        mesh = meshFilter.mesh;
         mesh.GetVertices(vertices);
         mesh.GetColors(colors);
         for (int i = 0; i < vertices.Count - 1; i++)
@@ -27,6 +34,15 @@ public class SnowDisplacementScript : MonoBehaviour
         mesh.SetVertices(vertices);
         mesh.SetColors(colors);
         mesh.RecalculateNormals();
+
+        if (highPoly)
+        {
+            meshFilter.mesh = snowManager.highPolyMesh;
+        }
+        else
+        {
+            meshFilter.mesh = snowManager.lowPolyMesh;
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -38,6 +54,7 @@ public class SnowDisplacementScript : MonoBehaviour
                 {
                     vertices[i] += Vector3.down * Time.deltaTime * 10f;
                     colors[i] = new Color(mesh.normals[i].x, mesh.normals[i].y, mesh.normals[i].z);
+                    highPoly = true;
                 }
             }
         }
