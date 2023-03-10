@@ -6,8 +6,8 @@ public class SnowDisplacementScript : MonoBehaviour
 {
     Mesh mesh;
     MeshFilter meshFilter;
-    //List<Vector3> vertices = new List<Vector3>();
-    //List<Color> colors = new List<Color>();
+    List<Vector3> vertices = new List<Vector3>();
+    List<Color> colors = new List<Color>();
 
     SnowManager snowManager;
 
@@ -17,56 +17,60 @@ public class SnowDisplacementScript : MonoBehaviour
     {
         snowManager = FindObjectOfType<SnowManager>();
         meshFilter = GetComponent<MeshFilter>();
+        meshFilter.mesh.GetVertices(vertices);
+        meshFilter.mesh.GetColors(colors);
     }
+
+    int index = 0;
 
     // Update is called once per frame
     void Update()
     {
+        if(index < vertices.Count - 1)
+        {
+            index++;
+        }
+        else
+        {
+            index = 0;
+        }
+        if (vertices[index].y > -0.5f && vertices[index].y < 0.5f)
+        {
+            vertices[index] += Vector3.up * Time.deltaTime * 20f * Mathf.PerlinNoise(vertices[index].x, vertices[index].z);
+        }
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!highPoly)
         {
-            if (!highPoly)
+            SwitchToHighPoly();
+        }
+        else
+        {
+            for (int i = 0; i < vertices.Count - 1; i++)
             {
-                SwitchToHighPoly();
-            }
-            else
-            {
-                List<Vector3> vertices = new List<Vector3>();
-                meshFilter.mesh.GetVertices(vertices);
-                List<Color> colors = new List<Color>();
-                meshFilter.mesh.GetColors(colors);
-
-                for (int i = 0; i < vertices.Count - 1; i++)
+                if (other.bounds.max.x >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.min.x <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.max.z >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z && other.bounds.min.z <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z)
                 {
-                    if (Vector3.Distance(vertices[i], other.transform.position) <= snowManager.effectRange)
+                    if (vertices[i].y > -0.5f && vertices[i].y < 0.5f)
                     {
-                        Debug.Log(vertices[i]);
+                        colors[i] = new Color(meshFilter.mesh.normals[i].x, meshFilter.mesh.normals[i].y, meshFilter.mesh.normals[i].z);
                         vertices[i] += Vector3.down * Time.deltaTime * 40f;
-                        Debug.Log(vertices[i]);
-                        /*colors[i] = new Color(meshFilter.mesh.normals[i].x, meshFilter.mesh.normals[i].y, meshFilter.mesh.normals[i].z);
-                        */
-                        if (vertices[i].y > -2f && vertices[i].y < 2f)
-                        {
-                            
-                        }
                     }
-                    /*if (other.bounds.max.x >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.min.x <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.max.z >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z && other.bounds.min.z <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z)
-                    {
-                        if (vertices[i].y > -2f && vertices[i].y < 2f)
-                        {
-                            vertices[i] += Vector3.down * Time.deltaTime * 10f;
-                            colors[i] = new Color(meshFilter.mesh.normals[i].x, meshFilter.mesh.normals[i].y, meshFilter.mesh.normals[i].z);
-                            highPoly = true;
-                        }
-                    }*/
                 }
-
-                meshFilter.mesh.SetVertices(vertices);
-                //meshFilter.mesh.SetColors(colors);
-                meshFilter.mesh.RecalculateNormals();
+                /*if (other.bounds.max.x >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.min.x <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.max.z >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z && other.bounds.min.z <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z)
+                {
+                    if (vertices[i].y > -2f && vertices[i].y < 2f)
+                    {
+                        vertices[i] += Vector3.down * Time.deltaTime * 10f;
+                        colors[i] = new Color(meshFilter.mesh.normals[i].x, meshFilter.mesh.normals[i].y, meshFilter.mesh.normals[i].z);
+                        highPoly = true;
+                    }
+                }*/
             }
+
+            meshFilter.mesh.SetVertices(vertices);
+            meshFilter.mesh.SetColors(colors);
+            meshFilter.mesh.RecalculateNormals();
         }
     }
 
@@ -74,6 +78,8 @@ public class SnowDisplacementScript : MonoBehaviour
     {
         Debug.Log("Switch to high poly");
         meshFilter.mesh = snowManager.highPolyMesh;
+        meshFilter.mesh.GetVertices(vertices);
+        meshFilter.mesh.GetColors(colors);
         highPoly = true;
     }
 }
