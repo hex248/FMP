@@ -60,6 +60,11 @@ public class PlayerController : MonoBehaviour
     public bool movementMenuLocked;
     public bool movementAttackLocked;
 
+    [Header("Buffering Settings")]
+    //[SerializeField] bool dashHasBufferPriority = true;
+    bool attackBuffered;
+    bool dashBuffered;
+
 
     private void Start()
     {
@@ -75,17 +80,37 @@ public class PlayerController : MonoBehaviour
         movementDashLocked = isDashing;
         movementAttackLocked = isAttacking;
 
-        if (!isMovementLocked())
+        if (!isMovementLocked() && !isActionBuffered())
         {
             //normal movement
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed);
         }
-        else
+        else if(!isMovementLocked() && isActionBuffered())
+        {
+
+            //dash gets priority
+            if (dashBuffered)
+            {
+                Vector3 dashEndLocation = GetDashEndPoint();
+                StartDash(dashEndLocation);
+                Debug.Log("buffered dash to " + (dashEndLocation - transform.position));
+            }
+            else if (attackBuffered)
+            {
+                StartAttack();
+            }
+            //allow only 1 buffered action for now - TODO - allow for multiple of same action?
+            dashBuffered = false;
+            attackBuffered = false;
+        }
+        else 
         {
             Vector3 moveDirection = Vector3.zero;
             DoMovement(moveDirection, moveSpeed);
         }
+
+
         if (isDashing)
         {
             DoDashMove();
@@ -168,9 +193,13 @@ public class PlayerController : MonoBehaviour
         bool triggered = context.action.triggered;
         if (triggered)
         {
-            if(!isMovementLocked())
+            if(!isMovementLocked() && !isActionBuffered())
             {
                 StartAttack();
+            }
+            else
+            {
+                attackBuffered = true;
             }
         }
     }
@@ -230,18 +259,23 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (!isMovementLocked())
+            if (!isMovementLocked() && !isActionBuffered())
             {
                 //check dash direction
                 Vector3 dashEndLocation = GetDashEndPoint();
                 StartDash(dashEndLocation);
 
             }
+            else
+            {
+                dashBuffered = true;
+            }
         }
     }
 
     Vector3 GetDashEndPoint()
     {
+        Debug.Log("input is " + movementInput);
         Vector2 dashInputDirection;
         if (movementInput.magnitude > 0.1f)
         {
@@ -398,10 +432,7 @@ public class PlayerController : MonoBehaviour
         return (!(hitCount == 0));
     }
 
-    bool isMovementLocked()
-    {
-        return (movementDashLocked || playerManager.isPaused || movementAttackLocked);
-    }
+
 
     void StartDash(Vector3 dashEndLocation)
     {
@@ -456,5 +487,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    bool isMovementLocked()
+    {
+        return (movementDashLocked || playerManager.isPaused || movementAttackLocked);
+    }
 
+    bool isActionBuffered()
+    {
+        return (attackBuffered || dashBuffered);
+    }
 }
