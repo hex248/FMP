@@ -210,15 +210,15 @@ public class PlayerController : MonoBehaviour
     {
         showAttackGizmos = true;
         doneAttackHit = true;
-        Collider[] hitColliders = Physics.OverlapBox(transform.position + testAttack.hitboxOffset, testAttack.hitboxSize, rotationalDirection, attackLayerMask);
+        Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * testAttack.hitboxOffset;
+        Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (testAttack.hitboxSize / 2f), rotationalDirection, attackLayerMask);
         for(int i = 0; i < hitColliders.Length; i++)
         {
             Debug.Log("Hit : " + hitColliders[i].name + i);
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
-                Debug.Log("Apply force " + currentAttackDirection * 400f);
-                hitRb.AddForce(currentAttackDirection * 400f);
+                hitRb.AddForce(currentAttackDirection * 200f);
             }
         }
     }
