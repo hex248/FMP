@@ -35,9 +35,9 @@ public class PlayerController : MonoBehaviour
     [Header("Attack Settings")]
 
     [SerializeField] Attack testAttack;
-    //[SerializeField] float attackMoveDistance;
-    //[SerializeField] float attackMoveTime;
-    //[SerializeField] float postAttackDelay;
+    [SerializeField] LayerMask attackLayerMask;
+    bool showAttackGizmos;
+    bool doneAttackHit = false;
 
     Vector3 currentAttackDirection;
     Vector3 mostRecentMoveDirection;
@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
     public int playerNumber = 1;
     PlayerAnimationScript playerAnim;
+    Quaternion rotationalDirection;
    
 
     
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider>();
         playerManager = FindObjectOfType<PlayerManager>();
         playerAnim = GetComponentInChildren<PlayerAnimationScript>();
+        lastMovementDirection = Vector3.forward;
     }
 
     private void FixedUpdate()
@@ -88,10 +90,28 @@ public class PlayerController : MonoBehaviour
         {
             DoDashMove();
         }
-        if(isAttacking)
+        if (isAttacking)
         {
             DoAttackMove();
+            if(timeSinceAttack >= testAttack.damageTime && doneAttackHit == false)
+            {
+                DoAttackHit();
+            }
         }
+    }
+
+    void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.red;
+        if(showAttackGizmos)
+        {
+            Gizmos.matrix = transform.localToWorldMatrix;
+            //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * testAttack.hitboxOffset;
+            Gizmos.DrawWireCube(testAttack.hitboxOffset, testAttack.hitboxSize);
+        }
+        
+
     }
 
     //Movement Code
@@ -137,7 +157,8 @@ public class PlayerController : MonoBehaviour
             lastMovementDirection = walkDirection.normalized;
         }
         Quaternion targetRotation = Quaternion.LookRotation(lastMovementDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+        rotationalDirection = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+        transform.rotation = rotationalDirection;
     }
 
     //Attack Code
@@ -158,6 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceAttack = 0f;
         isAttacking = true;
+        doneAttackHit = false;
         playerAnim.StartAttackAnimation();
         Vector2 attackInputDirection;
         currentAttackDirection = mostRecentMoveDirection;
@@ -169,6 +191,7 @@ public class PlayerController : MonoBehaviour
         if (timeSinceAttack >= testAttack.attackTime)
         {
             isAttacking = false;
+            showAttackGizmos = false;
         }
         else if (timeSinceAttack >= testAttack.moveTime)
         {
@@ -181,7 +204,23 @@ public class PlayerController : MonoBehaviour
             DoMovement(currentAttackDirection, attackSpeed);
         }
         timeSinceAttack += Time.deltaTime;
+    }
 
+    void DoAttackHit()
+    {
+        showAttackGizmos = true;
+        doneAttackHit = true;
+        Collider[] hitColliders = Physics.OverlapBox(transform.position + testAttack.hitboxOffset, testAttack.hitboxSize, rotationalDirection, attackLayerMask);
+        for(int i = 0; i < hitColliders.Length; i++)
+        {
+            Debug.Log("Hit : " + hitColliders[i].name + i);
+            Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
+            if (hitRb != null)
+            {
+                Debug.Log("Apply force " + currentAttackDirection * 400f);
+                hitRb.AddForce(currentAttackDirection * 400f);
+            }
+        }
     }
 
 
@@ -362,22 +401,6 @@ public class PlayerController : MonoBehaviour
     bool isMovementLocked()
     {
         return (movementDashLocked || playerManager.isPaused || movementAttackLocked);
-    }
-
-    void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.yellow;
-        if (gizmosLocation.Count != 0)
-        {
-            for (int i = 0; i < gizmosLocation.Count; i++)
-            {
-                Gizmos.DrawSphere(gizmosLocation[i], 0.1f);
-            }
-        }
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(dashEnd, 0.25f);
-
     }
 
     void StartDash(Vector3 dashEndLocation)
