@@ -33,9 +33,11 @@ public class PlayerController : MonoBehaviour
     float timeSinceDash;
 
     [Header("Attack Settings")]
-    [SerializeField] float attackMoveDistance;
-    [SerializeField] float attackMoveTime;
-    [SerializeField] float postAttackDelay;
+
+    [SerializeField] Attack testAttack;
+    //[SerializeField] float attackMoveDistance;
+    //[SerializeField] float attackMoveTime;
+    //[SerializeField] float postAttackDelay;
 
     Vector3 currentAttackDirection;
     Vector3 mostRecentMoveDirection;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
     Vector3 lastMovementDirection;
     [SerializeField] [Range(0f, 0.999f)] float squashAmount;
     public int playerNumber = 1;
+    PlayerAnimationScript playerAnim;
    
 
     
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         playerManager = FindObjectOfType<PlayerManager>();
+        playerAnim = GetComponentInChildren<PlayerAnimationScript>();
     }
 
     private void FixedUpdate()
@@ -154,7 +158,7 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceAttack = 0f;
         isAttacking = true;
-
+        playerAnim.StartAttackAnimation();
         Vector2 attackInputDirection;
         currentAttackDirection = mostRecentMoveDirection;
 
@@ -162,18 +166,18 @@ public class PlayerController : MonoBehaviour
 
     void DoAttackMove()
     {
-        if (timeSinceAttack >= attackMoveTime + postAttackDelay)
+        if (timeSinceAttack >= testAttack.attackTime)
         {
             isAttacking = false;
         }
-        else if (timeSinceAttack >= attackMoveTime)
+        else if (timeSinceAttack >= testAttack.moveTime)
         {
             //finished attack movement
         }
         else
         {
             //move player
-            attackSpeed = attackMoveDistance / attackMoveTime;
+            attackSpeed = testAttack.moveDistance / testAttack.moveTime;
             DoMovement(currentAttackDirection, attackSpeed);
         }
         timeSinceAttack += Time.deltaTime;

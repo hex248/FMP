@@ -19,22 +19,20 @@ public class PlayerAnimationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Scale(rb.velocity, Vector3.one - Vector3.up).magnitude > 0.5f)
+        Vector3 movement = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if (movement.magnitude > 0.5f)
         {
             anim.SetBool("isMoving", true);
-            anim.SetFloat("movementSpeed", Vector3.Scale(rb.velocity, Vector3.one - Vector3.up).magnitude * movementSpeedAnimation);
+            anim.SetFloat("movementSpeed", movement.magnitude * movementSpeedAnimation);
         }
         else
         {
             anim.SetBool("isMoving", false);
         }
-        if (player.movementAttackLocked)
-        {
-            anim.SetTrigger("StartAttack");
-        }
-        else
-        {
-            anim.ResetTrigger("StartAttack");
-        }
+    }
+
+    public void StartAttackAnimation()
+    {
+        anim.SetTrigger("StartAttack");
     }
 }

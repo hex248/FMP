@@ -1134,6 +1134,38 @@ PrefabInstance:
       propertyPath: attackMoveDistance
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.moveTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.attackTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.damageTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.hitboxSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.hitboxSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.hitboxSize.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.moveDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: testAttack.hitboxOffset.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5527190355557821519, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
