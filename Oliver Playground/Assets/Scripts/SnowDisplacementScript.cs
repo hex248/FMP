@@ -14,6 +14,9 @@ public class SnowDisplacementScript : MonoBehaviour
 
     bool highPoly = false;
     Vector3[] originalVertices;
+    Color originalColor;
+
+    public Collider player;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class SnowDisplacementScript : MonoBehaviour
         meshFilter.mesh.GetVertices(vertices);
         meshFilter.mesh.GetColors(colors);
         originalVertices = snowManager.highPolyMesh.vertices;
+        originalColor = colors[0];
     }
 
     // Update is called once per frame
@@ -42,6 +46,7 @@ public class SnowDisplacementScript : MonoBehaviour
                     else
                     {
                         collidedVertsIndexes.Remove(j);
+                        colors[j] = originalColor;
                     }
                 }
             }
@@ -71,7 +76,14 @@ public class SnowDisplacementScript : MonoBehaviour
     {
         for (int i = 0; i < vertices.Count; i++)
         {
-            if (other.bounds.max.x >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.min.x <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x && other.bounds.max.z >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z && other.bounds.min.z <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z)
+            if (other.tag == "Player")
+            {
+                player = other;
+            }
+            if (other.bounds.max.x >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x
+                && other.bounds.min.x <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).x
+                && other.bounds.max.z >= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z
+                && other.bounds.min.z <= (Vector3.Scale(vertices[i], transform.lossyScale) + transform.position).z)
             {
                 if (vertices[i].y > -0.5f && vertices[i].y < 0.5f)
                 {

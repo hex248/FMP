@@ -2329,6 +2329,7 @@ MonoBehaviour:
   mainModel: {fileID: 6315496520867583486}
   coloredElements:
   - {fileID: 3437432618883624241}
+  - {fileID: 8698021952072536435}
   squashAmount: 0.7
   playerNumber: 0
 --- !u!54 &7954760809937148159
@@ -3335,14 +3336,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 40392ed86a141df4398c7289778cbcfd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
---- !u!1 &1849121225345137087 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
-  m_PrefabInstance: {fileID: 1542496225215497454}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1360849433656599301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
+  m_PrefabInstance: {fileID: 1542496225215497454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1849121225345137087 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b5c5a18c6c71b64b947f0b7f4c5e678, type: 3}
   m_PrefabInstance: {fileID: 1542496225215497454}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1233110506985378303
@@ -3423,6 +3424,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: dbabc77902bcfcd468dff3635db451c4, type: 2}
+    - target: {fileID: -3272779888895563104, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2797083043394059231, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -2314595198776909741, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3439,6 +3448,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c8ae95fbe8d91b046a282f3aaace0ed0, type: 2}
+    - target: {fileID: 3334253920875687900, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223055974203837994, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4609874772732471568, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3465,11 +3482,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: dbabc77902bcfcd468dff3635db451c4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
---- !u!137 &3437432618883624241 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8417361359673230750, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
-  m_PrefabInstance: {fileID: 6585475751926704303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6696560396598726468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
@@ -3478,6 +3490,16 @@ Transform:
 --- !u!1 &6315496520867583486 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+  m_PrefabInstance: {fileID: 6585475751926704303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8698021952072536435 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2581085608464054748, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
+  m_PrefabInstance: {fileID: 6585475751926704303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3437432618883624241 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8417361359673230750, guid: 9c3c322662ca8244baf24b8d76046604, type: 3}
   m_PrefabInstance: {fileID: 6585475751926704303}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &3730786916316276972
