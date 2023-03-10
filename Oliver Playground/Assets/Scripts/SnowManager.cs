@@ -13,6 +13,7 @@ public class SnowManager : MonoBehaviour
     public float step;
 
     public int size = 3;
+    public float effectRange = 0.1f;
 
     private void Start()
     {
