@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimationScript : MonoBehaviour
 {
     public float movementSpeedAnimation = 1.0f;
+    private PlayerController player;
     private Animator anim;
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -12,6 +13,7 @@ public class PlayerAnimationScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody>();
+        player = GetComponentInParent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,14 @@ public class PlayerAnimationScript : MonoBehaviour
         else
         {
             anim.SetBool("isMoving", false);
+        }
+        if (player.movementAttackLocked)
+        {
+            anim.SetTrigger("StartAttack");
+        }
+        else
+        {
+            anim.ResetTrigger("StartAttack");
         }
     }
 }
