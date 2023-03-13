@@ -1,0 +1,155 @@
+ffmpeg version git-2019-11-13-a7245ad Copyright (c) 2000-2019 the FFmpeg developers
+  built with gcc 9.2.1 (GCC) 20191010
+  configuration: --enable-gpl --enable-version3 --enable-sdl2 --enable-fontconfig --enable-gnutls --enable-iconv --enable-libass --enable-libdav1d --enable-libbluray --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libopus --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libtheora --enable-libtwolame --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libzimg --enable-lzma --enable-zlib --enable-gmp --enable-libvidstab --enable-libvorbis --enable-libvo-amrwbenc --enable-libmysofa --enable-libspeex --enable-libxvid --enable-libaom --enable-libmfx --enable-ffnvcodec --enable-cuvid --enable-d3d11va --enable-nvenc --enable-nvdec --enable-dxva2 --enable-avisynth --enable-libopenmpt --enable-amf
+  libavutil      56. 35.101 / 56. 35.101
+  libavcodec     58. 62.100 / 58. 62.100
+  libavformat    58. 35.100 / 58. 35.100
+  libavdevice    58.  9.100 / 58.  9.100
+  libavfilter     7. 66.100 /  7. 66.100
+  libswscale      5.  6.100 /  5.  6.100
+  libswresample   3.  6.100 /  3.  6.100
+  libpostproc    55.  6.100 / 55.  6.100
+Splitting the commandline.
+Reading option '-v' ... matched as option 'v' (set logging level) with argument 'debug'.
+Reading option '-nostdin' ... matched as option 'stdin' (enable or disable interaction on standard input) with argument 0.
+Reading option '-progress' ... matched as option 'progress' (write program-readable progress information) with argument 'C:/Users/Adit/AppData/Local/Temp/KritaFFmpegProgress.DfYKIL'.
+Reading option '-r' ... matched as option 'r' (set frame rate (Hz value, fraction or abbreviation)) with argument '24'.
+Reading option '-start_number' ... matched as AVOption 'start_number' with argument '0'.
+Reading option '-i' ... matched as input url with argument 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo%04d.png'.
+Reading option '-vf' ... matched as option 'vf' (set video filters) with argument 'palettegen'.
+Reading option '-y' ... matched as option 'y' (overwrite output files) with argument '1'.
+Reading option 'E:/FMP/Kazi's Stuffs/GIF/palette.png' ... matched as output url.
+Finished splitting the commandline.
+Parsing a group of options: global .
+Applying option v (set logging level) with argument debug.
+Applying option nostdin (enable or disable interaction on standard input) with argument 0.
+Applying option progress (write program-readable progress information) with argument C:/Users/Adit/AppData/Local/Temp/KritaFFmpegProgress.DfYKIL.
+[file @ 00000203bfd5d440] Setting default whitelist 'file,crypto'
+Applying option y (overwrite output files) with argument 1.
+Successfully parsed a group of options.
+Parsing a group of options: input url E:/FMP/Kazi's Stuffs/GIF/HivemindLogo%04d.png.
+Applying option r (set frame rate (Hz value, fraction or abbreviation)) with argument 24.
+Successfully parsed a group of options.
+Opening an input file: E:/FMP/Kazi's Stuffs/GIF/HivemindLogo%04d.png.
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0000.png' for reading
+[file @ 00000203bfda1740] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfda9900] Statistics: 1692630 bytes read, 0 seeks
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0001.png' for reading
+[file @ 00000203bfda9b80] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfda9580] Statistics: 1692630 bytes read, 0 seeks
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0002.png' for reading
+[file @ 00000203bfda9580] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfda9680] Statistics: 1692630 bytes read, 0 seeks
+[image2 @ 00000203bfd9dfc0] Probe buffer size limit of 5000000 bytes reached
+Input #0, image2, from 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo%04d.png':
+  Duration: 00:00:00.60, start: 0.000000, bitrate: N/A
+    Stream #0:0, 3, 1/25: Video: png, 1 reference frame, rgba(pc), 1920x1080 [SAR 3937:3937 DAR 16:9], 0/1, 25 fps, 25 tbr, 25 tbn, 25 tbc
+Successfully opened the file.
+Parsing a group of options: output url E:/FMP/Kazi's Stuffs/GIF/palette.png.
+Applying option vf (set video filters) with argument palettegen.
+Successfully parsed a group of options.
+Opening an output file: E:/FMP/Kazi's Stuffs/GIF/palette.png.
+Successfully opened the file.
+detected 6 logical cores
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> png (native))
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 3 times
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0003.png' for reading
+[file @ 00000203bfda9540] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfdc12c0] Statistics: 1691726 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0004.png' for reading
+[file @ 00000203bfda9540] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfdc12c0] Statistics: 1691726 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0005.png' for reading
+[file @ 00000203bfda9540] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfdc12c0] Statistics: 1705226 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0006.png' for reading
+[file @ 00000203bfda9540] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203bfdc12c0] Statistics: 1698864 bytes read, 0 seeks
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] Setting 'video_size' to value '1920x1080'
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] Setting 'pix_fmt' to value '26'
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] Setting 'time_base' to value '1/24'
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] Setting 'pixel_aspect' to value '3937/3937'
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] Setting 'sws_param' to value 'flags=2'
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] Setting 'frame_rate' to value '24/1'
+[graph 0 input from stream 0:0 @ 00000203bfe16b00] w:1920 h:1080 pixfmt:rgba tb:1/24 fr:24/1 sar:3937/3937 sws_param:flags=2
+[format @ 00000203c3290340] Setting 'pix_fmts' to value 'rgb24|rgba|rgb48be|rgba64be|pal8|gray|ya8|gray16be|ya16be|monob'
+[auto_scaler_0 @ 00000203c3290c00] Setting 'flags' to value 'bicubic'
+[auto_scaler_0 @ 00000203c3290c00] w:iw h:ih flags:'bicubic' interl:0
+[Parsed_palettegen_0 @ 00000203bfe16a00] auto-inserting filter 'auto_scaler_0' between the filter 'graph 0 input from stream 0:0' and the filter 'Parsed_palettegen_0'
+[auto_scaler_1 @ 00000203c31e9f40] Setting 'flags' to value 'bicubic'
+[auto_scaler_1 @ 00000203c31e9f40] w:iw h:ih flags:'bicubic' interl:0
+[format @ 00000203c3290340] auto-inserting filter 'auto_scaler_1' between the filter 'Parsed_palettegen_0' and the filter 'format'
+[AVFilterGraph @ 00000203bfda9540] query_formats: 4 queried, 1 merged, 2 already done, 0 delayed
+[auto_scaler_1 @ 00000203c31e9f40] picking rgba out of 10 ref:bgra alpha:1
+[swscaler @ 00000203c3290fc0] Forcing full internal H chroma due to input having non subsampled chroma
+[auto_scaler_0 @ 00000203c3290c00] w:1920 h:1080 fmt:rgba sar:3937/3937 -> w:1920 h:1080 fmt:bgra sar:1/1 flags:0x4
+[swscaler @ 00000203c329fd80] Forcing full internal H chroma due to input having non subsampled chroma
+[auto_scaler_1 @ 00000203c31e9f40] w:16 h:16 fmt:bgra sar:1/1 -> w:16 h:16 fmt:rgba sar:1/1 flags:0x4
+Output #0, image2, to 'E:/FMP/Kazi's Stuffs/GIF/palette.png':
+  Metadata:
+    encoder         : Lavf58.35.100
+    Stream #0:0, 0, 1/24: Video: png, 1 reference frame, rgba, 16x16 [SAR 1:1 DAR 1:1], 0/1, q=2-31, 200 kb/s, 24 fps, 24 tbn, 24 tbc
+    Metadata:
+      encoder         : Lavc58.62.100 png
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0007.png' for reading
+[file @ 00000203bfdc11c0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c33decc0] Statistics: 1698864 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0008.png' for reading
+[file @ 00000203c501ffc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5029080] Statistics: 1693551 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0009.png' for reading
+[file @ 00000203c5020080] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5029080] Statistics: 1693551 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0010.png' for reading
+[file @ 00000203c5020340] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5028f40] Statistics: 1675460 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0011.png' for reading
+[file @ 00000203c50206c0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5029480] Statistics: 1675460 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0012.png' for reading
+[file @ 00000203c501f980] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5029340] Statistics: 1691739 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0013.png' for reading
+[file @ 00000203c501fe00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5029080] Statistics: 1691739 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[image2 @ 00000203bfd9dfc0] Opening 'E:/FMP/Kazi's Stuffs/GIF/HivemindLogo0014.png' for reading
+[file @ 00000203c501fd00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5029080] Statistics: 1687005 bytes read, 0 seeks
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 6 times
+[Parsed_palettegen_0 @ 00000203bfe16a00] 255(+1) colors generated out of 8476 colors; ratio=0.030085
+[Parsed_palettegen_0 @ 00000203bfe16a00] Dupped color: FF879AA8
+[Parsed_palettegen_0 @ 00000203bfe16a00] Dupped color: FF8C9EAB
+[Parsed_palettegen_0 @ 00000203bfe16a00] Dupped color: FF8E9FAC
+[Parsed_palettegen_0 @ 00000203bfe16a00] Dupped color: FF94A3AF
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+Clipping frame in rate conversion by 0.000008
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+[out_0_0 @ 00000203c3290240] EOF on sink link out_0_0:default.
+No more output streams to write to, finishing.
+[image2 @ 00000203bfda06c0] Opening 'E:/FMP/Kazi's Stuffs/GIF/palette.png' for writing
+[file @ 00000203c501fc40] Setting default whitelist 'file,crypto'
+[AVIOContext @ 00000203c5028f40] Statistics: 0 seeks, 1 writeouts
+frame=    1 fps=0.0 q=-0.0 Lsize=N/A time=00:00:00.04 bitrate=N/A speed=0.0868x    
+[AVIOContext @ 00000203bfd9de80] Statistics: 0 seeks, 1 writeouts
+video:1kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+Input file #0 (E:/FMP/Kazi's Stuffs/GIF/HivemindLogo%04d.png):
+  Input stream #0:0 (video): 15 packets read (25372801 bytes); 15 frames decoded; 
+  Total: 15 packets (25372801 bytes) demuxed
+Output file #0 (E:/FMP/Kazi's Stuffs/GIF/palette.png):
+  Output stream #0:0 (video): 1 frames encoded; 1 packets muxed (936 bytes); 
+  Total: 1 packets (936 bytes) muxed
+15 frames successfully decoded, 0 decoding errors
