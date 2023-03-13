@@ -135,7 +135,19 @@ public class PlayerController : MonoBehaviour
             //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * testAttack.hitboxOffset;
             Gizmos.DrawWireCube(testAttack.hitboxOffset, testAttack.hitboxSize);
         }
-        
+
+
+        Gizmos.color = Color.yellow;
+        if (gizmosLocation.Count != 0)
+        {
+            for (int i = 0; i < gizmosLocation.Count; i++)
+            {
+                Gizmos.DrawSphere(gizmosLocation[i], 0.3f);
+            }
+        }
+        Gizmos.color = Color.red;
+
+
 
     }
 
@@ -247,7 +259,12 @@ public class PlayerController : MonoBehaviour
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
-                hitRb.AddForce(currentAttackDirection * 200f);
+                hitRb.AddForce(currentAttackDirection * testAttack.force);
+            }
+            EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(testAttack.damage);
             }
         }
     }
@@ -290,23 +307,24 @@ public class PlayerController : MonoBehaviour
         bool foundDashLocation = false;
         float checkValue = 1.0f;
 
-        
+        gizmosLocation.Clear();
         while (!foundDashLocation)
         {
+            
             if (checkValue <= 0f)
             {
                 foundDashLocation = true;
                 checkValue = 0f;
-
                 return transform.position;
             }
             else
             {
                 Vector3 directionOffset = totalDashVector * checkValue;
-                Vector3 checkOffset = new Vector3(0f, playerColliderRadius + 0.001f, 0f);
+                Vector3 checkOffset = new Vector3(0f, playerColliderRadius + 0.01f, 0f);
                 Vector3 playerLocationWithOffset = transform.position + checkOffset;
                 Vector3 checkLocation = transform.position + checkOffset + directionOffset;
                 Vector3 dashEndLocation = transform.position + directionOffset;
+                Debug.Log(checkLocation);
 
                 if (checkValue == 1f)
                 {
@@ -318,11 +336,17 @@ public class PlayerController : MonoBehaviour
 
                 if (!DashEndsInCollider(playerLocationWithOffset, checkLocation))
                 {
+                    
                     //check if near enough to collider
                     Collider[] collidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer);
+                    gizmosLocation.Add(checkLocation);
+                    if (collidersAtPoint.Length >= 1)
+                        Debug.Log(collidersAtPoint[0]);
+                        
 
                     if (collidersAtPoint.Length == 0)
                     {
+                        Debug.Log("not too near collider");
                         foundDashLocation = true;
                         dashEnd = dashEndLocation;
                         return dashEndLocation;
@@ -378,7 +402,7 @@ public class PlayerController : MonoBehaviour
 
         if (withDebug)
         {
-            gizmosLocation.Clear();
+            //gizmosLocation.Clear();
             Debug.DrawLine(raycastStart, raycastEnd, Color.red, 1f);
         }
 
@@ -391,7 +415,7 @@ public class PlayerController : MonoBehaviour
             if (hasHit)
             {
                 hitCount++;
-                gizmosLocation.Add(hit.point);
+                //gizmosLocation.Add(hit.point);
                 raycastStart = hit.point + dashOffset.normalized * 0.0001f;
 
             }
@@ -419,7 +443,7 @@ public class PlayerController : MonoBehaviour
             if (hasHit)
             {
                 hitCount--;
-                gizmosLocation.Add(hit.point);
+                //gizmosLocation.Add(hit.point);
                 raycastStart = hit.point + dashOffset.normalized * 0.0001f;
             }
             else

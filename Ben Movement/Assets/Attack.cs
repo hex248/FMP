@@ -19,4 +19,7 @@ public class Attack
 
     public Vector3 hitboxSize;
     public Vector3 hitboxOffset;
+
+    public float force;
+    public float damage;
 }
