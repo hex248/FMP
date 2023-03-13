@@ -33,7 +33,7 @@ Shader "Kazi/Display Vertex Colors" {
     float4 frag(v2f i) : COLOR
     {
         i.color.a = tex2D(_BaseMap, i.uv).a;
-    clip(i.color.a - 0.5);
+        clip(i.color.a - 0.5);
         return i.color;
     }
     ENDCG

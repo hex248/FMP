@@ -95,7 +95,7 @@ MonoBehaviour:
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
-    stencilCompareFunction: 8
+    stencilCompareFunction: 1
     passOperation: 0
     failOperation: 0
     zFailOperation: 0
@@ -126,8 +126,8 @@ MonoBehaviour:
       PassNames: []
     overrideMaterial: {fileID: 2100000, guid: 3420cec16a9ff5c40b23a25efc85fd50, type: 2}
     overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 4
+    overrideDepthState: 1
+    depthCompareFunction: 3
     enableWrite: 1
     stencilSettings:
       overrideStencilState: 0
