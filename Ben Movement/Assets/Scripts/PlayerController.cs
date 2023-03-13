@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
     float timeSinceDash;
 
     [Header("Attack Settings")]
-
-    [SerializeField] Attack testAttack;
+    [SerializeField] List<Attack> basicCombo = new List<Attack>();
+    int currentComboStage = 0;
     [SerializeField] LayerMask attackLayerMask;
     bool showAttackGizmos;
     bool doneAttackHit = false;
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking)
         {
             DoAttackMove();
-            if(timeSinceAttack >= testAttack.damageTime && doneAttackHit == false)
+            if(timeSinceAttack >= basicCombo[currentComboStage].damageTime && doneAttackHit == false)
             {
                 DoAttackHit();
             }
@@ -132,8 +132,8 @@ public class PlayerController : MonoBehaviour
         if(showAttackGizmos)
         {
             Gizmos.matrix = transform.localToWorldMatrix;
-            //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * testAttack.hitboxOffset;
-            Gizmos.DrawWireCube(testAttack.hitboxOffset, testAttack.hitboxSize);
+            //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * basicCombo[currentComboStage].hitboxOffset;
+            Gizmos.DrawWireCube(basicCombo[currentComboStage].hitboxOffset, basicCombo[currentComboStage].hitboxSize);
         }
 
 
@@ -229,19 +229,19 @@ public class PlayerController : MonoBehaviour
 
     void DoAttackMove()
     {
-        if (timeSinceAttack >= testAttack.attackTime)
+        if (timeSinceAttack >= basicCombo[currentComboStage].attackTime)
         {
             isAttacking = false;
             showAttackGizmos = false;
         }
-        else if (timeSinceAttack >= testAttack.moveTime)
+        else if (timeSinceAttack >= basicCombo[currentComboStage].moveTime)
         {
             //finished attack movement
         }
         else
         {
             //move player
-            attackSpeed = testAttack.moveDistance / testAttack.moveTime;
+            attackSpeed = basicCombo[currentComboStage].moveDistance / basicCombo[currentComboStage].moveTime;
             DoMovement(currentAttackDirection, attackSpeed);
         }
         timeSinceAttack += Time.deltaTime;
@@ -251,20 +251,20 @@ public class PlayerController : MonoBehaviour
     {
         showAttackGizmos = true;
         doneAttackHit = true;
-        Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * testAttack.hitboxOffset;
-        Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (testAttack.hitboxSize / 2f), rotationalDirection, attackLayerMask);
+        Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * basicCombo[currentComboStage].hitboxOffset;
+        Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (basicCombo[currentComboStage].hitboxSize / 2f), rotationalDirection, attackLayerMask);
         for(int i = 0; i < hitColliders.Length; i++)
         {
             Debug.Log("Hit : " + hitColliders[i].name + i);
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
-                hitRb.AddForce(currentAttackDirection * testAttack.force);
+                hitRb.AddForce(currentAttackDirection * basicCombo[currentComboStage].force);
             }
             EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.TakeDamage(testAttack.damage);
+                enemy.TakeDamage(basicCombo[currentComboStage].damage);
             }
         }
     }

@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float maxDamageDissolveAmount;
     [SerializeField] float deathDissolveRate = 0.00001f;
     float targetDissolveFactor;
+    float currentDissolveFactor;
 
     public bool triggerDeath = false;
 
@@ -35,8 +36,6 @@ public class EnemyHealth : MonoBehaviour
             triggerDeath = false;
             Die();
         }
-        healthFactor = 1 - currentHealth / maximumHealth;
-        targetDissolveFactor = healthFactor * maxDamageDissolveAmount;
         UpdateDissolve();
     }
 
@@ -55,7 +54,6 @@ public class EnemyHealth : MonoBehaviour
         {
             healthFactor = 1 - currentHealth / maximumHealth;
             targetDissolveFactor = healthFactor * maxDamageDissolveAmount;
-            UpdateDissolve();
         }
     }
 
@@ -67,10 +65,10 @@ public class EnemyHealth : MonoBehaviour
 
     void UpdateDissolve()
     {
-        
+        currentDissolveFactor = Mathf.MoveTowards(currentDissolveFactor, targetDissolveFactor, 0.01f);
         for (int i = 0; i < skinnedMaterials.Length; i++)
         {
-            skinnedMaterials[i].SetFloat("_DissolveAmount", targetDissolveFactor);
+            skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolveFactor);
         }
     }
 
@@ -87,7 +85,7 @@ public class EnemyHealth : MonoBehaviour
             while (targetDissolveFactor < 1)
             {
                 targetDissolveFactor += deathDissolveRate;
-                UpdateDissolve();
+
                 Debug.Log(targetDissolveFactor);
                 yield return new WaitForSeconds(0.02f);
             }
