@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public struct SnowData
 {
@@ -19,13 +20,14 @@ public class SnowDisplacementCompute : MonoBehaviour
 
     Mesh mesh;
     MeshFilter meshFilter;
-    List<Vector3> vertices = new List<Vector3>();
+    public List<Vector3> vertices = new List<Vector3>();
     List<Color> colors = new List<Color>();
     List<int> collidedVertsIndexes = new List<int>();
 
     SnowManager snowManager;
 
-    bool highPoly = false;
+    public bool highPoly = false;
+
     Vector3[] originalVertices;
     Color originalColor;
 
@@ -37,12 +39,15 @@ public class SnowDisplacementCompute : MonoBehaviour
         meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh.GetVertices(vertices);
         meshFilter.mesh.GetColors(colors);
-        originalVertices = snowManager.highPolyMesh.vertices;
+        //originalVertices = snowManager.highPolyMesh.vertices;
+        //List<Vector3> tempOrigVerts = snowManager.highPolyMesh.vertices.ToList();
+        //tempOrigVerts.RemoveRange(tempOrigVerts.Count - 7, tempOrigVerts.Count - 1);
+        //originalVertices = tempOrigVerts.ToArray();
         originalColor = colors[0];
 
-        topOutHeight = originalVertices[0].y;
+        topOutHeight = vertices[0].y;
 
-        snowData = new SnowData[snowManager.highPolyMesh.vertices.Length];
+        snowData = new SnowData[snowManager.highPolyMesh.vertices.Length - 6];
 
         SwitchToLowPoly();
     }
@@ -72,7 +77,7 @@ public class SnowDisplacementCompute : MonoBehaviour
                 }
                 */
             }
-            else
+            else if (1 > 2)
             {
                 SwitchToLowPoly();
             }
@@ -97,8 +102,15 @@ public class SnowDisplacementCompute : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // compute shader takes care of next steps
-        ComputeVerticesGPU(other);
-        
+        if (highPoly)
+        {
+            ComputeVerticesGPU(other);
+        }
+        else
+        {
+            SwitchToHighPoly();
+        }
+
 
         /*
         for (int i = 0; i < vertices.Count; i++)
@@ -132,10 +144,10 @@ public class SnowDisplacementCompute : MonoBehaviour
 
     public void ComputeVerticesGPU(Collider other)
     {
-        int verticesSize = sizeof(float) * 3;
-        int colorsSize = sizeof(float) * 4;
+        int positionSize = sizeof(float) * 3;
+        int colorSize = sizeof(float) * 4;
         int collidedSize = sizeof(int) * 1;
-        int totalSize = (verticesSize + colorsSize + collidedSize)/* * snowData.Length*/;
+        int totalSize = (positionSize + colorSize + collidedSize)/* * snowData.Length*/;
         //Debug.Log(totalSize);
 
         ComputeBuffer snowDataBuffer = new ComputeBuffer(snowData.Length, totalSize);
@@ -146,6 +158,8 @@ public class SnowDisplacementCompute : MonoBehaviour
         computeShader.SetFloat("topOutHeight", topOutHeight);
         computeShader.SetVector("collidingBoundsMax", other.bounds.max);
         computeShader.SetVector("collidingBoundsMin", other.bounds.min);
+
+        //computeShader.SetVector("_Time", Shader.GetGlobalVector("_Time"));
 
         computeShader.Dispatch(0, snowData.Length / 10, 1, 1);
 
@@ -162,15 +176,22 @@ public class SnowDisplacementCompute : MonoBehaviour
             }
         }
 
+        Debug.Log(vertices.Count);
+        Debug.Log(colors.Count);
+        Debug.Log(snowData.Length);
+
         snowDataBuffer.Dispose();
 
     }
 
     void SwitchToHighPoly()
     {
+        Debug.Log("switch to high poly");
         meshFilter.mesh = snowManager.highPolyMesh;
         meshFilter.mesh.GetVertices(vertices);
+        vertices.RemoveRange(vertices.Count - 7, vertices.Count - 1);
         meshFilter.mesh.GetColors(colors);
+        colors.RemoveRange(vertices.Count - 7, vertices.Count - 1);
 
         for (int i = 0; i < vertices.Count; i++)
         {
@@ -185,6 +206,7 @@ public class SnowDisplacementCompute : MonoBehaviour
     }
     void SwitchToLowPoly()
     {
+        Debug.Log("switch to low poly");
         meshFilter.mesh = snowManager.lowPolyMesh;
         meshFilter.mesh.GetVertices(vertices);
         meshFilter.mesh.GetColors(colors);

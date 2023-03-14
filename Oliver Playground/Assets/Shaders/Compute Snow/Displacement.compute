@@ -1,5 +1,6 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel CSMain
+#include "UnityCG.cginc"
 
 struct SnowData
 {
@@ -29,7 +30,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     SnowData snow = snowData[id.x];
 
-    float randomYPos = clamp(snow.position.y - rand(float2(0.1, 0.5)), bottomOutHeight, topOutHeight);
+    float randomYPos = clamp(snow.position.y - 0.01, bottomOutHeight, topOutHeight);
     snow.position = float3(snow.position.x, randomYPos, snow.position.z);
 
     snowData[id.x] = snow;
