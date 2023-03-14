@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 8491704806393515540}
+  cameraFollow: {fileID: 0}
   playerNumber: 0
 --- !u!1001 &4150482364070036744
 PrefabInstance:
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2ea7f2a3fe4124bb6abd1c2ddbee1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusPoint: {fileID: 5862487387398765280}
+  playerPoint: {fileID: 5862487387398765280}
   cam: {fileID: 2506270392354407003}
   smoothSpeed: 0.5
 --- !u!1001 &5966685731650314433
@@ -474,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741879360369, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Size
-      value: 0.40659344
+      value: 0.4065934
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741909571397, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -538,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3327234034453279535, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: X
+      value: Z
       objectReference: {fileID: 0}
     - target: {fileID: 3462528031390368992, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
@@ -1224,7 +1225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: basicCombo.Array.data[0].damage
-      value: 30
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: basicCombo.Array.data[0].moveTime
@@ -1232,7 +1233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: basicCombo.Array.data[0].attackTime
-      value: 0.5
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: basicCombo.Array.data[0].damageTime

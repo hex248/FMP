@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Collider col;
     PlayerManager playerManager;
-    
+    Player playerParent;
 
     [Header("Move Settings")]
     [SerializeField] float moveSpeed;
@@ -65,6 +65,13 @@ public class PlayerController : MonoBehaviour
     bool attackBuffered;
     bool dashBuffered;
 
+    [Header("Focus Settings")]
+    public bool triggerFocus;
+    public bool isFocusing;
+    [SerializeField] GameObject focusObject;
+    [SerializeField] float focusMoveSpeedMultiplier = 0.3f;
+
+
 
     private void Start()
     {
@@ -72,6 +79,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider>();
         playerManager = FindObjectOfType<PlayerManager>();
         playerAnim = GetComponentInChildren<PlayerAnimationScript>();
+        playerParent = GetComponentInParent<Player>();
         lastMovementDirection = Vector3.forward;
     }
 
@@ -80,11 +88,16 @@ public class PlayerController : MonoBehaviour
         movementDashLocked = isDashing;
         movementAttackLocked = isAttacking;
 
-        if (!isMovementLocked() && !isActionBuffered())
+        if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
         {
             //normal movement
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed);
+        }
+        else if(!isMovementLocked() && !isActionBuffered() && isFocusing == true)
+        {
+            Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
+            DoMovement(moveDirection, moveSpeed * focusMoveSpeedMultiplier);
         }
         else if(!isMovementLocked() && isActionBuffered())
         {
@@ -121,6 +134,19 @@ public class PlayerController : MonoBehaviour
             if(timeSinceAttack >= basicCombo[currentComboStage].damageTime && doneAttackHit == false)
             {
                 DoAttackHit();
+            }
+        }
+
+        if(triggerFocus)
+        {
+            triggerFocus = false;
+            if(isFocusing == true)
+            {
+                Unfocus();
+            }
+            else
+            {
+                Focus();
             }
         }
     }
@@ -161,10 +187,31 @@ public class PlayerController : MonoBehaviour
     Vector3 GetRotatedDirectionFromInput(Vector2 inDirection)
     {
         Vector3 inDirection3D = new Vector3(inDirection.x, 0f, inDirection.y);
-        Quaternion rotationAngle = Quaternion.Euler(0f, 45f, 0f);
-        Matrix4x4 matrix = Matrix4x4.Rotate(rotationAngle);
-        Vector3 outDirection = matrix.MultiplyPoint3x4(inDirection3D);
+        Vector3 outDirection = Vector3.zero;
+        if (!isFocusing || focusObject == null)
+        {
+            Quaternion rotationAngle = Quaternion.Euler(0f, 45f, 0f);
+            Matrix4x4 matrix = Matrix4x4.Rotate(rotationAngle);
+            outDirection = matrix.MultiplyPoint3x4(inDirection3D);
+
+        }
+        else
+        {
+            Vector3 focusPoint = focusObject.transform.position; // replace zero with focus point. currently focusses around origin
+            Vector3 focusPointXZ = new Vector3(focusPoint.x, 0f, focusPoint.z);
+            Vector3 positionXZ = new Vector3(transform.position.x, 0f, transform.position.z);
+
+            Vector3 focusPointDirection = (focusPointXZ - positionXZ).normalized;
+            Vector3 standardForward = new Vector3(0f, 0f, 1f);
+            Quaternion rotationAngle = Quaternion.FromToRotation(standardForward, focusPointDirection);
+            Debug.Log(rotationAngle);
+
+            Matrix4x4 matrix = Matrix4x4.Rotate(rotationAngle);
+            outDirection = matrix.MultiplyPoint3x4(inDirection3D);
+        }
+
         return outDirection;
+
     }
 
     void DoMovement(Vector3 direction, float speed)
@@ -218,6 +265,7 @@ public class PlayerController : MonoBehaviour
 
     void StartAttack()
     {
+        Debug.Log("attack");
         timeSinceAttack = 0f;
         isAttacking = true;
         doneAttackHit = false;
@@ -519,5 +567,36 @@ public class PlayerController : MonoBehaviour
     bool isActionBuffered()
     {
         return (attackBuffered || dashBuffered);
+    }
+
+    //Focus Code
+
+    public void OnFocusButtonPressed(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+        if (triggered)
+        {
+            if(isFocusing)
+            {
+                Unfocus();
+            }
+            else
+            {
+                Focus();
+            }
+        }
+    }
+
+    void Focus()
+    {
+        isFocusing = true;
+        focusObject = FindObjectOfType<EnemyHealth>().gameObject;
+        playerParent.cameraFollow.Focus(focusObject.transform);
+    }
+
+    void Unfocus()
+    {
+        isFocusing = false;
+        playerParent.cameraFollow.ToPlayer();
     }
 }

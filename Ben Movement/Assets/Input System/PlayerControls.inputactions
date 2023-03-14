@@ -6,15 +6,6 @@
             "id": "18aded0a-34f2-4e07-aa70-d561d536c79c",
             "actions": [
                 {
-                    "name": "Ranged Attack",
-                    "type": "Button",
-                    "id": "67a68705-afa7-402a-af4b-7c2374ebc00f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Player Move",
                     "type": "PassThrough",
                     "id": "745f08eb-a84a-4d33-9e11-2bb4757df90b",
@@ -24,9 +15,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Player Dash",
+                    "name": "Player Dodge",
                     "type": "Button",
                     "id": "2e6b073f-c704-4be7-9413-7f802bc42547",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player Ranged Attack",
+                    "type": "Button",
+                    "id": "67a68705-afa7-402a-af4b-7c2374ebc00f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player Melee Attack",
+                    "type": "Button",
+                    "id": "65676db7-1e36-4f58-a0fc-eb33f5063863",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player Focus",
+                    "type": "Button",
+                    "id": "497cb945-137e-4e0e-b301-980032d475bf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -82,99 +100,22 @@
                 {
                     "name": "",
                     "id": "5c4b80e0-6319-4f1a-8632-c4df948a9bb2",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Ranged Attack",
+                    "action": "Player Ranged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "fe69b0f5-58fd-4943-b920-b28b04833f30",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Ranged Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "WASD",
-                    "id": "f0f5452f-d1ad-4efd-b028-89d3d39a0fd1",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Player Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "right",
-                    "id": "71b8ad70-691e-4249-8ca5-06633967b35a",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Player Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "up",
-                    "id": "fb8d9aee-cca6-4d44-92ff-7ac127843541",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Player Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "891d643f-c3cb-4866-95cd-e25380218c32",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Player Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "f825c678-1f7f-4405-9095-581dd15496ab",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Player Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "cce67dfe-44a4-48e5-9f5f-118e9bada49b",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Player Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5c0d53c2-01d9-4a5f-a26b-b62c1e383f9c",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Player Dash",
+                    "action": "Player Ranged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -377,6 +318,105 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "e6de5ec3-c5af-43eb-867b-7b07e3c28d67",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Focus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09c26430-19b4-4574-a6a0-b5273f3f96f5",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Player Focus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aed026c3-d882-4c9b-a75e-511cfd8e7743",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Player Melee Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a38fc728-1b3f-4039-8d46-eb0e88877621",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Melee Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "WASD",
+                    "id": "f0f5452f-d1ad-4efd-b028-89d3d39a0fd1",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "right",
+                    "id": "71b8ad70-691e-4249-8ca5-06633967b35a",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "up",
+                    "id": "fb8d9aee-cca6-4d44-92ff-7ac127843541",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "891d643f-c3cb-4866-95cd-e25380218c32",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "f825c678-1f7f-4405-9095-581dd15496ab",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "Controller Move",
                     "id": "5e4f95c5-4100-4643-8efd-aa62b4a0e7e1",
                     "path": "2DVector(mode=2)",
@@ -430,6 +470,28 @@
                     "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "cce67dfe-44a4-48e5-9f5f-118e9bada49b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Player Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c0d53c2-01d9-4a5f-a26b-b62c1e383f9c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

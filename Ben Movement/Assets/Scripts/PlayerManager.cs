@@ -17,7 +17,6 @@ public class PlayerManager : MonoBehaviour
     PlayerInput playerInput;
     [SerializeField] InputActionAsset actionAsset;
     InputSystemUIInputModule inputModule;
-    [SerializeField] InputActionReference menuMove;
     string playerControlScheme;
     InputDevice[] devices;
 
@@ -90,7 +89,6 @@ public class PlayerManager : MonoBehaviour
         playerInput.actions = newActionAsset;
 
         InputActionMap actionMap = newActionAsset.FindActionMap("Player", true);
-        menuMove = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.move = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.submit = InputActionReference.Create(actionMap.FindAction("Menu Select", true));
 
@@ -112,6 +110,13 @@ public class PlayerManager : MonoBehaviour
             binding.actionReference = newReference;
 
             Debug.Log(newReference.ToString());
+        }
+
+        //re-apply in scrolling lists
+        ScrollRectAutoScroll[] scrollers = player.GetComponentsInChildren<ScrollRectAutoScroll>(true);
+        foreach (ScrollRectAutoScroll scroller in scrollers)
+        {
+            scroller.eventSystem = player.GetComponentInChildren<MultiplayerEventSystem>();
         }
 
 

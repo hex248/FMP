@@ -14,8 +14,14 @@ public class EnemyHealth : MonoBehaviour
     //limits the amount u can dissolve until you die
     [SerializeField, Range(0f, 1f)] float maxDamageDissolveAmount;
     [SerializeField] float deathDissolveRate = 0.00001f;
-    float targetDissolveFactor;
-    float currentDissolveFactor;
+    [SerializeField] float maxTimeToTargetDissove = 1f;
+
+    float targetDissolveAmount;
+    float currentDissolveAmount;
+
+    float timeSinceTargetAdjusted;
+    float dissolveDistance;
+    float dissolveSmoothFac;
 
     public bool triggerDeath = false;
 
@@ -53,7 +59,12 @@ public class EnemyHealth : MonoBehaviour
         else
         {
             healthFactor = 1 - currentHealth / maximumHealth;
-            targetDissolveFactor = healthFactor * maxDamageDissolveAmount;
+
+            targetDissolveAmount = healthFactor * maxDamageDissolveAmount;
+            dissolveDistance = Mathf.Abs(currentDissolveAmount - targetDissolveAmount);
+
+            timeSinceTargetAdjusted = 0f;
+
         }
     }
 
@@ -65,10 +76,13 @@ public class EnemyHealth : MonoBehaviour
 
     void UpdateDissolve()
     {
-        currentDissolveFactor = Mathf.MoveTowards(currentDissolveFactor, targetDissolveFactor, 0.01f);
+        timeSinceTargetAdjusted += Time.deltaTime;
+        dissolveSmoothFac = Mathf.Min(1f, timeSinceTargetAdjusted / 1f);
+
+        currentDissolveAmount = Mathf.SmoothStep(currentDissolveAmount, targetDissolveAmount, dissolveSmoothFac);
         for (int i = 0; i < skinnedMaterials.Length; i++)
         {
-            skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolveFactor);
+            skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolveAmount);
         }
     }
 
@@ -82,11 +96,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (skinnedMaterials.Length > 0)
         {
-            while (targetDissolveFactor < 1)
+            while (targetDissolveAmount < 1)
             {
-                targetDissolveFactor += deathDissolveRate;
+                targetDissolveAmount += deathDissolveRate;
 
-                Debug.Log(targetDissolveFactor);
+                Debug.Log(targetDissolveAmount);
                 yield return new WaitForSeconds(0.02f);
             }
         }

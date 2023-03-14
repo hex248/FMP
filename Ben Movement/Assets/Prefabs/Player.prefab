@@ -444,6 +444,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ceac3733-8265-4e5c-9cf0-206cdf8683ee
     m_ActionName: Player/Start[/Keyboard/space,/Gamepad/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 65676db7-1e36-4f58-a0fc-eb33f5063863
+    m_ActionName: Player/Player Melee Attack[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 497cb945-137e-4e0e-b301-980032d475bf
+    m_ActionName: Player/Player Focus[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
@@ -470,15 +478,20 @@ MonoBehaviour:
   dashCheckRadius: 0.01
   dashCheckResolution: 0.01
   playerColliderRadius: 0.25
-  attackMoveDistance: 0
-  attackMoveTime: 0
-  postAttackDelay: 0
+  basicCombo: []
+  attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   playerVisuals: {fileID: 4774828045323943578}
   squashAmount: 0.3
   playerNumber: 1
   movementDashLocked: 0
   movementMenuLocked: 0
   movementAttackLocked: 0
+  triggerFocus: 0
+  isFocusing: 0
+  focusObject: {fileID: 0}
+  focusMoveSpeedMultiplier: 0.8
 --- !u!54 &7478775978707637640
 Rigidbody:
   m_ObjectHideFlags: 0

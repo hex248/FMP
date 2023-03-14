@@ -16,7 +16,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     bool hasBeenOpened;
 
     private Vector2 m_NextScrollPosition = Vector2.up;
-    [SerializeField] EventSystem eventSystem;
+    public EventSystem eventSystem;
     
     void OnEnable()
     {
@@ -42,6 +42,7 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
         ResetScroll();
     }
 
+
     float GetNormalizedPosition(Selectable selected)
     {
         Selectable first = m_Selectables[0];
@@ -57,15 +58,8 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
         InputScroll();
         if(selectedIsInList)
         {
-            if (!mouseOver)
-            {
-                // Lerp scrolling code.
-                m_ScrollRect.normalizedPosition = Vector2.Lerp(m_ScrollRect.normalizedPosition, m_NextScrollPosition, scrollSpeed * Time.deltaTime);
-            }
-            else
-            {
-                m_NextScrollPosition = m_ScrollRect.normalizedPosition;
-            }
+            Debug.Log(m_ScrollRect.normalizedPosition + " " + Time.unscaledDeltaTime);
+            m_ScrollRect.normalizedPosition = Vector2.Lerp(m_ScrollRect.normalizedPosition, m_NextScrollPosition, scrollSpeed * Time.unscaledDeltaTime);
         }
     }
     
@@ -81,6 +75,8 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         Selectable selectedElement = eventSystem.currentSelectedGameObject ? eventSystem.currentSelectedGameObject.GetComponent<Selectable>() : null;
         selectedIsInList = (selectedElement != null) && m_Selectables.Contains(eventSystem.currentSelectedGameObject.GetComponent<Selectable>());
+        Debug.Log("scroll to selected " + selectedIsInList);
+
         if (selectedIsInList)
         {
 
