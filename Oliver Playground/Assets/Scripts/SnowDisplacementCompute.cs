@@ -14,6 +14,8 @@ public class SnowDisplacementCompute : MonoBehaviour
     public ComputeShader computeShader;
 
     SnowData[] snowData;
+    public float topOutHeight;
+    public float bottomOutHeight = -1.0f;
 
     Mesh mesh;
     MeshFilter meshFilter;
@@ -27,7 +29,7 @@ public class SnowDisplacementCompute : MonoBehaviour
     Vector3[] originalVertices;
     Color originalColor;
 
-    public Collider player;
+    Collider player;
 
     private void Start()
     {
@@ -37,6 +39,8 @@ public class SnowDisplacementCompute : MonoBehaviour
         meshFilter.mesh.GetColors(colors);
         originalVertices = snowManager.highPolyMesh.vertices;
         originalColor = colors[0];
+
+        topOutHeight = originalVertices[0].y;
 
         snowData = new SnowData[snowManager.highPolyMesh.vertices.Length];
 
@@ -131,12 +135,15 @@ public class SnowDisplacementCompute : MonoBehaviour
         int verticesSize = sizeof(float) * 3;
         int colorsSize = sizeof(float) * 4;
         int collidedSize = sizeof(int) * 1;
-        int totalSize = verticesSize + colorsSize + collidedSize;
+        int totalSize = (verticesSize + colorsSize + collidedSize)/* * snowData.Length*/;
+        //Debug.Log(totalSize);
 
         ComputeBuffer snowDataBuffer = new ComputeBuffer(snowData.Length, totalSize);
         snowDataBuffer.SetData(snowData);
         computeShader.SetBuffer(0, "snowData", snowDataBuffer);
         computeShader.SetFloat("resolution", snowData.Length);
+        computeShader.SetFloat("bottomOutHeight", bottomOutHeight);
+        computeShader.SetFloat("topOutHeight", topOutHeight);
         computeShader.SetVector("collidingBoundsMax", other.bounds.max);
         computeShader.SetVector("collidingBoundsMin", other.bounds.min);
 
@@ -170,6 +177,7 @@ public class SnowDisplacementCompute : MonoBehaviour
             SnowData data = new SnowData();
             data.position = vertices[i];
             data.vertexColor = colors[i];
+            data.collided = -1;
             snowData[i] = data;
         }
 
@@ -186,6 +194,7 @@ public class SnowDisplacementCompute : MonoBehaviour
             SnowData data = new SnowData();
             data.position = vertices[i];
             data.vertexColor = colors[i];
+            data.collided = -1;
             snowData[i] = data;
         }
 

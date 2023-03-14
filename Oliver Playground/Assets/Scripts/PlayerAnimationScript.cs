@@ -14,7 +14,7 @@ public class PlayerAnimationScript : MonoBehaviour
         rb = GetComponentInParent<Rigidbody>();
     }
 
-    private Vector3 direction;
+    private Vector3 direction = Vector3.right;
 
     // Update is called once per frame
     void Update()
