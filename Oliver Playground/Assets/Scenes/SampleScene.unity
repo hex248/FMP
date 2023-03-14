@@ -3347,7 +3347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1793812404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,7 +4025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &213743528234431003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4041,6 +4041,8 @@ MonoBehaviour:
   computeShader: {fileID: 7200000, guid: 5739f76ccb81cf54ca92c6163d23457f, type: 3}
   topOutHeight: 0
   bottomOutHeight: -1
+  vertices: []
+  highPoly: 0
 --- !u!4 &701592012524349600
 Transform:
   m_ObjectHideFlags: 0
@@ -4116,4 +4118,4 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213743528234431002}
-  m_Mesh: {fileID: 4579454407841743219, guid: c69eaf5307e4e1a4794236bffe36f555, type: 3}
+  m_Mesh: {fileID: -462981019419857548, guid: a0959918664fe3f4980cece3f45b6ca8, type: 3}
