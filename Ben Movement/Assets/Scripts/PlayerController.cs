@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     [Header("Visuals Settings")]
     public GameObject playerVisuals;
     Vector3 lastMovementDirection;
-    [SerializeField] [Range(0f, 0.999f)] float squashAmount;
+    [SerializeField] [Range(0f, 0.99f)] float squashAmount;
     public int playerNumber = 1;
     PlayerAnimationScript playerAnim;
     Quaternion rotationalDirection;
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public bool isFocusing;
     [SerializeField] GameObject focusObject;
     [SerializeField] float focusMoveSpeedMultiplier = 0.3f;
+    [SerializeField] private float focusViewRange = 10f;
 
 
 
@@ -87,6 +88,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log("input is " + movementInput);
+        if (isFocusing)
+        {
+            if (focusObject == null)
+            {
+                Unfocus();
+            }
+        }
+        
         movementDashLocked = isDashing;
         movementAttackLocked = isAttacking;
 
@@ -283,7 +293,6 @@ public class PlayerController : MonoBehaviour
 
     void StartAttack()
     {
-        Debug.Log("attack");
         timeSinceAttack = 0f;
         isAttacking = true;
         doneAttackHit = false;
@@ -321,7 +330,6 @@ public class PlayerController : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (basicCombo[currentComboStage].hitboxSize / 2f), rotationalDirection, attackLayerMask);
         for(int i = 0; i < hitColliders.Length; i++)
         {
-            Debug.Log("Hit : " + hitColliders[i].name + i);
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
@@ -358,7 +366,6 @@ public class PlayerController : MonoBehaviour
 
     Vector3 GetDashEndPoint()
     {
-        Debug.Log("input is " + movementInput);
         Vector2 dashInputDirection;
         if (movementInput.magnitude > 0.1f)
         {
@@ -391,7 +398,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 playerLocationWithOffset = transform.position + checkOffset;
                 Vector3 checkLocation = transform.position + checkOffset + directionOffset;
                 Vector3 dashEndLocation = transform.position + directionOffset;
-                Debug.Log(checkLocation);
 
                 if (checkValue == 1f)
                 {
@@ -407,13 +413,8 @@ public class PlayerController : MonoBehaviour
                     //check if near enough to collider
                     Collider[] collidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer);
                     gizmosLocation.Add(checkLocation);
-                    if (collidersAtPoint.Length >= 1)
-                        Debug.Log(collidersAtPoint[0]);
-                        
-
                     if (collidersAtPoint.Length == 0)
                     {
-                        Debug.Log("not too near collider");
                         foundDashLocation = true;
                         dashEnd = dashEndLocation;
                         return dashEndLocation;
@@ -518,8 +519,6 @@ public class PlayerController : MonoBehaviour
                 reachedDestination = true;
             }
         }
-
-
         return (!(hitCount == 0));
     }
 
@@ -608,9 +607,105 @@ public class PlayerController : MonoBehaviour
 
     void Focus()
     {
-        isFocusing = true;
-        focusObject = FindObjectOfType<EnemyHealth>().gameObject;
-        playerParent.cameraFollow.Focus(focusObject.transform);
+        GameObject newFocusObject = SelectFocusTarget();
+        if (newFocusObject != null)
+        {
+            isFocusing = true;
+            focusObject = newFocusObject;
+            playerParent.cameraFollow.Focus(focusObject.transform);
+        }
+        else
+        {
+            Unfocus();
+        }
+    }
+
+    GameObject SelectFocusTarget()
+    {
+        EnemyHealth[] possibleEnemies = FindObjectsOfType<EnemyHealth>();
+        List<EnemyHealth> enemiesInRange = new List<EnemyHealth>();
+        List<EnemyHealth> enemiesInViewCone = new List<EnemyHealth>();
+        if (FindObjectOfType<EnemyHealth>() != null)
+        {
+            //filter out ones not in range
+            foreach (EnemyHealth possibleEnemy in possibleEnemies)
+            {
+                Vector3 offset = possibleEnemy.transform.position - transform.position;
+                if (offset.magnitude < focusViewRange)
+                {
+                    enemiesInRange.Add(possibleEnemy);
+                }
+            }
+
+        }
+
+        if (enemiesInRange == null || enemiesInRange.Count == 0)
+        {
+            //no nearby enemies, don't focus
+            return null;
+        }
+        else
+        {
+            //prioritise ones in front of player
+            foreach (EnemyHealth possibleEnemy in enemiesInRange)
+            {   
+                Vector3 offset = possibleEnemy.transform.position - transform.position;
+                Vector3 direction = offset.normalized;
+                if (Vector3.Dot(direction, transform.forward) > 0.1f)
+                {
+                    
+                    enemiesInViewCone.Add(possibleEnemy);
+                }
+            }
+
+            if (enemiesInViewCone == null || enemiesInViewCone.Count == 0)
+            {
+                //just focus on nearest enemy
+                
+                float currentMinDistance = Mathf.Infinity;
+                int currentMinIndex = 0;
+                int i = 0;
+                
+                foreach (EnemyHealth possibleEnemy in enemiesInRange)
+                {   
+                    Vector3 offset = possibleEnemy.transform.position - transform.position;
+                    if (offset.magnitude < currentMinDistance)
+                    {
+                        currentMinDistance = offset.magnitude;
+                        currentMinIndex = i;
+
+                    }
+
+                    i++;
+                }
+
+                return enemiesInRange[currentMinIndex].gameObject;
+
+            }
+            else
+            {
+                //focus on nearest enemy in view cone
+                
+                float currentMinDistance = Mathf.Infinity;
+                int currentMinIndex = 0;
+                int i = 0;
+                
+                foreach (EnemyHealth possibleEnemy in enemiesInViewCone)
+                {   
+                    Vector3 offset = possibleEnemy.transform.position - transform.position;
+                    if (offset.magnitude < currentMinDistance)
+                    {
+                        currentMinDistance = offset.magnitude;
+                        currentMinIndex = i;
+
+                    }
+
+                    i++;
+                }
+
+                return enemiesInViewCone[currentMinIndex].gameObject;
+            }
+        }
     }
 
     void Unfocus()
