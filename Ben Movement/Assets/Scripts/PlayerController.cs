@@ -14,7 +14,10 @@ public class PlayerController : MonoBehaviour
     [Header("Move Settings")]
     [SerializeField] float moveSpeed;
     Vector2 movementInput;
-
+    
+    private Vector3 currentForwardDirection;
+    private Vector3 mostRecentMoveDirection;
+    
     [Header("Dash Settings")]
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
@@ -37,10 +40,9 @@ public class PlayerController : MonoBehaviour
     int currentComboStage = 0;
     [SerializeField] LayerMask attackLayerMask;
     bool showAttackGizmos;
-    bool doneAttackHit = false;
-
+    private bool doneAttackHit = false;
     Vector3 currentAttackDirection;
-    Vector3 mostRecentMoveDirection;
+    
     bool isAttacking;
     float timeSinceAttack;
     float attackSpeed;
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed * focusMoveSpeedMultiplier);
+            RotateTowardsDirection(currentForwardDirection);
         }
         else if(!isMovementLocked() && isActionBuffered())
         {
@@ -136,19 +139,21 @@ public class PlayerController : MonoBehaviour
                 DoAttackHit();
             }
         }
-
-        if(triggerFocus)
+        else
         {
-            triggerFocus = false;
-            if(isFocusing == true)
+            if (isFocusing)
             {
-                Unfocus();
+                RotateTowardsDirection(currentForwardDirection);
             }
             else
             {
-                Focus();
+                if (!isMovementLocked())
+                {
+                    RotateTowardsDirection(currentForwardDirection);
+                }
             }
         }
+        
     }
 
     void OnDrawGizmos()
@@ -188,6 +193,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 inDirection3D = new Vector3(inDirection.x, 0f, inDirection.y);
         Vector3 outDirection = Vector3.zero;
+        
         if (!isFocusing || focusObject == null)
         {
             Quaternion rotationAngle = Quaternion.Euler(0f, 45f, 0f);
@@ -197,14 +203,14 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Vector3 focusPoint = focusObject.transform.position; // replace zero with focus point. currently focusses around origin
-            Vector3 focusPointXZ = new Vector3(focusPoint.x, 0f, focusPoint.z);
-            Vector3 positionXZ = new Vector3(transform.position.x, 0f, transform.position.z);
+            //Vector3 focusPoint = focusObject.transform.position; // replace zero with focus point. currently focusses around origin
+            //Vector3 focusPointXZ = new Vector3(focusPoint.x, 0f, focusPoint.z);
+            //Vector3 positionXZ = new Vector3(transform.position.x, 0f, transform.position.z);
 
-            Vector3 focusPointDirection = (focusPointXZ - positionXZ).normalized;
-            Vector3 standardForward = new Vector3(0f, 0f, 1f);
-            Quaternion rotationAngle = Quaternion.FromToRotation(standardForward, focusPointDirection);
-            Debug.Log(rotationAngle);
+            //Vector3 focusPointDirection = (focusPointXZ - positionXZ).normalized;
+            //Vector3 standardForward = new Vector3(0f, 0f, 1f);
+            //Quaternion rotationAngle = Quaternion.FromToRotation(standardForward, focusPointDirection);
+            Quaternion rotationAngle = Quaternion.Euler(0f, 45f, 0f);
 
             Matrix4x4 matrix = Matrix4x4.Rotate(rotationAngle);
             outDirection = matrix.MultiplyPoint3x4(inDirection3D);
@@ -229,8 +235,20 @@ public class PlayerController : MonoBehaviour
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
         rb.velocity = desiredVelocity;
 
+        if (isFocusing)
+        {
+            Vector3 focusPoint = focusObject.transform.position; // replace zero with focus point. currently focusses around origin
+            Vector3 focusPointXZ = new Vector3(focusPoint.x, 0f, focusPoint.z);
+            Vector3 positionXZ = new Vector3(transform.position.x, 0f, transform.position.z);
 
-        RotateTowardsDirection(direction);
+            currentForwardDirection = (focusPointXZ - positionXZ).normalized;
+        }
+        else
+        {
+            currentForwardDirection = mostRecentMoveDirection;
+        }
+
+
     }
 
     void RotateTowardsDirection(Vector3 direction)
@@ -271,7 +289,7 @@ public class PlayerController : MonoBehaviour
         doneAttackHit = false;
         playerAnim.StartAttackAnimation();
         Vector2 attackInputDirection;
-        currentAttackDirection = mostRecentMoveDirection;
+        currentAttackDirection = currentForwardDirection;
 
     }
 
@@ -320,7 +338,7 @@ public class PlayerController : MonoBehaviour
 
     //Dash Code
 
-    public void OnDash(InputAction.CallbackContext context)
+    public void OnDashButtonPressed(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -351,7 +369,8 @@ public class PlayerController : MonoBehaviour
             dashInputDirection = Vector2.zero;
         }
         Vector3 dashDirection = GetRotatedDirectionFromInput(dashInputDirection);
-        Vector3 totalDashVector = dashDirection * dashSpeed * dashTime;
+        //Vector3 dashDirection = mostRecentMoveDirection;
+        Vector3 totalDashVector = dashDirection * (dashSpeed * dashTime);
         bool foundDashLocation = false;
         float checkValue = 1.0f;
 
