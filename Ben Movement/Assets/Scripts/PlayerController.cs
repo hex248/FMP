@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
@@ -92,6 +93,11 @@ public class PlayerController : MonoBehaviour
         if (isFocusing)
         {
             if (focusObject == null)
+            {
+                Unfocus();
+            }
+
+            if ((focusObject.transform.position - transform.position).magnitude > focusViewRange)
             {
                 Unfocus();
             }
