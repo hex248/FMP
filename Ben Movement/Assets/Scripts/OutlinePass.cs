@@ -29,8 +29,17 @@ public class OutlinePass : ScriptableRenderPass
         if (material == null) material = passSettings.shader;
 
         // Set any material properties based on our pass settings. 
-        material.SetFloat("_DeltaX", passSettings.x);
-        material.SetFloat("_DeltaY", passSettings.y);
+        material.SetFloat("_Scale", passSettings.scale);
+        material.SetFloat("_DepthThreshold", passSettings.depthThreshold);
+        material.SetFloat("_NormalThreshold", passSettings.normalThreshold);
+
+        material.SetFloat("_DepthNormalThreshold", passSettings.depthNormalThreshold);
+        material.SetFloat("_DepthNormalThresholdScale", passSettings.depthNormalThresholdScale);
+        material.SetColor("_Color", passSettings.color);
+        
+        //Matrix4x4 clipToView = GL.GetGPUProjectionMatrix(passSettings.camera.projectionMatrix, true).inverse;
+        Matrix4x4 clipToView = Matrix4x4.zero;
+        material.SetMatrix("_ClipToView", clipToView);
     }
 
     // Gets called by the renderer before executing the pass.
@@ -63,12 +72,9 @@ public class OutlinePass : ScriptableRenderPass
 
         // Grab a command buffer. We put the actual execution of the pass inside of a profiling scope.
         CommandBuffer cmd = CommandBufferPool.Get();
-        using (new ProfilingScope(cmd, new ProfilingSampler(ProfilerTag)))
-        {
-            // Blit from the color buffer to a temporary buffer and back. This is needed for a two-pass shader.
-            Blit(cmd, colorBuffer, temporaryBuffer, material, 0); // shader pass 0
-            Blit(cmd, temporaryBuffer, colorBuffer, material, 1);
-        }
+        cmd.Clear();
+        Blit(cmd, colorBuffer, temporaryBuffer, material, 0); // shader pass 0
+
 
         // Execute the command buffer and release it.
         context.ExecuteCommandBuffer(cmd);

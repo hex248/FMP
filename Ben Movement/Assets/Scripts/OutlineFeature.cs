@@ -9,8 +9,15 @@ public class OutlineFeature : ScriptableRendererFeature
         // Where/when the render pass should be injected during the rendering process.
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing;
         public Material shader;
-        public float x = 1.00f;
-        public float y = 1.00f;
+        
+        public int scale = 1;
+        public float depthThreshold = 0.2f;
+        [Range(0, 1)]
+        public float normalThreshold = 0.4f;
+        [Range(0, 1)]
+        public float depthNormalThreshold = 0.5f;
+        public float depthNormalThresholdScale = 7f;
+        public Color color = Color.black;
     }
 
     // References to our pass and its settings.
