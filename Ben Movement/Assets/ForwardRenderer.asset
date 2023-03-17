@@ -156,10 +156,9 @@ MonoBehaviour:
   m_Active: 0
   passSettings:
     renderPassEvent: 450
-    shader: {fileID: 2100000, guid: 5b53ebe2a60f178659f2aa210ef6841e, type: 2}
     scale: 1
     depthThreshold: 0.2
-    normalThreshold: 0.4
-    depthNormalThreshold: 0.5
-    depthNormalThresholdScale: 7
-    color: {r: 0, g: 0, b: 0, a: 1}
+    normalThreshold: 0
+    depthNormalThreshold: 0
+    depthNormalThresholdScale: 11.15
+    color: {r: 1, g: 1, b: 1, a: 1}
