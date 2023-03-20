@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FireHoof
+  m_Shader: {fileID: -6465566751694194690, guid: 9479e0004d2d2364183a828638abdce3, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_c022dbb9ba75456e8ebba23a6775742f:
+        m_Texture: {fileID: 2800000, guid: ba4d499a49b2d034ea582fec8c7dace3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_3b1e66acac17476f94e0d7a09d4200b1: 0.53
+    - Vector1_77ec2defb6ef482fab33e7da0c4831a0: 4.73
+    - Vector1_902711648e634d5591f66ba6133a0f74: 0
+    m_Colors:
+    - Color_d16052712d704de2ac6f08f10376a2f3: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 23.968628, g: 0.2509804, b: 0, a: 1}
+  m_BuildTextureStacks: []
