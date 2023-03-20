@@ -8,6 +8,7 @@ public class OutlineFeature : ScriptableRendererFeature
     {
         // Where/when the render pass should be injected during the rendering process.
         public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing;
+        public Material shader;
         
         public int scale = 1;
         public float depthThreshold = 0.2f;
@@ -20,8 +21,8 @@ public class OutlineFeature : ScriptableRendererFeature
     }
 
     // References to our pass and its settings.
-    [SerializeField] private OutlineSettings passSettings = new OutlineSettings();
     OutlinePass pass;
+    public OutlineSettings passSettings = new OutlineSettings();
 
     // Gets called every time serialization happens.
     // Gets called when you enable/disable the renderer feature.
@@ -38,10 +39,7 @@ public class OutlineFeature : ScriptableRendererFeature
     // Will not be called if the renderer feature is disabled in the renderer inspector.
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-#if UNITY_EDITOR
-        if (renderingData.cameraData.isSceneViewCamera) return;
         // Here you can queue up multiple passes after each other.
-#endif
         renderer.EnqueuePass(pass);
     }
 }

@@ -1,15 +1,8 @@
-Shader "Hidden/Binjabin/oline"
+Shader "Hidden/Binjabin/Outline Post Process"
 {
-	Properties
-	{
-		_MainTex("Texture", 2D) = "white                "
-	}
     SubShader
     {
-		Tags 
-		{
-			"RenderPipeline" = "UniversalPipeline"
-		}
+		Tags {"RenderPipeline" = "UniversalPipeline"}
 
         HLSLINCLUDE
         
@@ -28,7 +21,6 @@ Shader "Hidden/Binjabin/oline"
 		{
 			float4 vertex : SV_POSITION;
 			float2 texcoord : TEXCOORD0;
-			float3 viewSpaceDir : TEXCOORD2;
 		};
 
 		TEXTURE2D(_MainTex);
@@ -59,13 +51,12 @@ Shader "Hidden/Binjabin/oline"
 			return float4(color, alpha);
 		}
 
-        Varyings Vert(Attributes i)
+        Varyings Vert(Attributes IN)
 		{
-			Varyings o;
-			o.vertex = TransformObjectToHClip(i.positionOS.xyz);
-			o.viewSpaceDir = mul(_ClipToView, o.vertex).xyz;
-			o.texcoord = TRANSFORM_TEX(i.uv, _MainTex);
-			return o;
+			Varyings OUT;
+			OUT.vertex = TransformObjectToHClip(IN.positionOS.xyz);
+			OUT.texcoord = TRANSFORM_TEX(IN.uv, _MainTex);
+			return OUT;
 		}
         
 		ENDHLSL
@@ -93,12 +84,9 @@ Shader "Hidden/Binjabin/oline"
 				float3 normal1 = SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, topRightUV).rgb;
 				float3 normal2 = SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, bottomRightUV).rgb;
 				float3 normal3 = SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, topLeftUV).rgb;
-				
 
 				float3 normalFiniteDifference0 = normal1 - normal0;
 				float3 normalFiniteDifference1 = normal3 - normal2;
-
-				
 
 				float edgeNormal = sqrt(dot(normalFiniteDifference0, normalFiniteDifference0) + dot(normalFiniteDifference1, normalFiniteDifference1));
 				edgeNormal = edgeNormal > _NormalThreshold ? 1 : 0;
@@ -106,11 +94,10 @@ Shader "Hidden/Binjabin/oline"
 				float depthFiniteDifference0 = depth1 - depth0;
 				float depthFiniteDifference1 = depth3 - depth2;
 				
-				float edgeDepth = sqrt(pow(depthFiniteDifference0, 2) + pow(depthFiniteDifference1, 2)) * 100;
-				return edgeDepth;
 
+				float edgeDepth = sqrt(pow(depthFiniteDifference0, 2) + pow(depthFiniteDifference1, 2)) * 100;
 				float3 viewNormal = normal0 * 2 - 1;
-				float NdotV = 1 - dot(viewNormal, -i.viewSpaceDir);
+				float NdotV = 1 - dot(viewNormal, float3(0,0,1));
 				float normalThreshold01 = saturate((NdotV - _DepthNormalThreshold) / (1 - _DepthNormalThreshold));
 				float normalThreshold = normalThreshold01 * _DepthNormalThresholdScale + 1;
 				float depthThreshold = _DepthThreshold * depth0 * normalThreshold;
@@ -123,7 +110,7 @@ Shader "Hidden/Binjabin/oline"
 				float4 edgeColor = float4(_Color.rgb, _Color.a * edge);
 				float4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
 
-				return NdotV;
+				return edgeDepth;
 				//return alphaBlend(edgeColor, color);
 			}
         	ENDHLSL
