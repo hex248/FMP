@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
                 Unfocus();
             }
 
-            if ((focusObject.transform.position - transform.position).magnitude > focusViewRange)
+            else if ((focusObject.transform.position - transform.position).magnitude > focusViewRange)
             {
                 Unfocus();
             }
