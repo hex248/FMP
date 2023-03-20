@@ -555,6 +555,7 @@ public class PlayerController : MonoBehaviour
         {
             //finished dash
             isDashing = false;
+            playerAnim.EndDashAnimation();
             yScale = 1f;
             horizontalScale = 1f;
             col.enabled = true;
@@ -565,6 +566,7 @@ public class PlayerController : MonoBehaviour
         {
 
             col.enabled = true;
+            playerAnim.StartDashAnimation();
             yScale = Mathf.SmoothStep(yMin, 1f, timeSinceDash / dashTime);
             horizontalScale = Mathf.SmoothStep(xMax, 1f, timeSinceDash / dashTime);
         }

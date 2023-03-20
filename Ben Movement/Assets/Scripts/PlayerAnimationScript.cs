@@ -35,4 +35,14 @@ public class PlayerAnimationScript : MonoBehaviour
     {
         anim.SetTrigger("StartAttack");
     }
+
+    public void StartDashAnimation()
+    {
+        anim.SetBool("dodge", true);
+    }
+
+    public void EndDashAnimation()
+    {
+        anim.SetBool("dodge", false);
+    }
 }
