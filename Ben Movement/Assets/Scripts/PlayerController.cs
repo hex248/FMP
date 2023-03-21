@@ -39,14 +39,19 @@ public class PlayerController : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] List<Attack> basicCombo = new List<Attack>();
-    int currentComboStage = 0;
+    
     [SerializeField] LayerMask attackLayerMask;
     bool showAttackGizmos;
     private bool doneAttackHit = false;
     Vector3 currentAttackDirection;
-    
+    float lastAttackingTime;
+    bool neededReset;
+    int currentComboStage = 0;
+    int nextComboStage;
+
     bool isAttacking;
-    float timeSinceAttack;
+    [SerializeField] float maxTimeBetweenAttackForCombo;
+    float timeSinceAttackEnd;
     float attackSpeed;
 
     
@@ -88,10 +93,28 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponentInChildren<PlayerAnimationScript>();
         playerParent = GetComponentInParent<Player>();
         lastMovementDirection = Vector3.forward;
+        lastAttackingTime = 0f;
+        ResetCombo();
     }
-
     private void FixedUpdate()
     {
+
+        if (isAttacking)
+        {
+            lastAttackingTime = 0f;
+            neededReset = true;
+        }
+        else
+        {
+            lastAttackingTime += Time.deltaTime;
+        }
+        if (lastAttackingTime >= maxTimeBetweenAttackForCombo && neededReset == true)
+        {
+            ResetCombo();
+            neededReset = false;
+        }
+        
+
         if (isFocusing)
         {
             if (focusObject == null)
@@ -107,6 +130,7 @@ public class PlayerController : MonoBehaviour
         
         movementDashLocked = isDashing;
         movementAttackLocked = isAttacking;
+        
 
         if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
         {
@@ -156,7 +180,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking)
         {
             DoAttackMove();
-            if(timeSinceAttack >= basicCombo[currentComboStage].damageTime && doneAttackHit == false)
+            if(timeSinceAttackEnd >= basicCombo[currentComboStage].damageTime && doneAttackHit == false)
             {
                 DoAttackHit();
             }
@@ -254,10 +278,7 @@ public class PlayerController : MonoBehaviour
             mostRecentMoveDirection = direction;
             
             //reset combo if you are moving and not in the process of an attack
-            if(!movementAttackLocked)
-            {
-                ResetCombo();
-            }
+
         }
         
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
@@ -311,7 +332,10 @@ public class PlayerController : MonoBehaviour
 
     void StartAttack()
     {
-        timeSinceAttack = 0f;
+        currentComboStage = nextComboStage;
+        Debug.Log(currentComboStage);
+
+        timeSinceAttackEnd = 0f;
         isAttacking = true;
         doneAttackHit = false;
         playerAnim.StartAttackAnimation(currentComboStage);
@@ -319,30 +343,37 @@ public class PlayerController : MonoBehaviour
         currentAttackDirection = currentForwardDirection;
 
         IncrementCombo();
+
     }
 
     void IncrementCombo()
     {
-        currentComboStage += 1;
-        if(currentComboStage >= basicCombo.Count)
+        nextComboStage = currentComboStage + 1;
+
+        if (nextComboStage >= basicCombo.Count)
         {
             ResetCombo();
         }
+        
+
     }
 
     void ResetCombo()
     {
-        currentComboStage = 0;
+        nextComboStage = 0;
     }
 
     void DoAttackMove()
     {
-        if (timeSinceAttack >= basicCombo[currentComboStage].attackTime)
+        if (timeSinceAttackEnd >= basicCombo[currentComboStage].attackTime)
         {
             isAttacking = false;
             showAttackGizmos = false;
+
+            //time you were last  attacking
+            
         }
-        else if (timeSinceAttack >= basicCombo[currentComboStage].moveTime)
+        else if (timeSinceAttackEnd >= basicCombo[currentComboStage].moveTime)
         {
             //finished attack movement
         }
@@ -352,7 +383,7 @@ public class PlayerController : MonoBehaviour
             attackSpeed = basicCombo[currentComboStage].moveDistance / basicCombo[currentComboStage].moveTime;
             DoMovement(currentAttackDirection, attackSpeed);
         }
-        timeSinceAttack += Time.deltaTime;
+        timeSinceAttackEnd += Time.deltaTime;
     }
 
     void DoAttackHit()
@@ -559,6 +590,7 @@ public class PlayerController : MonoBehaviour
 
     void StartDash(Vector3 dashEndLocation)
     {
+        playerAnim.StartDashAnimation();
         timeSinceDash = 0f;
         isDashing = true;
 
@@ -593,7 +625,6 @@ public class PlayerController : MonoBehaviour
         {
 
             col.enabled = true;
-            playerAnim.StartDashAnimation();
             yScale = Mathf.SmoothStep(yMin, 1f, timeSinceDash / dashTime);
             horizontalScale = Mathf.SmoothStep(xMax, 1f, timeSinceDash / dashTime);
         }
