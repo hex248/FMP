@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     
     private Vector3 currentForwardDirection;
     private Vector3 mostRecentMoveDirection;
+    bool isWalking;
     
     [Header("Dash Settings")]
     [SerializeField] float dashSpeed;
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour
     bool isAttacking;
     float timeSinceAttack;
     float attackSpeed;
+
+    
 
     [Header("Visuals Settings")]
     public GameObject playerVisuals;
@@ -89,7 +92,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("input is " + movementInput);
         if (isFocusing)
         {
             if (focusObject == null)
@@ -114,6 +116,9 @@ public class PlayerController : MonoBehaviour
         }
         else if(!isMovementLocked() && !isActionBuffered() && isFocusing == true)
         {
+
+
+
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed * focusMoveSpeedMultiplier);
             RotateTowardsDirection(currentForwardDirection);
@@ -138,6 +143,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
+            //movement is defined by dash or attack
             Vector3 moveDirection = Vector3.zero;
             DoMovement(moveDirection, moveSpeed);
         }
@@ -246,6 +252,12 @@ public class PlayerController : MonoBehaviour
         if(direction.magnitude >= 0.1f)
         {
             mostRecentMoveDirection = direction;
+            
+            //reset combo if you are moving and not in the process of an attack
+            if(!movementAttackLocked)
+            {
+                ResetCombo();
+            }
         }
         
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
@@ -302,10 +314,25 @@ public class PlayerController : MonoBehaviour
         timeSinceAttack = 0f;
         isAttacking = true;
         doneAttackHit = false;
-        playerAnim.StartAttackAnimation();
+        playerAnim.StartAttackAnimation(currentComboStage);
         Vector2 attackInputDirection;
         currentAttackDirection = currentForwardDirection;
 
+        IncrementCombo();
+    }
+
+    void IncrementCombo()
+    {
+        currentComboStage += 1;
+        if(currentComboStage >= basicCombo.Count)
+        {
+            ResetCombo();
+        }
+    }
+
+    void ResetCombo()
+    {
+        currentComboStage = 0;
     }
 
     void DoAttackMove()

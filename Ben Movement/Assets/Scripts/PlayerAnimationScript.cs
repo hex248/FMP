@@ -31,8 +31,10 @@ public class PlayerAnimationScript : MonoBehaviour
         }
     }
 
-    public void StartAttackAnimation()
+    public void StartAttackAnimation(int comboStage)
     {
+        anim.SetInteger("Combo Stage", comboStage);
+        Debug.Log(comboStage);
         anim.SetTrigger("StartAttack");
     }
 
