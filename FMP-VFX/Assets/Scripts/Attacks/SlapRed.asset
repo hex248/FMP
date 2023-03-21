@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf61aa6748b4f94fbe5410ba74b3d77, type: 3}
+  m_Name: SlapRed
+  m_EditorClassIdentifier: 
+  name: SLAP
+  mesh: {fileID: 4068373912626513877, guid: f13a858efa98e06498dafd3f0ae0956a, type: 3}
+  material: {fileID: 2100000, guid: 99449ae52e7f3bb4b9dee8e525a6538b, type: 2}
+  attackDuration: 0.1
+  holdDuration: 0
+  dissolveDuration: 0.4
+  startOffset: 1.24
+  targetOffset: 0.24
+  mainColor: {r: 1.9766746, g: 0, b: 0, a: 1}
+  secondaryColor: {r: 31.626795, g: 0.9935119, b: 0, a: 1}
