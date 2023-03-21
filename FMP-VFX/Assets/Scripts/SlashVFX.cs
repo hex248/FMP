@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-[ExecuteAlways]
 [RequireComponent(typeof(MeshRenderer))]
 public class SlashVFX : MonoBehaviour
 {
@@ -11,10 +10,11 @@ public class SlashVFX : MonoBehaviour
     public AttackVFX attackVFX;
     public KeyCode attackKey;
     public bool loop;
-    public VisualEffect particles;
-    public Transform particleSpawner;
+    public ParticleSystem particleSpawner;
+    ParticleSystemRenderer particleRenderer;
     public AnimationCurve curve;
     public float curveOffset;
+    public ParticleSystem.MinMaxCurve emissionRate;
 
 
     [Header("Info")]
@@ -35,16 +35,26 @@ public class SlashVFX : MonoBehaviour
         mf = GetComponent<MeshFilter>();
         GetComponent<MeshFilter>().mesh = attackVFX.mesh;
 
+        particleRenderer = particleSpawner.GetComponent<ParticleSystemRenderer>();
+
         totalTime = attackVFX.attackDuration + attackVFX.holdDuration + attackVFX.dissolveDuration;
         offsetDelta = attackVFX.targetOffset - attackVFX.startOffset;
         currentOffset = attackVFX.startOffset;
-        mr.sharedMaterial.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
+        mr.material.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
+
+        //particleRenderer.material = mr.material;
     }
 
     private void Update()
     {
-        mr.sharedMaterial.SetColor("_mainColor", attackVFX.mainColor);
-        mr.sharedMaterial.SetColor("_secondaryColor", attackVFX.secondaryColor);
+        mr.material.SetColor("_mainColor", attackVFX.mainColor);
+        mr.material.SetColor("_secondaryColor", attackVFX.secondaryColor);
+        particleRenderer.material.SetColor("_Color", attackVFX.secondaryColor);
+
+        //particleRenderer.material.SetColor("_BaseMap", attackVFX.mainColor);
+        //particleRenderer.material.SetColor("_EmissionMap", attackVFX.secondaryColor);
+
+
         if (!animating && loop)
         {
             animating = true;
@@ -60,6 +70,8 @@ public class SlashVFX : MonoBehaviour
             {
                 currentOffset = attackVFX.startOffset;
                 mr.enabled = true;
+                var emission = particleSpawner.emission;
+                emission.rateOverTime = emissionRate;
             }
             timer += Time.deltaTime;
             // if in attack stage
@@ -81,18 +93,19 @@ public class SlashVFX : MonoBehaviour
             else
             {
                 animating = false;
-                //mr.enabled = false;
+                mr.enabled = false;
+                var emission = particleSpawner.emission;
+                emission.rateOverTime = new ParticleSystem.MinMaxCurve(0.0f);
                 timer = 0.0f;
                 step = 0.0f;
             }
             currentOffset = currentOffset += step;
-            mr.sharedMaterial.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
+            mr.material.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
             float progress = ((attackVFX.targetOffset - currentOffset) / offsetDelta);
             progress += curveOffset;
             Vector3 newPos = new Vector3(-1.25f, 0.0f, -1.25f) + new Vector3(curve.Evaluate(progress), 0.0f, progress) * 2.5f;
-            particles.SetVector3("SpawnPosition", newPos);
 
-            particleSpawner.localPosition = newPos;
+            particleSpawner.transform.localPosition = newPos;
         }
     }
 }
