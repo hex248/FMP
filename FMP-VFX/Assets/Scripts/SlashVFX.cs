@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
+[ExecuteAlways]
 [RequireComponent(typeof(MeshRenderer))]
 public class SlashVFX : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class SlashVFX : MonoBehaviour
     public AttackVFX attackVFX;
     public KeyCode attackKey;
     public bool loop;
+    public VisualEffect particles;
+    public Transform particleSpawner;
+    public AnimationCurve curve;
+    public float curveOffset;
 
 
     [Header("Info")]
@@ -32,13 +38,13 @@ public class SlashVFX : MonoBehaviour
         totalTime = attackVFX.attackDuration + attackVFX.holdDuration + attackVFX.dissolveDuration;
         offsetDelta = attackVFX.targetOffset - attackVFX.startOffset;
         currentOffset = attackVFX.startOffset;
-        mr.material.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
+        mr.sharedMaterial.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
     }
 
     private void Update()
     {
-        mr.material.SetColor("_mainColor", attackVFX.mainColor);
-        mr.material.SetColor("_secondaryColor", attackVFX.secondaryColor);
+        mr.sharedMaterial.SetColor("_mainColor", attackVFX.mainColor);
+        mr.sharedMaterial.SetColor("_secondaryColor", attackVFX.secondaryColor);
         if (!animating && loop)
         {
             animating = true;
@@ -80,7 +86,13 @@ public class SlashVFX : MonoBehaviour
                 step = 0.0f;
             }
             currentOffset = currentOffset += step;
-            mr.material.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
+            mr.sharedMaterial.SetVector("_offset", new Vector4(0, currentOffset, 0, 0));
+            float progress = ((attackVFX.targetOffset - currentOffset) / offsetDelta);
+            progress += curveOffset;
+            Vector3 newPos = new Vector3(-1.25f, 0.0f, -1.25f) + new Vector3(curve.Evaluate(progress), 0.0f, progress) * 2.5f;
+            particles.SetVector3("SpawnPosition", newPos);
+
+            particleSpawner.localPosition = newPos;
         }
     }
 }
