@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 7400810581997761881}
   m_Layer: 0
   m_Name: Player Parent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,6 +708,10 @@ PrefabInstance:
     - target: {fileID: 1968484378320701268, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
       propertyPath: m_LocalPosition.z
       value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968484378320701269, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
+      propertyPath: m_Antialiasing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1969043578066780490, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
       propertyPath: m_Name
@@ -1043,7 +1047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741879360369, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741909571397, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y

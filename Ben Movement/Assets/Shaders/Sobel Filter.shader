@@ -6,11 +6,9 @@ Shader "Kazi/Sobel Filter"
 		_Threshold("Line Clip Threshold", Float) = 0.5
 		_Color("Color", Color) = (0.0, 0.0, 0.0, 1.0)
 	}
-
 		SubShader
 		{
 			Tags {"RenderPipeline" = "UniversalPipeline"}
-
 			HLSLINCLUDE
 
 			#pragma vertex vert
@@ -102,10 +100,7 @@ Shader "Kazi/Sobel Filter"
 				half4 frag(Varyings IN) : SV_TARGET
 				{
 					half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
-					if (col.r == 0.0) 
-					{
-						discard;
-					}
+					clip(col.a - 0.5);
 					return col * _Color;
 				}
 				ENDHLSL

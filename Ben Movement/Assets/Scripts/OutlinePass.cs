@@ -29,17 +29,8 @@ public class OutlinePass : ScriptableRenderPass
         if (material == null) material = passSettings.shader;
 
         // Set any material properties based on our pass settings. 
-        material.SetFloat("_Scale", passSettings.scale);
-        material.SetFloat("_DepthThreshold", passSettings.depthThreshold);
-        material.SetFloat("_NormalThreshold", passSettings.normalThreshold);
-
-        material.SetFloat("_DepthNormalThreshold", passSettings.depthNormalThreshold);
-        material.SetFloat("_DepthNormalThresholdScale", passSettings.depthNormalThresholdScale);
-        material.SetColor("_Color", passSettings.color);
-        
-        //Matrix4x4 clipToView = GL.GetGPUProjectionMatrix(passSettings.camera.projectionMatrix, true).inverse;
-        Matrix4x4 clipToView = Matrix4x4.zero;
-        material.SetMatrix("_ClipToView", clipToView);
+        material.SetFloat("_DeltaX", passSettings.x);
+        material.SetFloat("_DeltaY", passSettings.y);
     }
 
     // Gets called by the renderer before executing the pass.
@@ -52,18 +43,15 @@ public class OutlinePass : ScriptableRenderPass
         RenderTextureDescriptor descriptor = renderingData.cameraData.cameraTargetDescriptor;
 
         // Set the number of depth bits we need for our temporary render texture.
-        descriptor.depthBufferBits = 0;
-
-        // Enable these if your pass requires access to the CameraDepthTexture or the CameraNormalsTexture.
-        // ConfigureInput(ScriptableRenderPassInput.Depth);
-        // ConfigureInput(ScriptableRenderPassInput.Normal);
-
-        // Grab the color buffer from the renderer camera color target.
-        colorBuffer = renderingData.cameraData.renderer.cameraColorTarget;
-
-        // Create a temporary render texture using the descriptor from above.
+        descriptor.depthBufferBits = 32;
         cmd.GetTemporaryRT(temporaryBufferID, descriptor, FilterMode.Point);
         temporaryBuffer = new RenderTargetIdentifier(temporaryBufferID);
+        // Enable these if your pass requires access to the CameraDepthTexture or the CameraNormalsTexture.
+        //ConfigureInput(ScriptableRenderPassInput.Depth);
+        //ConfigureInput(ScriptableRenderPassInput.Normal);
+        //ConfigureInput(ScriptableRenderPassInput.Color);
+        // Grab the color buffer from the renderer camera color target.
+        colorBuffer = renderingData.cameraData.renderer.cameraColorTarget;
     }
 
     // The actual execution of the pass. This is where custom rendering occurs.
@@ -72,9 +60,12 @@ public class OutlinePass : ScriptableRenderPass
 
         // Grab a command buffer. We put the actual execution of the pass inside of a profiling scope.
         CommandBuffer cmd = CommandBufferPool.Get();
-        cmd.Clear();
-        Blit(cmd, colorBuffer, temporaryBuffer, material, 0); // shader pass 0
-
+        using (new ProfilingScope(cmd, new ProfilingSampler(ProfilerTag)))
+        {
+            // Blit from the color buffer to a temporary buffer and back. This is needed for a two-pass shader.
+            Blit(cmd, colorBuffer, temporaryBuffer, material, 0); // shader pass 0
+            Blit(cmd, temporaryBuffer, colorBuffer, material, 1);
+        }
 
         // Execute the command buffer and release it.
         context.ExecuteCommandBuffer(cmd);

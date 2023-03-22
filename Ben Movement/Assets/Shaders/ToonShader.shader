@@ -167,6 +167,7 @@ Shader "Kazi/ToonShader"
                     }
                 }*/
                 color.rgb = MixFog(color.rgb, IN.positionWSAndFogFactor.w);
+                clip(color.a* _BaseColor.a* _BaseMap.Sample(sampler_BaseMap, IN.uv).a - 0.5f);
                 return color * _BaseColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
             }
             ENDHLSL
