@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject focusObject;
     [SerializeField] float focusMoveSpeedMultiplier = 0.3f;
     [SerializeField] private float focusViewRange = 10f;
+    [SerializeField] GameObject focusReticule;
 
 
 
@@ -126,6 +127,15 @@ public class PlayerController : MonoBehaviour
             {
                 Unfocus();
             }
+            else
+            {
+                focusReticule.SetActive(true);
+                focusReticule.transform.position = focusObject.transform.position;
+            }
+        }
+        else
+        {
+            focusReticule.SetActive(false);
         }
         
         movementDashLocked = isDashing;
@@ -199,6 +209,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        
         
     }
 
@@ -691,6 +702,7 @@ public class PlayerController : MonoBehaviour
         EnemyHealth[] possibleEnemies = FindObjectsOfType<EnemyHealth>();
         List<EnemyHealth> enemiesInRange = new List<EnemyHealth>();
         List<EnemyHealth> enemiesInViewCone = new List<EnemyHealth>();
+        List<EnemyHealth> enemiesInDirectView = new List<EnemyHealth>();
         if (FindObjectOfType<EnemyHealth>() != null)
         {
             //filter out ones not in range
@@ -731,9 +743,9 @@ public class PlayerController : MonoBehaviour
                 float currentMinDistance = Mathf.Infinity;
                 int currentMinIndex = 0;
                 int i = 0;
-                
+
                 foreach (EnemyHealth possibleEnemy in enemiesInRange)
-                {   
+                {
                     Vector3 offset = possibleEnemy.transform.position - transform.position;
                     if (offset.magnitude < currentMinDistance)
                     {
@@ -744,32 +756,74 @@ public class PlayerController : MonoBehaviour
 
                     i++;
                 }
+
+
 
                 return enemiesInRange[currentMinIndex].gameObject;
 
             }
             else
             {
-                //focus on nearest enemy in view cone
-                
-                float currentMinDistance = Mathf.Infinity;
-                int currentMinIndex = 0;
-                int i = 0;
-                
+                //check if any are right in front
                 foreach (EnemyHealth possibleEnemy in enemiesInViewCone)
-                {   
+                {
                     Vector3 offset = possibleEnemy.transform.position - transform.position;
-                    if (offset.magnitude < currentMinDistance)
+                    Vector3 direction = offset.normalized;
+                    if (Vector3.Dot(direction, transform.forward) > 0.7f)
                     {
-                        currentMinDistance = offset.magnitude;
-                        currentMinIndex = i;
 
+                        enemiesInDirectView.Add(possibleEnemy);
                     }
-
-                    i++;
                 }
 
-                return enemiesInViewCone[currentMinIndex].gameObject;
+                if (enemiesInDirectView == null || enemiesInDirectView.Count == 0)
+                {
+
+                    float currentMinDistance = Mathf.Infinity;
+                    int currentMinIndex = 0;
+                    int i = 0;
+
+                    foreach (EnemyHealth possibleEnemy in enemiesInDirectView)
+                    {
+                        Vector3 offset = possibleEnemy.transform.position - transform.position;
+                        if (offset.magnitude < currentMinDistance)
+                        {
+                            currentMinDistance = offset.magnitude;
+                            currentMinIndex = i;
+
+                        }
+
+                        i++;
+                    }
+
+                    return enemiesInDirectView[currentMinIndex].gameObject;
+                }
+                else
+                {
+                    //focus on nearest enemy in view cone
+                    float currentMinDistance = Mathf.Infinity;
+                    int currentMinIndex = 0;
+                    int i = 0;
+                
+                    foreach (EnemyHealth possibleEnemy in enemiesInViewCone)
+                    {   
+                        Vector3 offset = possibleEnemy.transform.position - transform.position;
+                        if (offset.magnitude < currentMinDistance)
+                        {
+                            currentMinDistance = offset.magnitude;
+                            currentMinIndex = i;
+
+                        }
+
+                        i++;
+                    }
+
+                    return enemiesInViewCone[currentMinIndex].gameObject;
+                }
+
+                
+
+                
             }
         }
     }
