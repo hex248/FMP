@@ -47,8 +47,8 @@ public class OutlinePass : ScriptableRenderPass
         cmd.GetTemporaryRT(temporaryBufferID, descriptor, FilterMode.Point);
         temporaryBuffer = new RenderTargetIdentifier(temporaryBufferID);
         // Enable these if your pass requires access to the CameraDepthTexture or the CameraNormalsTexture.
-        //ConfigureInput(ScriptableRenderPassInput.Depth);
-        //ConfigureInput(ScriptableRenderPassInput.Normal);
+        ConfigureInput(ScriptableRenderPassInput.Depth);
+        ConfigureInput(ScriptableRenderPassInput.Normal);
         //ConfigureInput(ScriptableRenderPassInput.Color);
         // Grab the color buffer from the renderer camera color target.
         colorBuffer = renderingData.cameraData.renderer.cameraColorTarget;
