@@ -169,7 +169,7 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
         {
             RenderTextureDescriptor temporaryTargetDescriptor = renderingData.cameraData.cameraTargetDescriptor;
-            temporaryTargetDescriptor.depthBufferBits = 0;
+            temporaryTargetDescriptor.depthBufferBits = 24;
             cmd.GetTemporaryRT(temporaryBufferID, temporaryTargetDescriptor, FilterMode.Point);
             temporaryBuffer = new RenderTargetIdentifier(temporaryBufferID);
             cameraColorTarget = renderingData.cameraData.renderer.cameraColorTarget;
@@ -183,8 +183,8 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature
             CommandBuffer cmd = CommandBufferPool.Get();
             using (new ProfilingScope(cmd, new ProfilingSampler("ScreenSpaceOutlines")))
             {
-                cmd.Blit(cameraColorTarget, temporaryBuffer);
-                cmd.Blit(temporaryBuffer, cameraColorTarget, screenSpaceOutlineMaterial);
+                Blit(cmd, cameraColorTarget, temporaryBuffer);
+                Blit(cmd, temporaryBuffer, cameraColorTarget, screenSpaceOutlineMaterial);
             }
 
             context.ExecuteCommandBuffer(cmd);
