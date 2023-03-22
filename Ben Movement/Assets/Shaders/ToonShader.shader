@@ -9,21 +9,24 @@ Shader "Kazi/ToonShader"
     }
         SubShader
     {
-        Tags {"RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" "Queue" = "Geometry"}
+        Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
 
         Pass
         {
-            Name "StandardLit"
+            Name "ForwardLit"
             Tags{"LightMode" = "UniversalForward"}
 
             HLSLPROGRAM
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
             #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
-            #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
+            #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile _ _SHADOWS_SOFT
+            #pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
+            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ SHADOWS_SHADOWMASK
             #pragma multi_compile_fog
-            #pragma multi_compile_instancing
             #pragma vertex vert
             #pragma fragment frag
 
@@ -107,65 +110,6 @@ Shader "Kazi/ToonShader"
                     }
                     color.rgb += value * light.color;
                 }
-                /*if (width < 32.0 || height < 32.0)
-                {
-                    VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normal);
-                IN.normal = vertexNormalInput.normalWS.xyz;
-                value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
-                if (value > _ClipThreshold)
-                {
-                    value = 1.0;
-                }
-                else
-                {
-                    value = 0.5;
-                }
-                color += value * float4(mainLight.color, 1.0);
-                for (int i = 0; i < additionalLightsCount; ++i)
-                {
-                    Light light = GetAdditionalLight(i, positionWS);
-                    value = dot(IN.normal, light.direction.xyz) * light.distanceAttenuation * light.shadowAttenuation;
-                    if (value > _ClipThreshold)
-                    {
-                        value = 1.0;
-                    }
-                    else
-                    {
-                        value = 0.0;
-                    }
-                    color.rgb += value * light.color;
-                }
-                }
-                else
-                {
-                    float3 normal = normalize((_NormalMap.Sample(sampler_NormalMap, IN.uv) * 2.0) - 0.5);
-                    VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(float3(normal.x, normal.y, normal.z));
-                    IN.normal = vertexNormalInput.normalWS.xyz;
-                    value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
-                    if (value > _ClipThreshold)
-                    {
-                        value = 1.0;
-                    }
-                    else
-                    {
-                        value = 0.5;
-                    }
-                    color += value * float4(mainLight.color, 1.0);
-                    for (int i = 0; i < additionalLightsCount; ++i)
-                    {
-                        Light light = GetAdditionalLight(i, positionWS);
-                        value = dot(IN.normal, light.direction.xyz) * light.shadowAttenuation;
-                        if (value > _ClipThreshold)
-                        {
-                            value = 1.0;
-                        }
-                        else
-                        {
-                            value = 0.0;
-                        }
-                        color.rgb += value * light.color;
-                    }
-                }*/
                 color.rgb = MixFog(color.rgb, IN.positionWSAndFogFactor.w);
                 clip(color.a* _BaseColor.a* _BaseMap.Sample(sampler_BaseMap, IN.uv).a - 0.5f);
                 return color * _BaseColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
@@ -174,6 +118,7 @@ Shader "Kazi/ToonShader"
         }
         UsePass "Universal Render Pipeline/Lit/ShadowCaster"
         UsePass "Universal Render Pipeline/Lit/DepthOnly"
+        UsePass "Universal Render Pipeline/Lit/DepthNormals"
         UsePass "Universal Render Pipeline/Lit/Meta"
     }
 }
