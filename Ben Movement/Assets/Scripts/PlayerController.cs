@@ -8,7 +8,8 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
-    Collider col;
+    Collider mainCol;
+    List<Collider> fabricCols = new List<Collider>();
     PlayerManager playerManager;
     Player playerParent;
 
@@ -89,12 +90,14 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        col = GetComponent<Collider>();
+        mainCol = GetComponent<Collider>();
         playerManager = FindObjectOfType<PlayerManager>();
         playerAnim = GetComponentInChildren<PlayerAnimationScript>();
         playerParent = GetComponentInParent<Player>();
         lastMovementDirection = Vector3.forward;
         lastAttackingTime = 0f;
+        fabricCols = GetComponentsInChildren<Collider>().ToList();
+
         ResetCombo();
     }
     private void FixedUpdate()
@@ -478,17 +481,17 @@ public class PlayerController : MonoBehaviour
                 {
                     DashEndsInCollider(playerLocationWithOffset, checkLocation, true);
                 }
-                //check if it is in a collider
+                //check if it is in a mainCollider
                 //probably a way to have to avoid doing this check for each location
                 //and instead just do this once, and compare the values
 
                 if (!DashEndsInCollider(playerLocationWithOffset, checkLocation))
                 {
                     
-                    //check if near enough to collider
-                    Collider[] collidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer);
+                    //check if near enough to mainCollider
+                    Collider[] mainCollidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer);
                     gizmosLocation.Add(checkLocation);
-                    if (collidersAtPoint.Length == 0)
+                    if (mainCollidersAtPoint.Length == 0)
                     {
                         foundDashLocation = true;
                         dashEnd = dashEndLocation;
@@ -614,7 +617,16 @@ public class PlayerController : MonoBehaviour
 
         yMin = 1f - squashAmount;
         xMax = Mathf.Sqrt(1f / yMin);
-        col.enabled = false;
+        mainCol.enabled = false;
+        SetClothCollidersActive(false);
+    }
+
+    void SetClothCollidersActive(bool on)
+    {
+        foreach(Collider collider in fabricCols)
+        {
+            collider.enabled = on;
+        }
     }
 
     void DoDashMove()
@@ -628,14 +640,15 @@ public class PlayerController : MonoBehaviour
             playerAnim.EndDashAnimation();
             yScale = 1f;
             horizontalScale = 1f;
-            col.enabled = true;
+            mainCol.enabled = true;
+            SetClothCollidersActive(true);
 
         }
 
         else if (timeSinceDash >= enableColliderTime)
         {
 
-            col.enabled = true;
+            mainCol.enabled = true;
             yScale = Mathf.SmoothStep(yMin, 1f, timeSinceDash / dashTime);
             horizontalScale = Mathf.SmoothStep(xMax, 1f, timeSinceDash / dashTime);
         }
