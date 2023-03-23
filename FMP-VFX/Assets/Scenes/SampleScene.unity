@@ -5583,11 +5583,6 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -1420747162901802366, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
   m_PrefabInstance: {fileID: 1264196433}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &540498233 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4694135486842888090, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
-  m_PrefabInstance: {fileID: 1264196433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -5741,41 +5736,6 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5949651922784088266, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
   m_PrefabInstance: {fileID: 1264196433}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &967671881 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
-  m_PrefabInstance: {fileID: 1264196433}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &967671882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967671881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 140b8e8ad9468514eb515cb5199e1bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackVFX: {fileID: 11400000, guid: a1208b3177b79cb4792a288f9d80f3aa, type: 2}
-  attackKey: 120
-  loop: 0
-  movementCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  curveOffset: 0
-  leftHoof: {fileID: 1564400990}
-  rightHoof: {fileID: 540498233}
-  animating: 0
-  timer: 0
-  totalTime: 0
-  offsetDelta: 0
-  currentOffset: 0
-  step: 0
 --- !u!1001 &1264196433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5837,7 +5797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1150976069182270069, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5955,6 +5915,26 @@ PrefabInstance:
     - target: {fileID: 2265516724301692066, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
       propertyPath: m_Name
       value: SlashPurple
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885488958972060042, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885488958972060042, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 1.663e-42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885488958972060042, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.0071633e+22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885488958972060042, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885488958972060042, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 8.42e-43
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1573e8d5bdc765946832055a90ed8023, type: 3}
@@ -10763,11 +10743,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &1564400990 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5008440677060047355, guid: 4f0d038bcd8e9e34a943537450d706e8, type: 3}
-  m_PrefabInstance: {fileID: 1264196433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -20611,7 +20586,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: NaN, z: 4.029e-42, w: 6e-44}
+  m_BoundingSphereOverride: {x: 0, y: 0.006055832, z: 4.5905e-41, w: 1e-45}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
