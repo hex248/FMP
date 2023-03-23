@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     Material[] skinnedMaterials;
 
     //limits the amount u can dissolve until you die
+    [SerializeField] bool dissolveActive = true;
     [SerializeField, Range(0f, 1f)] float maxDamageDissolveAmount;
     [SerializeField] float deathDissolveRate = 0.00001f;
     [SerializeField] float maxTimeToTargetDissove = 1f;
@@ -30,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maximumHealth;
 
-        skinnedMesh = GetComponent<MeshRenderer>();
+        skinnedMesh = GetComponentInChildren<MeshRenderer>();
         if (skinnedMesh != null)
             skinnedMaterials = skinnedMesh.materials;
     }
@@ -70,21 +71,26 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
-        StartCoroutine(DeathDissolve());
+        if (dissolveActive)
+            StartCoroutine(DeathDissolve());
 
     }
 
     void UpdateDissolve()
     {
-        timeSinceTargetAdjusted += Time.deltaTime;
-        dissolveSmoothFac = Mathf.Min(1f, timeSinceTargetAdjusted / 1f);
-
-        currentDissolveAmount = Mathf.SmoothStep(currentDissolveAmount, targetDissolveAmount, dissolveSmoothFac);
-        for (int i = 0; i < skinnedMaterials.Length; i++)
+        if(dissolveActive)
         {
-            skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolveAmount);
+            timeSinceTargetAdjusted += Time.deltaTime;
+            dissolveSmoothFac = Mathf.Min(1f, timeSinceTargetAdjusted / 1f);
+
+            currentDissolveAmount = Mathf.SmoothStep(currentDissolveAmount, targetDissolveAmount, dissolveSmoothFac);
+            for (int i = 0; i < skinnedMaterials.Length; i++)
+            {
+                skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolveAmount);
+            }
         }
     }
+        
 
 
 

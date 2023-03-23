@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     PlayerManager playerManager;
     public PlayerInput playerInput;
     PlayerInputManager playerInputManager;
-    PlayerController playerMovement;
+    public PlayerController playerMovement;
     ColorblindFilters filterController;
     public CameraFollow cameraFollow;
 

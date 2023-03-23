@@ -70,8 +70,17 @@ public class PlayerManager : MonoBehaviour
         isPaused = false;
     }
 
+    Vector3 GetPlayerSpawnPoint()
+    {
+        return new Vector3(0f, 3f, 0f);
+    }
+
     public void PlayerSpawned(Player player)
     {
+        //find spawn position
+        player.playerMovement.transform.position = GetPlayerSpawnPoint();
+
+
         players.Add(player);
         playerInput = player.GetComponentInChildren<PlayerInput>();
 
