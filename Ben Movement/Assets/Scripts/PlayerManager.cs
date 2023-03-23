@@ -72,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     Vector3 GetPlayerSpawnPoint()
     {
-        return new Vector3(0f, 3f, 0f);
+        return new Vector3(Random.Range(-2f, 2f), 0.5f, Random.Range(-2f, 2f));
     }
 
     public void PlayerSpawned(Player player)

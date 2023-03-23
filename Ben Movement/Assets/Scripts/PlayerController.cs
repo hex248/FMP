@@ -296,6 +296,7 @@ public class PlayerController : MonoBehaviour
         }
         
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
+        //TODO - Smooth out input rather than just setting directly? Might not be what we want though
         rb.velocity = desiredVelocity;
 
         if (isFocusing)

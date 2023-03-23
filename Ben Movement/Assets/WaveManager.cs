@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
 
     public List<EnemySpawnInfo> enemySpawnOptions = new List<EnemySpawnInfo>();
     public bool spawnNextRound;
+    [SerializeField] float spawnRadius;
     int currentRound;
 
     private void Start()
@@ -67,10 +68,19 @@ public class WaveManager : MonoBehaviour
                 int randomIndex = Random.Range(0, difficultyPossibleSpawnOptions.Count);
                 EnemySpawnInfo enemyToSpawn = difficultyPossibleSpawnOptions[randomIndex];
                 difficultyLeftToDistribute -= enemyToSpawn.difficultyCost;
-                Instantiate(enemyToSpawn.enemyPrefab, new Vector3(0f, 10f, 0f), Quaternion.identity);
+                GameObject newEnemy = Instantiate(enemyToSpawn.enemyPrefab, new Vector3(0f, 10f, 0f), Quaternion.identity);
+                newEnemy.transform.position = GetSpawnPosition();
             }
         }
 
 
+    }
+
+    Vector3 GetSpawnPosition()
+    {
+        float x = Mathf.Sin(0f) * spawnRadius;
+        float z = Mathf.Cos(0f) * spawnRadius;
+        Vector3 spawnPosition = new Vector3(x, 0, z);
+        return spawnPosition;
     }
 }
