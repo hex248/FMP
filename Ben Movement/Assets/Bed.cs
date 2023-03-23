@@ -13,6 +13,7 @@ public class Bed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        transform.eulerAngles = transform.rotation.eulerAngles + new Vector3(0f, Time.deltaTime, 0f);
     }
 }
