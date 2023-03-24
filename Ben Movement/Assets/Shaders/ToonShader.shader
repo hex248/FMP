@@ -8,7 +8,8 @@ Shader "Kazi/ToonShader"
         [MainColor] _BaseColor("Base Color", Color) = (1,1,1,1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _NormalMap("Normal Map", 2D) = "black" {}
-        _ClipThreshold("Clip Threshold", FLOAT) = 0.5
+        _Smoothness("Smoothness", Range(0.0, 1.0)) = 1.0
+        _ClipThreshold("Clip Threshold", Range(0.0, 1.0)) = 0.5
     }
         SubShader
     {
@@ -68,6 +69,7 @@ Shader "Kazi/ToonShader"
             float4 _BaseMap_ST;
             float4 _NormalMap_ST;
             float _ClipThreshold;
+            float _Smoothness;
             half4 _BaseColor;
             CBUFFER_END
 
@@ -98,7 +100,14 @@ Shader "Kazi/ToonShader"
                 value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
                 if (value > _ClipThreshold)
                 {
-                    value = 1.0;
+                    if (value > (1 - _Smoothness))
+                    {
+                        value = 1.5;
+                    }
+                    else
+                    {
+                        value = 1.0;
+                    }
                 }
                 else
                 {
@@ -111,7 +120,14 @@ Shader "Kazi/ToonShader"
                     value = dot(IN.normal, light.direction.xyz) * light.distanceAttenuation * light.shadowAttenuation;
                     if (value > _ClipThreshold)
                     {
-                        value = 1.0;
+                        if (value > (1 - _Smoothness)) 
+                        {
+                            value = 1.5;
+                        }
+                        else 
+                        {
+                            value = 1.0;
+                        }
                     }
                     else
                     {
