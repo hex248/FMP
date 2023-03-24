@@ -2,6 +2,9 @@ Shader "Kazi/ToonShader"
 {
     Properties
     {
+        [IntRange] _StencilID ("Stencil ID", Range(0, 255)) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _Comp("Compare", Float) = 0
         [MainColor] _BaseColor("Base Color", Color) = (1,1,1,1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _NormalMap("Normal Map", 2D) = "black" {}
@@ -9,8 +12,14 @@ Shader "Kazi/ToonShader"
     }
         SubShader
     {
+        Cull [_Cull]
         Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
-
+        Stencil
+        {
+            Ref[_StencilID]
+            Comp [_Comp]
+            Pass Replace
+        }
         Pass
         {
             Name "ForwardLit"
