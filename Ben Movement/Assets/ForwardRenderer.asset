@@ -57,37 +57,6 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
---- !u!114 &-3316157227641755563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c2904cb33c81eb4eba0aacd7d9acce4, type: 3}
-  m_Name: NewScreenSpaceOutlines
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  renderPassEvent: 550
-  outlinesLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  outlineSettings:
-    outlineColor: {r: 0, g: 0, b: 0, a: 1}
-    outlineScale: 1.2
-    depthThreshold: 50
-    robertsCrossMultiplier: 142
-    normalThreshold: 0.21
-    steepAngleThreshold: 0
-    steepAngleMultiplier: 0
-  viewSpaceNormalsTextureSettings:
-    colorFormat: 7
-    depthBufferBits: 24
-    filterMode: 0
-    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-    depthTest: 4
 --- !u!114 &-2826805843081034478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,24 +114,6 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
---- !u!114 &-60737833813218546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b01dfdff15ce7434bbca79309a56aeae, type: 3}
-  m_Name: NewOutlineFeature
-  m_EditorClassIdentifier: 
-  m_Active: 0
-  passSettings:
-    renderPassEvent: 550
-    shader: {fileID: 2100000, guid: f69936575d095e34496205c15ed20064, type: 2}
-    x: 1
-    y: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,12 +127,10 @@ MonoBehaviour:
   m_Name: ForwardRenderer
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: -3316157227641755563}
   - {fileID: -4647851363055628260}
   - {fileID: -7540576948473457772}
   - {fileID: -375346416473009125}
-  - {fileID: -60737833813218546}
-  m_RendererFeatureMap: 55a8113b92a4fad11c104188cf837fbf9493bd90377d5a971b1469426c80cafa0eeb220f433728ff
+  m_RendererFeatureMap: 1c104188cf837fbf9493bd90377d5a971b1469426c80cafa
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -203,7 +152,7 @@ MonoBehaviour:
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
-    stencilCompareFunction: 8
+    stencilCompareFunction: 0
     passOperation: 0
     failOperation: 0
     zFailOperation: 5
