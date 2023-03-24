@@ -78,9 +78,10 @@ public class WaveManager : MonoBehaviour
 
     Vector3 GetSpawnPosition()
     {
-        float x = Mathf.Sin(0f) * spawnRadius;
-        float z = Mathf.Cos(0f) * spawnRadius;
-        Vector3 spawnPosition = new Vector3(x, 0, z);
+        float randomAngle = Random.Range(-Mathf.PI, Mathf.PI);
+        float x = Mathf.Sin(randomAngle) * spawnRadius;
+        float z = Mathf.Cos(randomAngle) * spawnRadius;
+        Vector3 spawnPosition = new Vector3(x, 1.5f, z);
         return spawnPosition;
     }
 }
