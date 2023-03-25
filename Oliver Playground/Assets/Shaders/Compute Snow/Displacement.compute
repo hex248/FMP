@@ -6,16 +6,15 @@ struct SnowData
 {
     float3 position;
     float4 vertexColor;
-    int collided;
+    float moveAmount;
 };
 
 RWStructuredBuffer<SnowData> snowData;
-float resolution;
 
-float3 collidingBoundsMax;
-float3 collidingBoundsMin;
+float resolution;
 float bottomOutHeight;
 float topOutHeight;
+float deltaTime;
 
 
 float rand(float2 co)
@@ -23,15 +22,16 @@ float rand(float2 co)
     return(frac(sin(dot(co.x, float2(12.989, 78.233))) * 43758.5453)) * 1;
 }
 
-[numthreads(10,1,1)]
-void CSMain (uint3 id : SV_DispatchThreadID)
+[numthreads(64, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
 {
     float xPos = id.x / resolution;
 
     SnowData snow = snowData[id.x];
 
-    float randomYPos = clamp(snow.position.y - 0.01, bottomOutHeight, topOutHeight);
-    snow.position = float3(snow.position.x, randomYPos, snow.position.z);
+    float calculatedY = clamp(snow.position.y + (snow.moveAmount * deltaTime), bottomOutHeight, topOutHeight);
+
+    snow.position = float3(snow.position.x, calculatedY, snow.position.z);
 
     snowData[id.x] = snow;
 }
