@@ -11,6 +11,7 @@ Shader "Kazi/Display Vertex Colors" {
         CGPROGRAM
         #pragma vertex vert
         #pragma fragment frag
+        #pragma multi_compile_instancing
         #include "UnityCG.cginc"
         sampler2D _BaseMap;
     float4 _BaseMap_ST;

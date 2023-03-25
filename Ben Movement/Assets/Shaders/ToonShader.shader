@@ -2,15 +2,25 @@ Shader "Kazi/ToonShader"
 {
     Properties
     {
+        [IntRange] _StencilID ("Stencil ID", Range(0, 255)) = 0
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _Comp("Compare", Float) = 0
         [MainColor] _BaseColor("Base Color", Color) = (1,1,1,1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _NormalMap("Normal Map", 2D) = "black" {}
-        _ClipThreshold("Clip Threshold", FLOAT) = 0.5
+        _Smoothness("Smoothness", Range(0.0, 1.0)) = 1.0
+        _ClipThreshold("Clip Threshold", Range(0.0, 1.0)) = 0.5
     }
         SubShader
     {
+        Cull [_Cull]
         Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
-
+        Stencil
+        {
+            Ref[_StencilID]
+            Comp [_Comp]
+            Pass Replace
+        }
         Pass
         {
             Name "ForwardLit"
@@ -59,6 +69,7 @@ Shader "Kazi/ToonShader"
             float4 _BaseMap_ST;
             float4 _NormalMap_ST;
             float _ClipThreshold;
+            float _Smoothness;
             half4 _BaseColor;
             CBUFFER_END
 
@@ -89,7 +100,14 @@ Shader "Kazi/ToonShader"
                 value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
                 if (value > _ClipThreshold)
                 {
-                    value = 1.0;
+                    if (value > (1 - _Smoothness))
+                    {
+                        value = 1.5;
+                    }
+                    else
+                    {
+                        value = 1.0;
+                    }
                 }
                 else
                 {
@@ -102,7 +120,14 @@ Shader "Kazi/ToonShader"
                     value = dot(IN.normal, light.direction.xyz) * light.distanceAttenuation * light.shadowAttenuation;
                     if (value > _ClipThreshold)
                     {
-                        value = 1.0;
+                        if (value > (1 - _Smoothness)) 
+                        {
+                            value = 1.5;
+                        }
+                        else 
+                        {
+                            value = 1.0;
+                        }
                     }
                     else
                     {

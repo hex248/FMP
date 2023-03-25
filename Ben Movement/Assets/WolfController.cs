@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class WolfController : MonoBehaviour
 {
+    [SerializeField] GameObject wolfVisuals;
     [SerializeField] float moveSpeed;
+    [SerializeField] float rotationSpeed;
     Rigidbody rb;
     Bed bed;
     float timeSinceStart;
     GameObject currentTarget;
+    [SerializeField] bool targetPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -16,24 +19,34 @@ public class WolfController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         bed = FindObjectOfType<Bed>();
         currentTarget = bed.gameObject;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        RotateTowardsTarget();
+        MoveForward(moveSpeed);
         Vector3 direction = currentTarget.transform.position - transform.position;
-        DoMovement(direction, moveSpeed);
+
+        if (targetPlayer)
+        {
+            targetPlayer = false;
+            currentTarget = FindObjectOfType<PlayerController>().gameObject;
+        }
     }
 
-    void DoMovement(Vector3 direction, float speed)
+    void MoveForward(float speed)
     {
-        if (direction.magnitude >= 1f)
-        {
-            direction = direction.normalized;
-        }
-
-        Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
-        //TODO - Make movement much smoother - Especially for the floatyness of the wolf
+        Vector3 desiredVelocity = wolfVisuals.transform.forward * moveSpeed;
         rb.velocity = desiredVelocity;
+    }
+
+    void RotateTowardsTarget()
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position, Vector3.up);
+        transform.rotation = Quaternion.Lerp(wolfVisuals.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //smoke.SetVector3("EmissionDirection", head.forward * -1);
     }
 }

@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: -115
     y: -190
-    width: 1480
-    height: 1623
+    width: 1485
+    height: 1632
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,7 +311,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614636}
   - {fileID: 8926484042661614850}
   - {fileID: 8926484042661614926}
-  m_UIPosition: {x: 933, y: -1}
+  m_UIPosition: {x: 941, y: 32}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614622}
   - {fileID: 8926484042661614626}
-  m_UIPosition: {x: 933, y: 910}
+  m_UIPosition: {x: 946, y: 939}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1177,7 +1177,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.2
+      m_SerializableObject: 0.3
     m_Space: 2147483647
   m_Property:
     name: A
@@ -1211,7 +1211,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.4
+      m_SerializableObject: 0.5
     m_Space: 2147483647
   m_Property:
     name: B
@@ -1274,7 +1274,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":-0.000001816079020500183,"value":0.9929285645484924,"inTangent":-0.7475280165672302,"outTangent":-0.7475280165672302,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":0.99700927734375,"value":0.2476348876953125,"inTangent":-0.023384500294923784,"outTangent":-0.023384500294923784,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":-0.004173187538981438,"value":0.5066385865211487,"inTangent":4.641349792480469,"outTangent":4.641349792480469,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":0.10120512545108795,"value":0.9957361817359924,"inTangent":-0.023540537804365159,"outTangent":-0.023540537804365159,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.99700927734375,"value":0.2476348876953125,"inTangent":-0.023384500294923784,"outTangent":-0.023384500294923784,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -3968,7 +3968,8 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614865}
 --- !u!114 &8926484042661614855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4001,8 +4002,7 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661614865}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661614856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4262,7 +4262,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 1
   m_LinkedSlots:
-  - {fileID: 8926484042661614855}
+  - {fileID: 8926484042661614854}
 --- !u!114 &8926484042661614867
 MonoBehaviour:
   m_ObjectHideFlags: 0
