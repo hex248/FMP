@@ -482,6 +482,7 @@ MonoBehaviour:
   attackLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  maxTimeBetweenAttackForCombo: 0
   playerVisuals: {fileID: 4774828045323943578}
   squashAmount: 0
   playerNumber: 1
@@ -493,6 +494,7 @@ MonoBehaviour:
   focusObject: {fileID: 0}
   focusMoveSpeedMultiplier: 0.8
   focusViewRange: 10
+  focusReticule: {fileID: 0}
 --- !u!54 &7478775978707637640
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1165,7 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc47d49e6da3244ba4adc4a4976e79a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeedAnimation: 0.3
+  movementSpeedAnimation: 0.35
 --- !u!136 &3094487779797318009
 CapsuleCollider:
   m_ObjectHideFlags: 0
