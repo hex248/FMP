@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float currentHealth;
     float healthFactor;
 
-    MeshRenderer skinnedMesh;
+    SkinnedMeshRenderer skinnedMesh;
     Material[] skinnedMaterials;
 
     //limits the amount u can dissolve until you die
@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maximumHealth;
 
-        skinnedMesh = GetComponentInChildren<MeshRenderer>();
+        skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
         if (skinnedMesh != null)
             skinnedMaterials = skinnedMesh.materials;
     }
