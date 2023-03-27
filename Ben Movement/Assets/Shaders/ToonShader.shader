@@ -4,7 +4,10 @@ Shader "Kazi/ToonShader"
     {
         [IntRange] _StencilID ("Stencil ID", Range(0, 255)) = 0
         [Enum(UnityEngine.Rendering.CullMode)] _Cull("Cull", Float) = 0
-        [Enum(UnityEngine.Rendering.CompareFunction)] _Comp("Compare", Float) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _Comp("Stencil Compare", Float) = 0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _Depth("Z Write Compare", Float) = 2
+        [Enum(UnityEngine.Rendering.StencilOp)] _Pass("Stencil Pass", Float) = 0
+        [Enum(None,0,Alpha,1,Red,8,Green,4,Blue,2,RGB,14,RGBA,15)] _ColorMask("Writing Color Mask", Int) = 15
         [MainColor] _BaseColor("Base Color", Color) = (1,1,1,1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _NormalMap("Normal Map", 2D) = "black" {}
@@ -14,12 +17,14 @@ Shader "Kazi/ToonShader"
         SubShader
     {
         Cull [_Cull]
+        ZWrite [_Depth]
+        ColorMask [_ColorMask]
         Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
         Stencil
         {
             Ref[_StencilID]
             Comp [_Comp]
-            Pass Replace
+            Pass [_Pass]
         }
         Pass
         {
