@@ -49,4 +49,9 @@ public class WolfController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(wolfVisuals.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         //smoke.SetVector3("EmissionDirection", head.forward * -1);
     }
+
+    void Attack()
+    {
+
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Attack
+public class MeleeAttack
 {
     //the overall time the attack takes
     public float attackTime;

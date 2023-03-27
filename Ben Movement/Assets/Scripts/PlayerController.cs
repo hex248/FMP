@@ -38,24 +38,38 @@ public class PlayerController : MonoBehaviour
     Vector3 dashEnd;
     float timeSinceDash;
 
-    [Header("Attack Settings")]
-    [SerializeField] List<Attack> basicCombo = new List<Attack>();
+    [Header("Melee Attack Settings")]
+    [SerializeField] List<MeleeAttack> meleeCombo = new List<MeleeAttack>();
     
     [SerializeField] LayerMask attackLayerMask;
-    bool showAttackGizmos;
-    private bool doneAttackHit = false;
-    Vector3 currentAttackDirection;
-    float lastAttackingTime;
-    bool neededReset;
-    int currentComboStage = 0;
-    int nextComboStage;
+    bool showMeleeAttackGizmos;
+    private bool doneMeleeAttackHit = false;
+    Vector3 currentMeleeAttackDirection;
+    float lastMeleeAttackingTime;
+    bool neededMeleeComboReset;
+    int currentMeleeComboStage = 0;
+    int nextMeleeComboStage;
 
-    bool isAttacking;
-    [SerializeField] float maxTimeBetweenAttackForCombo;
-    float timeSinceAttackEnd;
+    bool isMeleeAttacking;
+    [SerializeField] float maxTimeBetweenMeleeAttackForCombo;
+    float timeSinceMeleeAttackEnd;
     float attackSpeed;
 
-    
+    [Header("Ranged Attack Settings")]
+    [SerializeField] List<RangedAttack> rangedCombo = new List<RangedAttack>();
+    private bool doneRangedProjectileSpawn = false;
+    Vector3 currentRangedAttackDirection;
+    float lastRangedAttackingTime;
+    bool neededRangedComboReset;
+    int currentRangedComboStage = 0;
+    int nextRangedComboStage;
+
+    bool isRangedAttacking;
+    [SerializeField] float maxTimeBetweenRangedAttackForCombo;
+    float timeSinceRangedAttackEnd;
+    float rangedSpeed;
+
+
 
     [Header("Visuals Settings")]
     public GameObject playerVisuals;
@@ -70,11 +84,12 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Lock Settings")]
     public bool movementDashLocked;
     public bool movementMenuLocked;
-    public bool movementAttackLocked;
+    public bool movementMeleeAttackLocked;
 
     [Header("Buffering Settings")]
     //[SerializeField] bool dashHasBufferPriority = true;
-    bool attackBuffered;
+    bool meleeAttackBuffered;
+    bool rangedAttackBuffered;
     bool dashBuffered;
 
     [Header("Focus Settings")]
@@ -95,27 +110,27 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponentInChildren<PlayerAnimationScript>();
         playerParent = GetComponentInParent<Player>();
         lastMovementDirection = Vector3.forward;
-        lastAttackingTime = 0f;
+        lastMeleeAttackingTime = 0f;
         fabricCols = GetComponentsInChildren<Collider>().ToList();
 
-        ResetCombo();
+        ResetMeleeCombo();
     }
     private void FixedUpdate()
     {
 
-        if (isAttacking)
+        if (isMeleeAttacking)
         {
-            lastAttackingTime = 0f;
-            neededReset = true;
+            lastMeleeAttackingTime = 0f;
+            neededMeleeComboReset = true;
         }
         else
         {
-            lastAttackingTime += Time.deltaTime;
+            lastMeleeAttackingTime += Time.deltaTime;
         }
-        if (lastAttackingTime >= maxTimeBetweenAttackForCombo && neededReset == true)
+        if (lastMeleeAttackingTime >= maxTimeBetweenMeleeAttackForCombo && neededMeleeComboReset == true)
         {
-            ResetCombo();
-            neededReset = false;
+            ResetMeleeCombo();
+            neededMeleeComboReset = false;
         }
         
 
@@ -142,7 +157,7 @@ public class PlayerController : MonoBehaviour
         }
         
         movementDashLocked = isDashing;
-        movementAttackLocked = isAttacking;
+        movementMeleeAttackLocked = isMeleeAttacking;
         
 
         if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
@@ -170,13 +185,13 @@ public class PlayerController : MonoBehaviour
                 StartDash(dashEndLocation);
                 Debug.Log("buffered dash to " + (dashEndLocation - transform.position));
             }
-            else if (attackBuffered)
+            else if (meleeAttackBuffered)
             {
-                StartAttack();
+                StartMeleeAttack();
             }
             //allow only 1 buffered action for now - TODO - allow for multiple of same action?
             dashBuffered = false;
-            attackBuffered = false;
+            meleeAttackBuffered = false;
         }
         else 
         {
@@ -190,12 +205,12 @@ public class PlayerController : MonoBehaviour
         {
             DoDashMove();
         }
-        if (isAttacking)
+        if (isMeleeAttacking)
         {
-            DoAttackMove();
-            if(timeSinceAttackEnd >= basicCombo[currentComboStage].damageTime && doneAttackHit == false)
+            DoMeleeAttackMove();
+            if(timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].damageTime && doneMeleeAttackHit == false)
             {
-                DoAttackHit();
+                DoMeleeAttackHit();
             }
         }
         else
@@ -220,11 +235,11 @@ public class PlayerController : MonoBehaviour
     {
 
         Gizmos.color = Color.red;
-        if(showAttackGizmos)
+        if(showMeleeAttackGizmos)
         {
             Gizmos.matrix = transform.localToWorldMatrix;
-            //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * basicCombo[currentComboStage].hitboxOffset;
-            Gizmos.DrawWireCube(basicCombo[currentComboStage].hitboxOffset, basicCombo[currentComboStage].hitboxSize);
+            //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;
+            Gizmos.DrawWireCube(meleeCombo[currentMeleeComboStage].hitboxOffset, meleeCombo[currentMeleeComboStage].hitboxSize);
         }
 
 
@@ -327,101 +342,189 @@ public class PlayerController : MonoBehaviour
         transform.rotation = rotationalDirection;
     }
 
-    //Attack Code
+    //Melee Attack Code
 
-    public void OnAttackButtonPressed(InputAction.CallbackContext context)
+    public void OnMeleeAttackButtonPressed(InputAction.CallbackContext context)
     {
         bool triggered = context.action.triggered;
         if (triggered)
         {
             if(!isMovementLocked() && !isActionBuffered())
             {
-                StartAttack();
+                StartMeleeAttack();
             }
             else
             {
-                attackBuffered = true;
+                meleeAttackBuffered = true;
             }
         }
     }
 
-    void StartAttack()
+    void StartMeleeAttack()
     {
-        currentComboStage = nextComboStage;
-        Debug.Log(currentComboStage);
+        currentMeleeComboStage = nextMeleeComboStage;
+        Debug.Log(currentMeleeComboStage);
 
-        timeSinceAttackEnd = 0f;
-        isAttacking = true;
-        doneAttackHit = false;
-        playerAnim.StartAttackAnimation(currentComboStage);
+        timeSinceMeleeAttackEnd = 0f;
+        isMeleeAttacking = true;
+        doneMeleeAttackHit = false;
+        playerAnim.StartMeleeAttackAnimation(currentMeleeComboStage);
         Vector2 attackInputDirection;
-        currentAttackDirection = currentForwardDirection;
+        currentMeleeAttackDirection = currentForwardDirection;
 
-        IncrementCombo();
+        IncrementMeleeCombo();
 
     }
 
-    void IncrementCombo()
+    void IncrementMeleeCombo()
     {
-        nextComboStage = currentComboStage + 1;
+        nextMeleeComboStage = currentMeleeComboStage + 1;
 
-        if (nextComboStage >= basicCombo.Count)
+        if (nextMeleeComboStage >= meleeCombo.Count)
         {
-            ResetCombo();
+            ResetMeleeCombo();
         }
-        
-
     }
 
-    void ResetCombo()
+    void ResetMeleeCombo()
     {
-        nextComboStage = 0;
+        nextMeleeComboStage = 0;
     }
 
-    void DoAttackMove()
+    void DoMeleeAttackMove()
     {
-        if (timeSinceAttackEnd >= basicCombo[currentComboStage].attackTime)
+        if (timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].attackTime)
         {
-            isAttacking = false;
-            showAttackGizmos = false;
+            isMeleeAttacking = false;
+            showMeleeAttackGizmos = false;
 
             //time you were last  attacking
             
         }
-        else if (timeSinceAttackEnd >= basicCombo[currentComboStage].moveTime)
+        else if (timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].moveTime)
         {
             //finished attack movement
         }
         else
         {
             //move player
-            attackSpeed = basicCombo[currentComboStage].moveDistance / basicCombo[currentComboStage].moveTime;
-            DoMovement(currentAttackDirection, attackSpeed);
+            attackSpeed = meleeCombo[currentMeleeComboStage].moveDistance / meleeCombo[currentMeleeComboStage].moveTime;
+            DoMovement(currentMeleeAttackDirection, attackSpeed);
         }
-        timeSinceAttackEnd += Time.deltaTime;
+        timeSinceMeleeAttackEnd += Time.deltaTime;
     }
 
-    void DoAttackHit()
+    void DoMeleeAttackHit()
     {
-        showAttackGizmos = true;
-        doneAttackHit = true;
-        Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * basicCombo[currentComboStage].hitboxOffset;
-        Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (basicCombo[currentComboStage].hitboxSize / 2f), rotationalDirection, attackLayerMask);
+        showMeleeAttackGizmos = true;
+        doneMeleeAttackHit = true;
+        Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;
+        Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (meleeCombo[currentMeleeComboStage].hitboxSize / 2f), rotationalDirection, attackLayerMask);
         for(int i = 0; i < hitColliders.Length; i++)
         {
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
-                hitRb.AddForce(currentAttackDirection * basicCombo[currentComboStage].force);
+                hitRb.AddForce(currentMeleeAttackDirection * meleeCombo[currentMeleeComboStage].force);
             }
             EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.TakeDamage(basicCombo[currentComboStage].damage);
+                enemy.TakeDamage(meleeCombo[currentMeleeComboStage].damage);
             }
         }
     }
 
+    //Ranged Attack Code
+
+    public void OnRangedAttackButtonPressed(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+        if (triggered)
+        {
+            if(!isMovementLocked() && !isActionBuffered())
+            {
+                StartRangedAttack();
+            }
+            else
+            {
+                rangedAttackBuffered = true;
+            }
+        }
+    }
+
+    void StartRangedAttack()
+    {
+        currentRangedComboStage = nextRangedComboStage;
+        Debug.Log(currentRangedComboStage);
+
+        timeSinceRangedAttackEnd = 0f;
+        isRangedAttacking = true;
+        doneRangedProjectileSpawn = false;
+        playerAnim.StartRangedAttackAnimation(currentRangedComboStage);
+        Vector2 attackInputDirection;
+        currentRangedAttackDirection = currentForwardDirection;
+
+        IncrementMeleeCombo();
+
+    }
+
+    void IncrementRangedCombo()
+    {
+        nextRangedComboStage = currentRangedComboStage + 1;
+
+        if (nextRangedComboStage >= rangedCombo.Count)
+        {
+            ResetRangedCombo();
+        }
+    }
+
+    void ResetRangedCombo()
+    {
+        nextRangedComboStage = 0;
+    }
+
+    void DoRangedAttackMove()
+    {
+        if (timeSinceRangedAttackEnd >= rangedCombo[currentRangedComboStage].attackTime)
+        {
+            isRangedAttacking = false;
+
+            //time you were last  attacking
+            
+        }
+        else if (timeSinceRangedAttackEnd >= rangedCombo[currentRangedComboStage].moveTime)
+        {
+            //finished attack movement
+        }
+        else
+        {
+            //move player
+            attackSpeed = rangedCombo[currentRangedComboStage].moveDistance / rangedCombo[currentRangedComboStage].moveTime;
+            DoMovement(currentRangedAttackDirection, attackSpeed);
+        }
+        timeSinceRangedAttackEnd += Time.deltaTime;
+    }
+
+    void DoRangedAttackHit()
+    {
+        doneRangedProjectileSpawn = true;
+        //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * rangedCombo[currentRangedComboStage].hitboxOffset;
+        //Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (rangedCombo[currentRangedComboStage].hitboxSize / 2f), rotationalDirection, attackLayerMask);
+        /*for(int i = 0; i < hitColliders.Length; i++)
+        {
+            Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
+            if (hitRb != null)
+            {
+                hitRb.AddForce(currentRangedAttackDirection * rangedCombo[currentRangedComboStage].force);
+            }
+            EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(rangedCombo[currentRangedComboStage].damage);
+            }
+        }*/
+    }
 
     //Dash Code
 
@@ -670,12 +773,12 @@ public class PlayerController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return (movementDashLocked || playerManager.isPaused || movementAttackLocked);
+        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked);
     }
 
     bool isActionBuffered()
     {
-        return (attackBuffered || dashBuffered);
+        return (meleeAttackBuffered || dashBuffered);
     }
 
     //Focus Code
