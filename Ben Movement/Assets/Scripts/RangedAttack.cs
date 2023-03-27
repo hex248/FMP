@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class RangedAttack
 {
+    public GameObject projectile;
     //the overall time the attack takes
     public float attackTime;
 

@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
     public bool movementDashLocked;
     public bool movementMenuLocked;
     public bool movementMeleeAttackLocked;
+    public bool movementRangedAttackLocked;
 
     [Header("Buffering Settings")]
     //[SerializeField] bool dashHasBufferPriority = true;
@@ -132,7 +133,23 @@ public class PlayerController : MonoBehaviour
             ResetMeleeCombo();
             neededMeleeComboReset = false;
         }
-        
+
+
+        if (isRangedAttacking)
+        {
+            lastRangedAttackingTime = 0f;
+            neededRangedComboReset = true;
+        }
+        else
+        {
+            lastRangedAttackingTime += Time.deltaTime;
+        }
+        if (lastRangedAttackingTime >= maxTimeBetweenRangedAttackForCombo && neededRangedComboReset == true)
+        {
+            ResetRangedCombo();
+            neededRangedComboReset = false;
+        }
+
 
         if (isFocusing)
         {
@@ -158,6 +175,7 @@ public class PlayerController : MonoBehaviour
         
         movementDashLocked = isDashing;
         movementMeleeAttackLocked = isMeleeAttacking;
+        movementRangedAttackLocked = isRangedAttacking;
         
 
         if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
@@ -189,9 +207,14 @@ public class PlayerController : MonoBehaviour
             {
                 StartMeleeAttack();
             }
+            else if(rangedAttackBuffered)
+            {
+                StartRangedAttack();
+            }
             //allow only 1 buffered action for now - TODO - allow for multiple of same action?
             dashBuffered = false;
             meleeAttackBuffered = false;
+            rangedAttackBuffered = false;
         }
         else 
         {
@@ -211,6 +234,14 @@ public class PlayerController : MonoBehaviour
             if(timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].damageTime && doneMeleeAttackHit == false)
             {
                 DoMeleeAttackHit();
+            }
+        }
+        else if(isRangedAttacking)
+        {
+            DoRangedAttackMove();
+            if (timeSinceRangedAttackEnd >= rangedCombo[currentRangedComboStage].projectileSpawnTime && doneRangedProjectileSpawn == false)
+            {
+                DoRangedProjectileSpawn();
             }
         }
         else
@@ -506,24 +537,14 @@ public class PlayerController : MonoBehaviour
         timeSinceRangedAttackEnd += Time.deltaTime;
     }
 
-    void DoRangedAttackHit()
+    void DoRangedProjectileSpawn()
     {
         doneRangedProjectileSpawn = true;
-        //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * rangedCombo[currentRangedComboStage].hitboxOffset;
-        //Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (rangedCombo[currentRangedComboStage].hitboxSize / 2f), rotationalDirection, attackLayerMask);
-        /*for(int i = 0; i < hitColliders.Length; i++)
-        {
-            Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
-            if (hitRb != null)
-            {
-                hitRb.AddForce(currentRangedAttackDirection * rangedCombo[currentRangedComboStage].force);
-            }
-            EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(rangedCombo[currentRangedComboStage].damage);
-            }
-        }*/
+        Vector3 spawnOffset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * rangedCombo[currentRangedComboStage].projectileSpawnOffset;
+        GameObject newProjectile = Instantiate(rangedCombo[currentRangedComboStage].projectile);
+        newProjectile.transform.position = transform.position + spawnOffset;
+        newProjectile.transform.forward = currentRangedAttackDirection;
+
     }
 
     //Dash Code
@@ -773,12 +794,12 @@ public class PlayerController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked);
+        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked);
     }
 
     bool isActionBuffered()
     {
-        return (meleeAttackBuffered || dashBuffered);
+        return (meleeAttackBuffered || dashBuffered || rangedAttackBuffered);
     }
 
     //Focus Code
