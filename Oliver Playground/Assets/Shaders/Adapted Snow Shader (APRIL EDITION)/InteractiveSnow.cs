@@ -3,6 +3,8 @@ using UnityEngine.Rendering;
 
 public class InteractiveSnow : MonoBehaviour
 {
+    public Renderer heightMapVisualiser;
+
     public Shader _snowHeightMapUpdate;
     public Texture _stepPrint;
     public Material _snowMaterial;
@@ -10,14 +12,16 @@ public class InteractiveSnow : MonoBehaviour
 
     public float _drawDistance = 0.3f;
 
-    Material _heightMapUpdate;
-    CustomRenderTexture _snowHeightMap;
+    public Material _heightMapUpdate;
+    public CustomRenderTexture _snowHeightMap;
+    public CustomRenderTexture _prevHeightMap;
 
     int _index = 0;
 
     private readonly int DrawPosition = Shader.PropertyToID("_DrawPosition");
     private readonly int DrawAngle = Shader.PropertyToID("_DrawAngle");
     private readonly int DrawBrush = Shader.PropertyToID("_DrawBrush");
+    private readonly int PreviousTexture = Shader.PropertyToID("_PreviousTexture");
     private readonly int HeightMap = Shader.PropertyToID("_HeightMap");
 
     private void Start()
@@ -36,11 +40,14 @@ public class InteractiveSnow : MonoBehaviour
         var material = new Material(_snowMaterial);
 
         _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate, _stepPrint);
-        _snowHeightMap = CreateHeightMap(1024, 1024, _heightMapUpdate);
+        _snowHeightMap = CreateHeightMap(512, 512, _heightMapUpdate);
+        _prevHeightMap = _snowHeightMap;
 
         var terrain = gameObject.GetComponent<Terrain>();
         terrain.materialTemplate = material;
         terrain.materialTemplate.SetTexture(HeightMap, _snowHeightMap);
+        //heightMapVisualiser.material = _heightMapUpdate;
+        heightMapVisualiser.material.mainTexture = _snowHeightMap;
 
         _snowHeightMap.Initialize();
     }
@@ -86,6 +93,7 @@ public class InteractiveSnow : MonoBehaviour
     {
         var material = new Material(shader);
         material.SetTexture(DrawBrush, stepPrint);
+        material.SetTexture(PreviousTexture, _prevHeightMap);
         material.SetVector(DrawPosition, new Vector4(-1, -1, 0, 0));
         return material;
     }
