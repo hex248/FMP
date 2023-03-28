@@ -2,9 +2,10 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 {
 	Properties
 	{
-		_DrawPosition("Drawpos", Vector) = (-1,-1,0,0)
-		_DrawBrush("Brush", 2D) = "white" {}
-		_PreviousTexture("PreviousTexture", 2D) = "white" {}
+		_DrawPosition("Draw Position", Vector) = (-1,-1,0,0)
+		_DrawAngle("Draw Angle", float) = 0.05
+		_DrawBrush("Brush", 2D) = "white"
+		_PreviousTexture("PreviousTexture", 2D) = "white"
 		_Offset("Offset", float) = 0.05
 	}
 
@@ -42,13 +43,16 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 				};
 
 				TEXTURE2D(_DrawBrush);
-				SAMPLER(sampler_DrawBrush);
 				TEXTURE2D(_PreviousTexture);
+
+				SAMPLER(sampler_DrawBrush);
 				SAMPLER(sampler_PreviousTexture);
 
 				CBUFFER_START(UnityPerMaterial)
 					float4 _DrawPosition;
-					float _DrawAngle, _RestoreAmount, _Offset;
+					float _DrawAngle;
+					float _RestoreAmount;
+					float _Offset;
 				CBUFFER_END
 
 				Varyings vert(Attributes IN)
@@ -64,17 +68,22 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 
 				float4 frag(Varyings IN) : SV_Target
 				{
-					float4 previousColor = SAMPLE_TEXTURE2D(_PreviousTexture, sampler_PreviousTexture, IN.positionHCS.xy);
-					float2 pos = IN.positionHCS.xy - _DrawPosition;
+
+					float2 pos = IN.uv.xy - _DrawPosition;
 
 					float2x2 rot = float2x2(cos(_DrawAngle), -sin(_DrawAngle),
 											sin(_DrawAngle), cos(_DrawAngle));
 					pos = mul(rot, pos);
-					pos /= _Offset;
+					//pos /= _Offset;
 					pos += float2(0.5, 0.5);
 
 					float4 drawColor = SAMPLE_TEXTURE2D(_DrawBrush, sampler_DrawBrush, pos);
-					return drawColor;
+
+					//return drawColor;
+
+					float4 previousColor = SAMPLE_TEXTURE2D(_PreviousTexture, sampler_PreviousTexture, IN.uv.xy);
+					//return previousColor;
+					// return the darkest of the two values - ie only overwrite colour if it is darker than it was previously
 					return min(previousColor, drawColor);
 				}
 
