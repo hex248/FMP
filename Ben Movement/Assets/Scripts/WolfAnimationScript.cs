@@ -20,4 +20,14 @@ public class WolfAnimationScript : MonoBehaviour
         Vector3 movement = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         anim.SetFloat("movementSpeed", movement.magnitude * movementSpeedAnimation);
     }
+
+    public void StartAttack()
+    {
+        anim.SetBool("attack", true);
+    }
+
+    public void EndAttack()
+    {
+        anim.SetBool("attack", false);
+    }
 }
