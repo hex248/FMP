@@ -68,13 +68,13 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 
 				float4 frag(Varyings IN) : SV_Target
 				{
-
+					//return IN.color;
 					float2 pos = IN.uv.xy - _DrawPosition;
 
 					float2x2 rot = float2x2(cos(_DrawAngle), -sin(_DrawAngle),
 											sin(_DrawAngle), cos(_DrawAngle));
 					pos = mul(rot, pos);
-					//pos /= _Offset;
+					pos /= _Offset;
 					pos += float2(0.5, 0.5);
 
 					float4 drawColor = SAMPLE_TEXTURE2D(_DrawBrush, sampler_DrawBrush, pos);

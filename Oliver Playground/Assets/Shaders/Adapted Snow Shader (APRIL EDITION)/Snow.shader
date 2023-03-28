@@ -24,7 +24,7 @@ Shader "InteractiveSnow/Snow"
 			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			#pragma tessellate tess
+			#pragma require tessellation
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
@@ -75,14 +75,13 @@ Shader "InteractiveSnow/Snow"
 
 			half4 frag(Varyings IN) : SV_Target
 			{
-				//return IN.color;
 				half height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, IN.uv).r;
 				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, height) * _NormalMapAmount;
 
-				return heightColor;
+				//return heightColor;
 
 				half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
-				return color;
+				return color * heightColor;
 			}
 
 			float tess()
