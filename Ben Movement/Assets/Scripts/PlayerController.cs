@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 focusReticule.SetActive(true);
-                focusReticule.transform.position = focusObject.transform.position;
+                focusReticule.transform.position = focusObject.transform.position + new Vector3(0f, 1f, 0f);
             }
         }
         else
