@@ -9,8 +9,11 @@ public class Projectile : MonoBehaviour
     public float homingAmount;
     public GameObject currentTarget;
     [Header("Attack Settings")]
-    public RangedAttack attackInfo;
-    
+    public float damage;
+    public float force;
+    public float scaleMultiplier;
+
+    TrailRenderer trail;
 
     Collider col;
     Rigidbody rb;
@@ -19,11 +22,15 @@ public class Projectile : MonoBehaviour
     {
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        trail = GetComponent<TrailRenderer>();
+        transform.localScale = transform.localScale * scaleMultiplier;
+        trail.startWidth = trail.startWidth * scaleMultiplier;
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        Debug.Log("Collided with " + collision.gameObject);
         if(collision.gameObject == null)
         {
             return;
@@ -31,14 +38,14 @@ public class Projectile : MonoBehaviour
         EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
-            enemy.TakeDamage(attackInfo.damage);
-            Debug.Log("deal " + attackInfo.damage + " damage");
+            enemy.TakeDamage(damage);
+            Debug.Log("deal " + damage + " damage");
         }
 
         Rigidbody hitRb = collision.gameObject.GetComponent<Rigidbody>();
         if (hitRb != null)
         {
-            hitRb.AddForce(transform.forward * attackInfo.force);
+            hitRb.AddForce(transform.forward * force);
         }
 
         Destroy(gameObject);
