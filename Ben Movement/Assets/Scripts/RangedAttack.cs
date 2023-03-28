@@ -5,8 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class RangedAttack
 {
-
     public GameObject projectile;
+    [Header("Charging Settings")]
+    public float fullChargeTime;
+    public float fullChargeScaleFactor;
+    public float fullChargeDamageMultiplier;
+    public float fullChargeForceMultiplier;
+    public float fullChargeSpeedMultiplier;
+
+
+    [Header("Attack Settings")]
+    
     //the overall time the attack takes
     public float attackTime;
 
@@ -21,6 +30,6 @@ public class RangedAttack
 
     public Transform projectileSpawnPosition;
 
-    public float force;
-    public float damage;
+    public float baseForce;
+    public float baseDamage;
 }

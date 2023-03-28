@@ -61,6 +61,10 @@ public class PlayerController : MonoBehaviour
     private bool doneRangedProjectileSpawn = false;
     Vector3 currentRangedAttackDirection;
     float lastRangedAttackingTime;
+    bool isRangedAttackCharging;
+    float rangedAttackChargingTime;
+    float currentRangedAttackChargeFactor;
+
     //bool neededRangedComboReset;
     //int currentRangedComboStage = 0;
     //int nextRangedComboStage;
@@ -144,6 +148,15 @@ public class PlayerController : MonoBehaviour
             lastRangedAttackingTime += Time.deltaTime;
         }
 
+        if(isRangedAttackCharging)
+        {
+            rangedAttackChargingTime += Time.deltaTime;
+        }
+        else
+        {
+            rangedAttackChargingTime = 0f;
+        }
+
 
         if (isFocusing)
         {
@@ -169,7 +182,7 @@ public class PlayerController : MonoBehaviour
         
         movementDashLocked = isDashing;
         movementMeleeAttackLocked = isMeleeAttacking;
-        movementRangedAttackLocked = isRangedAttacking;
+        movementRangedAttackLocked = isRangedAttacking || isRangedAttackCharging;
         
 
         if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
@@ -464,23 +477,40 @@ public class PlayerController : MonoBehaviour
 
     public void OnRangedAttackButtonPressed(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
+        Debug.Log(context.phase);
         bool triggered = context.action.triggered;
         if (triggered)
         {
-            if(!isMovementLocked() && !isActionBuffered())
+            if (!isMovementLocked() && !isActionBuffered())
             {
-                StartRangedAttack();
+                //start charging
+                rangedAttackChargingTime = 0f;
+                isRangedAttackCharging = true;
+                Debug.Log("Held");
             }
             else
             {
-                rangedAttackBuffered = true;
+                //ranged attack probably doesn't need bufferinging but mabye re-add later
+
+                //rangedAttackBuffered = true;
+            }
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            if (isRangedAttackCharging)
+            {
+                //trigger attack on button release
+                isRangedAttackCharging = false;
+                Debug.Log("Resleased after " + rangedAttackChargingTime);
+                StartRangedAttack();
             }
         }
     }
 
     void StartRangedAttack()
     {
+        currentRangedAttackChargeFactor = Mathf.Clamp(rangedAttackChargingTime / rangedAttack.fullChargeTime, 0f, 1f);
+
         timeSinceRangedAttackEnd = 0f;
         isRangedAttacking = true;
         doneRangedProjectileSpawn = false;
@@ -519,11 +549,32 @@ public class PlayerController : MonoBehaviour
         GameObject newProjectile = Instantiate(rangedAttack.projectile);
         newProjectile.transform.position = rangedAttack.projectileSpawnPosition.position;
         newProjectile.transform.forward = currentRangedAttackDirection;
+
         Projectile projectileScript = newProjectile.GetComponent<Projectile>();
         if(projectileScript != null)
         {
-            projectileScript.attackInfo = rangedAttack;
+            if(currentRangedAttackChargeFactor != 1f)
+            {
+                projectileScript.damage = rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
+                projectileScript.force = rangedAttack.baseForce * Mathf.Lerp(1f, rangedAttack.fullChargeForceMultiplier, currentRangedAttackChargeFactor);
+                projectileScript.scaleMultiplier = Mathf.Lerp(1f, rangedAttack.fullChargeScaleFactor, currentRangedAttackChargeFactor);
+                projectileScript.projectileSpeed *= Mathf.Lerp(1f, rangedAttack.fullChargeSpeedMultiplier, currentRangedAttackChargeFactor);
+                Debug.Log(projectileScript.damage);
+            }
+            else
+            {
+                //mabye add bonus?
+                Debug.Log("Full Charge!");
+                projectileScript.damage = rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
+                projectileScript.force = rangedAttack.baseForce * Mathf.Lerp(1f, rangedAttack.fullChargeForceMultiplier, currentRangedAttackChargeFactor);
+                projectileScript.scaleMultiplier = Mathf.Lerp(1f, rangedAttack.fullChargeScaleFactor, currentRangedAttackChargeFactor);
+                projectileScript.projectileSpeed *= Mathf.Lerp(1f, rangedAttack.fullChargeSpeedMultiplier, currentRangedAttackChargeFactor);
+                Debug.Log(projectileScript.damage);
+            }
+
         }
+        
+        
     }
 
     //Dash Code

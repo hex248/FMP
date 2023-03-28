@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2503496147744339668}
   - component: {fileID: 2503496147744339671}
   - component: {fileID: 2503496147744339665}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,15 +220,8 @@ MonoBehaviour:
   projectileSpeed: 20
   homingAmount: 0
   currentTarget: {fileID: 0}
-  attackInfo:
-    projectile: {fileID: 0}
-    attackTime: 0
-    moveDistance: 0
-    moveTime: 0
-    projectileSpawnTime: 0
-    projectileSpawnPosition: {fileID: 0}
-    force: 0
-    damage: 0
+  damage: 0
+  force: 0
 --- !u!54 &2503496147744339665
 Rigidbody:
   m_ObjectHideFlags: 0
