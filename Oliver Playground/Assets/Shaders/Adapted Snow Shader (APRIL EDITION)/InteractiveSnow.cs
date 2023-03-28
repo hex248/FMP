@@ -40,14 +40,13 @@ public class InteractiveSnow : MonoBehaviour
         var material = new Material(_snowMaterial);
 
         _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate, _stepPrint);
-        _snowHeightMap = CreateHeightMap(512, 512, _heightMapUpdate);
+        _snowHeightMap = CreateHeightMap(1024, 1024, _heightMapUpdate);
         _prevHeightMap = _snowHeightMap;
 
         var terrain = gameObject.GetComponent<Terrain>();
         terrain.materialTemplate = material;
         terrain.materialTemplate.SetTexture(HeightMap, _snowHeightMap);
-        //heightMapVisualiser.material = _heightMapUpdate;
-        heightMapVisualiser.material.mainTexture = _snowHeightMap;
+        heightMapVisualiser.material = _heightMapUpdate;
 
         _snowHeightMap.Initialize();
     }
@@ -66,6 +65,7 @@ public class InteractiveSnow : MonoBehaviour
                 float angle = trail.transform.rotation.eulerAngles.y; // texture rotation angle
 
                 _heightMapUpdate.SetVector(DrawPosition, hitTextureCoord);
+                _heightMapUpdate.SetTexture(PreviousTexture, _prevHeightMap);
                 _heightMapUpdate.SetFloat(DrawAngle, angle * Mathf.Deg2Rad);
             }
         }
@@ -76,15 +76,16 @@ public class InteractiveSnow : MonoBehaviour
             _index = 0;
     }
 
-    private CustomRenderTexture CreateHeightMap(int weight, int height, Material material)
+    private CustomRenderTexture CreateHeightMap(int width, int height, Material material)
     {
-        var texture = new CustomRenderTexture(weight, height);
+        CustomRenderTexture texture = new CustomRenderTexture(width, height);
 
-        texture.dimension = TextureDimension.Tex2D;
-        texture.format = RenderTextureFormat.R8;
         texture.material = material;
         texture.updateMode = CustomRenderTextureUpdateMode.Realtime;
         texture.doubleBuffered = true;
+        texture.initializationMode = CustomRenderTextureUpdateMode.Realtime;
+        texture.initializationSource = CustomRenderTextureInitializationSource.Material;
+        texture.initializationMaterial = material;
 
         return texture;
     }
@@ -93,7 +94,6 @@ public class InteractiveSnow : MonoBehaviour
     {
         var material = new Material(shader);
         material.SetTexture(DrawBrush, stepPrint);
-        material.SetTexture(PreviousTexture, _prevHeightMap);
         material.SetVector(DrawPosition, new Vector4(-1, -1, 0, 0));
         return material;
     }
