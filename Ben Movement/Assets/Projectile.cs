@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [Header("Projectile Settings")]
+    [Header("Projectile Movement Settings")]
     public float projectileSpeed;
     public float homingAmount;
     public GameObject currentTarget;
+    [Header("Attack Settings")]
+    public RangedAttack attackInfo;
+    
 
     Collider col;
     Rigidbody rb;

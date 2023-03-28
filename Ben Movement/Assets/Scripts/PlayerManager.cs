@@ -29,6 +29,12 @@ public class PlayerManager : MonoBehaviour
 
     [Header("UI")]
     bool isMenuOpen;
+
+    [Header("Camera Sizes")]
+    [SerializeField] float largeCameraSize;
+    [SerializeField] float tallCameraSize;
+    [SerializeField] float smallCameraSize;
+
     public bool IsMenuOpen
     {
         get
@@ -148,21 +154,31 @@ public class PlayerManager : MonoBehaviour
         {
             case 1:
                 players[0].GetComponentInChildren<Camera>().targetTexture = normalRenderTexture;
+                players[0].GetComponentInChildren<Camera>().orthographicSize = largeCameraSize;
                 break;
             case 2:
                 players[0].GetComponentInChildren<Camera>().targetTexture = tallRenderTextures[0];
+                players[0].GetComponentInChildren<Camera>().orthographicSize = tallCameraSize;
                 players[1].GetComponentInChildren<Camera>().targetTexture = tallRenderTextures[1];
+                players[1].GetComponentInChildren<Camera>().orthographicSize = tallCameraSize;
                 break;
             case 3:
                 players[0].GetComponentInChildren<Camera>().targetTexture = smallRenderTextures[0];
+                players[0].GetComponentInChildren<Camera>().orthographicSize = smallCameraSize;
                 players[1].GetComponentInChildren<Camera>().targetTexture = tallRenderTextures[1];
+                players[1].GetComponentInChildren<Camera>().orthographicSize = tallCameraSize;
                 players[2].GetComponentInChildren<Camera>().targetTexture = smallRenderTextures[2];
+                players[2].GetComponentInChildren<Camera>().orthographicSize = smallCameraSize;
                 break;
             case 4:
                 players[0].GetComponentInChildren<Camera>().targetTexture = smallRenderTextures[0];
+                players[0].GetComponentInChildren<Camera>().orthographicSize = smallCameraSize;
                 players[1].GetComponentInChildren<Camera>().targetTexture = smallRenderTextures[1];
+                players[1].GetComponentInChildren<Camera>().orthographicSize = smallCameraSize;
                 players[2].GetComponentInChildren<Camera>().targetTexture = smallRenderTextures[2];
+                players[2].GetComponentInChildren<Camera>().orthographicSize = smallCameraSize;
                 players[3].GetComponentInChildren<Camera>().targetTexture = smallRenderTextures[3];
+                players[3].GetComponentInChildren<Camera>().orthographicSize = smallCameraSize;
                 break;
         }
     }

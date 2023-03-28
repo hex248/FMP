@@ -56,18 +56,18 @@ public class PlayerController : MonoBehaviour
     float attackSpeed;
 
     [Header("Ranged Attack Settings")]
-    [SerializeField] List<RangedAttack> rangedCombo = new List<RangedAttack>();
+    //[SerializeField] List<RangedAttack> rangedCombo = new List<RangedAttack>();
+    [SerializeField] RangedAttack rangedAttack;
     private bool doneRangedProjectileSpawn = false;
     Vector3 currentRangedAttackDirection;
     float lastRangedAttackingTime;
-    bool neededRangedComboReset;
-    int currentRangedComboStage = 0;
-    int nextRangedComboStage;
+    //bool neededRangedComboReset;
+    //int currentRangedComboStage = 0;
+    //int nextRangedComboStage;
 
     bool isRangedAttacking;
-    [SerializeField] float maxTimeBetweenRangedAttackForCombo;
+    //[SerializeField] float maxTimeBetweenRangedAttackForCombo;
     float timeSinceRangedAttackEnd;
-    float rangedSpeed;
 
 
 
@@ -138,16 +138,10 @@ public class PlayerController : MonoBehaviour
         if (isRangedAttacking)
         {
             lastRangedAttackingTime = 0f;
-            neededRangedComboReset = true;
         }
         else
         {
             lastRangedAttackingTime += Time.deltaTime;
-        }
-        if (lastRangedAttackingTime >= maxTimeBetweenRangedAttackForCombo && neededRangedComboReset == true)
-        {
-            ResetRangedCombo();
-            neededRangedComboReset = false;
         }
 
 
@@ -239,7 +233,7 @@ public class PlayerController : MonoBehaviour
         else if(isRangedAttacking)
         {
             DoRangedAttackMove();
-            if (timeSinceRangedAttackEnd >= rangedCombo[currentRangedComboStage].projectileSpawnTime && doneRangedProjectileSpawn == false)
+            if (timeSinceRangedAttackEnd >= rangedAttack.projectileSpawnTime && doneRangedProjectileSpawn == false)
             {
                 DoRangedProjectileSpawn();
             }
@@ -486,52 +480,32 @@ public class PlayerController : MonoBehaviour
 
     void StartRangedAttack()
     {
-        currentRangedComboStage = nextRangedComboStage;
-        Debug.Log(currentRangedComboStage);
-
         timeSinceRangedAttackEnd = 0f;
         isRangedAttacking = true;
         doneRangedProjectileSpawn = false;
-        playerAnim.StartRangedAttackAnimation(currentRangedComboStage);
+        playerAnim.StartRangedAttackAnimation();
         Vector2 attackInputDirection;
         currentRangedAttackDirection = currentForwardDirection;
 
-        IncrementMeleeCombo();
-
-    }
-
-    void IncrementRangedCombo()
-    {
-        nextRangedComboStage = currentRangedComboStage + 1;
-
-        if (nextRangedComboStage >= rangedCombo.Count)
-        {
-            ResetRangedCombo();
-        }
-    }
-
-    void ResetRangedCombo()
-    {
-        nextRangedComboStage = 0;
     }
 
     void DoRangedAttackMove()
     {
-        if (timeSinceRangedAttackEnd >= rangedCombo[currentRangedComboStage].attackTime)
+        if (timeSinceRangedAttackEnd >= rangedAttack.attackTime)
         {
             isRangedAttacking = false;
 
             //time you were last  attacking
             
         }
-        else if (timeSinceRangedAttackEnd >= rangedCombo[currentRangedComboStage].moveTime)
+        else if (timeSinceRangedAttackEnd >= rangedAttack.moveTime)
         {
             //finished attack movement
         }
         else
         {
             //move player
-            attackSpeed = rangedCombo[currentRangedComboStage].moveDistance / rangedCombo[currentRangedComboStage].moveTime;
+            attackSpeed = rangedAttack.moveDistance / rangedAttack.moveTime;
             DoMovement(currentRangedAttackDirection, attackSpeed);
         }
         timeSinceRangedAttackEnd += Time.deltaTime;
@@ -540,9 +514,9 @@ public class PlayerController : MonoBehaviour
     void DoRangedProjectileSpawn()
     {
         doneRangedProjectileSpawn = true;
-        Vector3 spawnOffset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * rangedCombo[currentRangedComboStage].projectileSpawnOffset;
-        GameObject newProjectile = Instantiate(rangedCombo[currentRangedComboStage].projectile);
-        newProjectile.transform.position = transform.position + spawnOffset;
+        //Vector3 spawnOffset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * rangedCombo[currentRangedComboStage].projectileSpawnOffset;
+        GameObject newProjectile = Instantiate(rangedAttack.projectile);
+        newProjectile.transform.position = rangedAttack.projectileSpawnPosition.position;
         newProjectile.transform.forward = currentRangedAttackDirection;
 
     }

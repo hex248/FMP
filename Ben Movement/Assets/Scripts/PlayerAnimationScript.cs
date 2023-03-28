@@ -37,9 +37,8 @@ public class PlayerAnimationScript : MonoBehaviour
         anim.SetTrigger("Start Melee Attack");
     }
 
-    public void StartRangedAttackAnimation(int comboStage)
+    public void StartRangedAttackAnimation()
     {
-        anim.SetInteger("Ranged Combo Stage", comboStage);
         anim.SetTrigger("Start Ranged Attack");
     }
 

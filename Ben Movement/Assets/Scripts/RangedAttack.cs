@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class RangedAttack
 {
+
     public GameObject projectile;
     //the overall time the attack takes
     public float attackTime;
@@ -18,7 +19,7 @@ public class RangedAttack
     //the time at which you check what you have hit
     public float projectileSpawnTime;
 
-    public Vector3 projectileSpawnOffset;
+    public Transform projectileSpawnPosition;
 
     public float force;
     public float damage;
