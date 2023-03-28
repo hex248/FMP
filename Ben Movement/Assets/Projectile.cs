@@ -23,6 +23,24 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
+        if(collision.gameObject == null)
+        {
+            return;
+        }
+        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(attackInfo.damage);
+            Debug.Log("deal " + attackInfo.damage + " damage");
+        }
+
+        Rigidbody hitRb = collision.gameObject.GetComponent<Rigidbody>();
+        if (hitRb != null)
+        {
+            hitRb.AddForce(transform.forward * attackInfo.force);
+        }
+
         Destroy(gameObject);
     }
 

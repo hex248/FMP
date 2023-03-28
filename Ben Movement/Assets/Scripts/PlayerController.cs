@@ -464,6 +464,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnRangedAttackButtonPressed(InputAction.CallbackContext context)
     {
+        Debug.Log(context);
         bool triggered = context.action.triggered;
         if (triggered)
         {
@@ -518,7 +519,11 @@ public class PlayerController : MonoBehaviour
         GameObject newProjectile = Instantiate(rangedAttack.projectile);
         newProjectile.transform.position = rangedAttack.projectileSpawnPosition.position;
         newProjectile.transform.forward = currentRangedAttackDirection;
-
+        Projectile projectileScript = newProjectile.GetComponent<Projectile>();
+        if(projectileScript != null)
+        {
+            projectileScript.attackInfo = rangedAttack;
+        }
     }
 
     //Dash Code
