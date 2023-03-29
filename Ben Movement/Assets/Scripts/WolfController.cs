@@ -19,8 +19,6 @@ public class WolfController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         bed = FindObjectOfType<Bed>();
         currentTarget = bed.gameObject;
-
-
     }
 
     // Update is called once per frame
