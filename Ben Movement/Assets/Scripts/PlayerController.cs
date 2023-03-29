@@ -868,6 +868,7 @@ public class PlayerController : MonoBehaviour
 
     GameObject SelectFocusTarget()
     {
+        Debug.Log("Search for focus target");
         EnemyHealth[] possibleEnemies = FindObjectsOfType<EnemyHealth>();
         List<EnemyHealth> enemiesInRange = new List<EnemyHealth>();
         List<EnemyHealth> enemiesInViewCone = new List<EnemyHealth>();
@@ -945,9 +946,8 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
-                if (enemiesInDirectView == null || enemiesInDirectView.Count == 0)
+                if (enemiesInDirectView != null && enemiesInDirectView.Count != 0)
                 {
-
                     float currentMinDistance = Mathf.Infinity;
                     int currentMinIndex = 0;
                     int i = 0;
@@ -964,7 +964,6 @@ public class PlayerController : MonoBehaviour
 
                         i++;
                     }
-
                     return enemiesInDirectView[currentMinIndex].gameObject;
                 }
                 else
@@ -986,7 +985,7 @@ public class PlayerController : MonoBehaviour
 
                         i++;
                     }
-
+                    Debug.Log("No enemies in direct view. Closest in view cone is " + currentMinIndex);
                     return enemiesInViewCone[currentMinIndex].gameObject;
                 }
 
