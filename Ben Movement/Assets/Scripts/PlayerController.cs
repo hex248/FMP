@@ -172,7 +172,8 @@ public class PlayerController : MonoBehaviour
             else
             {
                 focusReticule.SetActive(true);
-                focusReticule.transform.position = focusObject.transform.position + new Vector3(0f, 1f, 0f);
+                Vector3 worldPos = focusObject.transform.position + new Vector3(0f, 1.5f, 0f);
+                focusReticule.transform.position = playerParent.playerCamera.WorldToScreenPoint(worldPos);
             }
         }
         else
