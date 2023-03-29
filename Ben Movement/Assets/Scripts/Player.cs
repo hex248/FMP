@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public PlayerController playerMovement;
     ColorblindFilters filterController;
     public CameraFollow cameraFollow;
+    public Camera playerCamera;
 
     [Header("Player Details")]
     public int playerNumber;
@@ -28,7 +29,8 @@ public class Player : MonoBehaviour
         playerManager.PlayerSpawned(this);
         screenManager = FindObjectOfType<ScreenManager>();
 
-        cameraFollow = GetComponentInChildren<CameraFollow>(); ;
+        cameraFollow = GetComponentInChildren<CameraFollow>();
+        playerCamera = cameraFollow.GetComponentInChildren<Camera>();
     }
 
     // Update is called once per frame
