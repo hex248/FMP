@@ -249,10 +249,23 @@ MonoBehaviour:
   moveSpeed: 2
   moveRotationSpeed: 5
   aimRotationSpeed: 20
-  attackDistance: 5
+  attackTime: 0.5
+  attackMoveDistance: -100
+  attackMoveTime: 0.5
+  damageTime: 0.5
+  hitboxOffset: {x: 0, y: 1.2, z: 0.8}
+  hitboxSize: {x: 0.7, y: 0.7, z: 1}
+  attackLayerMask:
+    serializedVersion: 2
+    m_Bits: 65
+  attackForce: 5
+  attackDamage: 5
   wolfVisuals: {fileID: 7704235921465295036}
   maxAttackRange: 5
   targetPlayer: 0
+  raycastLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!65 &1577664589033795166
 BoxCollider:
   m_ObjectHideFlags: 0

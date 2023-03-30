@@ -1037,6 +1037,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: attackTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: attackForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: attackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: attackMoveTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: maxAttackRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: aimRotationSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: inRangeMoveSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: moveRotationSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: attackMoveDistance
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: raycastLayer.m_Bits
+      value: 30719
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
 --- !u!850595691 &609286127
