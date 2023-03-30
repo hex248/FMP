@@ -3,8 +3,6 @@ using UnityEngine.Rendering;
 
 public class InteractiveSnow : MonoBehaviour
 {
-    public Renderer heightMapVisualiser;
-
     public Shader _snowHeightMapUpdate;
     public Texture _stepPrint;
     public Material _snowMaterial;
@@ -13,9 +11,9 @@ public class InteractiveSnow : MonoBehaviour
     public float _drawDistance = 0.3f;
     public float _offset = 0.2f;
 
-    public Material _heightMapUpdate;
-    public CustomRenderTexture _snowHeightMap;
-    public CustomRenderTexture _prevHeightMap;
+    Material _heightMapUpdate;
+    CustomRenderTexture _snowHeightMap;
+    CustomRenderTexture _prevHeightMap;
 
     Terrain terrain;
 
@@ -50,17 +48,18 @@ public class InteractiveSnow : MonoBehaviour
         terrain = gameObject.GetComponent<Terrain>();
         terrain.materialTemplate = material;
         terrain.materialTemplate.SetTexture(HeightMap, _snowHeightMap);
-        heightMapVisualiser.material = _heightMapUpdate;
 
         _snowHeightMap.Initialize();
     }
 
     void UpdateSnowMaterial()
     {
+        // set the properties of the copied material based on snow asset
         terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
+        terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
         terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
-        terrain.materialTemplate.SetVector("_DrawPosition", _trailsPositions[0].position);
 
+        // convert array of transforms to array of positions (V4)
         Vector4[] posArray = new Vector4[_trailsPositions.Length];
         for (int i = 0; i < _trailsPositions.Length; i++)
         {

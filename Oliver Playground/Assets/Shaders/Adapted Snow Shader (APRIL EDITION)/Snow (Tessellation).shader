@@ -43,7 +43,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			float2 _DrawPositions[100];
+			Vector _DrawPositions[100];
 
 			struct ControlPoint
 			{
@@ -118,8 +118,16 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				//float dist = distance(worldPosition, GetCameraPositionWS());
 
 				// distance from drawPosition
-				float dist = distance(worldPosition, _DrawPosition);
+				float dist = 1000.0;
+				// loop through from the second position
+				for (float i = 0; i < _DrawPositions.Length; i++)
+				{
+					float newDist = distance(worldPosition, _DrawPositions[i]);
 
+					// if this is closer, set this as the distance from closest player
+					dist = min(dist, newDist);
+				}
+				//dist = distance(worldPosition, _DrawPosition);
 
 				float f = clamp(1.0 - (dist - minDist) / (maxDist - minDist), 0.01, 1.0) * tess;
 				return (f);
@@ -180,28 +188,10 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 					return vert(v);
 			}
 
-			/*
-			Varyings vert(Attributes IN)
-			{
-				Varyings OUT;
-
-				half4 newPos = IN.vertex;
-				half pos = SAMPLE_TEXTURE2D_LOD(_HeightMap, sampler_HeightMap, IN.uv, 1).r * _Height;
-				newPos.y += pos;
-				OUT.vertex = TransformObjectToHClip(newPos);
-
-				OUT.color = half4(0, newPos.y, 0, 1);
-				OUT.normal = IN.normal;
-				OUT.uv = TRANSFORM_TEX(IN.uv, _HeightMap);
-
-				return OUT;
-			}
-			*/
-
 			half4 frag(Varyings IN) : SV_Target
 			{
 				half height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, IN.uv).r;
-				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, height) * _NormalMapAmount;
+				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, round(height * 5.0f) * 0.2f) * _NormalMapAmount;
 
 				//return heightColor;
 
