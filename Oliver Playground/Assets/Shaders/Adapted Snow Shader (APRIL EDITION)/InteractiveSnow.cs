@@ -17,6 +17,8 @@ public class InteractiveSnow : MonoBehaviour
     public CustomRenderTexture _snowHeightMap;
     public CustomRenderTexture _prevHeightMap;
 
+    Terrain terrain;
+
     int _index = 0;
 
     private readonly int DrawPosition = Shader.PropertyToID("_DrawPosition");
@@ -34,6 +36,7 @@ public class InteractiveSnow : MonoBehaviour
     private void Update()
     {
         DrawTrails();
+        UpdateSnowMaterial();
         _snowHeightMap.Update();
     }
 
@@ -44,12 +47,18 @@ public class InteractiveSnow : MonoBehaviour
         _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate, _stepPrint);
         _snowHeightMap = CreateHeightMap(512, 512, _heightMapUpdate);
 
-        var terrain = gameObject.GetComponent<Terrain>();
+        terrain = gameObject.GetComponent<Terrain>();
         terrain.materialTemplate = material;
         terrain.materialTemplate.SetTexture(HeightMap, _snowHeightMap);
         heightMapVisualiser.material = _heightMapUpdate;
 
         _snowHeightMap.Initialize();
+    }
+
+    void UpdateSnowMaterial()
+    {
+        terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
+        terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
     }
 
     private void DrawTrails()
