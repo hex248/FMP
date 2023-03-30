@@ -59,6 +59,14 @@ public class InteractiveSnow : MonoBehaviour
     {
         terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
         terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
+        terrain.materialTemplate.SetVector("_DrawPosition", _trailsPositions[0].position);
+
+        Vector4[] posArray = new Vector4[_trailsPositions.Length];
+        for (int i = 0; i < _trailsPositions.Length; i++)
+        {
+            posArray[i] = _trailsPositions[i].position;
+        }
+        terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
     }
 
     private void DrawTrails()
