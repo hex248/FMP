@@ -13,7 +13,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		
 		_Tess("Tessellation", Range(1, 32)) = 20
 		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
-		_MaxTessDistance("Max Tess Distance", Range(1, 32)) = 20
+		_MaxTessDistance("Max Tess Distance", Range(0, 32)) = 20
 		_DrawPosition("Draw Position", Vector) = (0,0,0,0)
 	}
 
@@ -119,7 +119,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 				// distance from drawPosition
 				float dist = 1000.0;
-				// loop through from the second position
+				// loop all draw positions
 				for (float i = 0; i < _DrawPositions.Length; i++)
 				{
 					float newDist = distance(worldPosition, _DrawPositions[i]);
@@ -163,7 +163,8 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				newPos.y += pos;
 				OUT.vertex = TransformObjectToHClip(newPos);
 
-				OUT.color = half4(0, newPos.y, 0, 1);
+				
+				OUT.color = half4(0, round(newPos.y-0.5), 0, 1);
 				OUT.normal = IN.normal;
 				OUT.uv = TRANSFORM_TEX(IN.uv, _HeightMap);
 

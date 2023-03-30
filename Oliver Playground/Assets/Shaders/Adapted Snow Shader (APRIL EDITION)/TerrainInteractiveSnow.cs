@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class InteractiveSnow : MonoBehaviour
+public class TerrainInteractiveSnow : MonoBehaviour
 {
     public Shader _snowHeightMapUpdate;
     public Texture _stepPrint;
@@ -12,9 +12,10 @@ public class InteractiveSnow : MonoBehaviour
     public float _offset = 0.2f;
 
     Material _heightMapUpdate;
-    public CustomRenderTexture _snowHeightMap;
-    public CustomRenderTexture _prevHeightMap;
-    MeshRenderer meshRenderer;
+    CustomRenderTexture _snowHeightMap;
+    CustomRenderTexture _prevHeightMap;
+
+    Terrain terrain;
 
     int _index = 0;
 
@@ -44,9 +45,9 @@ public class InteractiveSnow : MonoBehaviour
         _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate, _stepPrint);
         _snowHeightMap = CreateHeightMap(512, 512, _heightMapUpdate);
 
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
-        meshRenderer.material = material;
-        meshRenderer.material.SetTexture(HeightMap, _snowHeightMap);
+        terrain = gameObject.GetComponent<Terrain>();
+        terrain.materialTemplate = material;
+        terrain.materialTemplate.SetTexture(HeightMap, _snowHeightMap);
 
         _snowHeightMap.Initialize();
     }
@@ -54,9 +55,9 @@ public class InteractiveSnow : MonoBehaviour
     void UpdateSnowMaterial()
     {
         // set the properties of the copied material based on snow asset
-        meshRenderer.material.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
-        meshRenderer.material.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
-        meshRenderer.material.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
+        terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
+        terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
+        terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
 
         // convert array of transforms to array of positions (V4)
         Vector4[] posArray = new Vector4[_trailsPositions.Length];
@@ -64,7 +65,7 @@ public class InteractiveSnow : MonoBehaviour
         {
             posArray[i] = _trailsPositions[i].position;
         }
-        meshRenderer.material.SetVectorArray("_DrawPositions", posArray);
+        terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
     }
 
     private void DrawTrails()
@@ -107,7 +108,7 @@ public class InteractiveSnow : MonoBehaviour
 
         return texture;
     }
-    
+
     private Material CreateHeightMapUpdate(Shader shader, Texture stepPrint)
     {
         var material = new Material(shader);
