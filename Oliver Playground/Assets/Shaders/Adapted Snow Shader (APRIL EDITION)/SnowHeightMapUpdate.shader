@@ -48,6 +48,8 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 				SAMPLER(sampler_DrawBrush);
 				SAMPLER(sampler_PreviousTexture);
 
+				float _DeltaTime = 0.0;
+
 				CBUFFER_START(UnityPerMaterial)
 					float4 _DrawPosition;
 					float _DrawAngle;
@@ -68,7 +70,6 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 
 				float4 frag(Varyings IN) : SV_Target
 				{
-					//return IN.color;
 					float2 pos = IN.uv.xy - _DrawPosition;
 
 					float2x2 rot = float2x2(cos(_DrawAngle), -sin(_DrawAngle),
@@ -79,10 +80,18 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 
 					float4 drawColor = SAMPLE_TEXTURE2D(_DrawBrush, sampler_DrawBrush, pos);
 
-					//return drawColor;
-
 					float4 previousColor = SAMPLE_TEXTURE2D(_PreviousTexture, sampler_PreviousTexture, IN.uv.xy);
-					//return previousColor;
+
+					// SNOW REGENERATION
+					
+					// calculate amount of white to add based on _snowRegenerationSpeed
+					
+					float upAmount = 1 * _DeltaTime;
+					float4 colorToAdd = float4(upAmount, upAmount, upAmount, 1);
+
+					// add white
+					previousColor += colorToAdd;
+
 					// return the darkest of the two values - ie only overwrite colour if it is darker than it was previously
 					return min(previousColor, drawColor);
 				}

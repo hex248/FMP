@@ -58,6 +58,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
         terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
         terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
         terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
+        terrain.materialTemplate.SetFloat("_DeltaTime", Time.deltaTime);
 
         // convert array of transforms to array of positions (V4)
         Vector4[] posArray = new Vector4[_trailsPositions.Length];
