@@ -21,18 +21,13 @@ public class WolfAnimationScript : MonoBehaviour
         anim.SetFloat("movementSpeed", movement.magnitude * movementSpeedAnimation);
     }
 
-    public void TakeDamage()
+    public void TakeDamageAnimation()
     {
         anim.SetTrigger("damage");
     }
 
-    public void StartAttack()
+    public void StartAttackAnimation()
     {
-        anim.SetBool("attack", true);
-    }
-
-    public void EndAttack()
-    {
-        anim.SetBool("attack", false);
+        anim.SetTrigger("attack");
     }
 }

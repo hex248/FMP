@@ -246,9 +246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaddf015be2dc34789ad23a1664f380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wolfVisuals: {fileID: 7704235921465295036}
   moveSpeed: 2
-  rotationSpeed: 2
+  moveRotationSpeed: 5
+  aimRotationSpeed: 20
+  attackDistance: 5
+  wolfVisuals: {fileID: 7704235921465295036}
+  maxAttackRange: 5
   targetPlayer: 0
 --- !u!65 &1577664589033795166
 BoxCollider:
