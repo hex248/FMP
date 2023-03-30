@@ -12,7 +12,9 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		_NormalMapAmount("Normal Map Amount", float) = 1
 		
 		_Tess("Tessellation", Range(1, 32)) = 20
+		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
 		_MaxTessDistance("Max Tess Distance", Range(1, 32)) = 20
+		_DrawPosition("Draw Position", Vector) = (0,0,0,0)
 	}
 
 		SubShader
@@ -40,6 +42,8 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			#pragma domain domain
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+			float2 _DrawPositions[100];
 
 			struct ControlPoint
 			{
@@ -71,11 +75,12 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			SAMPLER(sampler_HeightMap);
 
 			CBUFFER_START(UnityPerMaterial)
+				float4 _DrawPosition;
 				float4 _BaseColor;
 				float4 _BottomColor;
 				float4 _BaseMap_ST, _HeightMap_ST, _NormalMap_ST;
 				half _Height, _NormalMapAmount;
-				float _Tess, _MaxTessDistance;
+				float _Tess, _MinTessDistance, _MaxTessDistance;
 			CBUFFER_END
 
 			ControlPoint TessellationVertexProgram(Attributes v)
@@ -109,7 +114,13 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			float CalcDistanceTessFactor(float4 vertex, float minDist, float maxDist, float tess)
 			{
 				float3 worldPosition = mul(unity_ObjectToWorld, vertex).xyz;
-				float dist = distance(worldPosition, GetCameraPositionWS());
+				// distance from camera position
+				//float dist = distance(worldPosition, GetCameraPositionWS());
+
+				// distance from drawPosition
+				float dist = distance(worldPosition, _DrawPosition);
+
+
 				float f = clamp(1.0 - (dist - minDist) / (maxDist - minDist), 0.01, 1.0) * tess;
 				return (f);
 			}
@@ -117,7 +128,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			TessellationFactors patchConstantFunction(InputPatch<ControlPoint, 3> patch)
 			{
 				// values for distance fading the tessellation
-				float minDist = 5.0;
+				float minDist = _MinTessDistance;
 				float maxDist = _MaxTessDistance;
 
 				TessellationFactors f;
