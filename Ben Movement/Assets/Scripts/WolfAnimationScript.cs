@@ -30,4 +30,21 @@ public class WolfAnimationScript : MonoBehaviour
     {
         anim.SetTrigger("attack");
     }
+
+    public void PrepareAttack()
+    {
+        anim.SetTrigger("prepare attack");
+    }
+
+    public void AttackHit()
+    {
+        anim.SetTrigger("attack complete");
+        anim.SetBool("missed attack", false);
+    }
+
+    public void AttackMissed()
+    {
+        anim.SetTrigger("attack complete");
+        anim.SetBool("missed attack", true);
+    }
 }

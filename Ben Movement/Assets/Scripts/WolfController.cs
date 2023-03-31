@@ -20,12 +20,23 @@ public class WolfController : MonoBehaviour
     [SerializeField] float attackMoveDistance;
     [SerializeField] float attackMoveTime;
     [SerializeField] float damageTime;
-    [SerializeField] float attackCooldown;
+    
+
+
     bool doneAttackHit;
     float timeSinceAttackEnd;
     float timeSinceLastAttacking;
     Vector3 currentAttackDirection;
     bool isAttacking;
+
+    [SerializeField] float minAttackPrepareTime;
+    bool isPreparingAttack;
+    float timeSincePrepare;
+
+    [SerializeField] float missedAttackStunTime;
+    float timeSinceStunned = 0f;
+    bool isStunned; 
+
     [SerializeField] Vector3 hitboxOffset;
     [SerializeField] Vector3 hitboxSize;
     [SerializeField] LayerMask attackLayerMask;
@@ -80,23 +91,43 @@ public class WolfController : MonoBehaviour
             {
                 //in range
 
-                if (Vector3.Dot(transform.forward, directionToTarget) >= 0.9f && timeSinceLastAttacking >= attackCooldown)
+                if (Vector3.Dot(transform.forward, directionToTarget) >= 0.5f)
                 {
-                    //facing right direction
-                    StartAttack();
+                    //can see target
+                    PrepareAttack();
                 }
-                else
-                {
-                    //need to aim
-                    AimTowardsTarget();
-                    MoveForward(inRangeMoveSpeed);
-                }
+
+                
             }
             else
             {
                 RotateTowardsTarget();
                 MoveForward(moveSpeed);
             }
+        }
+        else if(isPreparingAttack)
+        {
+            if (timeSincePrepare >= minAttackPrepareTime)
+            {
+                //can see target
+                StartAttack();
+            }
+            else
+            {
+                //need to aim
+                AimTowardsTarget();
+                MoveForward(inRangeMoveSpeed);
+                timeSincePrepare += Time.deltaTime;
+            }
+        }
+        else if(isStunned)
+        {
+            timeSinceStunned += Time.deltaTime;
+            if(timeSinceStunned >= missedAttackStunTime)
+            {
+                isStunned = false;
+            }
+            MoveForward(0);
         }
 
 
@@ -149,11 +180,19 @@ public class WolfController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return isAttacking;
+        return isAttacking || isPreparingAttack || isStunned;
+    }
+
+    void PrepareAttack()
+    {
+        isPreparingAttack = true;
+        wolfAnimationScript.PrepareAttack();
+        timeSincePrepare = 0f;
     }
 
     void StartAttack()
     {
+        isPreparingAttack = false;
         isAttacking = true;
         wolfAnimationScript.StartAttackAnimation();
 
@@ -190,6 +229,7 @@ public class WolfController : MonoBehaviour
         doneAttackHit = true;
         Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * hitboxOffset;
         Collider[] hitColliders = Physics.OverlapBox(transform.position + offset, (hitboxSize / 2f), rotationalDirection, attackLayerMask);
+        bool hasHitPlayer = false;
         for (int i = 0; i < hitColliders.Length; i++)
         {
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
@@ -197,12 +237,32 @@ public class WolfController : MonoBehaviour
             {
                 Debug.Log("Apply force to " + hitRb.gameObject);
                 hitRb.AddForce(currentAttackDirection * attackForce);
+                hasHitPlayer = true;
             }
             EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
                 enemy.TakeDamage(attackDamage);
+                hasHitPlayer = true;
             }
+            Bed bed = hitColliders[i].gameObject.GetComponent<Bed>();
+            if (bed != null)
+            {
+                //bed.TakeDamage(attackDamage);
+                hasHitPlayer = true;
+            }
+        }
+
+        if (hasHitPlayer)
+        {
+            wolfAnimationScript.AttackHit();
+            isStunned = false;
+        }
+        else
+        {
+            wolfAnimationScript.AttackMissed();
+            isStunned = true;
+            timeSinceStunned = 0f;
         }
     }
 

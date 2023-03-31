@@ -49,7 +49,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 10
+      - m_Value: 30
         m_Name: Spawn Rate
         m_Overridden: 1
       - m_Value: 0.75
@@ -249,10 +249,12 @@ MonoBehaviour:
   moveSpeed: 2
   moveRotationSpeed: 5
   aimRotationSpeed: 20
-  attackTime: 0.5
-  attackMoveDistance: -100
-  attackMoveTime: 0.5
-  damageTime: 0.5
+  inRangeMoveSpeed: 0
+  attackTime: 0.375
+  attackMoveDistance: 2
+  attackMoveTime: 0.375
+  damageTime: 0.375
+  minAttackPrepareTime: 1
   hitboxOffset: {x: 0, y: 1.2, z: 0.8}
   hitboxSize: {x: 0.7, y: 0.7, z: 1}
   attackLayerMask:
