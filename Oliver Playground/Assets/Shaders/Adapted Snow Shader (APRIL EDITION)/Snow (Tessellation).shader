@@ -15,6 +15,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
 		_MaxTessDistance("Max Tess Distance", Range(0, 32)) = 20
 		_DrawPosition("Draw Position", Vector) = (0,0,0,0)
+		_ShadingDetail("Shading Detail", int) = 5
 	}
 
 		SubShader
@@ -81,6 +82,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				float4 _BaseMap_ST, _HeightMap_ST, _NormalMap_ST;
 				half _Height, _NormalMapAmount;
 				float _Tess, _MinTessDistance, _MaxTessDistance;
+				int _ShadingDetail;
 			CBUFFER_END
 
 			ControlPoint TessellationVertexProgram(Attributes v)
@@ -192,7 +194,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			half4 frag(Varyings IN) : SV_Target
 			{
 				half height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, IN.uv).r;
-				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, round(height * 5.0f) * 0.2f) * _NormalMapAmount;
+				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, round(height * round(_ShadingDetail)) / round(_ShadingDetail)) * _NormalMapAmount;
 
 				//return heightColor;
 
