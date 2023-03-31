@@ -13,6 +13,10 @@ Shader "Kazi/ToonShader"
         _NormalMap("Normal Map", 2D) = "black" {}
         _Smoothness("Smoothness", Range(0.0, 1.0)) = 1.0
         _ClipThreshold("Clip Threshold", Range(0.0, 1.0)) = 0.5
+        _DissolveScale("DissolveScale", Float) = 50
+        _DissolveAmount("DissolveAmount", Range(0, 1)) = 1.0
+        _DissolveWidth("DissolveWidth", Float) = 0.02
+        [HDR]_DissolveColor("DissolveColor", Color) = (0.2094241, 0.670157, 7.999999, 1)
     }
         SubShader
     {
@@ -71,12 +75,72 @@ Shader "Kazi/ToonShader"
             SAMPLER(sampler_NormalMap);
 
             CBUFFER_START(UnityPerMaterial)
+            float _DissolveAmount;
+            float _DissolveScale;
+            float _DissolveWidth;
+            float4 _DissolveColor;
             float4 _BaseMap_ST;
             float4 _NormalMap_ST;
             float _ClipThreshold;
             float _Smoothness;
             half4 _BaseColor;
             CBUFFER_END
+
+                inline float Unity_SimpleNoise_RandomValue_float(float2 uv)
+            {
+                return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
+            }
+
+            inline float Unity_SimpleNnoise_Interpolate_float(float a, float b, float t)
+            {
+                return (1.0 - t) * a + (t * b);
+            }
+
+
+            inline float Unity_SimpleNoise_ValueNoise_float(float2 uv)
+            {
+                float2 i = floor(uv);
+                float2 f = frac(uv);
+                f = f * f * (3.0 - 2.0 * f);
+
+                uv = abs(frac(uv) - 0.5);
+                float2 c0 = i + float2(0.0, 0.0);
+                float2 c1 = i + float2(1.0, 0.0);
+                float2 c2 = i + float2(0.0, 1.0);
+                float2 c3 = i + float2(1.0, 1.0);
+                float r0 = Unity_SimpleNoise_RandomValue_float(c0);
+                float r1 = Unity_SimpleNoise_RandomValue_float(c1);
+                float r2 = Unity_SimpleNoise_RandomValue_float(c2);
+                float r3 = Unity_SimpleNoise_RandomValue_float(c3);
+
+                float bottomOfGrid = Unity_SimpleNnoise_Interpolate_float(r0, r1, f.x);
+                float topOfGrid = Unity_SimpleNnoise_Interpolate_float(r2, r3, f.x);
+                float t = Unity_SimpleNnoise_Interpolate_float(bottomOfGrid, topOfGrid, f.y);
+                return t;
+            }
+            float Unity_SimpleNoise_float(float2 UV, float Scale)
+            {
+                float t = 0.0;
+
+                float freq = pow(2.0, float(0));
+                float amp = pow(0.5, float(3 - 0));
+                t += Unity_SimpleNoise_ValueNoise_float(float2(UV.x * Scale / freq, UV.y * Scale / freq)) * amp;
+
+                freq = pow(2.0, float(1));
+                amp = pow(0.5, float(3 - 1));
+                t += Unity_SimpleNoise_ValueNoise_float(float2(UV.x * Scale / freq, UV.y * Scale / freq)) * amp;
+
+                freq = pow(2.0, float(2));
+                amp = pow(0.5, float(3 - 2));
+                t += Unity_SimpleNoise_ValueNoise_float(float2(UV.x * Scale / freq, UV.y * Scale / freq)) * amp;
+
+                return t;
+            }
+
+            float Unity_Step_float(float Edge, float In)
+            {
+                return step(Edge, In);
+            }
 
             Varyings vert(Attributes IN)
             {
@@ -140,6 +204,8 @@ Shader "Kazi/ToonShader"
                     }
                     color.rgb += value * light.color;
                 }
+                color.rgb += Unity_Step_float(Unity_SimpleNoise_float(IN.uv, _DissolveScale), _DissolveAmount + _DissolveWidth) * _DissolveColor;
+                color.a = Unity_SimpleNoise_float(IN.uv, _DissolveScale) * _DissolveAmount;
                 color.rgb = MixFog(color.rgb, IN.positionWSAndFogFactor.w);
                 clip(color.a* _BaseColor.a* _BaseMap.Sample(sampler_BaseMap, IN.uv).a - 0.5f);
                 return color * _BaseColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
