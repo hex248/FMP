@@ -909,6 +909,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: d05ecc009d650424590cf7e35221e605, type: 2}
     - target: {fileID: 5981975307598187975, guid: 0f6aa8450cc2f9d409c3bfa36a4fbb48, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981975307598187975, guid: 0f6aa8450cc2f9d409c3bfa36a4fbb48, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d05ecc009d650424590cf7e35221e605, type: 2}
@@ -1387,7 +1391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1026329843
 Transform:
   m_ObjectHideFlags: 0

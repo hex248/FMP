@@ -14,7 +14,7 @@ Shader "Kazi/ToonShader"
         _Smoothness("Smoothness", Range(0.0, 1.0)) = 1.0
         _ClipThreshold("Clip Threshold", Range(0.0, 1.0)) = 0.5
         _DissolveScale("DissolveScale", Float) = 50
-        _DissolveAmount("DissolveAmount", Range(0, 1)) = 1.0
+        _DissolveAmount("DissolveAmount", Range(0, 1)) = 0.0
         _DissolveWidth("DissolveWidth", Float) = 0.02
         [HDR]_DissolveColor("DissolveColor", Color) = (0.2094241, 0.670157, 7.999999, 1)
     }
@@ -205,9 +205,9 @@ Shader "Kazi/ToonShader"
                     color.rgb += value * light.color;
                 }
                 color.rgb += Unity_Step_float(Unity_SimpleNoise_float(IN.uv, _DissolveScale), _DissolveAmount + _DissolveWidth) * _DissolveColor;
-                color.a = Unity_SimpleNoise_float(IN.uv, _DissolveScale) * _DissolveAmount;
                 color.rgb = MixFog(color.rgb, IN.positionWSAndFogFactor.w);
-                clip(color.a* _BaseColor.a* _BaseMap.Sample(sampler_BaseMap, IN.uv).a - 0.5f);
+                color.a *= 1 - Unity_Step_float(Unity_SimpleNoise_float(IN.uv, _DissolveScale), _DissolveAmount);
+                clip(color.a * _BaseColor.a * _BaseMap.Sample(sampler_BaseMap, IN.uv).a - 0.5f);
                 return color * _BaseColor * _BaseMap.Sample(sampler_BaseMap, IN.uv);
             }
             ENDHLSL
