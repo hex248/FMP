@@ -86,14 +86,15 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 					
 					// calculate amount of white to add based on _snowRegenerationSpeed
 					
-					float upAmount = 1 * _DeltaTime;
+					float upAmount = 0.01;
 					float4 colorToAdd = float4(upAmount, upAmount, upAmount, 1);
 
 					// add white
 					previousColor += colorToAdd;
+					//return newPreviousColor;
 
 					// return the darkest of the two values - ie only overwrite colour if it is darker than it was previously
-					return min(previousColor, drawColor);
+					return min(previousColor , drawColor);
 				}
 
 				ENDHLSL

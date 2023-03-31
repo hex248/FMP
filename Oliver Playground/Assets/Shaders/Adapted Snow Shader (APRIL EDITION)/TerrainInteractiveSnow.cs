@@ -12,7 +12,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
     public float _offset = 0.2f;
 
     Material _heightMapUpdate;
-    CustomRenderTexture _snowHeightMap;
+    public CustomRenderTexture _snowHeightMap;
     CustomRenderTexture _prevHeightMap;
 
     Terrain terrain;
@@ -43,7 +43,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
         var material = new Material(_snowMaterial);
 
         _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate, _stepPrint);
-        _snowHeightMap = CreateHeightMap(512, 512, _heightMapUpdate);
+        _snowHeightMap = CreateHeightMap(1024, 1024, _heightMapUpdate);
 
         terrain = gameObject.GetComponent<Terrain>();
         terrain.materialTemplate = material;
@@ -58,7 +58,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
         terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
         terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
         terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
-        terrain.materialTemplate.SetFloat("_DeltaTime", Time.deltaTime);
         terrain.materialTemplate.SetInt("_ShadingDetail", _snowMaterial.GetInt("_ShadingDetail"));
 
         // convert array of transforms to array of positions (V4)
@@ -87,6 +86,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 _heightMapUpdate.SetTexture(PreviousTexture, _prevHeightMap);
                 _heightMapUpdate.SetFloat(DrawAngle, angle * Mathf.Deg2Rad);
                 _heightMapUpdate.SetFloat(Offset, _offset);
+                _heightMapUpdate.SetFloat("_DeltaTime", Time.deltaTime);
             }
         }
         _prevHeightMap = _snowHeightMap;
