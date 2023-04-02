@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snow (Tessellation)
+  m_Shader: {fileID: 4800000, guid: abea7ce3896c6f14fa46bb340500e0f7, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 532622803f17be14a8fbf941d0ac6e0c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DisplacementMap:
+        m_Texture: {fileID: 2800000, guid: e3d0ae6e75536ca469855e3c58ed6b5b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HeightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 58576fd7c173476449df7bb734471c9d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: f792f8e571ede5e47a50db596efa97d8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 459ae148e11b3a64d84cce2739fe250d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_3082f3c7636c433e972fed03f7913927_Texture_1:
+        m_Texture: {fileID: 2800000, guid: e3d0ae6e75536ca469855e3c58ed6b5b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Displacement: 0.47
+    - _FlipYZ: 0
+    - _Glossiness: 0.5
+    - _Height: 0.5
+    - _HeightAmount: 0.5
+    - _MaxTessDistance: 10.1
+    - _Metallic: 0
+    - _MinTessDistance: 10
+    - _NormalMapAmount: 1
+    - _ShadingDetail: 4
+    - _Tess: 25
+    - _TessellationAmount: 12
+    m_Colors:
+    - _BaseColor: {r: 0.9103774, g: 0.94846696, b: 1, a: 1}
+    - _BottomColor: {r: 0.5718672, g: 0.6126773, b: 0.6698113, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DrawPosition: {r: 0.5, g: 0.5, b: 0, a: 0}
+  m_BuildTextureStacks: []
