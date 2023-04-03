@@ -288,6 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4054264351552983803}
+  - component: {fileID: 1326875708134467727}
   - component: {fileID: 2071803449222374927}
   - component: {fileID: 4516365663885039616}
   - component: {fileID: 7478775978707637640}
@@ -315,6 +316,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1326875708134467727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7016549952370542837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: player
+  drawTransform: {fileID: 959958574937507330}
 --- !u!114 &2071803449222374927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,17 +493,32 @@ MonoBehaviour:
   dashCheckRadius: 0.01
   dashCheckResolution: 0.01
   playerColliderRadius: 0.25
-  basicCombo: []
+  meleeCombo: []
   attackLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  maxTimeBetweenAttackForCombo: 0
+  maxTimeBetweenMeleeAttackForCombo: 0
+  rangedAttack:
+    projectile: {fileID: 0}
+    fullChargeTime: 0
+    fullChargeScaleFactor: 0
+    fullChargeDamageMultiplier: 0
+    fullChargeForceMultiplier: 0
+    fullChargeSpeedMultiplier: 0
+    attackTime: 0
+    moveDistance: 0
+    moveTime: 0
+    projectileSpawnTime: 0
+    projectileSpawnPosition: {fileID: 0}
+    baseForce: 0
+    baseDamage: 0
   playerVisuals: {fileID: 4774828045323943578}
   squashAmount: 0
   playerNumber: 1
   movementDashLocked: 0
   movementMenuLocked: 0
-  movementAttackLocked: 0
+  movementMeleeAttackLocked: 0
+  movementRangedAttackLocked: 0
   triggerFocus: 0
   isFocusing: 0
   focusObject: {fileID: 0}
@@ -949,6 +979,30 @@ PrefabInstance:
     - target: {fileID: -346550501327608738, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -168399688324931529, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.0000019036233
+      objectReference: {fileID: 0}
+    - target: {fileID: -168399688324931529, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.00021481374
+      objectReference: {fileID: 0}
+    - target: {fileID: -168399688324931529, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.00022908673
+      objectReference: {fileID: 0}
+    - target: {fileID: -168399688324931529, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.0067785224
+      objectReference: {fileID: 0}
+    - target: {fileID: -168399688324931529, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.0057450035
+      objectReference: {fileID: 0}
+    - target: {fileID: -168399688324931529, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.0023059358
       objectReference: {fileID: 0}
     - target: {fileID: -10106821585353549, guid: e2eb00ab8c1d38d479f0bbf63905968d, type: 3}
       propertyPath: m_Layer

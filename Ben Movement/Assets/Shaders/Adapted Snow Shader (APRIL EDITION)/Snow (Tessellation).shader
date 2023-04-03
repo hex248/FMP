@@ -14,7 +14,6 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		_Tess("Tessellation", Range(1, 32)) = 20
 		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
 		_MaxTessDistance("Max Tess Distance", Range(0, 32)) = 20
-		_DrawPosition("Draw Position", Vector) = (0,0,0,0)
 		_ShadingDetail("Shading Detail", int) = 5
 	}
 
@@ -44,7 +43,8 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			Vector _DrawPositions[100];
+			Vector _DrawPositions[3];
+			float _DrawPositionNum;
 
 			struct ControlPoint
 			{
@@ -76,7 +76,6 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			SAMPLER(sampler_HeightMap);
 
 			CBUFFER_START(UnityPerMaterial)
-				float4 _DrawPosition;
 				float4 _BaseColor;
 				float4 _BottomColor;
 				float4 _BaseMap_ST, _HeightMap_ST, _NormalMap_ST;
@@ -122,14 +121,13 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				// distance from drawPosition
 				float dist = 1000.0;
 				// loop all draw positions
-				for (float i = 0; i < _DrawPositions.Length; i++)
+				for (float i = 0; i < _DrawPositionNum; i++)
 				{
 					float newDist = distance(worldPosition, _DrawPositions[i]);
 
 					// if this is closer, set this as the distance from closest player
 					dist = min(dist, newDist);
 				}
-				//dist = distance(worldPosition, _DrawPosition);
 
 				float f = clamp(1.0 - (dist - minDist) / (maxDist - minDist), 0.01, 1.0) * tess;
 				return (f);
@@ -137,15 +135,12 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 			TessellationFactors patchConstantFunction(InputPatch<ControlPoint, 3> patch)
 			{
-				// values for distance fading the tessellation
-				float minDist = _MinTessDistance;
-				float maxDist = _MaxTessDistance;
 
 				TessellationFactors f;
 
-				float edge0 = CalcDistanceTessFactor(patch[0].vertex, minDist, maxDist, _Tess);
-				float edge1 = CalcDistanceTessFactor(patch[1].vertex, minDist, maxDist, _Tess);
-				float edge2 = CalcDistanceTessFactor(patch[2].vertex, minDist, maxDist, _Tess);
+				float edge0 = CalcDistanceTessFactor(patch[0].vertex, _MinTessDistance, _MaxTessDistance, _Tess);
+				float edge1 = CalcDistanceTessFactor(patch[1].vertex, _MinTessDistance, _MaxTessDistance, _Tess);
+				float edge2 = CalcDistanceTessFactor(patch[2].vertex, _MinTessDistance, _MaxTessDistance, _Tess);
 
 				// make sure there are no gaps between different tessellated distances, by averaging the edges out
 				f.edge[0] = (edge1 + edge2) / 2;

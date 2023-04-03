@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8972666271578233529}
   - component: {fileID: 8972666271578233530}
   - component: {fileID: 8972666271578233535}
-  - component: {fileID: 8972666271578233534}
+  - component: {fileID: 8070778325111318084}
   m_Layer: 0
   m_Name: Snow (Terrain)
   m_TagString: Untagged
@@ -97,7 +97,7 @@ MonoBehaviour:
   _drawDistance: 3
   _offset: 0.03
   _snowHeightMap: {fileID: 0}
---- !u!65 &8972666271578233534
+--- !u!65 &8070778325111318084
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,8 +105,8 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8972666271578233531}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6, y: 0.5, z: 6}
-  m_Center: {x: 3, y: 0.25, z: 3}
+  m_Size: {x: 100, y: 2, z: 100}
+  m_Center: {x: -50, y: 1, z: 50}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,7 +7,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
     public Shader _snowHeightMapUpdate;
     public Texture _stepPrint;
     public Material _snowMaterial;
-    public Transform[] _trailsPositions;
+    public List<Transform> _trailsPositions;
 
     public float _drawDistance = 0.3f;
     public float _offset = 0.2f;
@@ -61,16 +62,19 @@ public class TerrainInteractiveSnow : MonoBehaviour
         terrain.materialTemplate.SetInt("_ShadingDetail", _snowMaterial.GetInt("_ShadingDetail"));
 
         // convert array of transforms to array of positions (V4)
-        Vector4[] posArray = new Vector4[_trailsPositions.Length];
-        for (int i = 0; i < _trailsPositions.Length; i++)
+        Vector4[] posArray = new Vector4[_trailsPositions.Count];
+        Debug.Log($"Amount of positions: {posArray.Length}");
+        for (int i = 0; i < _trailsPositions.Count; i++)
         {
             posArray[i] = _trailsPositions[i].position;
         }
         terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
+        terrain.materialTemplate.SetFloat("_DrawPositionNum", posArray.Length);
     }
 
     private void DrawTrails()
     {
+        if (_trailsPositions.Count < 1) return;
         var trail = _trailsPositions[_index];
 
         Ray ray = new Ray(trail.transform.position, Vector3.down);
@@ -83,10 +87,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 Vector2 hitTextureCoord = hit.textureCoord;
                 float angle = trail.transform.rotation.eulerAngles.y; // texture rotation angle
 
-
-                angle = 0;
-                Debug.Log($"angle: {angle}");
-
                 _heightMapUpdate.SetVector(DrawPosition, hitTextureCoord);
                 _heightMapUpdate.SetTexture(PreviousTexture, _prevHeightMap);
                 _heightMapUpdate.SetFloat(DrawAngle, angle * Mathf.Deg2Rad);
@@ -98,7 +98,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
         _index++;
 
-        if (_index >= _trailsPositions.Length)
+        if (_index >= _trailsPositions.Count)
             _index = 0;
     }
 
@@ -122,5 +122,29 @@ public class TerrainInteractiveSnow : MonoBehaviour
         material.SetTexture(DrawBrush, stepPrint);
         material.SetVector(DrawPosition, new Vector4(-1, -1, 0, 0));
         return material;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<TrailDrawer>() != null)
+        {
+            var trailDrawer = other.GetComponent<TrailDrawer>();
+            if (!_trailsPositions.Contains(trailDrawer.drawTransform))
+            {
+                _trailsPositions.Add(trailDrawer.drawTransform);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<TrailDrawer>() != null)
+        {
+            var trailDrawer = other.GetComponent<TrailDrawer>();
+            if (_trailsPositions.Contains(trailDrawer.drawTransform))
+            {
+                _trailsPositions.Remove(trailDrawer.drawTransform);
+            }
+        }
     }
 }
