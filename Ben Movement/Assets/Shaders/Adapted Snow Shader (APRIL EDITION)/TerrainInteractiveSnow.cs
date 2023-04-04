@@ -55,21 +55,24 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
     void UpdateSnowMaterial()
     {
-        // set the properties of the copied material based on snow asset
-        terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
-        terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
-        terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
-        terrain.materialTemplate.SetInt("_ShadingDetail", _snowMaterial.GetInt("_ShadingDetail"));
-
         // convert array of transforms to array of positions (V4)
         Vector4[] posArray = new Vector4[_trailsPositions.Count];
-        Debug.Log($"Amount of positions: {posArray.Length}");
         for (int i = 0; i < _trailsPositions.Count; i++)
         {
             posArray[i] = _trailsPositions[i].position;
         }
         terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
         terrain.materialTemplate.SetFloat("_DrawPositionNum", posArray.Length);
+        Debug.Log($"Amount of positions: {posArray.Length}");
+
+        // set positions after (triggers an update of positions)
+
+        // set the properties of the copied material based on snow asset
+        terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
+        terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
+        terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
+        terrain.materialTemplate.SetInt("_ShadingDetail", _snowMaterial.GetInt("_ShadingDetail"));
+        Debug.Log($"pass count:{terrain.materialTemplate.renderQueue}");
     }
 
     private void DrawTrails()

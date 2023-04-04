@@ -100,7 +100,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			[UNITY_outputcontrolpoints(3)]
 			[UNITY_outputtopology("triangle_cw")]
 			[UNITY_partitioning("fractional_odd")]
-			[UNITY_patchconstantfunc("patchConstantFunction")]
+			[UNITY_patchconstantfunc("PatchConstantFunction")]
 			ControlPoint hull(InputPatch<ControlPoint, 3> patch, uint id : SV_OutputControlPointID)
 			{
 				return patch[id];
@@ -133,7 +133,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				return (f);
 			}
 
-			TessellationFactors patchConstantFunction(InputPatch<ControlPoint, 3> patch)
+			TessellationFactors PatchConstantFunction(InputPatch<ControlPoint, 3> patch)
 			{
 
 				TessellationFactors f;
