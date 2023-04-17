@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Centipede : MonoBehaviour
 {
+    
+    
+    [Header("Movement")]
+    private float currentMoveSpeed;
+    private float randomFactor;
+    [SerializeField] private float turnSpeed;
+    [SerializeField] private float moveSpeed;
+    
+    [Header("Segment Settings")]
     [SerializeField] List<GameObject> centipedeParts;
     [SerializeField] private float maxPartDistance;
-    private float currentMoveSpeed;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +33,12 @@ public class Centipede : MonoBehaviour
             if (partIndex == 0)
             {
                 //do regular movement
+                float turnFac = Mathf.Sin(Time.time);
+                GameObject part = centipedeParts[partIndex];
+                float turnAmount = turnFac * Time.deltaTime * turnSpeed;
                 
+                part.transform.eulerAngles = new Vector3(0f, turnAmount, 0f) + part.transform.eulerAngles;
+                part.transform.position += part.transform.right * (Time.deltaTime * moveSpeed);
             }
             else
             {
