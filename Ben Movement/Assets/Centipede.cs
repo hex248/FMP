@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Centipede : MonoBehaviour
 {
-    
-    
-    [Header("Movement")]
-    private float currentMoveSpeed;
-    private float randomFactor;
+
+    [Header("AI")] 
+    [SerializeField] private GameObject target;
+
+    private Quaternion wigglelessRotation;
+
+
+    [Header("Movement")] 
     [SerializeField] private float turnSpeed;
+    [SerializeField] private float wiggleSpeed;
+    [SerializeField] private float wiggleAmplitude;
     [SerializeField] private float moveSpeed;
     
     [Header("Segment Settings")]
@@ -29,16 +34,24 @@ public class Centipede : MonoBehaviour
         {
             //start from the last one
             int partIndex = centipedeParts.Count - 1 - i;
-            Debug.Log("process centipede segment " + partIndex);
             if (partIndex == 0)
             {
                 //do regular movement
-                float turnFac = Mathf.Sin(Time.time);
                 GameObject part = centipedeParts[partIndex];
-                float turnAmount = turnFac * Time.deltaTime * turnSpeed;
+                Vector3 offset = target.transform.position - part.transform.position;
+                offset = new Vector3(offset.x, 0f, offset.z);
                 
-                part.transform.eulerAngles = new Vector3(0f, turnAmount, 0f) + part.transform.eulerAngles;
-                part.transform.position += part.transform.right * (Time.deltaTime * moveSpeed);
+                Quaternion targetRotation = Quaternion.LookRotation(offset, Vector3.up);
+                wigglelessRotation = Quaternion.RotateTowards(wigglelessRotation, targetRotation, turnSpeed);
+                
+                float wiggleFac = Mathf.Sin(Time.time * wiggleSpeed);
+                float wiggleAmount = wiggleFac * wiggleAmplitude;
+                Quaternion wiggleRotation = Quaternion.Euler(0f, wiggleAmount, 0f);
+                
+                //apply that wiggle
+                part.transform.rotation = wigglelessRotation * wiggleRotation;
+                
+                part.transform.position += part.transform.forward * (Time.deltaTime * moveSpeed);
             }
             else
             {
@@ -47,7 +60,7 @@ public class Centipede : MonoBehaviour
                 GameObject followPart = centipedeParts[partIndex - 1];
                 Vector3 offset = followPart.transform.position - part.transform.position;
 
-                part.transform.right = offset.normalized;
+                part.transform.forward = offset.normalized;
                 if (offset.magnitude > maxPartDistance)
                 {
                     Vector3 move = (offset.magnitude - maxPartDistance) * offset.normalized;
