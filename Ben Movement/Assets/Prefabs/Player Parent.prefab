@@ -932,7 +932,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 524544874834777135, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: D-Pad Left
+      value: D-Pad/Left
       objectReference: {fileID: 0}
     - target: {fileID: 874372471093151667, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1200,7 +1200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741879360369, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741909571397, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1256,7 +1256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3030833674252048201, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: LS Left
+      value: LS/Left
       objectReference: {fileID: 0}
     - target: {fileID: 3327234033742932557, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1388,7 +1388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4716086569789495982, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: D-Pad Up
+      value: D-Pad/Up
       objectReference: {fileID: 0}
     - target: {fileID: 5157133816087409293, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1684,7 +1684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6073563585552833230, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: D-Pad Right
+      value: D-Pad/Right
       objectReference: {fileID: 0}
     - target: {fileID: 6134485620658770093, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1708,11 +1708,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6785778128770830040, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: D-Pad Down
+      value: D-Pad/Down
       objectReference: {fileID: 0}
     - target: {fileID: 7798763804931234248, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: LS Up
+      value: LS/Up
       objectReference: {fileID: 0}
     - target: {fileID: 7881084620109904996, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_BindingId
@@ -1720,7 +1720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8314714335634165182, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: LS Down
+      value: LS/Down
       objectReference: {fileID: 0}
     - target: {fileID: 8548184656453530176, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1740,7 +1740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719391113062734248, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_text
-      value: LS Right
+      value: LS/Right
       objectReference: {fileID: 0}
     - target: {fileID: 8865374229454090638, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2366,11 +2366,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[0].moveTime
-      value: 0.05
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[1].moveTime
-      value: 0.05
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[2].moveTime
@@ -2414,19 +2414,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[0].attackTime
-      value: 0.15
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[0].damageTime
-      value: 0.05
+      value: 0.215
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[1].attackTime
-      value: 0.15
+      value: 0.71
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[1].damageTime
-      value: 0.05
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: meleeCombo.Array.data[2].attackTime

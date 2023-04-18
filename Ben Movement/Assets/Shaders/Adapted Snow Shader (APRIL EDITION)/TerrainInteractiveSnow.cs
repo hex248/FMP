@@ -81,7 +81,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
         var trail = _trailsPositions[_index];
 
         Ray ray = new Ray(trail.transform.position, Vector3.down);
-        Debug.DrawRay(trail.transform.position, Vector3.down * _drawDistance, Color.blue);
+        //Debug.DrawRay(trail.transform.position, Vector3.down * _drawDistance, Color.blue);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _drawDistance))
         {
