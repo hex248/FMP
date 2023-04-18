@@ -150,7 +150,8 @@ public class WolfController : MonoBehaviour
         if (targetPlayer)
         {
             targetPlayer = false;
-            currentTarget = FindObjectOfType<PlayerController>().gameObject;
+            if(FindObjectOfType<PlayerController>() != null)
+                currentTarget = FindObjectOfType<PlayerController>().gameObject;
         }
     }
 

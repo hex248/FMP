@@ -40,7 +40,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300943358675074050}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 006403a980b22b840825f82d145edca4, type: 3}
+  m_Asset: {fileID: 0}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -142,8 +142,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,6 +254,7 @@ MonoBehaviour:
   attackMoveTime: 0.375
   damageTime: 0.375
   minAttackPrepareTime: 1
+  missedAttackStunTime: 0
   hitboxOffset: {x: 0, y: 1.2, z: 0.8}
   hitboxSize: {x: 0.7, y: 0.7, z: 1}
   attackLayerMask:
@@ -264,7 +264,7 @@ MonoBehaviour:
   attackDamage: 5
   wolfVisuals: {fileID: 7704235921465295036}
   maxAttackRange: 5
-  targetPlayer: 0
+  targetPlayer: 1
   raycastLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -398,7 +398,7 @@ PrefabInstance:
     - target: {fileID: 2321523695958950486, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4fa8276ab7b61bc41aa3ed2cbc93f2db, type: 2}
+      objectReference: {fileID: 2100000, guid: 0564e2fa4bc0b5e489932b57e8d0a546, type: 2}
     - target: {fileID: 8626154274752587844, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour
     Transform currentFocusPoint;
     Rigidbody rb;
     private Vector3 velocity = Vector3.zero;
+    Vector3 shakeOffset;
 
     void SetObliqueness(float horizObl, float vertObl)
     {
@@ -44,5 +45,23 @@ public class CameraFollow : MonoBehaviour
     public void ToPlayer()
     {
         currentFocusPoint = playerPoint;
+    }
+
+    public void CameraShake()
+    {
+        StartCoroutine(DoCameraShake(10f, 1f));
+    }
+
+    IEnumerator DoCameraShake(float strength, float time)
+    {
+        float timeSinceShakeStart = 0f;
+        while(timeSinceShakeStart < time)
+        {
+            timeSinceShakeStart += Time.deltaTime;
+
+            shakeOffset = new Vector3(Random.Range(-strength, strength), 0f, Random.Range(-strength, strength));
+            yield return null;
+        }
+        shakeOffset = new Vector3(0f, 0f, 0f);
     }
 }
