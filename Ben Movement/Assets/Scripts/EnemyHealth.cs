@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float currentHealth;
     float healthFactor;
 
-    SkinnedMeshRenderer skinnedMesh;
-    Material[] skinnedMaterials;
+    List<SkinnedMeshRenderer> skinnedMeshRenderers;
+    List<Material> skinnedMaterials = new List<Material>();
 
     //limits the amount u can dissolve until you die
     [SerializeField] bool dissolveActive = true;
@@ -31,9 +32,16 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maximumHealth;
 
-        skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
-        if (skinnedMesh != null)
-            skinnedMaterials = skinnedMesh.materials;
+        skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+        if (skinnedMeshRenderers != null)
+            foreach(SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
+            {
+                foreach (Material material in skinnedMeshRenderer.materials)
+                {
+                    skinnedMaterials.Add(material);
+                }
+            }
+            
     }
 
     private void Update()
@@ -84,7 +92,7 @@ public class EnemyHealth : MonoBehaviour
             dissolveSmoothFac = Mathf.Min(1f, timeSinceTargetAdjusted / 1f);
 
             currentDissolveAmount = Mathf.SmoothStep(currentDissolveAmount, targetDissolveAmount, dissolveSmoothFac);
-            for (int i = 0; i < skinnedMaterials.Length; i++)
+            for (int i = 0; i < skinnedMaterials.Count; i++)
             {
                 skinnedMaterials[i].SetFloat("_DissolveAmount", currentDissolveAmount);
             }
@@ -100,7 +108,7 @@ public class EnemyHealth : MonoBehaviour
 
     IEnumerator DeathDissolve()
     {
-        if (skinnedMaterials.Length > 0)
+        if (skinnedMaterials.Count > 0)
         {
             while (targetDissolveAmount < 1)
             {
