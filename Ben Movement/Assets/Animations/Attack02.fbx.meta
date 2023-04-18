@@ -12,6 +12,9 @@ ModelImporter:
   - first:
       74: 3342588920743207306
     second: Sheep_Skeleton|Walk
+  - first:
+      74: 5097810873900626798
+    second: Sheep_Skeleton|Attack02
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -21,7 +24,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 1
+    resampleCurves: 0
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
@@ -41,11 +44,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sheep_Skeleton|Attack01
-      takeName: Sheep_Skeleton|Attack01
+      name: Sheep_Skeleton|Attack02
+      takeName: Sheep_Skeleton|Attack02
       internalID: 0
       firstFrame: 0
-      lastFrame: 26
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
