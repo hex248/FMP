@@ -47,4 +47,19 @@ public class WolfAnimationScript : MonoBehaviour
         anim.SetTrigger("attack complete");
         anim.SetBool("missed attack", true);
     }
+
+    public void Recover()
+    {
+        anim.SetTrigger("recover");
+    }
+
+    public void Damaged()
+    {
+        anim.SetTrigger("damaged");
+    }
+
+    public void Death()
+    {
+        anim.SetTrigger("death");
+    }
 }

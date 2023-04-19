@@ -29,16 +29,24 @@ public class WolfController : MonoBehaviour
     Vector3 currentAttackDirection;
     bool isAttacking;
 
+    
+    
+
     [SerializeField] float minAttackPrepareTime;
     bool isPreparingAttack;
     float timeSincePrepare;
 
     [SerializeField] float missedAttackStunTime;
     float timeSinceStunned = 0f;
-    bool isStunned; 
+    bool isMissedAttackStunned;
+
+    [SerializeField] float damagedStunnedTime;
+    bool isDamageStunned;
+    float timeSinceDamaged;
+    bool isDeathStunned;
 
     [SerializeField] Vector3 hitboxOffset;
-    [SerializeField] Vector3 hitboxSize;
+    [SerializeField] Vector3 hitboxSize; 
     [SerializeField] LayerMask attackLayerMask;
     [SerializeField] float attackForce;
     [SerializeField] float attackDamage;
@@ -105,7 +113,7 @@ public class WolfController : MonoBehaviour
                 MoveForward(moveSpeed);
             }
         }
-        else if(isPreparingAttack)
+        else if(isPreparingAttack && !isInteruptAttack())
         {
             if (timeSincePrepare >= minAttackPrepareTime)
             {
@@ -120,19 +128,20 @@ public class WolfController : MonoBehaviour
                 timeSincePrepare += Time.deltaTime;
             }
         }
-        else if(isStunned)
+        else if(isMissedAttackStunned && !isInteruptAttack())
         {
             timeSinceStunned += Time.deltaTime;
             if(timeSinceStunned >= missedAttackStunTime)
             {
-                isStunned = false;
+                wolfAnimationScript.Recover();
+                isMissedAttackStunned = false;
             }
             MoveForward(0);
         }
 
 
 
-        if (isAttacking)
+        if (isAttacking && !isInteruptAttack())
         {
             timeSinceLastAttacking = 0f;
             DoMeleeAttackMove();
@@ -146,6 +155,14 @@ public class WolfController : MonoBehaviour
             timeSinceLastAttacking += Time.deltaTime;
         }
 
+        if (isDamageStunned)
+        {
+            if(timeSinceDamaged >= damagedStunnedTime)
+            {
+                isDamageStunned = false;
+            }
+            timeSinceDamaged += Time.deltaTime;
+        }
 
         if (targetPlayer)
         {
@@ -153,6 +170,8 @@ public class WolfController : MonoBehaviour
             if(FindObjectOfType<PlayerController>() != null)
                 currentTarget = FindObjectOfType<PlayerController>().gameObject;
         }
+
+        
     }
 
 
@@ -181,7 +200,12 @@ public class WolfController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return isAttacking || isPreparingAttack || isStunned;
+        return isAttacking || isPreparingAttack || isMissedAttackStunned || isDamageStunned || isDeathStunned;
+    }
+
+    bool isInteruptAttack()
+    {
+        return isMissedAttackStunned || isDamageStunned || isDeathStunned;
     }
 
     void PrepareAttack()
@@ -257,12 +281,12 @@ public class WolfController : MonoBehaviour
         if (hasHitPlayer)
         {
             wolfAnimationScript.AttackHit();
-            isStunned = false;
+            isMissedAttackStunned = false;
         }
         else
         {
             wolfAnimationScript.AttackMissed();
-            isStunned = true;
+            isMissedAttackStunned = true;
             timeSinceStunned = 0f;
         }
     }
@@ -273,10 +297,22 @@ public class WolfController : MonoBehaviour
         Gizmos.color = Color.red;
 
         Gizmos.matrix = transform.localToWorldMatrix;
-            //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;
+        //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;
         Gizmos.DrawWireCube(hitboxOffset, hitboxSize);
+    }
 
+    public void Damage()
+    {
+        isDamageStunned = true;
+        timeSinceDamaged = 0f;
+        isAttacking = false;
+        isPreparingAttack = false;
+    }
 
-
+    public void Death()
+    {
+        isDeathStunned = true;
+        isAttacking = false;
+        isPreparingAttack = false;
     }
 }
