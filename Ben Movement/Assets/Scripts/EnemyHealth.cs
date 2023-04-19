@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class EnemyHealth : MonoBehaviour
     float dissolveSmoothFac;
 
     public bool triggerDeath = false;
+
+    [SerializeField] UnityEvent damageEvent;
+    [SerializeField] UnityEvent deathEvent;
+
 
 
     void Start()
@@ -73,6 +78,7 @@ public class EnemyHealth : MonoBehaviour
             dissolveDistance = Mathf.Abs(currentDissolveAmount - targetDissolveAmount);
 
             timeSinceTargetAdjusted = 0f;
+            damageEvent.Invoke();
 
         }
     }
@@ -81,6 +87,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (dissolveActive)
             StartCoroutine(DeathDissolve());
+            deathEvent.Invoke();
 
     }
 
