@@ -205,7 +205,7 @@ public class WolfController : MonoBehaviour
 
     bool isInteruptAttack()
     {
-        return isMissedAttackStunned || isDamageStunned || isDeathStunned;
+        return isDamageStunned || isDeathStunned;
     }
 
     void PrepareAttack()
