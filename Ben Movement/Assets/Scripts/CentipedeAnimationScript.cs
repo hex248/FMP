@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class CentipedeAnimationScript : MonoBehaviour
 {
+    public Transform parent;
     public Transform target;
-    public float Y;
+    [Header("Movement")]
+    [SerializeField] private float turnSpeed = 1.0f;
+    [SerializeField] private float wiggleSpeed = 2.0f;
+    [SerializeField] private float wiggleAmplitude = 10.0f;
+    // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
+    // Update is called once per frame
     void LateUpdate()
     {
-        //target.localEulerAngles = new Vector3(transform.eulerAngles.x - 90.0f, transform.eulerAngles.y, transform.eulerAngles.z);
-        target.rotation = Quaternion.Euler(transform.eulerAngles.x - 90.0f, Y, transform.eulerAngles.z);
+        Vector3 pointToTarget = (transform.position - target.position);
+        parent.rotation = Quaternion.Lerp(parent.rotation, Quaternion.Euler(new Vector3(parent.eulerAngles.x, Mathf.Atan2(pointToTarget.z, -pointToTarget.x) * Mathf.Rad2Deg + (Mathf.Sin(Time.time * wiggleSpeed) * wiggleAmplitude), parent.eulerAngles.z)), Time.deltaTime * turnSpeed);
     }
 }
