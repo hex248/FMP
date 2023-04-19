@@ -1852,6 +1852,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6604582036211379363, guid: 28dc8ad773985fd409afb5aa49d46a27, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0118
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 28dc8ad773985fd409afb5aa49d46a27, type: 3}
       propertyPath: m_Name
       value: centipede
@@ -2430,7 +2434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1351708959
 MonoBehaviour:
   m_ObjectHideFlags: 0

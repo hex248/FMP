@@ -51,7 +51,7 @@ public class Centipede : MonoBehaviour
                 //apply that wiggle
                 part.transform.rotation = (wigglelessRotation * wiggleRotation);
                 
-                part.transform.position += part.transform.forward * (Time.deltaTime * moveSpeed);
+                part.transform.position += part.transform.up * (Time.deltaTime * moveSpeed);
             }
             else
             {
@@ -60,7 +60,7 @@ public class Centipede : MonoBehaviour
                 GameObject followPart = centipedeParts[partIndex - 1];
                 Vector3 offset = followPart.transform.position - part.transform.position;
 
-                part.transform.forward = offset.normalized;
+                part.transform.up = offset.normalized;
                 if (offset.magnitude > maxPartDistance)
                 {
                     Vector3 move = (offset.magnitude - maxPartDistance) * offset.normalized;
