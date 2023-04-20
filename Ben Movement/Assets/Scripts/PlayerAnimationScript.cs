@@ -28,7 +28,7 @@ public class PlayerAnimationScript : MonoBehaviour
     private void Update()
     {
         anim.SetBool("isMoving", isMoving);
-        anim.SetFloat("movementSpeed", rb.velocity.magnitude * movementSpeedAnimation);
+        anim.SetFloat("movementSpeed", rb.velocity.magnitude);
     }
 
     public void StartRangedAttackAnimation()
