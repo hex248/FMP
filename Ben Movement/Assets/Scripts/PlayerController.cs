@@ -407,6 +407,10 @@ public class PlayerController : MonoBehaviour
         timeSinceMeleeAttackEnd = 0f;
         isMeleeAttacking = true;
         doneMeleeAttackHit = false;
+        if (meleeCombo[currentMeleeComboStage].vfx != null)
+        {
+            meleeCombo[currentMeleeComboStage].vfx.StartEffect();
+        }
         playerAnim.StartMeleeAttackAnimation(currentMeleeComboStage);
         Vector2 attackInputDirection;
         currentMeleeAttackDirection = currentForwardDirection;

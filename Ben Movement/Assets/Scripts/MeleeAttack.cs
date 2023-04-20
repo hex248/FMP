@@ -22,4 +22,6 @@ public class MeleeAttack
 
     public float force;
     public float damage;
+
+    public SlashVFX vfx;
 }
