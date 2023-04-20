@@ -15,6 +15,9 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
 		_MaxTessDistance("Max Tess Distance", Range(0, 32)) = 20
 		_ShadingDetail("Shading Detail", int) = 5
+
+
+		_DrawPositionNum("Draw Position Num", int) = 0
 	}
 
 		SubShader
@@ -43,8 +46,6 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			Vector _DrawPositions[3];
-			float _DrawPositionNum;
 
 			struct ControlPoint
 			{
@@ -82,6 +83,8 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				half _Height, _NormalMapAmount;
 				float _Tess, _MinTessDistance, _MaxTessDistance;
 				int _ShadingDetail;
+				int _DrawPositionNum;
+				Vector _DrawPositions[100];
 			CBUFFER_END
 
 			ControlPoint TessellationVertexProgram(Attributes v)
