@@ -184,24 +184,32 @@ public class PlayerController : MonoBehaviour
         movementDashLocked = isDashing;
         movementMeleeAttackLocked = isMeleeAttacking;
         movementRangedAttackLocked = isRangedAttacking || isRangedAttackCharging;
-        
+
+
 
         if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
         {
             //normal movement
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed);
+
+            if(moveDirection.magnitude >= 0.01f)
+                playerAnim.isMoving = true;
+            else
+                playerAnim.isMoving = false;
         }
-        else if(!isMovementLocked() && !isActionBuffered() && isFocusing == true)
+        else if (!isMovementLocked() && !isActionBuffered() && isFocusing == true)
         {
-
-
-
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed * focusMoveSpeedMultiplier);
             RotateTowardsDirection(currentForwardDirection);
+
+            if (moveDirection.magnitude >= 0.01f)
+                playerAnim.isMoving = true;
+            else
+                playerAnim.isMoving = false;
         }
-        else if(!isMovementLocked() && isActionBuffered())
+        else if (!isMovementLocked() && isActionBuffered())
         {
 
             //dash gets priority
@@ -215,7 +223,7 @@ public class PlayerController : MonoBehaviour
             {
                 StartMeleeAttack();
             }
-            else if(rangedAttackBuffered)
+            else if (rangedAttackBuffered)
             {
                 StartRangedAttack();
             }
@@ -223,12 +231,16 @@ public class PlayerController : MonoBehaviour
             dashBuffered = false;
             meleeAttackBuffered = false;
             rangedAttackBuffered = false;
+
+            playerAnim.isMoving = false;
         }
-        else 
+        else
         {
             //movement is defined by dash or attack
             Vector3 moveDirection = Vector3.zero;
             DoMovement(moveDirection, moveSpeed);
+
+            playerAnim.isMoving = false;
         }
 
 

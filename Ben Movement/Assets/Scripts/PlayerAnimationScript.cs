@@ -8,6 +8,7 @@ public class PlayerAnimationScript : MonoBehaviour
     private PlayerController player;
     private Animator anim;
     private Rigidbody rb;
+    public bool isMoving;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,24 +18,17 @@ public class PlayerAnimationScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Vector3 movement = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if (movement.magnitude > 0.5f)
-        {
-            anim.SetBool("isMoving", true);
-            anim.SetFloat("movementSpeed", movement.magnitude * movementSpeedAnimation);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
-    }
 
     public void StartMeleeAttackAnimation(int comboStage)
     {
         anim.SetInteger("Melee Combo Stage", comboStage);
         anim.SetTrigger("Start Melee Attack");
+    }
+
+    private void Update()
+    {
+        anim.SetBool("isMoving", isMoving);
+        anim.SetFloat("movementSpeed", rb.velocity.magnitude);
     }
 
     public void StartRangedAttackAnimation()
@@ -51,4 +45,6 @@ public class PlayerAnimationScript : MonoBehaviour
     {
         anim.SetBool("dodge", false);
     }
+
+    
 }
