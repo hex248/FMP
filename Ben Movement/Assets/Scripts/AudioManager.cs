@@ -100,8 +100,28 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayInChannel(AudioClip clip, int channelNumber)
+    // play by asset name
+    public void PlayInChannel(string clipName, ChannelType channelType, int channelNumber)
     {
-        audioChannels[channelNumber - 1].PlayOnce(clip);
+        // find audio asset
+        AudioAsset selectedAsset = assets.Find(e => e.name == clipName);
+        AudioClip clip = selectedAsset.clip;
+        // filter channels based on channelType
+        List<AudioChannel> filteredChannels = audioChannels.FindAll(e => e.type == channelType);
+        // get selected channel
+        AudioChannel selectedChannel = filteredChannels[channelNumber - 1];
+        // play clip in selected channel
+        selectedChannel.PlayOnce(clip);
+    }
+
+    // play specific AudioClip (mostly temporary use cases, just for testing when an asset does not need to be set up for the long term)
+    public void PlayInChannel(AudioClip clip, ChannelType channelType, int channelNumber)
+    {
+        // filter channels based on channelType
+        List<AudioChannel> filteredChannels = audioChannels.FindAll(e => e.type == channelType);
+        // get selected channel
+        AudioChannel selectedChannel = filteredChannels[channelNumber - 1];
+        // play clip in selected channel
+        selectedChannel.PlayOnce(clip);
     }
 }
