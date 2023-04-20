@@ -56,13 +56,13 @@ public class TerrainInteractiveSnow : MonoBehaviour
     void UpdateSnowMaterial()
     {
         // convert array of transforms to array of positions (V4)
-        Vector4[] posArray = new Vector4[_trailsPositions.Count];
+        Vector4[] posArray = new Vector4[100];
         for (int i = 0; i < _trailsPositions.Count; i++)
         {
             posArray[i] = _trailsPositions[i].position;
         }
         terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
-        terrain.materialTemplate.SetFloat("_DrawPositionNum", posArray.Length);
+        //terrain.materialTemplate.SetInt("_DrawPositionNum", posArray.Length);
         Debug.Log($"Amount of positions: {posArray.Length}");
 
         // set positions after (triggers an update of positions)
@@ -135,6 +135,8 @@ public class TerrainInteractiveSnow : MonoBehaviour
             if (!_trailsPositions.Contains(trailDrawer.drawTransform))
             {
                 _trailsPositions.Add(trailDrawer.drawTransform);
+
+                terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
             }
         }
     }
