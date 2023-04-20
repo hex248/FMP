@@ -455,6 +455,7 @@ public class PlayerController : MonoBehaviour
 
     void DoMeleeAttackHit()
     {
+        Debug.Log("combo stage hit " + currentMeleeComboStage);
         showMeleeAttackGizmos = true;
         doneMeleeAttackHit = true;
         Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;

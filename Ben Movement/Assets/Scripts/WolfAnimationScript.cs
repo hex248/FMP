@@ -62,4 +62,9 @@ public class WolfAnimationScript : MonoBehaviour
     {
         anim.SetTrigger("death");
     }
+
+    public void EndDamageStun()
+    {
+        anim.SetTrigger("end damage stun");
+    }
 }

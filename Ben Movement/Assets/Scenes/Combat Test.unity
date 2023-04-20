@@ -2352,6 +2352,10 @@ PrefabInstance:
       value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: maxSpeedChange
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
       propertyPath: aimRotationSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -2361,7 +2365,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
       propertyPath: damagedStunnedTime
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
+      propertyPath: stunMaxSpeedChange
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7704235920015397543, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
       propertyPath: minAttackPrepareTime

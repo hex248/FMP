@@ -120,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 07ed29935fb37cd43bb6c93cb27d73c0, type: 2}
+  m_Motion: {fileID: 5723062789191808832, guid: c5080ccbafa1a6743a659d84ad921936, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -421,6 +421,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: end damage stun
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -483,7 +489,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 5723062789191808832, guid: c5080ccbafa1a6743a659d84ad921936, type: 3}
+  m_Motion: {fileID: -7072239204941087410, guid: 38ead68247236e64ba403ddcfbf0b0ad, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -503,7 +509,7 @@ AnimatorStateMachine:
     m_Position: {x: -460, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7927889742174964969}
-    m_Position: {x: -210, y: 20, z: 0}
+    m_Position: {x: -210, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 98593294377600957}
     m_Position: {x: -210, y: 90, z: 0}
@@ -618,7 +624,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: end damage stun
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -907935778658801559}
   m_Solo: 0
@@ -628,7 +637,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.0007417798
   m_TransitionOffset: 0.009045665
   m_ExitTime: 0.99901056
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

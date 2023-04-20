@@ -13,6 +13,7 @@ public class WolfController : MonoBehaviour
     [SerializeField] float moveRotationSpeed;
     [SerializeField] float aimRotationSpeed;
     [SerializeField] float inRangeMoveSpeed;
+    [SerializeField] float stunMaxSpeedChange;
     Quaternion rotationalDirection;
 
     [Header("Attack")]
@@ -136,7 +137,7 @@ public class WolfController : MonoBehaviour
                 wolfAnimationScript.Recover();
                 isMissedAttackStunned = false;
             }
-            MoveForward(0);
+            MoveForward(0, stunMaxSpeedChange);
         }
 
 
@@ -160,8 +161,14 @@ public class WolfController : MonoBehaviour
             if(timeSinceDamaged >= damagedStunnedTime)
             {
                 isDamageStunned = false;
+                wolfAnimationScript.EndDamageStun();
             }
             timeSinceDamaged += Time.deltaTime;
+            MoveForward(0, stunMaxSpeedChange);
+        }
+        else if(isDeathStunned)
+        {
+            MoveForward(0, stunMaxSpeedChange);
         }
 
         if (targetPlayer)
@@ -175,10 +182,14 @@ public class WolfController : MonoBehaviour
     }
 
 
-    void MoveForward(float speed)
+    void MoveForward(float speed, float maxSpeedChange = Mathf.Infinity)
     {
         Vector3 desiredVelocity = wolfVisuals.transform.forward * speed;
-        rb.velocity = desiredVelocity;
+        Vector3 newVelocity = Vector3.zero;
+        newVelocity.x = Mathf.MoveTowards(rb.velocity.x, desiredVelocity.x, maxSpeedChange);
+        newVelocity.z = Mathf.MoveTowards(rb.velocity.z, desiredVelocity.z, maxSpeedChange);
+
+        rb.velocity = newVelocity;
     }
 
     void RotateTowardsTarget()
@@ -277,7 +288,7 @@ public class WolfController : MonoBehaviour
                 hasHitPlayer = true;
             }
         }
-
+        
         if (hasHitPlayer)
         {
             wolfAnimationScript.AttackHit();
