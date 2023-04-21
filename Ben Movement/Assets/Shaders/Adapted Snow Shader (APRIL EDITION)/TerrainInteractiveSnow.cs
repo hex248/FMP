@@ -8,6 +8,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
     public Texture _stepPrint;
     public Material _snowMaterial;
     public List<Transform> _trailsPositions;
+    public List<float> _trailSizes;
 
     public float _drawDistance = 0.3f;
     public float _offset = 0.2f;
@@ -93,7 +94,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 _heightMapUpdate.SetVector(DrawPosition, hitTextureCoord);
                 _heightMapUpdate.SetTexture(PreviousTexture, _prevHeightMap);
                 _heightMapUpdate.SetFloat(DrawAngle, angle * Mathf.Deg2Rad);
-                _heightMapUpdate.SetFloat(Offset, _offset);
+                _heightMapUpdate.SetFloat(Offset, _trailSizes[_index] / 100);
                 _heightMapUpdate.SetFloat("_DeltaTime", Time.deltaTime);
             }
         }
@@ -135,8 +136,15 @@ public class TerrainInteractiveSnow : MonoBehaviour
             if (!_trailsPositions.Contains(trailDrawer.drawTransform))
             {
                 _trailsPositions.Add(trailDrawer.drawTransform);
+                _trailSizes.Add(trailDrawer.drawSize);
 
                 terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
+            }
+            else
+            {
+                // update draw size
+
+                _trailSizes[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawSize;
             }
         }
     }
@@ -148,6 +156,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
             var trailDrawer = other.GetComponent<TrailDrawer>();
             if (_trailsPositions.Contains(trailDrawer.drawTransform))
             {
+                _trailSizes.RemoveAt(_trailsPositions.IndexOf(trailDrawer.drawTransform));
                 _trailsPositions.Remove(trailDrawer.drawTransform);
             }
         }

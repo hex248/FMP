@@ -7,6 +7,7 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 		_DrawBrush("Brush", 2D) = "white"
 		_PreviousTexture("PreviousTexture", 2D) = "white"
 		_Offset("Offset", float) = 0.05
+		_DeltaTime("Delta Time", float) = 0.0
 	}
 
 		SubShader
@@ -48,13 +49,14 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 				SAMPLER(sampler_DrawBrush);
 				SAMPLER(sampler_PreviousTexture);
 
-				float _DeltaTime = 0.0;
+				//float _DeltaTime = 0.0;
 
 				CBUFFER_START(UnityPerMaterial)
 					float4 _DrawPosition;
 					float _DrawAngle;
 					float _RestoreAmount;
 					float _Offset;
+					float _DeltaTime;
 				CBUFFER_END
 
 				Varyings vert(Attributes IN)
@@ -86,11 +88,15 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 					
 					// calculate amount of white to add based on _snowRegenerationSpeed
 					
-					float upAmount = 0.01;
+					//float upAmount = unity_DeltaTime;
+					float upAmount = 0.5*_DeltaTime;
 					float4 colorToAdd = float4(upAmount, upAmount, upAmount, 1);
+					float4 newColor = lerp(previousColor, float4(1,1,1,1), 10* unity_DeltaTime);
 
 					// add white
 					previousColor += colorToAdd;
+					//previousColor = newColor;
+					
 
 					// return the darkest of the two values - ie only overwrite colour if it is darker than it was previously
 					return min(previousColor, drawColor);

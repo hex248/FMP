@@ -7,5 +7,6 @@ public class TrailDrawer : MonoBehaviour
 {
     public string name;
     public Transform drawTransform;
+    public float drawSize = 5;
 
 }
