@@ -123,6 +123,61 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1512080 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 32e1c1c4816fd7c4ba7d4b102372f622, type: 3}
+  m_PrefabInstance: {fileID: 191429725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1512081 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2036410469228376182, guid: 32e1c1c4816fd7c4ba7d4b102372f622, type: 3}
+  m_PrefabInstance: {fileID: 191429725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1512084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: turret 3
+  drawTransform: {fileID: 1512081}
+  drawSize: 15
+--- !u!54 &1512085
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512080}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!64 &1512086
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7857590630482128698, guid: 32e1c1c4816fd7c4ba7d4b102372f622, type: 3}
 --- !u!1 &5492770
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +531,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 806788272617679949, guid: 0db4e63ad5fd15a49b74bb6fac431014, type: 3}
   m_PrefabInstance: {fileID: 806788271717595672}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &150006527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -344004081357383697, guid: 0d1330b8cbf97b54dad57d1ff89fb9bd, type: 3}
+  m_PrefabInstance: {fileID: 1618987445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &150006528 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5742926517106001164, guid: 0d1330b8cbf97b54dad57d1ff89fb9bd, type: 3}
+  m_PrefabInstance: {fileID: 1618987445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &150006531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150006527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: healing trap
+  drawTransform: {fileID: 150006528}
+  drawSize: 15
+--- !u!54 &150006532
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150006527}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 62
+  m_CollisionDetection: 0
+--- !u!64 &150006533
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150006527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3861478300804232965, guid: 0d1330b8cbf97b54dad57d1ff89fb9bd, type: 3}
 --- !u!1 &172776626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,6 +1591,61 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &402397454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 0f6aa8450cc2f9d409c3bfa36a4fbb48, type: 3}
+  m_PrefabInstance: {fileID: 434182438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &402397455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2036410469228376182, guid: 0f6aa8450cc2f9d409c3bfa36a4fbb48, type: 3}
+  m_PrefabInstance: {fileID: 434182438}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &402397458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402397454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: turret 1
+  drawTransform: {fileID: 402397455}
+  drawSize: 15
+--- !u!54 &402397459
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402397454}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!64 &402397460
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402397454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7857590630482128698, guid: 0f6aa8450cc2f9d409c3bfa36a4fbb48, type: 3}
 --- !u!1 &415360800 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7272911518199237601, guid: 6774d71d10b9f9d46b1da4261f4f2b4a, type: 3}
@@ -2376,6 +2541,61 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8972666271578233534, guid: bc40458d7b8764c4bb62b4e07b476faf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bc40458d7b8764c4bb62b4e07b476faf, type: 3}
+--- !u!1 &762646339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: d82b20fe232070441840a5d95452f2e5, type: 3}
+  m_PrefabInstance: {fileID: 1701966687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &762646340 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2036410469228376182, guid: d82b20fe232070441840a5d95452f2e5, type: 3}
+  m_PrefabInstance: {fileID: 1701966687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &762646343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762646339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: turret 2
+  drawTransform: {fileID: 762646340}
+  drawSize: 15
+--- !u!54 &762646344
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762646339}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!64 &762646345
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762646339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7857590630482128698, guid: d82b20fe232070441840a5d95452f2e5, type: 3}
 --- !u!1 &807841542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3244458196547573144, guid: 28dc8ad773985fd409afb5aa49d46a27, type: 3}
@@ -3447,6 +3667,61 @@ CapsuleCollider:
   m_Height: 2.01
   m_Direction: 1
   m_Center: {x: 0, y: -0.26, z: 0}
+--- !u!1 &1414442841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6085036178219441596, guid: e0d176f5a7f2f4844a34eb1e1cfed3c0, type: 3}
+  m_PrefabInstance: {fileID: 1961903527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1414442842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8387580481774712099, guid: e0d176f5a7f2f4844a34eb1e1cfed3c0, type: 3}
+  m_PrefabInstance: {fileID: 1961903527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1414442845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414442841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: teleport trap
+  drawTransform: {fileID: 1414442842}
+  drawSize: 15
+--- !u!54 &1414442846
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414442841}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
+--- !u!64 &1414442847
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414442841}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6788383922943872000, guid: e0d176f5a7f2f4844a34eb1e1cfed3c0, type: 3}
 --- !u!1 &1456160840
 GameObject:
   m_ObjectHideFlags: 0
