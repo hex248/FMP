@@ -131,14 +131,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             lastMeleeAttackingTime += Time.deltaTime;
+
+            if (lastMeleeAttackingTime >= maxTimeBetweenMeleeAttackForCombo && neededMeleeComboReset == true)
+            {
+                ResetMeleeCombo();
+                neededMeleeComboReset = false;
+                playerAnim.ComboTimeout();
+
+            }
         }
-        if (lastMeleeAttackingTime >= maxTimeBetweenMeleeAttackForCombo && neededMeleeComboReset == true)
-        {
-            ResetMeleeCombo();
-            neededMeleeComboReset = false;
-            playerAnim.ComboTimeout();
-            
-        }
+
 
 
         if (isRangedAttacking)
@@ -195,8 +197,16 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDirection = GetRotatedDirectionFromInput(movementInput);
             DoMovement(moveDirection, moveSpeed);
 
-            if(moveDirection.magnitude >= 0.01f)
+            if (moveDirection.magnitude >= 0.01f)
+            {
                 playerAnim.isMoving = true;
+
+                if (neededMeleeComboReset)
+                {
+                    neededMeleeComboReset = false;
+                    ResetMeleeCombo();
+                }
+            }
             else
                 playerAnim.isMoving = false;
         }
@@ -207,7 +217,15 @@ public class PlayerController : MonoBehaviour
             RotateTowardsDirection(currentForwardDirection);
 
             if (moveDirection.magnitude >= 0.01f)
+            {
                 playerAnim.isMoving = true;
+
+                if (neededMeleeComboReset)
+                {
+                    neededMeleeComboReset = false;
+                    ResetMeleeCombo();
+                }
+            }
             else
                 playerAnim.isMoving = false;
         }
@@ -220,6 +238,12 @@ public class PlayerController : MonoBehaviour
                 Vector3 dashEndLocation = GetDashEndPoint();
                 StartDash(dashEndLocation);
                 Debug.Log("buffered dash to " + (dashEndLocation - transform.position));
+
+                if (neededMeleeComboReset)
+                {
+                    neededMeleeComboReset = false;
+                    ResetMeleeCombo();
+                }
             }
             else if (meleeAttackBuffered)
             {
@@ -249,6 +273,12 @@ public class PlayerController : MonoBehaviour
         if (isDashing)
         {
             DoDashMove();
+
+            if (neededMeleeComboReset)
+            {
+                neededMeleeComboReset = false;
+                ResetMeleeCombo();
+            }
         }
         if (isMeleeAttacking)
         {
@@ -358,10 +388,9 @@ public class PlayerController : MonoBehaviour
         if(direction.magnitude >= 0.1f)
         {
             mostRecentMoveDirection = direction;
-            
-            //reset combo if you are moving and not in the process of an attack
 
         }
+
         
         Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
         //TODO - Smooth out input rather than just setting directly? Might not be what we want though
