@@ -23,12 +23,19 @@ public class PlayerAnimationScript : MonoBehaviour
     {
         anim.SetInteger("Melee Combo Stage", comboStage);
         anim.SetTrigger("Start Melee Attack");
+        anim.SetBool("isAttacking", true);
     }
 
     private void Update()
     {
         anim.SetBool("isMoving", isMoving);
-        anim.SetFloat("movementSpeed", rb.velocity.magnitude);
+
+        if(isMoving)
+        {
+            anim.SetBool("isAttacking", false);
+        }
+
+        anim.SetFloat("movementSpeed", rb.velocity.magnitude * 0.4f);
     }
 
     public void StartRangedAttackAnimation()
@@ -46,5 +53,11 @@ public class PlayerAnimationScript : MonoBehaviour
         anim.SetBool("dodge", false);
     }
 
-    
+    public void ComboTimeout()
+    {
+        anim.SetTrigger("combo timeout");
+        anim.SetBool("isAttacking", false);
+    }
+
+
 }
