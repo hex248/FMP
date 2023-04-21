@@ -24,6 +24,8 @@ public class PlayerAnimationScript : MonoBehaviour
         anim.SetInteger("Melee Combo Stage", comboStage);
         anim.SetTrigger("Start Melee Attack");
         anim.SetBool("isAttacking", true);
+        anim.ResetTrigger("combo timeout");
+        isMoving = false;
     }
 
     private void Update()
@@ -58,6 +60,4 @@ public class PlayerAnimationScript : MonoBehaviour
         anim.SetTrigger("combo timeout");
         anim.SetBool("isAttacking", false);
     }
-
-
 }
