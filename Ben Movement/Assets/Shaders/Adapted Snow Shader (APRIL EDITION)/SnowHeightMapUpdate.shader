@@ -90,6 +90,7 @@ Shader "InteractiveSnow/SnowHeightMapUpdate"
 					
 					//float upAmount = unity_DeltaTime;
 					float upAmount = 0.5*_DeltaTime;
+					upAmount = 0.01;
 					float4 colorToAdd = float4(upAmount, upAmount, upAmount, 1);
 					float4 newColor = lerp(previousColor, float4(1,1,1,1), 10* unity_DeltaTime);
 
