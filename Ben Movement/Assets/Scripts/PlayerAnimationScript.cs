@@ -37,7 +37,7 @@ public class PlayerAnimationScript : MonoBehaviour
             anim.SetBool("isAttacking", false);
         }
 
-        anim.SetFloat("movementSpeed", rb.velocity.magnitude * 0.4f);
+        anim.SetFloat("movementSpeed", rb.velocity.magnitude * movementSpeedAnimation);
     }
 
     public void StartRangedAttackAnimation()
