@@ -12,13 +12,18 @@ public class PlayerHealth : MonoBehaviour
 
     PlayerController controller;
     PlayerAnimationScript anim;
+    Player player;
+    CameraFollow camera;
 
 
+    
     private void Start()
     {
         currentHitPoints = maxHitPoints;
         controller = GetComponent<PlayerController>();
         anim = GetComponentInChildren<PlayerAnimationScript>();
+        player = transform.parent.GetComponent<Player>();
+        camera = player.cameraFollow;
     }
 
     private void Update()
@@ -48,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
         invincible = true;
         anim.Damage();
         controller.Damage();
+        camera.CameraShake(0.3f, 0.2f);
     }
 
     void Die()

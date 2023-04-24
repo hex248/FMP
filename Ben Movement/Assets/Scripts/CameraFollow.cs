@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour
     Rigidbody rb;
     private Vector3 velocity = Vector3.zero;
     Vector3 shakeOffset;
+    Vector3 smoothFocusPoint;
 
     void SetObliqueness(float horizObl, float vertObl)
     {
@@ -32,7 +33,8 @@ public class CameraFollow : MonoBehaviour
     {
         if (currentFocusPoint != null)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, currentFocusPoint.position, ref velocity, smoothSpeed);
+            smoothFocusPoint = Vector3.SmoothDamp(smoothFocusPoint, currentFocusPoint.position, ref velocity, smoothSpeed);
+            transform.position = smoothFocusPoint + shakeOffset;
         }
         SetObliqueness(hori, verti);
     }
@@ -47,9 +49,9 @@ public class CameraFollow : MonoBehaviour
         currentFocusPoint = playerPoint;
     }
 
-    public void CameraShake()
+    public void CameraShake(float strength, float time)
     {
-        StartCoroutine(DoCameraShake(10f, 1f));
+        StartCoroutine(DoCameraShake(strength, time));
     }
 
     IEnumerator DoCameraShake(float strength, float time)
