@@ -58,7 +58,7 @@ public class WolfController : MonoBehaviour
 
     [Header("Behavior")]
     [SerializeField] float maxAttackRange;
-    GameObject currentTarget;
+    public GameObject currentTarget;
     [SerializeField] bool targetPlayer;
     Bed bed;
 
@@ -171,12 +171,6 @@ public class WolfController : MonoBehaviour
             MoveForward(0, stunMaxSpeedChange);
         }
 
-        if (targetPlayer)
-        {
-            targetPlayer = false;
-            if(FindObjectOfType<PlayerController>() != null)
-                currentTarget = FindObjectOfType<PlayerController>().gameObject;
-        }
 
         
     }

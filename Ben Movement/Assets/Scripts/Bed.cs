@@ -14,6 +14,6 @@ public class Bed : MonoBehaviour
     void Update()
     {
 
-        transform.eulerAngles = transform.rotation.eulerAngles + new Vector3(0f, Time.deltaTime * 5f, 0f);
+        //transform.eulerAngles = transform.rotation.eulerAngles + new Vector3(0f, Time.deltaTime * 5f, 0f);
     }
 }

@@ -11,7 +11,22 @@ public class PlayerManager : MonoBehaviour
     [Header("Players")]
     public int playerCount = 0;
 
-    public List<Player> players = new List<Player>();
+    private List<Player> m_Players = new List<Player>();
+    public List<Player> players
+    {
+        get
+        {
+            return m_Players;
+        }
+        set
+        {
+            if (m_Players == value)
+                return;
+            m_Players = value;
+            if(OnPlayerListChange != null)
+                OnPlayerListChange();
+        }
+    }
 
     [Header("Input")]
     PlayerInput playerInput;
@@ -183,5 +198,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    
+    //delegate for AI that needs accurate list of players.
+    public delegate void OnPlayerListChangeDelegate();
+    public event OnPlayerListChangeDelegate OnPlayerListChange;
+
+
+
+
+
 }
