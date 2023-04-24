@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] float maxTimeBetweenRangedAttackForCombo;
     float timeSinceRangedAttackEnd;
 
+    [Header("Interact Settings")]
+    public bool interacting = false;
 
 
     [Header("Visuals Settings")]
@@ -335,9 +337,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         Gizmos.color = Color.red;
-
-
-
     }
 
     //Movement Code
@@ -345,6 +344,23 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+
+        if (triggered)
+        {
+            if (!isMovementLocked() && !isActionBuffered())
+            {
+                interacting = false;
+            }
+        }
+        else
+        {
+            interacting = false;
+        }
     }
 
     Vector3 GetRotatedDirectionFromInput(Vector2 inDirection)
