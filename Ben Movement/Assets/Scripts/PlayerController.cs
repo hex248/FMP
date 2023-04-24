@@ -349,12 +349,13 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         bool triggered = context.action.triggered;
+        Debug.Log($"Interact key: {triggered}");
 
         if (triggered)
         {
             if (!isMovementLocked() && !isActionBuffered())
             {
-                interacting = false;
+                interacting = true;
             }
         }
         else
