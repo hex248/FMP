@@ -48,6 +48,7 @@ public class PlayerAnimationScript : MonoBehaviour
     public void StartDashAnimation()
     {
         anim.SetBool("dodge", true);
+        anim.SetBool("isAttacking", false);
     }
 
     public void EndDashAnimation()
