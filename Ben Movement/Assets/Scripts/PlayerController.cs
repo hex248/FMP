@@ -75,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Interact Settings")]
     public bool interacting = false;
+    public bool cycleLeftPressed = false;
+    public bool cycleRightPressed = false;
 
 
     [Header("Visuals Settings")]
@@ -368,7 +370,6 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         bool triggered = context.action.triggered;
-        Debug.Log($"Interact key: {triggered}");
 
         if (triggered)
         {
@@ -380,6 +381,40 @@ public class PlayerController : MonoBehaviour
         else
         {
             interacting = false;
+        }
+    }
+
+    public void OnCycleLeft(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+
+        if (triggered)
+        {
+            if (!isMovementLocked() && !isActionBuffered())
+            {
+                cycleLeftPressed = true;
+            }
+        }
+        else
+        {
+            cycleLeftPressed = false;
+        }
+    }
+
+    public void OnCycleRight(InputAction.CallbackContext context)
+    {
+        bool triggered = context.action.triggered;
+
+        if (triggered)
+        {
+            if (!isMovementLocked() && !isActionBuffered())
+            {
+                cycleRightPressed = true;
+            }
+        }
+        else
+        {
+            cycleRightPressed = false;
         }
     }
 

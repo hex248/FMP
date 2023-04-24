@@ -13,7 +13,7 @@ public class HealthPickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, 1.5f + 0.2f * Mathf.Sin(Time.time), transform.position.z);
+        transform.position = new Vector3(transform.position.x, 1.0f + 0.2f * Mathf.Sin(Time.time), transform.position.z);
         transform.eulerAngles += new Vector3(0f, Time.deltaTime * 30f, 0f);
     }
 }

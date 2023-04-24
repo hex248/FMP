@@ -5,31 +5,50 @@ using UnityEngine;
 public class BuildTrap : MonoBehaviour
 {
     public GameObject interactPopup;
-    public GameObject buildPopup;
+    public GameObject hologramParent;
+
+    public GameObject[] holograms;
+    public GameObject currentHologram;
+    public int hologramIDX = 0;
 
     private void Start()
     {
         interactPopup.SetActive(false);
-        buildPopup.SetActive(false);
+        hologramParent.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (hologramParent.activeInHierarchy)
+        {
+            if (currentHologram != null && currentHologram != holograms[hologramIDX]) currentHologram.SetActive(false);
+            holograms[hologramIDX].SetActive(true);
+            currentHologram = holograms[hologramIDX];
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-
-            // press interact bind
-
             // if is interacting
-
-            Debug.Log(other.GetComponent<PlayerController>().interacting);
             if (other.GetComponent<PlayerController>().interacting)
             {
-                ShowBuildPopup();
+                ShowHolograms();
             }
-            else if (!buildPopup.activeInHierarchy)
+            // otherwise, show interact icon if the holograms aren't showing
+            else if (!hologramParent.activeInHierarchy)
             {
                 ShowInteractPopup();
+            }
+
+            if (other.GetComponent<PlayerController>().cycleLeftPressed)
+            {
+                CycleLeft();
+            }
+            else if (other.GetComponent<PlayerController>().cycleRightPressed)
+            {
+                CycleRight();
             }
         }
     }
@@ -39,28 +58,40 @@ public class BuildTrap : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             HideInteractPopup();
-            HideBuildPopup();
+            HideHolograms();
         }
     }
 
     void ShowInteractPopup()
     {
         interactPopup.SetActive(true);
-        buildPopup.SetActive(false);
+        hologramParent.SetActive(false);
     }
 
-    void ShowBuildPopup()
+    void ShowHolograms()
     {
         interactPopup.SetActive(false);
-        buildPopup.SetActive(true);
+        hologramParent.SetActive(true);
     }
     void HideInteractPopup()
     {
         interactPopup.SetActive(false);
     }
 
-    void HideBuildPopup()
+    void HideHolograms()
     {
-        buildPopup.SetActive(false);
+        hologramParent.SetActive(false);
+    }
+
+    void CycleLeft()
+    {
+        hologramIDX--;
+        if (hologramIDX <= 0) hologramIDX = holograms.Length - 1;
+    }
+
+    void CycleRight()
+    {
+        hologramIDX++;
+        if (hologramIDX >= holograms.Length) hologramIDX = 0;
     }
 }

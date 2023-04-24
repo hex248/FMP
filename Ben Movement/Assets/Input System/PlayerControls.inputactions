@@ -60,6 +60,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Player Cycle Left",
+                    "type": "Button",
+                    "id": "f74b4be6-a12d-4228-bb1b-36731620a314",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Player Cycle Right",
+                    "type": "Button",
+                    "id": "6b66a70d-0a55-4787-ae26-9d8eae800b5f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Toggle Menu",
                     "type": "Button",
                     "id": "31f7ccb2-efa3-4985-86f0-e5a86e388129",
@@ -521,6 +539,50 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Player Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ec8f81e-1b4b-4178-8e1d-e0a149a624d0",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Player Cycle Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec7a0c48-6290-4d5a-b556-926578bf00a0",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Cycle Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72fa4a6d-8549-4ad5-8d15-65094c19b522",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Player Cycle Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40ed7b3a-a9c6-427f-baa8-6b54c2746831",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Cycle Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
