@@ -50,9 +50,11 @@ public class WolfTargetting : MonoBehaviour
     {
         playerParents = playerManager.players;
         players = new List<PlayerController>();
+        Debug.Log("List update, " + players + " " + playerParents);
         foreach (Player player in playerParents)
         {
-            PlayerController newPlayerController = player.GetComponentInChildren<PlayerController>();
+            PlayerController newPlayerController = player.gameObject.GetComponentInChildren<PlayerController>();
+            Debug.Log("List update, add " + player + "!");
             players.Add(newPlayerController);
         }
     }

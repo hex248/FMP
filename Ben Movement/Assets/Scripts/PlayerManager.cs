@@ -12,21 +12,7 @@ public class PlayerManager : MonoBehaviour
     public int playerCount = 0;
 
     private List<Player> m_Players = new List<Player>();
-    public List<Player> players
-    {
-        get
-        {
-            return m_Players;
-        }
-        set
-        {
-            if (m_Players == value)
-                return;
-            m_Players = value;
-            if(OnPlayerListChange != null)
-                OnPlayerListChange();
-        }
-    }
+    public List<Player> players = new List<Player>();
 
     [Header("Input")]
     PlayerInput playerInput;
@@ -139,7 +125,6 @@ public class PlayerManager : MonoBehaviour
 
             binding.actionReference = newReference;
 
-            Debug.Log(newReference.ToString());
         }
 
         //re-apply in scrolling lists
@@ -151,15 +136,18 @@ public class PlayerManager : MonoBehaviour
 
 
         playerCount++;
+        OnPlayerListChange();
         StartCoroutine(screenManager.PlayerJoined(playerCount));
         player.GetComponentInChildren<PlayerController>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
 
         UpdateRenderTextures();
+
     }
 
     public void DisconnectPlayer(Player player)
     {
         players.RemoveAt(player.playerNumber - 1);
+        OnPlayerListChange();
         playerCount--;
     }
 
