@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Player Interact",
+                    "type": "Button",
+                    "id": "5804510e-978a-4f84-b672-16d149555f51",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Toggle Menu",
                     "type": "Button",
                     "id": "31f7ccb2-efa3-4985-86f0-e5a86e388129",
@@ -99,22 +108,22 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "5c4b80e0-6319-4f1a-8632-c4df948a9bb2",
-                    "path": "<Keyboard>/z",
+                    "id": "fe69b0f5-58fd-4943-b920-b28b04833f30",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Gamepad",
                     "action": "Player Ranged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "fe69b0f5-58fd-4943-b920-b28b04833f30",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "5c4b80e0-6319-4f1a-8632-c4df948a9bb2",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Keyboard",
                     "action": "Player Ranged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -490,6 +499,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Player Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d965a4b-121e-4aa8-b8ea-ffd99d656b87",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Player Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34fda4c5-34c7-4628-a753-815c005f28a9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Player Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
