@@ -50,7 +50,6 @@ public class WolfController : MonoBehaviour
     [SerializeField] Vector3 hitboxSize; 
     [SerializeField] LayerMask attackLayerMask;
     [SerializeField] float attackForce;
-    [SerializeField] float attackDamage;
 
     [Header("Visuals")]
     [SerializeField] GameObject wolfVisuals;
@@ -269,10 +268,10 @@ public class WolfController : MonoBehaviour
                 hitRb.AddForce(currentAttackDirection * attackForce);
                 hasHitPlayer = true;
             }
-            EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
-            if (enemy != null)
+            PlayerHealth player = hitColliders[i].gameObject.GetComponent<PlayerHealth>();
+            if (player != null)
             {
-                enemy.TakeDamage(attackDamage);
+                player.Damage();
                 hasHitPlayer = true;
             }
             Bed bed = hitColliders[i].gameObject.GetComponent<Bed>();

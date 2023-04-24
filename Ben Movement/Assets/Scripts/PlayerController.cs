@@ -107,6 +107,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float focusViewRange = 10f;
     [SerializeField] GameObject focusReticule;
 
+    [Header("Stun Settings")]
+    [SerializeField] float damageStunTime;
+    float timeSinceDamaged;
+    bool isDamageStunned;
+
 
 
     private void Start()
@@ -162,6 +167,16 @@ public class PlayerController : MonoBehaviour
         {
             rangedAttackChargingTime = 0f;
         }
+
+        if(isDamageStunned)
+        {
+            timeSinceDamaged += Time.deltaTime;
+            if(timeSinceDamaged >= damageStunTime)
+            {
+                isDamageStunned = false;
+            }
+        }
+
 
 
         if (isFocusing)
@@ -312,8 +327,12 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
-        
+    }
+
+    public void Damage()
+    {
+        timeSinceDamaged = 0f;
+        isDamageStunned = true;
     }
 
     void OnDrawGizmos()
@@ -890,7 +909,7 @@ public class PlayerController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked);
+        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned);
     }
 
     bool isActionBuffered()

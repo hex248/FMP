@@ -61,4 +61,10 @@ public class PlayerAnimationScript : MonoBehaviour
         anim.SetTrigger("combo timeout");
         anim.SetBool("isAttacking", false);
     }
+
+    public void Damage()
+    {
+        anim.SetTrigger("Damaged");
+        anim.SetBool("isAttacking", false);
+    }
 }
