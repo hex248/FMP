@@ -122,10 +122,12 @@ public class WolfTargetting : MonoBehaviour
     void TargetPlayer(PlayerController player)
     {
         target = player.gameObject;
+        targetingPlayer = true;
     }
 
     void TargetBed()
     {
         target = bed.gameObject;
+        targetingPlayer = false;
     }
 }
