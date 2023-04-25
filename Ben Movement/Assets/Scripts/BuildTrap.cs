@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class BuildTrap : MonoBehaviour
 {
-    public GameObject interactPopup;
-    public GameObject hologramParent;
+    [SerializeField] GameObject interactPopup;
+    [SerializeField] GameObject hologramParent;
 
-    public GameObject[] holograms;
-    public GameObject currentHologram;
-    public int hologramIDX = 0;
+    [SerializeField] GameObject[] holograms;
+    GameObject currentHologram;
+    int hologramIDX = 0;
+
+    float timeSinceCycleLeft = 0.0f;
+    float timeSinceCycleRight = 0.0f;
+    public float cycleCooldown = 0.25f;
 
     private void Start()
     {
@@ -19,6 +23,8 @@ public class BuildTrap : MonoBehaviour
 
     private void Update()
     {
+        timeSinceCycleLeft += Time.deltaTime;
+        timeSinceCycleRight += Time.deltaTime;
         if (hologramParent.activeInHierarchy)
         {
             if (currentHologram != null && currentHologram != holograms[hologramIDX]) currentHologram.SetActive(false);
@@ -44,11 +50,19 @@ public class BuildTrap : MonoBehaviour
 
             if (other.GetComponent<PlayerController>().cycleLeftPressed)
             {
-                CycleLeft();
+                if (timeSinceCycleLeft >= cycleCooldown)
+                {
+                    timeSinceCycleLeft = 0.0f;
+                    CycleLeft();
+                }
             }
             else if (other.GetComponent<PlayerController>().cycleRightPressed)
             {
-                CycleRight();
+                if (timeSinceCycleRight >= cycleCooldown)
+                {
+                    timeSinceCycleRight = 0.0f;
+                    CycleRight();
+                }
             }
         }
     }
