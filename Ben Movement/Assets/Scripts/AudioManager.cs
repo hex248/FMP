@@ -13,6 +13,7 @@ public enum ChannelType
 public class AudioChannelSettings
 {
     public string sourceName;
+    public string description;
     [Range(0, 1)]
     public float volume = 1.0f;
     [Range(-3, 3)]

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BuildTrap : MonoBehaviour
 {
-    [SerializeField] GameObject interactPopup;
+    AudioManager AM;
+
+    [SerializeField] GameObject interactControls;
     [SerializeField] GameObject hologramParent;
 
     [SerializeField] GameObject[] holograms;
@@ -12,18 +14,24 @@ public class BuildTrap : MonoBehaviour
     GameObject currentHologram;
     int hologramIDX = 0;
 
+    float timeSinceInteract = 0.0f;
     float timeSinceCycleLeft = 0.0f;
     float timeSinceCycleRight = 0.0f;
+    public float interactCooldown = 1.0f;
     public float cycleCooldown = 0.25f;
 
     private void Start()
     {
-        interactPopup.SetActive(false);
+        AM = FindObjectOfType<AudioManager>();
+        interactControls.SetActive(false);
         hologramParent.SetActive(false);
+        HideInteractControls();
+        HideHolograms();
     }
 
     private void Update()
     {
+        timeSinceInteract += Time.deltaTime;
         timeSinceCycleLeft += Time.deltaTime;
         timeSinceCycleRight += Time.deltaTime;
         if (hologramParent.activeInHierarchy)
@@ -38,22 +46,23 @@ public class BuildTrap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            ShowInteractControls();
             // if is interacting
             if (other.GetComponent<PlayerController>().interacting)
             {
-                if (!hologramParent.activeInHierarchy)
+                if (timeSinceInteract >= interactCooldown)
                 {
-                    ShowHolograms();
+                    timeSinceInteract = 0.0f;
+                    if (!hologramParent.activeInHierarchy)
+                    {
+                        ShowHolograms();
+                        ShowHologramControls();
+                    }
+                    else // if interacting while holograms shown:
+                    {
+                        Build(prefabs[hologramIDX]);
+                    }
                 }
-                else // if interacting while holograms shown:
-                {
-                    Build(prefabs[hologramIDX]);
-                }
-            }
-            // otherwise, show interact icon if the holograms aren't showing
-            else if (!hologramParent.activeInHierarchy)
-            {
-                ShowInteractPopup();
             }
 
             if (other.GetComponent<PlayerController>().cycleLeftPressed)
@@ -79,30 +88,39 @@ public class BuildTrap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HideInteractPopup();
+            HideInteractControls();
             HideHolograms();
         }
     }
 
     void Build(GameObject prefab)
     {
-
+        // play build sound effect
+        AM.PlayInChannel("tower_build", ChannelType.SFX, 1);
+        // spawn tower
+        var spawned = Instantiate(prefab);
+        spawned.transform.position = hologramParent.transform.position;
+        // destroy self
+        Destroy(gameObject);
     }
 
-    void ShowInteractPopup()
+    void ShowInteractControls()
     {
-        interactPopup.SetActive(true);
-        hologramParent.SetActive(false);
+        interactControls.SetActive(true);
+    }
+
+    void ShowHologramControls()
+    {
+
     }
 
     void ShowHolograms()
     {
-        interactPopup.SetActive(false);
         hologramParent.SetActive(true);
     }
-    void HideInteractPopup()
+    void HideInteractControls()
     {
-        interactPopup.SetActive(false);
+        interactControls.SetActive(false);
     }
 
     void HideHolograms()

@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f714df9c1f6641a44b15e2f229188dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactPopup: {fileID: 6388796308350406603}
+  interactControls: {fileID: 6388796308350406603}
   hologramParent: {fileID: 6388796309600095370}
   holograms:
   - {fileID: 82764556002014624}
@@ -198,6 +198,13 @@ MonoBehaviour:
   - {fileID: 1212746329666273445}
   - {fileID: 6403353576632547369}
   - {fileID: 329976500671178012}
+  prefabs:
+  - {fileID: 6453545602357310299, guid: eab5a883a2b97e443bee69a6bdb38d6c, type: 3}
+  - {fileID: 4545832507115619273, guid: b6f71bfff691fc442b74856fee6a0496, type: 3}
+  - {fileID: 5223359971110643448, guid: 1bbebebc05a641744ae81dc685610a6b, type: 3}
+  - {fileID: 32888877153748016, guid: 487ec414ee730b148a246b9beffbef2d, type: 3}
+  - {fileID: 6646714391190693750, guid: d32fa30a2e219844d9c1864625d69288, type: 3}
+  interactCooldown: 0.35
   cycleCooldown: 0.15
 --- !u!1 &6388796308350406603
 GameObject:

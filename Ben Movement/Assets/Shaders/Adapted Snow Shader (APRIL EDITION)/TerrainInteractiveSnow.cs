@@ -11,7 +11,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
     public List<float> _trailSizes;
 
     public float _drawDistance = 0.3f;
-    public float _offset = 0.2f;
 
     Material _heightMapUpdate;
     public CustomRenderTexture _snowHeightMap;
@@ -82,7 +81,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
         var trail = _trailsPositions[_index];
 
         Ray ray = new Ray(trail.transform.position, Vector3.down);
-        //Debug.DrawRay(trail.transform.position, Vector3.down * _drawDistance, Color.blue);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _drawDistance))
         {
@@ -160,5 +158,12 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 _trailsPositions.Remove(trailDrawer.drawTransform);
             }
         }
+    }
+
+    public void RemoveObject(GameObject removedObject)
+    {
+        int removedIDX = _trailsPositions.IndexOf(removedObject.transform);
+        _trailsPositions.RemoveAt(removedIDX);
+        _trailSizes.RemoveAt(removedIDX);
     }
 }

@@ -9,4 +9,9 @@ public class TrailDrawer : MonoBehaviour
     public Transform drawTransform;
     public float drawSize = 5;
 
+    private void OnDestroy()
+    {
+        // send message to TerrainInteractiveSnow to remove this from the 
+        FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(this.gameObject);
+    }
 }
