@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour
 
     void SetObliqueness(float horizObl, float vertObl)
     {
-        Matrix4x4 mat = Camera.main.projectionMatrix;
+        Matrix4x4 mat = cam.projectionMatrix;
         mat[0, 2] = horizObl;
         mat[1, 2] = vertObl;
         Camera.main.projectionMatrix = mat;

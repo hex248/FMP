@@ -131,7 +131,6 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         if (isMeleeAttacking)
         {
             lastMeleeAttackingTime = 0f;
@@ -194,6 +193,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+
+
                 focusReticule.SetActive(true);
                 Vector3 worldPos = focusObject.transform.position + new Vector3(0f, 1.5f, 0f);
                 focusReticule.transform.position = playerParent.playerCamera.WorldToScreenPoint(worldPos);
@@ -386,9 +387,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnCycleLeft(InputAction.CallbackContext context)
     {
-        bool triggered = context.action.triggered;
+        bool performed = context.performed;
 
-        if (triggered)
+        if (performed)
         {
             if (!isMovementLocked() && !isActionBuffered())
             {
@@ -403,9 +404,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnCycleRight(InputAction.CallbackContext context)
     {
-        bool triggered = context.action.triggered;
+        bool performed = context.performed;
 
-        if (triggered)
+        if (performed)
         {
             if (!isMovementLocked() && !isActionBuffered())
             {
