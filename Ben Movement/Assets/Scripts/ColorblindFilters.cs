@@ -45,7 +45,7 @@ public class ColorblindFilters : MonoBehaviour
 
     float secretnessScale = 5f;
 
-    private void Start()
+    private void Awake()
     {
         volume.profile = new VolumeProfile(); // create new volume profile
         channelMixer = volume.profile.Add<ChannelMixer>(); // add channel mixer effect

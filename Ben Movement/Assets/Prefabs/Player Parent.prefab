@@ -592,6 +592,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3190041394345523219}
     m_Modifications:
+    - target: {fileID: 1968484378320701265, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1968484378320701267, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
       propertyPath: orthographic
       value: 1
@@ -3128,4 +3132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHitPoints: 5
-  invincibilityTime: 2
+  invincibilityTime: 0.6
+  volume: {fileID: 0}
+  hurtGradientAmount: 1
+  hurtIntensityAmount: 0.33
+  vignetteSmoothSpeed: 20
+  vignetteColor: {r: 1, g: 0, b: 0, a: 0}
