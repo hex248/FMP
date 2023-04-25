@@ -8,6 +8,7 @@ public class BuildTrap : MonoBehaviour
     [SerializeField] GameObject hologramParent;
 
     [SerializeField] GameObject[] holograms;
+    [SerializeField] GameObject[] prefabs;
     GameObject currentHologram;
     int hologramIDX = 0;
 
@@ -40,7 +41,14 @@ public class BuildTrap : MonoBehaviour
             // if is interacting
             if (other.GetComponent<PlayerController>().interacting)
             {
-                ShowHolograms();
+                if (!hologramParent.activeInHierarchy)
+                {
+                    ShowHolograms();
+                }
+                else // if interacting while holograms shown:
+                {
+                    Build(prefabs[hologramIDX]);
+                }
             }
             // otherwise, show interact icon if the holograms aren't showing
             else if (!hologramParent.activeInHierarchy)
@@ -74,6 +82,11 @@ public class BuildTrap : MonoBehaviour
             HideInteractPopup();
             HideHolograms();
         }
+    }
+
+    void Build(GameObject prefab)
+    {
+
     }
 
     void ShowInteractPopup()
