@@ -131,7 +131,6 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         if (isMeleeAttacking)
         {
             lastMeleeAttackingTime = 0f;
@@ -388,9 +387,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnCycleLeft(InputAction.CallbackContext context)
     {
-        bool triggered = context.action.triggered;
+        bool performed = context.performed;
 
-        if (triggered)
+        if (performed)
         {
             if (!isMovementLocked() && !isActionBuffered())
             {
@@ -405,9 +404,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnCycleRight(InputAction.CallbackContext context)
     {
-        bool triggered = context.action.triggered;
+        bool performed = context.performed;
 
-        if (triggered)
+        if (performed)
         {
             if (!isMovementLocked() && !isActionBuffered())
             {
