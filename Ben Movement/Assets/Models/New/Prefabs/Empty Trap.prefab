@@ -108,7 +108,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4879929357845238373}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -129,6 +129,7 @@ MonoBehaviour:
   name: empty trap
   drawTransform: {fileID: 467631260996154998}
   drawSize: 15
+  objectType: 1
 --- !u!1 &6082385853650541355
 GameObject:
   m_ObjectHideFlags: 0
