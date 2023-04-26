@@ -367,7 +367,7 @@ MonoBehaviour:
     loop: 0
   - sourceName: SFX 2
     description: Quieter, for less important and more subtle sounds
-    volume: 1
+    volume: 0.35
     pitch: 1
     priority: 128
     mute: 0
@@ -981,7 +981,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
   Mute: 0
