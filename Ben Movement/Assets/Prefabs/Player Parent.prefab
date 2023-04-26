@@ -1019,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741879360369, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741909571397, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3151,5 +3151,5 @@ MonoBehaviour:
   volume: {fileID: 2506270392354407006}
   hurtGradientAmount: 1
   hurtIntensityAmount: 0.33
-  vignetteSmoothSpeed: 20
+  vignetteSmoothSpeed: 5
   vignetteColor: {r: 1, g: 0, b: 0, a: 0}

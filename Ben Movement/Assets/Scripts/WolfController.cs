@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WolfController : MonoBehaviour
 {
@@ -60,8 +61,13 @@ public class WolfController : MonoBehaviour
     public GameObject currentTarget;
     [SerializeField] bool targetPlayer;
     Bed bed;
+    Vector3 moveDirection;
 
     [SerializeField] LayerMask raycastLayer;
+
+    [Header("Navmesh Settings")]
+    private NavMeshAgent navMesh;
+    bool useNavMesh;
 
 
     // Start is called before the first frame update
@@ -72,11 +78,17 @@ public class WolfController : MonoBehaviour
         wolfAnimationScript = GetComponentInChildren<WolfAnimationScript>();
         currentTarget = bed.gameObject;
         timeSinceLastAttacking = 0f;
+
+        navMesh = GetComponent<NavMeshAgent>();
+        navMesh.updatePosition = false;
+        navMesh.updateRotation = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+
         Vector3 offsetToTarget = currentTarget.transform.position - transform.position;
         Vector3 directionToTarget = offsetToTarget.normalized;
         float distanceToTarget = offsetToTarget.magnitude;
@@ -86,14 +98,46 @@ public class WolfController : MonoBehaviour
         float minDistanceToTargetCollider = Mathf.Infinity;
         Vector3 raycastStart = transform.position + new Vector3(0f, 0.5f, 0f);
         Physics.Raycast(raycastStart, directionToTarget, out hit, Mathf.Infinity, raycastLayer);
+
         if (hit.collider != null)
         {
             targetIsInDirectView = (hit.collider.gameObject == currentTarget);
             minDistanceToTargetCollider = (hit.point - transform.position).magnitude;
         }
 
+        navMesh.destination = currentTarget.transform.position;
+        Debug.DrawRay(transform.position, navMesh.desiredVelocity.normalized, Color.red, Time.deltaTime);
 
-        if (!isMovementLocked())
+        float navMeshTargetDirectionDot = Vector3.Dot(directionToTarget, navMesh.desiredVelocity.normalized);
+        if (navMeshTargetDirectionDot >= 0.99f)
+        {
+            //normal behaviour
+            useNavMesh = false;
+            moveDirection = directionToTarget;
+        }
+        else
+        {
+            if (currentTarget == bed.gameObject)
+            {
+                navMesh.agentTypeID = GetAgentTypeIDByName("Attacking Bed");
+            }
+            else
+            {
+                navMesh.agentTypeID = GetAgentTypeIDByName("Attacking Player");
+            }
+            //take directions from navmesh
+            useNavMesh = true;
+            moveDirection = navMesh.desiredVelocity.normalized;
+        }
+
+        if (useNavMesh && !isMovementLocked())
+        {
+            //don't attack while using navmesh
+
+            RotateTowardsTarget();
+            MoveForward(moveSpeed);
+        }
+        else if (!isMovementLocked())
         {
             if (minDistanceToTargetCollider <= maxAttackRange)
             {
@@ -105,7 +149,7 @@ public class WolfController : MonoBehaviour
                     PrepareAttack();
                 }
 
-                
+
             }
             else
             {
@@ -113,7 +157,7 @@ public class WolfController : MonoBehaviour
                 MoveForward(moveSpeed);
             }
         }
-        else if(isPreparingAttack && !isInteruptAttack())
+        else if (isPreparingAttack && !isInteruptAttack())
         {
             if (timeSincePrepare >= minAttackPrepareTime)
             {
@@ -128,10 +172,10 @@ public class WolfController : MonoBehaviour
                 timeSincePrepare += Time.deltaTime;
             }
         }
-        else if(isMissedAttackStunned && !isInteruptAttack())
+        else if (isMissedAttackStunned && !isInteruptAttack())
         {
             timeSinceStunned += Time.deltaTime;
-            if(timeSinceStunned >= missedAttackStunTime)
+            if (timeSinceStunned >= missedAttackStunTime)
             {
                 wolfAnimationScript.Recover();
                 isMissedAttackStunned = false;
@@ -157,7 +201,7 @@ public class WolfController : MonoBehaviour
 
         if (isDamageStunned)
         {
-            if(timeSinceDamaged >= damagedStunnedTime)
+            if (timeSinceDamaged >= damagedStunnedTime)
             {
                 isDamageStunned = false;
                 wolfAnimationScript.EndDamageStun();
@@ -165,13 +209,29 @@ public class WolfController : MonoBehaviour
             timeSinceDamaged += Time.deltaTime;
             MoveForward(0, stunMaxSpeedChange);
         }
-        else if(isDeathStunned)
+        else if (isDeathStunned)
         {
             MoveForward(0, stunMaxSpeedChange);
         }
 
 
-        
+        navMesh.nextPosition = transform.position;
+    }
+
+    int GetAgentTypeIDByName(string agentTypeName)
+    {
+        int count = NavMesh.GetSettingsCount();
+        string[] agentTypeNames = new string[count + 2];
+        for (var i = 0; i < count; i++)
+        {
+            int id = NavMesh.GetSettingsByIndex(i).agentTypeID;
+            string name = NavMesh.GetSettingsNameFromID(id);
+            if (name == agentTypeName)
+            {
+                return id;
+            }
+        }
+        return -1;
     }
 
 
@@ -187,7 +247,7 @@ public class WolfController : MonoBehaviour
 
     void RotateTowardsTarget()
     {
-        Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position, Vector3.up);
+        Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
 
         rotationalDirection = Quaternion.Lerp(wolfVisuals.transform.rotation, targetRotation, moveRotationSpeed * Time.deltaTime);
         transform.rotation = rotationalDirection;
