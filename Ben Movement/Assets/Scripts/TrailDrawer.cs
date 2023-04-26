@@ -15,6 +15,7 @@ public class TrailDrawer : MonoBehaviour
     public string name;
     public Transform drawTransform;
     public float drawSize = 5;
+    public float drawDistance = 1f;
 
     public ObjectType objectType;
 

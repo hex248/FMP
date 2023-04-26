@@ -8,9 +8,10 @@ public class TerrainInteractiveSnow : MonoBehaviour
     public Texture _stepPrint;
     public Material _snowMaterial;
     public List<Transform> _trailsPositions;
-    public List<float> _trailSizes;
+    public List<float> _trailSizes = new List<float>();
+    public List<float> _trailDistance;
 
-    public float _drawDistance = 0.3f;
+    //public float _drawDistance = 0.3f;
 
     Material _heightMapUpdate;
     public CustomRenderTexture _snowHeightMap;
@@ -79,7 +80,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
         Ray ray = new Ray(trail.transform.position, Vector3.down);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _drawDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, _trailDistance[_index]))
         {
             if (hit.collider.name == gameObject.name)
             {
@@ -134,6 +135,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 {
                     _trailsPositions.Add(trailDrawer.drawTransform);
                     _trailSizes.Add(trailDrawer.drawSize);
+                    _trailDistance.Add(trailDrawer.drawDistance);
 
                     terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
                 }
@@ -142,6 +144,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                     // update draw size
 
                     _trailSizes[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawSize;
+                    _trailDistance[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawDistance;
                 }
             }
         }

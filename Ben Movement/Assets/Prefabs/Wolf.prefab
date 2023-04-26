@@ -163,6 +163,36 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &7682145219413990220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3415173978111439523}
+  m_Layer: 11
+  m_Name: DrawPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3415173978111439523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682145219413990220}
+  m_LocalRotation: {x: -0, y: -0.7071067, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 0, y: -0, z: -0.0083}
+  m_LocalScale: {x: 0.02, y: 0.020000003, z: 0.020000003}
+  m_Children: []
+  m_Father: {fileID: 8898305270384561929}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7704235920015397536
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +208,7 @@ GameObject:
   - component: {fileID: 1577664589033795166}
   - component: {fileID: 724161248}
   - component: {fileID: 724161253}
+  - component: {fileID: 5922836131176838308}
   m_Layer: 11
   m_Name: Wolf
   m_TagString: Untagged
@@ -377,6 +408,23 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5922836131176838308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704235920015397536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Wolf
+  drawTransform: {fileID: 3415173978111439523}
+  drawSize: 5
+  drawDistance: 0.3
+  objectType: 0
 --- !u!1 &7704235921465295036
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +557,11 @@ GameObject:
 --- !u!4 &3639698405639444505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
+  m_PrefabInstance: {fileID: 3821435224542986226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8898305270384561929 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5653519914247303419, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
   m_PrefabInstance: {fileID: 3821435224542986226}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &6026214659153863286
