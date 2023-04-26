@@ -160,6 +160,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 				half4 newPos = IN.vertex;
 				half pos = SAMPLE_TEXTURE2D_LOD(_HeightMap, sampler_HeightMap, IN.uv, 1).r * _Height;
+				pos = floor(pos * 100) / 100;
 				newPos.y += pos;
 				OUT.vertex = TransformObjectToHClip(newPos);
 
