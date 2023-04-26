@@ -62,8 +62,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
             posArray[i] = _trailsPositions[i].position;
         }
         terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
-        //terrain.materialTemplate.SetInt("_DrawPositionNum", posArray.Length);
-        Debug.Log($"Amount of positions: {posArray.Length}");
 
         // set positions after (triggers an update of positions)
 
@@ -72,7 +70,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
         terrain.materialTemplate.SetFloat("_MinTessDistance", _snowMaterial.GetFloat("_MinTessDistance") + Time.deltaTime);
         terrain.materialTemplate.SetFloat("_MaxTessDistance", _snowMaterial.GetFloat("_MaxTessDistance"));
         terrain.materialTemplate.SetInt("_ShadingDetail", _snowMaterial.GetInt("_ShadingDetail"));
-        Debug.Log($"pass count:{terrain.materialTemplate.renderQueue}");
     }
 
     private void DrawTrails()
@@ -131,18 +128,21 @@ public class TerrainInteractiveSnow : MonoBehaviour
         if (other.GetComponent<TrailDrawer>() != null)
         {
             var trailDrawer = other.GetComponent<TrailDrawer>();
-            if (!_trailsPositions.Contains(trailDrawer.drawTransform))
+            if (trailDrawer.objectType == ObjectType.Player)
             {
-                _trailsPositions.Add(trailDrawer.drawTransform);
-                _trailSizes.Add(trailDrawer.drawSize);
+                if (!_trailsPositions.Contains(trailDrawer.drawTransform))
+                {
+                    _trailsPositions.Add(trailDrawer.drawTransform);
+                    _trailSizes.Add(trailDrawer.drawSize);
 
-                terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
-            }
-            else
-            {
-                // update draw size
+                    terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
+                }
+                else
+                {
+                    // update draw size
 
-                _trailSizes[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawSize;
+                    _trailSizes[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawSize;
+                }
             }
         }
     }

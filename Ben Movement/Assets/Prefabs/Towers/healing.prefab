@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2556603475012725203}
   - component: {fileID: 5974090643828964228}
   - component: {fileID: 2639599368728307404}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: floating icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5384363406855686108}
   - component: {fileID: 8465363951040803414}
   - component: {fileID: 6137564065248360277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,6 +223,7 @@ MonoBehaviour:
   name: healing tower
   drawTransform: {fileID: 1146446260168402518}
   drawSize: 15
+  objectType: 1
 --- !u!1 &6453545602357310299
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5963972229421787617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: healing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +270,7 @@ GameObject:
   - component: {fileID: 2990728545344943833}
   - component: {fileID: 3123749204683631042}
   - component: {fileID: 3156609086035791380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +351,7 @@ GameObject:
   - component: {fileID: 8027271197515985261}
   - component: {fileID: 2284534873154307683}
   - component: {fileID: 3134945436815297525}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +432,7 @@ GameObject:
   - component: {fileID: 4366583189369755880}
   - component: {fileID: 1808386048844866279}
   - component: {fileID: 443883363301931608}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: top icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
