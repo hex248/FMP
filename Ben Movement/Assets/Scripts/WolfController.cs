@@ -258,7 +258,8 @@ public class WolfController : MonoBehaviour
     {
         Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position, Vector3.up);
 
-        transform.rotation = Quaternion.Lerp(wolfVisuals.transform.rotation, targetRotation, aimRotationSpeed * Time.deltaTime);
+        rotationalDirection = Quaternion.Lerp(wolfVisuals.transform.rotation, targetRotation, aimRotationSpeed * Time.deltaTime);
+        transform.rotation = rotationalDirection;
         //smoke.SetVector3("EmissionDirection", head.forward * -1);
     }
 
@@ -321,10 +322,10 @@ public class WolfController : MonoBehaviour
         bool hasHitPlayer = false;
         for (int i = 0; i < hitColliders.Length; i++)
         {
+            Debug.Log(hitColliders[i].gameObject);
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
-                Debug.Log("Apply force to " + hitRb.gameObject);
                 hitRb.AddForce(currentAttackDirection * attackForce);
                 hasHitPlayer = true;
             }
@@ -359,8 +360,9 @@ public class WolfController : MonoBehaviour
     {
 
         Gizmos.color = Color.red;
-
-        Gizmos.matrix = transform.localToWorldMatrix;
+        //Matrix4x4 matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
+        Matrix4x4 matrix = transform.localToWorldMatrix;
+        Gizmos.matrix = matrix;
         //Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;
         Gizmos.DrawWireCube(hitboxOffset, hitboxSize);
     }

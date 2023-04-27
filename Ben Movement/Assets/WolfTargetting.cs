@@ -22,6 +22,7 @@ public class WolfTargetting : MonoBehaviour
     [SerializeField] float maxPlayerDetectRange;
     //the range at which the wolf can track the player once it has seen it. Should be larger than view range. To do with screen size??
     [SerializeField] float maxPlayerTrackingRange;
+    [SerializeField] LayerMask raycastLayer;
 
 
 
@@ -93,7 +94,17 @@ public class WolfTargetting : MonoBehaviour
             else if (offset.magnitude <= maxPlayerDetectRange)
             {
                 float dot = Vector3.Dot(offset.normalized, transform.forward);
-                if (dot > minPlayerDetectDot)
+
+                bool targetIsInDirectView = false;
+                Vector3 raycastStart = transform.position + new Vector3(0f, 0.5f, 0f);
+                RaycastHit hit;
+                Physics.Raycast(raycastStart, offset.normalized, out hit, maxPlayerDetectRange + 0.1f, raycastLayer);
+                if (hit.collider != null)
+                {
+                    targetIsInDirectView = (hit.collider.gameObject == player.gameObject);
+                }
+
+                if (dot > minPlayerDetectDot && targetIsInDirectView)
                 {
                     playersInView.Add(player);
                 }
