@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -251,7 +251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -402,6 +402,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 1156353097}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &212772123
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -439,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -505,6 +507,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 47527964}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &388264464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -897,7 +901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -954,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1010,6 +1014,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 1609846120}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &659485267
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1211,6 +1217,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 315551668}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &713358878
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1289,6 +1297,10 @@ PrefabInstance:
     - target: {fileID: 8972666271578233531, guid: bc40458d7b8764c4bb62b4e07b476faf, type: 3}
       propertyPath: m_Name
       value: Snow (Terrain)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972666271578233531, guid: bc40458d7b8764c4bb62b4e07b476faf, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8972666271578233534, guid: bc40458d7b8764c4bb62b4e07b476faf, type: 3}
       propertyPath: m_Enabled
@@ -1653,7 +1665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1709,6 +1721,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 1168311774}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1231121288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1756,7 +1770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1867,6 +1881,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 554479165}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1284302830
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2116,6 +2132,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 470539289}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1384708349
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2162,6 +2180,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 1797900415}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1489038589
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2198,6 +2218,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 1823095137}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1500313721
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2320,6 +2342,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 1989125244}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1554610514
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2449,6 +2473,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 104233174}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1718178022
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2580,7 +2606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2693,6 +2719,8 @@ MonoBehaviour:
   name: 
   drawTransform: {fileID: 330397178}
   drawSize: 5
+  drawDistance: 1
+  objectType: 0
 --- !u!54 &1890035054
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2730,7 +2758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6855368248813404561, guid: 7b9c84bcf69939b4f9ce0fca61037cb0, type: 3}
       propertyPath: m_LocalPosition.z

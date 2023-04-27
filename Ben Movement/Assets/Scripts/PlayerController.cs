@@ -765,7 +765,7 @@ public class PlayerController : MonoBehaviour
                 {
                     
                     //check if near enough to mainCollider
-                    Collider[] mainCollidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer);
+                    Collider[] mainCollidersAtPoint = Physics.OverlapSphere(checkLocation, playerColliderRadius, environmentLayer, QueryTriggerInteraction.Ignore);
                     gizmosLocation.Add(checkLocation);
                     if (mainCollidersAtPoint.Length == 0)
                     {

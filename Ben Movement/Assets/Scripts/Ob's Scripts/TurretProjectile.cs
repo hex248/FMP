@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TurretProjectile : MonoBehaviour
 {
+    public float damageAmount = 1;
     public float homingAmount;
     public float maxVelocity;
     [SerializeField] float velocity = 5.0f;
@@ -37,7 +38,15 @@ public class TurretProjectile : MonoBehaviour
 
     private void Update()
     {
-        lifeTime += Time.deltaTime;
+        if(lifeTime < maxLifeTime)
+        {
+            lifeTime += Time.deltaTime;
+            visuals.transform.localScale = Vector3.one * (maxLifeTime - lifeTime) / maxLifeTime;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         if (!locked)
         {
@@ -75,6 +84,7 @@ public class TurretProjectile : MonoBehaviour
 
         // trigger vfx and decal
         GameObject particleSys = CrashVFX(transform);
+        col.GetComponent<EnemyHealth>().TakeDamage(damageAmount, this.gameObject);
         yield return new WaitForSeconds(0.3f);
 
         // apply decal slightly after explosion starts, to hide it in the explosion
