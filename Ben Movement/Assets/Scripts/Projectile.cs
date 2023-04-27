@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour
     public float force;
     public float scaleMultiplier;
 
+    [Header("Owner Settings")]
+    public Player owner;
+
     TrailRenderer trail;
 
     Collider col;
@@ -38,7 +41,7 @@ public class Projectile : MonoBehaviour
         EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(damage, owner.gameObject);
             Debug.Log("deal " + damage + " damage");
         }
 

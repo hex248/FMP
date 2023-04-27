@@ -589,7 +589,7 @@ public class PlayerController : MonoBehaviour
             EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.TakeDamage(meleeCombo[currentMeleeComboStage].damage);
+                enemy.TakeDamage(meleeCombo[currentMeleeComboStage].damage, playerParent.gameObject);
             }
         }
     }
@@ -670,7 +670,6 @@ public class PlayerController : MonoBehaviour
         GameObject newProjectile = Instantiate(rangedAttack.projectile);
         newProjectile.transform.position = rangedAttack.projectileSpawnPosition.position;
         newProjectile.transform.forward = currentRangedAttackDirection;
-
         Projectile projectileScript = newProjectile.GetComponent<Projectile>();
         if(projectileScript != null)
         {
@@ -693,6 +692,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(projectileScript.damage);
             }
 
+            projectileScript.owner = playerParent;
         }
         
         

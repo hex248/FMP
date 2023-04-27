@@ -14,7 +14,7 @@ public class WolfTargetting : MonoBehaviour
     WolfController controller;
 
     bool targetingPlayer;
-
+    [Header("Detection Settings")]
     [SerializeField, Range(-1f, 1f)] float minPlayerDetectDot;
     //the range it can feel all around. Should be small. So that the player cannot just chill directly behind it.
     [SerializeField] float maxPlayerFeelRange;
@@ -23,6 +23,12 @@ public class WolfTargetting : MonoBehaviour
     //the range at which the wolf can track the player once it has seen it. Should be larger than view range. To do with screen size??
     [SerializeField] float maxPlayerTrackingRange;
     [SerializeField] LayerMask raycastLayer;
+    [SerializeField] bool targetsOnHit;
+
+
+    [Header("Alert Indicator")]
+    [SerializeField] GameObject alertObject;
+
 
 
 
@@ -134,11 +140,23 @@ public class WolfTargetting : MonoBehaviour
     {
         target = player.gameObject;
         targetingPlayer = true;
+
+
     }
 
     void TargetBed()
     {
         target = bed.gameObject;
         targetingPlayer = false;
+    }
+
+    public void Damaged(GameObject source)
+    {
+        if(source.GetComponent<Player>())
+        {
+            PlayerController damager = source.GetComponent<Player>().playerMovement;
+            if (!targetingPlayer)
+                TargetPlayer(damager);
+        } 
     }
 }

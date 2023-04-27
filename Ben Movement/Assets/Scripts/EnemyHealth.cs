@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
 
     public bool triggerDeath = false;
 
-    [SerializeField] UnityEvent damageEvent;
+    [SerializeField] UnityEvent<GameObject> damageEvent;
     [SerializeField] UnityEvent deathEvent;
 
 
@@ -59,7 +59,7 @@ public class EnemyHealth : MonoBehaviour
         UpdateDissolve();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject source)
     {
         damage = Mathf.Max(damage, 0f);
         currentHealth -= damage;
@@ -78,7 +78,7 @@ public class EnemyHealth : MonoBehaviour
             dissolveDistance = Mathf.Abs(currentDissolveAmount - targetDissolveAmount);
 
             timeSinceTargetAdjusted = 0f;
-            damageEvent.Invoke();
+            damageEvent.Invoke(source);
 
         }
     }
