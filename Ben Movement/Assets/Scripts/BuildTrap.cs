@@ -7,6 +7,7 @@ public class BuildTrap : MonoBehaviour
     AudioManager AM;
 
     [SerializeField] GameObject interactControls;
+    [SerializeField] GameObject hologramControls;
     [SerializeField] GameObject hologramParent;
 
     [SerializeField] GameObject[] holograms;
@@ -23,9 +24,8 @@ public class BuildTrap : MonoBehaviour
     private void Start()
     {
         AM = FindObjectOfType<AudioManager>();
-        interactControls.SetActive(false);
-        hologramParent.SetActive(false);
         HideInteractControls();
+        HideHologramControls();
         HideHolograms();
     }
 
@@ -89,6 +89,7 @@ public class BuildTrap : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             HideInteractControls();
+            HideHologramControls();
             HideHolograms();
         }
     }
@@ -96,7 +97,7 @@ public class BuildTrap : MonoBehaviour
     void Build(GameObject prefab)
     {
         // play build sound effect
-        AM.PlayInChannel("tower_build", ChannelType.SFX, 1);
+        //AM.PlayInChannel("tower_build", ChannelType.SFX, 1);
         // spawn tower
         var spawned = Instantiate(prefab);
         spawned.transform.position = hologramParent.transform.position;
@@ -111,7 +112,7 @@ public class BuildTrap : MonoBehaviour
 
     void ShowHologramControls()
     {
-
+        hologramControls.SetActive(true);
     }
 
     void ShowHolograms()
@@ -123,6 +124,11 @@ public class BuildTrap : MonoBehaviour
         interactControls.SetActive(false);
     }
 
+    void HideHologramControls()
+    {
+        hologramControls.SetActive(false);
+    }
+
     void HideHolograms()
     {
         hologramParent.SetActive(false);
@@ -131,7 +137,7 @@ public class BuildTrap : MonoBehaviour
     void CycleLeft()
     {
         hologramIDX--;
-        if (hologramIDX <= 0) hologramIDX = holograms.Length - 1;
+        if (hologramIDX < 0) hologramIDX = holograms.Length - 1;
     }
 
     void CycleRight()
