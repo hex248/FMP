@@ -223,6 +223,7 @@ MonoBehaviour:
   name: healing tower
   drawTransform: {fileID: 1146446260168402518}
   drawSize: 15
+  drawDistance: 1
   objectType: 1
 --- !u!1 &6453545602357310299
 GameObject:
@@ -233,6 +234,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5963972229421787617}
+  - component: {fileID: 6719087737192633180}
+  - component: {fileID: 7840020619945065518}
   m_Layer: 6
   m_Name: healing
   m_TagString: Untagged
@@ -259,6 +262,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6719087737192633180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453545602357310299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b18b3e3feb40ad4c9220a4e3074c029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &7840020619945065518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6453545602357310299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5, z: 1}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &7166976049148971926
 GameObject:
   m_ObjectHideFlags: 0
