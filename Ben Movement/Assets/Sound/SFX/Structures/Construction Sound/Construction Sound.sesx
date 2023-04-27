@@ -2,10 +2,10 @@
 <!DOCTYPE sesx>
 <sesx version="1.9">
 
-  <session appBuild="22.0.0.96" appVersion="22.0" audioChannelType="stereo" bitDepth="32" duration="3770942" sampleRate="48000">
+  <session appBuild="23.3.0.55" appVersion="23.3" audioChannelType="stereo" bitDepth="32" duration="3770942" sampleRate="48000">
     <tracks>
       <audioTrack automationLaneOpenState="false" id="10001" index="1" select="false" visible="true">
-        <trackParameters trackHeight="69" trackHue="160" trackMinimized="false">
+        <trackParameters trackHeight="50" trackHue="160" trackMinimized="false">
           <name>Track 1</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="false">
@@ -76,7 +76,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="7b2a85dd-267c-4879-b42e-011ff5d6d43c" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="b2ef88e7-e05b-4bf3-93fc-ea4be297e62b" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -97,7 +97,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="ff1447af-6c6e-464d-b839-fe245cadffcd" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="7cd23fd1-8786-4ffb-9e6e-397ba131ea6f" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -115,7 +115,7 @@
         </audioClip>
       </audioTrack>
       <audioTrack automationLaneOpenState="false" id="10002" index="2" select="false" visible="true">
-        <trackParameters trackHeight="69" trackHue="267" trackMinimized="false">
+        <trackParameters trackHeight="50" trackHue="267" trackMinimized="false">
           <name>Track 2</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="false">
@@ -186,7 +186,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="f5105200-d1f9-4f05-ba9e-ae16b7524c4c" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="f664f4e0-3e94-4893-9b76-57aae456171f" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -203,8 +203,8 @@
           </channelMap>
         </audioClip>
       </audioTrack>
-      <audioTrack automationLaneOpenState="false" id="10003" index="3" select="true" visible="true">
-        <trackParameters trackHeight="69" trackHue="51" trackMinimized="false">
+      <audioTrack automationLaneOpenState="false" id="10003" index="3" select="false" visible="true">
+        <trackParameters trackHeight="50" trackHue="51" trackMinimized="false">
           <name>Track 3</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="false">
@@ -275,7 +275,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="44846b13-03fe-4755-90a1-9a2d5925aac2" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="d8e7ec56-89bf-4323-a597-1d44edb953fe" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -296,7 +296,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="25f3f61b-b04e-496f-a6d4-3085fe1c1054" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="cf97e89f-cb4b-45e1-a108-cb1927446dde" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -314,7 +314,7 @@
         </audioClip>
       </audioTrack>
       <audioTrack automationLaneOpenState="false" id="10004" index="4" select="false" visible="true">
-        <trackParameters trackHeight="69" trackHue="182" trackMinimized="false">
+        <trackParameters trackHeight="50" trackHue="182" trackMinimized="false">
           <name>Track 4</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="false">
@@ -380,12 +380,12 @@
           </component>
         </trackAudioParameters>
         <editParameter parameterIndex="0" slotIndex="4294967280"/>
-        <audioClip clipAutoCrossfade="true" crossFadeHeadClipID="-1" crossFadeTailClipID="-1" endPoint="202270" fileID="3" hue="-1" id="0" lockedInTime="false" looped="false" name="turret-wip_jackhammer-for-construction 48000 1" offline="false" select="false" sourceInPoint="68402" sourceOutPoint="270672" startPoint="0" zOrder="0">
+        <audioClip clipAutoCrossfade="true" crossFadeHeadClipID="-1" crossFadeTailClipID="-1" endPoint="202270" fileID="3" hue="-1" id="0" lockedInTime="false" looped="false" name="turret-wip_jackhammer-for-construction 48000 1" offline="false" select="false" sourceInPoint="68402" sourceOutPoint="270672" startPoint="0" zOrder="7">
           <component componentGuid="c51894a6-68a9-43f6-bfbe-b06b558d83ca" componentID="Audition.Fader" id="clipGain" name="volume" powered="true">
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="33a36308-7f46-428f-9b95-7491555ef41b" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="ef61069e-6a46-40df-91fd-6ef4d363c048" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -393,7 +393,7 @@
             <parameter index="0" name="Pan" parameterValue="0"/>
           </component>
           <fadeIn crossFadeLinkType="linkedAsymmetric" endPoint="12321" shape="0" startPoint="0" type="log"/>
-          <fadeOut crossFadeLinkType="linkedAsymmetric" endPoint="202270" shape="0" startPoint="190301" type="log"/>
+          <fadeOut crossFadeLinkType="linkedAsymmetric" endPoint="202270" shape="0" startPoint="174591" type="log"/>
           <editParameter parameterIndex="0" slotIndex="4294967280"/>
           <editParameter parameterIndex="0" slotIndex="4294967281"/>
           <channelMap>
@@ -403,7 +403,7 @@
         </audioClip>
       </audioTrack>
       <audioTrack automationLaneOpenState="false" id="10005" index="5" select="false" visible="true">
-        <trackParameters trackHeight="69" trackHue="294" trackMinimized="false">
+        <trackParameters trackHeight="50" trackHue="294" trackMinimized="false">
           <name>Track 5</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="false">
@@ -474,7 +474,7 @@
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="f7e8f46b-a177-4861-8e1a-d1fbefb5150d" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="7adf9454-e662-48b7-b9cf-b80b29f2d39d" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -482,7 +482,7 @@
             <parameter index="0" name="Pan" parameterValue="0"/>
           </component>
           <fadeIn crossFadeLinkType="linkedAsymmetric" endPoint="11969" shape="0" startPoint="0" type="log"/>
-          <fadeOut crossFadeLinkType="linkedAsymmetric" endPoint="202270" shape="0" startPoint="188892" type="log"/>
+          <fadeOut crossFadeLinkType="linkedAsymmetric" endPoint="202270" shape="0" startPoint="174431" type="log"/>
           <editParameter parameterIndex="0" slotIndex="4294967280"/>
           <editParameter parameterIndex="0" slotIndex="4294967281"/>
           <channelMap>
@@ -491,8 +491,8 @@
           </channelMap>
         </audioClip>
       </audioTrack>
-      <audioTrack automationLaneOpenState="false" id="10006" index="6" select="false" visible="true">
-        <trackParameters trackHeight="69" trackHue="92" trackMinimized="false">
+      <audioTrack automationLaneOpenState="false" id="10006" index="6" select="true" visible="true">
+        <trackParameters trackHeight="50" trackHue="92" trackMinimized="false">
           <name>Track 6</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="false">
@@ -558,12 +558,12 @@
           </component>
         </trackAudioParameters>
         <editParameter parameterIndex="0" slotIndex="4294967280"/>
-        <audioClip clipAutoCrossfade="true" crossFadeHeadClipID="-1" crossFadeTailClipID="-1" endPoint="229840" fileID="5" hue="-1" id="0" lockedInTime="false" looped="false" name="turret-wip_chainsaw-for-construction 48000 1" offline="false" select="false" sourceInPoint="1376319" sourceOutPoint="1606159" startPoint="0" zOrder="4">
+        <audioClip clipAutoCrossfade="true" crossFadeHeadClipID="-1" crossFadeTailClipID="-1" endPoint="229840" fileID="5" hue="-1" id="0" lockedInTime="false" looped="false" name="turret-wip_chainsaw-for-construction 48000 1" offline="false" select="true" sourceInPoint="1376319" sourceOutPoint="1606159" startPoint="0" zOrder="4">
           <component componentGuid="92e554f1-a842-42ae-9220-6f6f9a98b9b8" componentID="Audition.Fader" id="clipGain" name="volume" powered="true">
             <parameter index="0" name="volume" parameterValue="1"/>
             <parameter index="1" name="static gain" parameterValue="1"/>
           </component>
-          <component componentGuid="c2172b18-1c37-4111-b264-99fe4062d87c" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
+          <component componentGuid="dfcdfeb3-731c-4fad-9116-8e0612a1d8f8" componentID="Audition.Mute" id="clipMute" name="Mute" powered="true">
             <parameter index="0" parameterValue="0"/>
             <parameter index="1" name="mute" parameterValue="0"/>
           </component>
@@ -571,7 +571,7 @@
             <parameter index="0" name="Pan" parameterValue="0"/>
           </component>
           <fadeIn crossFadeLinkType="linkedAsymmetric" endPoint="12201" shape="0" startPoint="0" type="log"/>
-          <fadeOut crossFadeLinkType="linkedAsymmetric" endPoint="229840" shape="0" startPoint="201168" type="log"/>
+          <fadeOut crossFadeLinkType="linkedAsymmetric" endPoint="229840" shape="0" startPoint="184730" type="log"/>
           <editParameter parameterIndex="0" slotIndex="4294967280"/>
           <editParameter parameterIndex="0" slotIndex="4294967281"/>
           <channelMap>
@@ -581,7 +581,7 @@
         </audioClip>
       </audioTrack>
       <masterTrack automationLaneOpenState="false" id="10000" index="7" select="false" visible="true">
-        <trackParameters trackHeight="69" trackHue="-1" trackMinimized="false">
+        <trackParameters trackHeight="50" trackHue="-1" trackMinimized="false">
           <name>Mix</name>
         </trackParameters>
         <trackAudioParameters audioChannelType="stereo" automationMode="1" monitoring="false" recordArmed="false" solo="false" soloSafe="true">
@@ -649,14 +649,14 @@
         <editParameter parameterIndex="0" slotIndex="4294967280"/>
       </masterTrack>
     </tracks>
-    <sessionState ctiPosition="248775" smpteStart="0">
-      <selectionState selectionDuration="0" selectionStart="248775"/>
-      <viewState horizontalViewDuration="441679" horizontalViewStart="0" trackControlsWidth="201" verticalScrollOffset="0"/>
+    <sessionState ctiPosition="229840" smpteStart="0">
+      <selectionState selectionDuration="229840" selectionStart="0"/>
+      <viewState horizontalViewDuration="262507" horizontalViewStart="0" trackControlsWidth="201" verticalScrollOffset="0"/>
       <timeFormatState beatsPerBar="4" beatsPerMinute="120" customFrameRate="12" linkToDefaultTimeSettings="true" noteLength="4" subdivisions="16" timeCodeDropFrame="false" timeCodeFrameRate="30" timeCodeNTSC="false" timeFormat="timeFormatDecimal"/>
       <mixingOptionState defaultPanModeLogarithmic="false" panPower="-3" playOverlappingClips="false"/>
     </sessionState>
     <xmpMetadata><![CDATA[<?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
-<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 7.1-c000 79.4d2f597, 2021/09/01-20:51:22        ">
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 7.1-c000 79.b0f8be9, 2021/12/08-19:11:22        ">
    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
       <rdf:Description rdf:about=""
             xmlns:xmp="http://ns.adobe.com/xap/1.0/"
@@ -667,9 +667,9 @@
             xmlns:xmpDM="http://ns.adobe.com/xmp/1.0/DynamicMedia/">
          <xmp:CreatorTool>Adobe Audition 22.0 (Windows)</xmp:CreatorTool>
          <xmp:CreateDate>2023-04-20T09:27:19+01:00</xmp:CreateDate>
-         <xmp:MetadataDate>2023-04-20T09:51:30+01:00</xmp:MetadataDate>
-         <xmp:ModifyDate>2023-04-20T09:51:30+01:00</xmp:ModifyDate>
-         <xmpMM:InstanceID>xmp.iid:a64d20fb-461e-294c-bad2-8643bf0cb125</xmpMM:InstanceID>
+         <xmp:MetadataDate>2023-04-25T23:34:08+01:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2023-04-25T23:34:08+01:00</xmp:ModifyDate>
+         <xmpMM:InstanceID>xmp.iid:86f4979a-46ea-c34d-b78b-1b23bd5b82e9</xmpMM:InstanceID>
          <xmpMM:DocumentID>xmp.did:af7bf178-5491-b34c-9497-e7c03ac90165</xmpMM:DocumentID>
          <xmpMM:OriginalDocumentID>xmp.did:af7bf178-5491-b34c-9497-e7c03ac90165</xmpMM:OriginalDocumentID>
          <xmpMM:History>
@@ -693,6 +693,20 @@
                   <stEvt:instanceID>xmp.iid:a64d20fb-461e-294c-bad2-8643bf0cb125</stEvt:instanceID>
                   <stEvt:when>2023-04-20T09:51:30+01:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Audition 22.0 (Windows)</stEvt:softwareAgent>
+                  <stEvt:changed>/</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:e39d21f4-9d49-d845-9032-3faa9979975c</stEvt:instanceID>
+                  <stEvt:when>2023-04-25T23:34:08+01:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Audition 23.3 (Windows)</stEvt:softwareAgent>
+                  <stEvt:changed>/metadata</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>saved</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:86f4979a-46ea-c34d-b78b-1b23bd5b82e9</stEvt:instanceID>
+                  <stEvt:when>2023-04-25T23:34:08+01:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Audition 23.3 (Windows)</stEvt:softwareAgent>
                   <stEvt:changed>/</stEvt:changed>
                </rdf:li>
             </rdf:Seq>
@@ -856,24 +870,24 @@
   </session>
 
   <files>
-    <file absolutePath="C:\Users\obryan2021\Documents\GitHub\FMP\Ben Movement\Assets\Sound\SFX\Structures\turret_build\turret-wip_hammer-nail-for-construction.wav" id="0" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:20;" mediaHandler="AmioWav" relativePath="../turret_build/turret-wip_hammer-nail-for-construction.wav"/>
-    <file absolutePath="C:\Users\obryan2021\Documents\GitHub\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_metal-for-construction 48000 1.wav" id="1" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_metal-for-construction 48000 1.wav"/>
-    <file absolutePath="C:\Users\obryan2021\Documents\GitHub\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_wood-creak-for-construction 48000 1.wav" id="2" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_wood-creak-for-construction 48000 1.wav"/>
-    <file absolutePath="C:\Users\obryan2021\Documents\GitHub\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_jackhammer-for-construction 48000 1.wav" id="3" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_jackhammer-for-construction 48000 1.wav"/>
-    <file absolutePath="C:\Users\obryan2021\Documents\GitHub\FMP\Ben Movement\Assets\Sound\SFX\Structures\turret_build\turret-wip_electric-drill-for-construction.wav" id="4" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:20;" mediaHandler="AmioWav" relativePath="../turret_build/turret-wip_electric-drill-for-construction.wav"/>
-    <file absolutePath="C:\Users\obryan2021\Documents\GitHub\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_chainsaw-for-construction 48000 1.wav" id="5" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_chainsaw-for-construction 48000 1.wav"/>
+    <file absolutePath="I:\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Imported Files\turret-wip_hammer-nail-for-construction.wav" id="0" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:20;" mediaHandler="AmioWav" relativePath="Imported Files/turret-wip_hammer-nail-for-construction.wav"/>
+    <file absolutePath="I:\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_metal-for-construction 48000 1.wav" id="1" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:40;" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_metal-for-construction 48000 1.wav"/>
+    <file absolutePath="I:\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_wood-creak-for-construction 48000 1.wav" id="2" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:40;" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_wood-creak-for-construction 48000 1.wav"/>
+    <file absolutePath="I:\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_jackhammer-for-construction 48000 1.wav" id="3" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:20;" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_jackhammer-for-construction 48000 1.wav"/>
+    <file absolutePath="I:\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Imported Files\turret-wip_electric-drill-for-construction.wav" id="4" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:20;" mediaHandler="AmioWav" relativePath="Imported Files/turret-wip_electric-drill-for-construction.wav"/>
+    <file absolutePath="I:\FMP\Ben Movement\Assets\Sound\SFX\Structures\Construction Sound\Conformed Files\turret-wip_chainsaw-for-construction 48000 1.wav" id="5" importerPrivateSettings="Compression:0:0;LargeFileSupport:0:0;SampleType:0:20;" mediaHandler="AmioWav" relativePath="Conformed Files/turret-wip_chainsaw-for-construction 48000 1.wav"/>
   </files>
 
   <audioDevice inputID="22222222-2222-2222-2222-22222222" outputID="11111111-1111-1111-1111-11111111">
     <inputPort id="1" name="Default Stereo Input"/>
-    <inputPort id="2" name="[01M] System Default - Microphone (Realtek High Definition Audio) 1"/>
-    <inputPort id="3" name="[02M] System Default - Microphone (Realtek High Definition Audio) 2"/>
-    <inputPort id="4" name="[01S] System Default - Microphone (Realtek High Definition Audio) 1"/>
+    <inputPort id="2" name="[01M] System Default - Microphone (HyperX Quadcast) 1"/>
+    <inputPort id="3" name="[02M] System Default - Microphone (HyperX Quadcast) 2"/>
+    <inputPort id="4" name="[01S] System Default - Microphone (HyperX Quadcast) 1"/>
     <outputPort id="1" name="Default Output"/>
-    <outputPort id="2" name="[01M] System Default - Speakers (Realtek High Definition Audio) 1"/>
-    <outputPort id="3" name="[02M] System Default - Speakers (Realtek High Definition Audio) 2"/>
+    <outputPort id="2" name="[01M] System Default - Speakers (GTK-XB7 Stereo) 1"/>
+    <outputPort id="3" name="[02M] System Default - Speakers (GTK-XB7 Stereo) 2"/>
     <outputPort id="4" name="Default Stereo Output"/>
-    <outputPort id="5" name="[01S] System Default - Speakers (Realtek High Definition Audio) 1"/>
+    <outputPort id="5" name="[01S] System Default - Speakers (GTK-XB7 Stereo) 1"/>
     <outputPort id="6" name="Default Surround Output"/>
   </audioDevice>
 
