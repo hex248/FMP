@@ -28,6 +28,10 @@ public class WolfTargetting : MonoBehaviour
 
     [Header("Alert Indicator")]
     [SerializeField] GameObject alertObject;
+    [SerializeField] AnimationCurve alertScaleCurve;
+    [SerializeField] float alertAnimationTime;
+    float timeSinceAlert;
+    bool playingAlertAnimation;
 
 
 
@@ -83,6 +87,25 @@ public class WolfTargetting : MonoBehaviour
 
         controller.currentTarget = target;
 
+        if (playingAlertAnimation)
+        {
+            float fac = timeSinceAlert / alertAnimationTime;
+            float scale = alertScaleCurve.Evaluate(fac);
+            Vector3 scaleVector = new Vector3(scale, scale, scale);
+
+            alertObject.transform.localScale = scaleVector;
+
+
+            timeSinceAlert += Time.deltaTime;
+            if (timeSinceAlert >= alertAnimationTime)
+            {
+                playingAlertAnimation = false;
+            }
+        }
+        else
+        {
+            alertObject.transform.localScale = Vector3.zero;
+        }
     }
 
     void AttemptFindPlayer()
@@ -140,7 +163,8 @@ public class WolfTargetting : MonoBehaviour
         target = player.gameObject;
         targetingPlayer = true;
 
-
+        timeSinceAlert = 0f;
+        playingAlertAnimation = true;
     }
 
     void TargetBed()
