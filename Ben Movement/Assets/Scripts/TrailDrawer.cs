@@ -16,6 +16,7 @@ public class TrailDrawer : MonoBehaviour
     public Transform drawTransform;
     public float drawSize = 5;
     public float drawDistance = 1f;
+    public int index = -1;
 
     public ObjectType objectType;
 
@@ -23,6 +24,6 @@ public class TrailDrawer : MonoBehaviour
     {
         // send message to TerrainInteractiveSnow to remove this from the 
         if(FindObjectOfType<TerrainInteractiveSnow>())
-            FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(this.gameObject);
+            FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(index);
     }
 }
