@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -19,7 +21,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
     Terrain terrain;
 
-    int _index = 0;
+    public int _index = 0;
 
     private readonly int DrawPosition = Shader.PropertyToID("_DrawPosition");
     private readonly int DrawAngle = Shader.PropertyToID("_DrawAngle");
@@ -75,7 +77,11 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
     private void DrawTrails()
     {
+
         if (_trailsPositions.Count < 1) return;
+
+        if (_index >= _trailsPositions.Count)
+            _index = 0;
         var trail = _trailsPositions[_index];
 
         Ray ray = new Ray(trail.transform.position, Vector3.down);
@@ -167,6 +173,12 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
     public void RemoveObject(int removeIDX)
     {
+        StartCoroutine(RemoveObjectCoroutine(removeIDX));
+    }
+
+    IEnumerator RemoveObjectCoroutine(int removeIDX)
+    {
+        yield return new WaitForEndOfFrame();
         _trailsPositions.RemoveAt(removeIDX);
         _trailSizes.RemoveAt(removeIDX);
         _trailDistance.RemoveAt(removeIDX);
