@@ -626,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1968484378320701268, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1968484378320701268, guid: 25e856ab2b9a4902fa1b4dabd9138eeb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -741,7 +741,7 @@ MonoBehaviour:
   cam: {fileID: 2506270392354407003}
   smoothSpeed: 0.5
   hori: 0
-  verti: 0.03
+  verti: 0
 --- !u!1001 &5966685731650314433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1019,7 +1019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741879360369, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 1.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 2727417741909571397, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
