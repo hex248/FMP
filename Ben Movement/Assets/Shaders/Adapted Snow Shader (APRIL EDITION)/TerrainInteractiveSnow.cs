@@ -136,6 +136,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                     _trailsPositions.Add(trailDrawer.drawTransform);
                     _trailSizes.Add(trailDrawer.drawSize);
                     _trailDistance.Add(trailDrawer.drawDistance);
+                    trailDrawer.index = _trailsPositions.Count - 1;
 
                     terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
                 }
@@ -159,14 +160,15 @@ public class TerrainInteractiveSnow : MonoBehaviour
             {
                 _trailSizes.RemoveAt(_trailsPositions.IndexOf(trailDrawer.drawTransform));
                 _trailsPositions.Remove(trailDrawer.drawTransform);
+                _trailDistance.RemoveAt(_trailsPositions.IndexOf(trailDrawer.drawTransform));
             }
         }
     }
 
-    public void RemoveObject(GameObject removedObject)
+    public void RemoveObject(int removeIDX)
     {
-        int removedIDX = _trailsPositions.IndexOf(removedObject.transform);
-        _trailsPositions.RemoveAt(removedIDX);
-        _trailSizes.RemoveAt(removedIDX);
+        _trailsPositions.RemoveAt(removeIDX);
+        _trailSizes.RemoveAt(removeIDX);
+        _trailDistance.RemoveAt(removeIDX);
     }
 }
