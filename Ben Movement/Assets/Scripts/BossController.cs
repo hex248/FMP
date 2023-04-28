@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     [Header("Movement")]
+    [SerializeField] AnimationCurve curve;
     [SerializeField] float moveSpeed = 1.0f;
     [SerializeField] float moveRotationSpeed = 1.0f;
     [SerializeField] float range = 1.0f;
@@ -16,17 +17,28 @@ public class BossController : MonoBehaviour
         animationScript = GetComponentInChildren<BossAnimationScript>();
     }
 
+    private int state = 0;
+
     // Update is called once per frame
     void Update()
     {
+        switch (state)
+        {
+            case 0:
+                animationScript.EndMoving();
+                break;
+            case 1:
+                MovingState();
+                animationScript.StartMoving();
+                break;
+        }
         if(Vector3.Scale(target.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
         {
-            MovingState();
-            animationScript.StartMoving();
+            state = 1;
         }
         else
         {
-            animationScript.EndMoving();
+            state = 0;
         }
     }
 

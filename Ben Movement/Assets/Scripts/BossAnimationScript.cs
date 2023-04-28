@@ -27,6 +27,7 @@ public class BossAnimationScript : MonoBehaviour
 
     public void EndMoving()
     {
+        
         anim.SetBool("isMoving", false);
     }
 }
