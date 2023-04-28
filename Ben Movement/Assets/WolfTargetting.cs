@@ -46,7 +46,6 @@ public class WolfTargetting : MonoBehaviour
             players.Add(newPlayerController);
         }
 
-
         bed = FindObjectOfType<Bed>();
         controller = GetComponent<WolfController>();
 
