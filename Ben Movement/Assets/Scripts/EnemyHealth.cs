@@ -120,8 +120,6 @@ public class EnemyHealth : MonoBehaviour
             while (targetDissolveAmount < 1)
             {
                 targetDissolveAmount += deathDissolveRate;
-
-                Debug.Log(targetDissolveAmount);
                 yield return new WaitForSeconds(0.02f);
             }
         }

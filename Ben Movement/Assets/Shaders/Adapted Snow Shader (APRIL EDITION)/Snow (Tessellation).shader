@@ -22,11 +22,12 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 		SubShader
 	{
-		Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
-		LOD 200
+		Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
 
 		Pass
 		{
+			Name "ForwardLit"
+			Tags{"LightMode" = "UniversalForward"}
 			HLSLPROGRAM
 
 			#if defined(SHADER_API_D3D11) || defined(SHADER_API_GLES3) || defined(SHADER_API_GLCORE) || defined(SHADER_API_VULKAN) || defined(SHADER_API_METAL) || defined(SHADER_API_PSSL)
@@ -38,6 +39,16 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			#   define UNITY_outputcontrolpoints    outputcontrolpoints
 			#endif
 
+			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+			#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
+			#pragma multi_compile _ _SHADOWS_SOFT
+			#pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
+			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ SHADOWS_SHADOWMASK
+			#pragma multi_compile_fog
 			#pragma require tessellation
 			#pragma vertex TessellationVertexProgram
 			#pragma fragment frag
@@ -45,6 +56,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			#pragma domain domain
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
 
 			struct ControlPoint
@@ -67,6 +79,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 			{
 				float4 vertex : SV_POSITION;
 				float2 uv : TEXCOORD0;
+				float4 shadowCoord  : TEXCOORD1;
 				float3 normal : NORMAL;
 				float4 color : COLOR;
 			};
@@ -163,11 +176,12 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				pos = floor(pos * 100) / 100;
 				newPos.y += pos;
 				newPos.y = clamp(newPos.y, 0.01, 1);
+				VertexPositionInputs vertexInput = GetVertexPositionInputs(newPos);
 				OUT.vertex = TransformObjectToHClip(newPos);
-
 				
 				OUT.color = half4(0, round(newPos.y-0.5), 0, 1);
 				OUT.normal = IN.normal;
+				OUT.shadowCoord = GetShadowCoord(vertexInput);
 				OUT.uv = TRANSFORM_TEX(IN.uv, _HeightMap);
 
 				return OUT;
@@ -193,16 +207,29 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 			half4 frag(Varyings IN) : SV_Target
 			{
+				Light mainLight = GetMainLight(IN.shadowCoord);
 				half height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, IN.uv).r;
 				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, round(height * round(_ShadingDetail)) / round(_ShadingDetail)) * _NormalMapAmount;
 
 				//return heightColor;
-
+				float value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
 				half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
-				return color * heightColor;
+				if (value > 0.5)
+				{
+					value = 1.0;
+				}
+				else 
+				{
+					value = 0.5;
+				}
+				return color * heightColor * (value * float4(mainLight.color, 1.0));
 			}
 
 			ENDHLSL
 		}
+		UsePass "Universal Render Pipeline/Lit/ShadowCaster"
+		UsePass "Universal Render Pipeline/Lit/DepthOnly"
+		UsePass "Universal Render Pipeline/Lit/DepthNormals"
+		UsePass "Universal Render Pipeline/Lit/Meta"
 	}
 }

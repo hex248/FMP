@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Active: 1
   passSettings:
-    renderPassEvent: 450
+    renderPassEvent: 300
     shader: {fileID: 2100000, guid: f69936575d095e34496205c15ed20064, type: 2}
     x: 1
     y: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: NewRenderObjects
-    Event: 450
+    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: NewRenderObjects
-    Event: 450
+    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:

@@ -21,6 +21,11 @@ public class WolfAnimationScript : MonoBehaviour
         anim.SetFloat("movementSpeed", movement.magnitude * movementSpeedAnimation);
     }
 
+    public void Alerted()
+    {
+        anim.SetTrigger("alerted");
+    }
+
     public void TakeDamageAnimation()
     {
         anim.SetTrigger("damage");
