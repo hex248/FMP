@@ -12,7 +12,12 @@ public class BossController : MonoBehaviour
     [SerializeField] float range = 1.0f;
     [HideInInspector]
     public GameObject currentTarget;
+    public Collider col;
     private BossAnimationScript animationScript;
+    [Header("Attack01")]
+    [SerializeField] GameObject attack01;
+    [SerializeField] GameObject shadow;
+    public float attack01Cooldown = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,20 +35,31 @@ public class BossController : MonoBehaviour
         {
             case 0:
                 SlowDown();
-                animationScript.EndMoving();
+                animationScript.SetActive(true);
+                shadow.transform.localScale = Vector3.one * slowDownCurve.Evaluate(time) * 7.5f;
                 break;
             case 1:
                 MovingState();
-                animationScript.StartMoving();
+                animationScript.SetActive(false);
+                shadow.transform.localScale = Vector3.one * speedUpCurve.Evaluate((time - 0.5f) / 10.0f) * 7.5f;
+                break;
+            case 2:
+                animationScript.SetActive(true);
+                animationScript.Attack01();
+                shadow.transform.localScale = Vector3.zero;
+                col.enabled = true;
                 break;
         }
-        if(Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
+        if(state != 2)
         {
-            state = 1;
-        }
-        else
-        {
-            state = 0;
+            if (Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
+            {
+                state = 1;
+            }
+            else
+            {
+                state = 0;
+            }
         }
         if(state != previousState)
         {
@@ -52,10 +68,20 @@ public class BossController : MonoBehaviour
         previousState = state;
     }
 
+    public void SetState(int newState)
+    {
+        state = newState;
+    }
+
     void SlowDown()
     {
         transform.position += transform.right * moveSpeed * Time.deltaTime * slowDownCurve.Evaluate(time);
         time += Time.deltaTime;
+        if (time > 1.0f && state == previousState)
+        {
+            state = 2;
+        }
+        col.enabled = true;
     }
 
     void MovingState()
@@ -65,5 +91,6 @@ public class BossController : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, Mathf.LerpAngle(transform.eulerAngles.y, Y - 90.0f, Time.deltaTime * moveRotationSpeed), 0.0f);
         transform.position += transform.right * moveSpeed * Time.deltaTime * speedUpCurve.Evaluate(time);
         time += Time.deltaTime;
+        col.enabled = false;
     }
 }
