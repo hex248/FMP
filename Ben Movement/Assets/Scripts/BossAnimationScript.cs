@@ -29,6 +29,7 @@ public class BossAnimationScript : MonoBehaviour
     {
         if (!arm.activeInHierarchy)
         {
+            anim.SetTrigger("attack01");
             arm.transform.position = boss.currentTarget.transform.position;
         }
         if (arm.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)

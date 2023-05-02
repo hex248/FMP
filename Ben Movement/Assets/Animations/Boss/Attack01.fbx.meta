@@ -1,11 +1,32 @@
 fileFormatVersion: 2
-guid: 5831c2caabcc83147826f8d7232966a5
+guid: a67ed072edf99b24ab73d5c3e0123643
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -3356870715296162825
     second: Armature|Attack01
+  - first:
+      74: 1990142704817959514
+    second: Armature|Attack01
+  - first:
+      74: -5025487861805838091
+    second: Armature|Fall
+  - first:
+      74: -936060506143327860
+    second: Armature|Fallen
+  - first:
+      74: -7111717523111038373
+    second: Armature|Gliding
+  - first:
+      74: -8945691123924629249
+    second: Armature|Idle
+  - first:
+      74: -5913978943142729594
+    second: Armature|Move
+  - first:
+      74: 4733286433499938339
+    second: Armature|Rise
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,10 +57,10 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: Armature|Attack01
-      takeName: Armature|Attack01
+      takeName: Armature|Attack01Redux
       internalID: 0
-      firstFrame: 8
-      lastFrame: 35
+      firstFrame: 5
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -58,14 +79,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.21727026
-        functionName: HurtPlayer
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 50
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -73,7 +87,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -124,7 +138,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 100
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

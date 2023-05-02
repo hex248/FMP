@@ -11,6 +11,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
     public Material _snowMaterial;
     public List<Transform> _trailsPositions;
     public List<float> _trailSizes = new List<float>();
+    public List<Texture2D> _trailBrushes = new List<Texture2D>();
     public List<float> _trailDistance;
 
     //public float _drawDistance = 0.3f;
@@ -25,10 +26,10 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
     private readonly int DrawPosition = Shader.PropertyToID("_DrawPosition");
     private readonly int DrawAngle = Shader.PropertyToID("_DrawAngle");
-    private readonly int DrawBrush = Shader.PropertyToID("_DrawBrush");
     private readonly int PreviousTexture = Shader.PropertyToID("_PreviousTexture");
     private readonly int HeightMap = Shader.PropertyToID("_HeightMap");
     private readonly int Offset = Shader.PropertyToID("_Offset");
+    private readonly int Brush = Shader.PropertyToID("_DrawBrush");
 
     private void Start()
     {
@@ -46,7 +47,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
     {
         var material = new Material(_snowMaterial);
 
-        _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate, _stepPrint);
+        _heightMapUpdate = CreateHeightMapUpdate(_snowHeightMapUpdate);
         _snowHeightMap = CreateHeightMap(1024, 1024, _heightMapUpdate);
 
         terrain = gameObject.GetComponent<Terrain>();
@@ -97,6 +98,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 _heightMapUpdate.SetTexture(PreviousTexture, _prevHeightMap);
                 _heightMapUpdate.SetFloat(DrawAngle, angle * Mathf.Deg2Rad);
                 _heightMapUpdate.SetFloat(Offset, _trailSizes[_index] / 100);
+                _heightMapUpdate.SetTexture(Brush, _trailBrushes[_index]);
                 _heightMapUpdate.SetFloat("_DeltaTime", Time.deltaTime);
             }
         }
@@ -122,10 +124,9 @@ public class TerrainInteractiveSnow : MonoBehaviour
         return texture;
     }
 
-    private Material CreateHeightMapUpdate(Shader shader, Texture stepPrint)
+    private Material CreateHeightMapUpdate(Shader shader)
     {
         var material = new Material(shader);
-        material.SetTexture(DrawBrush, stepPrint);
         material.SetVector(DrawPosition, new Vector4(-1, -1, 0, 0));
         return material;
     }
@@ -141,6 +142,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 {
                     _trailsPositions.Add(trailDrawer.drawTransform);
                     _trailSizes.Add(trailDrawer.drawSize);
+                    _trailBrushes.Add(trailDrawer.drawBrush);
                     _trailDistance.Add(trailDrawer.drawDistance);
                     trailDrawer.index = _trailsPositions.Count - 1;
 
@@ -150,8 +152,9 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 {
                     // update draw size
 
-                    _trailSizes[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawSize;
-                    _trailDistance[_trailsPositions.IndexOf(trailDrawer.drawTransform)] = trailDrawer.drawDistance;
+                    _trailSizes[trailDrawer.index] = trailDrawer.drawSize;
+                    _trailBrushes[trailDrawer.index] = trailDrawer.drawBrush;
+                    _trailDistance[trailDrawer.index] = trailDrawer.drawDistance;
                 }
             }
         }
@@ -164,9 +167,10 @@ public class TerrainInteractiveSnow : MonoBehaviour
             var trailDrawer = other.GetComponent<TrailDrawer>();
             if (_trailsPositions.Contains(trailDrawer.drawTransform))
             {
-                _trailSizes.RemoveAt(_trailsPositions.IndexOf(trailDrawer.drawTransform));
-                _trailsPositions.Remove(trailDrawer.drawTransform);
-                _trailDistance.RemoveAt(_trailsPositions.IndexOf(trailDrawer.drawTransform));
+                _trailSizes.RemoveAt(trailDrawer.index);
+                _trailBrushes.RemoveAt(trailDrawer.index);
+                _trailsPositions.RemoveAt(trailDrawer.index);
+                _trailDistance.RemoveAt(trailDrawer.index);
             }
         }
     }
@@ -180,6 +184,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         _trailsPositions.RemoveAt(removeIDX);
+        _trailBrushes.RemoveAt(removeIDX);
         _trailSizes.RemoveAt(removeIDX);
         _trailDistance.RemoveAt(removeIDX);
     }
