@@ -15,6 +15,7 @@ public class TrailDrawer : MonoBehaviour
     public string name;
     public Transform drawTransform;
     public float drawSize = 5;
+    public Texture2D drawBrush;
     public float drawDistance = 1f;
     public int index = -1;
 
@@ -28,5 +29,4 @@ public class TrailDrawer : MonoBehaviour
         if (FindObjectOfType<TerrainInteractiveSnow>())
             FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(index);
     }
-
 }
