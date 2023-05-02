@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
 
     [Header("Player Details")]
     public int playerNumber;
+    public PlayerHealthBar playerHealthBar;
+    public PlayerHealth playerHealth;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         playerInput = GetComponentInChildren<PlayerInput>();
         playerManager = FindObjectOfType<PlayerManager>();
@@ -31,6 +33,7 @@ public class Player : MonoBehaviour
 
         cameraFollow = GetComponentInChildren<CameraFollow>();
         playerCamera = cameraFollow.GetComponentInChildren<Camera>();
+        playerHealth = GetComponentInChildren<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -38,4 +41,5 @@ public class Player : MonoBehaviour
     {
 
     }
+
 }

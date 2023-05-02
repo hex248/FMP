@@ -13,8 +13,11 @@ public class PlayerHealthBar : MonoBehaviour
         }
         set
         {
-            health = value;
-            UpdateHealthBar();
+            if(value != health)
+            {
+                health = value;
+                UpdateHealthBar();
+            }
         }
     }
 
@@ -24,10 +27,9 @@ public class PlayerHealthBar : MonoBehaviour
     List<GameObject> currentHitPointObjects = new List<GameObject>();
     [SerializeField] GameObject hitPointPrefab;
 
-    private void Update()
-    {
-        Health = healthTest;
-    }
+    Player player;
+    PlayerHealth playerHealth;
+
 
     void UpdateHealthBar()
     {
@@ -69,8 +71,9 @@ public class PlayerHealthBar : MonoBehaviour
 
     }
 
-    private void Start()
+    public void Init(Player inPlayer)
     {
-        
+        playerHealth = inPlayer.playerHealth;
+        Health = playerHealth.GetCurrentHitPoints();
     }
 }

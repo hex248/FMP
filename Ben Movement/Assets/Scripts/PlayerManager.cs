@@ -36,6 +36,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float tallCameraSize;
     [SerializeField] float smallCameraSize;
 
+    [Header("Health Bars")]
+    [SerializeField] PlayerHealthBar[] healthBars1Player;
+    [SerializeField] PlayerHealthBar[] healthBars2Player;
+    [SerializeField] PlayerHealthBar[] healthBars3Player;
+    [SerializeField] PlayerHealthBar[] healthBars4Player;
+
     public bool IsMenuOpen
     {
         get
@@ -134,6 +140,7 @@ public class PlayerManager : MonoBehaviour
             scroller.eventSystem = player.GetComponentInChildren<MultiplayerEventSystem>();
         }
 
+        
 
         playerCount++;
         OnPlayerListChange();
@@ -141,7 +148,34 @@ public class PlayerManager : MonoBehaviour
         player.GetComponentInChildren<PlayerController>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
 
         UpdateRenderTextures();
+        AssignPlayerHealthBars();
 
+    }
+
+    void AssignPlayerHealthBars()
+    {
+
+        for(int i = 0; i < playerCount; i++)
+        {
+            Player player = players[i];
+            if (players.Count == 1)
+            {
+                player.playerHealthBar = healthBars1Player[i];
+            }
+            else if (players.Count == 2)
+            {
+                player.playerHealthBar = healthBars2Player[i];
+            }
+            else if (players.Count == 3)
+            {
+                player.playerHealthBar = healthBars3Player[i];
+            }
+            else if (players.Count == 4)
+            {
+                player.playerHealthBar = healthBars4Player[i];
+            }
+
+        }
     }
 
     public void DisconnectPlayer(Player player)

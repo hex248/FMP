@@ -58,6 +58,11 @@ public class PlayerHealth : MonoBehaviour
         }
 
         UpdateVignette();
+
+        if(player.playerHealthBar != null)
+        {
+            player.playerHealthBar.Health = currentHitPoints;
+        }
     }
 
     public void UpdateVignette()
@@ -97,7 +102,7 @@ public class PlayerHealth : MonoBehaviour
         controller.Damage();
         cameraLocation.CameraShake(0.3f, 0.2f);
 
-
+        player.playerHealthBar.Health = currentHitPoints;
     }
 
     void Die()
@@ -109,7 +114,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHitPoints += amount;
 
-        if(overHeal)
+        if (overHeal)
         {
             currentHitPoints = Mathf.Max(0, currentHitPoints);
         }
@@ -117,5 +122,12 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
         }
+
+        player.playerHealthBar.Health = currentHitPoints;
+    }
+
+    public int GetCurrentHitPoints()
+    {
+        return currentHitPoints;
     }
 }
