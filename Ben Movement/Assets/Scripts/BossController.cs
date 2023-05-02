@@ -41,7 +41,7 @@ public class BossController : MonoBehaviour
             case 1:
                 MovingState();
                 animationScript.SetActive(false);
-                shadow.transform.localScale = Vector3.one * speedUpCurve.Evaluate((time - 0.5f) / 10.0f) * 7.5f;
+                shadow.transform.localScale = Vector3.one * speedUpCurve.Evaluate((time - 0.75f) / 10.0f) * 7.5f;
                 break;
             case 2:
                 animationScript.SetActive(true);
