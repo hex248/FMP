@@ -10,6 +10,7 @@ public class BossAnimationScript : MonoBehaviour
     private Animator anim;
     private Rigidbody rb;
     float coolDown;
+    private Vector3 previousPos;
 
     void Start()
     {
@@ -25,6 +26,11 @@ public class BossAnimationScript : MonoBehaviour
         
     }
 
+    private void LateUpdate()
+    {
+        previousPos = boss.currentTarget.transform.position;
+    }
+
     public void Attack02()
     {
 
@@ -35,7 +41,14 @@ public class BossAnimationScript : MonoBehaviour
         if (!arm.activeInHierarchy)
         {
             anim.SetTrigger("attack01");
-            arm.transform.position = boss.currentTarget.transform.position + (boss.currentTarget.transform.forward * 1.5f);
+            if((previousPos - boss.currentTarget.transform.position).magnitude > 1.0f)
+            {
+                arm.transform.position = boss.currentTarget.transform.position + (boss.currentTarget.transform.forward * 1.5f);
+            }
+            else
+            {
+                arm.transform.position = boss.currentTarget.transform.position;
+            }
         }
         if (arm.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
