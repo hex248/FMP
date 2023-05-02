@@ -26,14 +26,18 @@ public class Menu : MonoBehaviour
     [SerializeField] GameObject accessibiltyMenu;
     [SerializeField] GameObject accessibilityFirstSelected;
 
+    [SerializeField] TextMeshProUGUI pausedText;
     PlayerManager playerManager;
+    [SerializeField] Player playerScript;
 
     bool isMenuOpen;
 
     void Start()
     {
         playerManager = FindObjectOfType<PlayerManager>();
+        
         CloseMenu();
+        pausedText.gameObject.SetActive(false);
     }
 
     public void OpenMainMenu()
@@ -50,6 +54,9 @@ public class Menu : MonoBehaviour
 
         eventSystem.SetSelectedGameObject(null);
         eventSystem.SetSelectedGameObject(mainMenuFirstSelected);
+
+        pausedText.gameObject.SetActive(true);
+        pausedText.text = $"Player {playerScript.playerNumber} has paused!";
     }
 
     public void OpenAccessiblityMenu()
@@ -78,6 +85,10 @@ public class Menu : MonoBehaviour
         accessibiltyMenu.SetActive(false);
 
         eventSystem.SetSelectedGameObject(null);
+
+        pausedText.gameObject.SetActive(false);
+        pausedText.text = $"Player {playerScript.playerNumber} has paused!";
+
     }
 
     public void OpenSettingsMenu()
