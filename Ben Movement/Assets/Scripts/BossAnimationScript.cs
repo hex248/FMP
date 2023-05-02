@@ -26,6 +26,18 @@ public class BossAnimationScript : MonoBehaviour
         
     }
 
+    public void StartBeam()
+    {
+        Vector3 direction = (boss.currentTarget.transform.position - transform.position).normalized;
+        float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
+    }
+
+    public void EndBeam()
+    {
+        
+    }
+
     private void LateUpdate()
     {
         previousPos = boss.currentTarget.transform.position;
@@ -33,8 +45,20 @@ public class BossAnimationScript : MonoBehaviour
 
     public void Attack02()
     {
-
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            anim.SetTrigger("attack02");
+        }
+        else
+        {
+            anim.ResetTrigger("attack02");
+            boss.SetState(1);
+        }
     }
+
+    int previousHealth;
+
+    PlayerHealth target;
 
     public void Attack01()
     {
@@ -56,6 +80,7 @@ public class BossAnimationScript : MonoBehaviour
         }
         else
         {
+            boss.dodgedAttacks++;
             arm.SetActive(false);
             boss.SetState(1);
         }

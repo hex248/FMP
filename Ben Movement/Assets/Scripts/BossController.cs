@@ -8,7 +8,7 @@ public class BossController : MonoBehaviour
     [SerializeField] AnimationCurve speedUpCurve;
     [SerializeField] AnimationCurve slowDownCurve;
     [SerializeField] float moveSpeed = 1.0f;
-    [SerializeField] float moveRotationSpeed = 1.0f;
+    public float moveRotationSpeed = 1.0f;
     [SerializeField] float range = 1.0f;
     [HideInInspector]
     public GameObject currentTarget;
@@ -25,6 +25,9 @@ public class BossController : MonoBehaviour
     }
 
     private int state = 0;
+    [HideInInspector]
+    //[Kazi] Checking for if attack is dodged isn't working atm
+    public int dodgedAttacks = 0;
     private float time = 0.0f;
     private int previousState;
 
@@ -56,7 +59,7 @@ public class BossController : MonoBehaviour
                 col.enabled = true;
                 break;
         }
-        if(state != 2)
+        if(state < 2)
         {
             if (Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
             {
@@ -71,6 +74,14 @@ public class BossController : MonoBehaviour
         {
             time = 0.0f;
         }
+        else
+        {
+            if (dodgedAttacks > 2)
+            {
+                state = 3;
+                dodgedAttacks = 0;
+            }
+        }
         previousState = state;
     }
 
@@ -83,7 +94,7 @@ public class BossController : MonoBehaviour
     {
         transform.position += transform.right * moveSpeed * Time.deltaTime * slowDownCurve.Evaluate(time);
         time += Time.deltaTime;
-        if (time > 1.0f && state == previousState)
+        if (time > 1.0f && state == previousState && state != 3)
         {
             state = 2;
         }
