@@ -49,6 +49,12 @@ public class BossController : MonoBehaviour
                 shadow.transform.localScale = Vector3.zero;
                 col.enabled = true;
                 break;
+            case 3:
+                animationScript.SetActive(true);
+                animationScript.Attack02();
+                shadow.transform.localScale = Vector3.zero;
+                col.enabled = true;
+                break;
         }
         if(state != 2)
         {

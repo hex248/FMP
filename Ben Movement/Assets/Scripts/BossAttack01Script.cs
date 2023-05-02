@@ -21,7 +21,7 @@ public class BossAttack01Script : MonoBehaviour
 
     public void HurtPlayer(int amount)
     {
-        for(int i = 0; i < Physics.OverlapBox(transform.position + Vector3.up, Vector3.one).Length - 1; i++)
+        for(int i = 0; i < Physics.OverlapBox(transform.position + Vector3.up, Vector3.one * 2.0f).Length - 1; i++)
         {
             if (Physics.OverlapBox(transform.position + Vector3.up, Vector3.one)[i].CompareTag("Player"))
             {
@@ -34,6 +34,6 @@ public class BossAttack01Script : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + Vector3.up, Vector3.one);
+        Gizmos.DrawWireCube(transform.position + Vector3.up, Vector3.one * 2.0f);
     }
 }
