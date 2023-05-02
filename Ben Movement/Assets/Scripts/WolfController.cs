@@ -22,7 +22,8 @@ public class WolfController : MonoBehaviour
     [SerializeField] float attackMoveDistance;
     [SerializeField] float attackMoveTime;
     [SerializeField] float damageTime;
-    
+    [SerializeField] float biteSFXDelay = 0.25f;
+
 
 
     bool doneAttackHit;
@@ -30,9 +31,9 @@ public class WolfController : MonoBehaviour
     float timeSinceLastAttacking;
     Vector3 currentAttackDirection;
     bool isAttacking;
+    bool biteSFXPlayed;
 
-    
-    
+
 
     [SerializeField] float minAttackPrepareTime;
     bool isPreparingAttack;
@@ -69,12 +70,13 @@ public class WolfController : MonoBehaviour
     private NavMeshAgent navMesh;
     bool useNavMesh;
 
+    AudioManager AM;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         bed = FindObjectOfType<Bed>();
+        AM = FindObjectOfType<AudioManager>();
         wolfAnimationScript = GetComponentInChildren<WolfAnimationScript>();
         currentTarget = bed.gameObject;
         timeSinceLastAttacking = 0f;
@@ -84,7 +86,6 @@ public class WolfController : MonoBehaviour
         navMesh.updateRotation = false;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
 
@@ -124,6 +125,7 @@ public class WolfController : MonoBehaviour
             else
             {
                 navMesh.agentTypeID = GetAgentTypeIDByName("Attacking Player");
+                AM.PlayInChannel("wolf_growl", ChannelType.SFX, 1);
             }
             //take directions from navmesh
             useNavMesh = true;
@@ -322,7 +324,6 @@ public class WolfController : MonoBehaviour
         bool hasHitPlayer = false;
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            Debug.Log(hitColliders[i].gameObject);
             Rigidbody hitRb = hitColliders[i].gameObject.GetComponent<Rigidbody>();
             if (hitRb != null)
             {
@@ -346,6 +347,7 @@ public class WolfController : MonoBehaviour
         if (hasHitPlayer)
         {
             wolfAnimationScript.AttackHit();
+            AM.PlayInChannel("wolf_bite", ChannelType.SFX, 1);
             isMissedAttackStunned = false;
         }
         else
