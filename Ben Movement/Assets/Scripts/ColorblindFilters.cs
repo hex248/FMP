@@ -57,8 +57,6 @@ public class ColorblindFilters : MonoBehaviour
     {
         if (!layersSetup)
         {
-            Debug.Log(player.playerNumber);
-
             gameObject.layer = LayerMask.NameToLayer($"Colorblind{player.playerNumber}"); // set layer to independent colorblind layer
             gameObject.layer |= LayerMask.NameToLayer($"Player{player.playerNumber}Only");
 

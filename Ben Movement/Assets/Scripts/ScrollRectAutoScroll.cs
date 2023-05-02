@@ -58,7 +58,6 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
         InputScroll();
         if(selectedIsInList)
         {
-            Debug.Log(m_ScrollRect.normalizedPosition + " " + Time.unscaledDeltaTime);
             m_ScrollRect.normalizedPosition = Vector2.Lerp(m_ScrollRect.normalizedPosition, m_NextScrollPosition, scrollSpeed * Time.unscaledDeltaTime);
         }
     }
@@ -75,7 +74,6 @@ public class ScrollRectAutoScroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         Selectable selectedElement = eventSystem.currentSelectedGameObject ? eventSystem.currentSelectedGameObject.GetComponent<Selectable>() : null;
         selectedIsInList = (selectedElement != null) && m_Selectables.Contains(eventSystem.currentSelectedGameObject.GetComponent<Selectable>());
-        Debug.Log("scroll to selected " + selectedIsInList);
 
         if (selectedIsInList)
         {

@@ -25,7 +25,6 @@ public class ColorFilterToggle : MonoBehaviour
 
     public void Checked(bool isTicked)
     {
-        Debug.Log(colorblindnessMode + " Checked " + isTicked);
         if(isTicked && active)
         {
             filters.ChangeMode(colorblindnessMode);

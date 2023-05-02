@@ -257,7 +257,6 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 dashEndLocation = GetDashEndPoint();
                 StartDash(dashEndLocation);
-                Debug.Log("buffered dash to " + (dashEndLocation - transform.position));
 
                 if (neededMeleeComboReset)
                 {
@@ -517,7 +516,6 @@ public class PlayerController : MonoBehaviour
     void StartMeleeAttack()
     {
         currentMeleeComboStage = nextMeleeComboStage;
-        Debug.Log(currentMeleeComboStage);
 
         timeSinceMeleeAttackEnd = 0f;
         isMeleeAttacking = true;
@@ -574,7 +572,6 @@ public class PlayerController : MonoBehaviour
 
     void DoMeleeAttackHit()
     {
-        Debug.Log("combo stage hit " + currentMeleeComboStage);
         showMeleeAttackGizmos = true;
         doneMeleeAttackHit = true;
         Vector3 offset = Quaternion.AngleAxis(rotationalDirection.eulerAngles.y, Vector3.up) * meleeCombo[currentMeleeComboStage].hitboxOffset;
@@ -598,7 +595,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnRangedAttackButtonPressed(InputAction.CallbackContext context)
     {
-        Debug.Log(context.phase);
         bool triggered = context.action.triggered;
         if (triggered)
         {
@@ -607,7 +603,6 @@ public class PlayerController : MonoBehaviour
                 //start charging
                 rangedAttackChargingTime = 0f;
                 isRangedAttackCharging = true;
-                Debug.Log("Held");
             }
             else
             {
@@ -622,7 +617,6 @@ public class PlayerController : MonoBehaviour
             {
                 //trigger attack on button release
                 isRangedAttackCharging = false;
-                Debug.Log("Resleased after " + rangedAttackChargingTime);
                 StartRangedAttack();
             }
         }
@@ -679,17 +673,14 @@ public class PlayerController : MonoBehaviour
                 projectileScript.force = rangedAttack.baseForce * Mathf.Lerp(1f, rangedAttack.fullChargeForceMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.scaleMultiplier = Mathf.Lerp(1f, rangedAttack.fullChargeScaleFactor, currentRangedAttackChargeFactor);
                 projectileScript.projectileSpeed *= Mathf.Lerp(1f, rangedAttack.fullChargeSpeedMultiplier, currentRangedAttackChargeFactor);
-                Debug.Log(projectileScript.damage);
             }
             else
             {
                 //mabye add bonus?
-                Debug.Log("Full Charge!");
                 projectileScript.damage = rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.force = rangedAttack.baseForce * Mathf.Lerp(1f, rangedAttack.fullChargeForceMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.scaleMultiplier = Mathf.Lerp(1f, rangedAttack.fullChargeScaleFactor, currentRangedAttackChargeFactor);
                 projectileScript.projectileSpeed *= Mathf.Lerp(1f, rangedAttack.fullChargeSpeedMultiplier, currentRangedAttackChargeFactor);
-                Debug.Log(projectileScript.damage);
             }
 
             projectileScript.owner = playerParent;
@@ -988,7 +979,6 @@ public class PlayerController : MonoBehaviour
 
     GameObject SelectFocusTarget()
     {
-        Debug.Log("Search for focus target");
         EnemyHealth[] possibleEnemies = FindObjectsOfType<EnemyHealth>();
         List<EnemyHealth> enemiesInRange = new List<EnemyHealth>();
         List<EnemyHealth> enemiesInViewCone = new List<EnemyHealth>();
@@ -1105,7 +1095,6 @@ public class PlayerController : MonoBehaviour
 
                         i++;
                     }
-                    Debug.Log("No enemies in direct view. Closest in view cone is " + currentMinIndex);
                     return enemiesInViewCone[currentMinIndex].gameObject;
                 }
 

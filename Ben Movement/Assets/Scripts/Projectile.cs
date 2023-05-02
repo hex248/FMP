@@ -33,7 +33,6 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided with " + collision.gameObject);
         if(collision.gameObject == null)
         {
             return;
@@ -42,7 +41,6 @@ public class Projectile : MonoBehaviour
         if (enemy != null)
         {
             enemy.TakeDamage(damage, owner.gameObject);
-            Debug.Log("deal " + damage + " damage");
         }
 
         Rigidbody hitRb = collision.gameObject.GetComponent<Rigidbody>();

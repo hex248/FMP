@@ -71,9 +71,7 @@ public class SlashVFX : MonoBehaviour
             {
                 trigger = false;
                 animating = true;
-                Debug.Log("animation triggered");
 
-                Debug.Log("first frame animating");
                 foreach (MeshRenderer mr in hooves)
                 {
                     mr.enabled = true;
@@ -87,7 +85,6 @@ public class SlashVFX : MonoBehaviour
 
                 if (timer >= attackDuration)
                 {
-                    Debug.Log("animation finished");
                     animating = false;
                     timer = 0.0f;
 
