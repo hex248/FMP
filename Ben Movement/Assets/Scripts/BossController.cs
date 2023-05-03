@@ -61,7 +61,7 @@ public class BossController : MonoBehaviour
         }
         if(state < 2)
         {
-            if (Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
+            if (currentTarget != null && Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
             {
                 state = 1;
             }
