@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    AudioManager AM;
+
     [Header("Turret Details")]
     public int level = 1;
 
@@ -32,6 +34,11 @@ public class Turret : MonoBehaviour
     public GameObject target;
     bool canShoot = true;
 
+    private void Start()
+    {
+        AM = FindObjectOfType<AudioManager>();
+    }
+
     void Update()
     {
         if (drawDetectionArea)
@@ -49,6 +56,7 @@ public class Turret : MonoBehaviour
             if (TargetInRange() && canShoot)
             {
                 canShoot = false;
+                AM.PlayInChannel($"turret_shooting", ChannelType.SFX, 2);
                 GameObject spawnedObj = Instantiate(projectilePrefab, turretOrb.transform.position, Quaternion.identity, projectileParent);
                 TurretProjectile spawnedProjectile = spawnedObj.GetComponent<TurretProjectile>();
                 spawnedProjectile.homingAmount = projectileHomingAmount;
@@ -70,6 +78,8 @@ public class Turret : MonoBehaviour
     public void ProjectileDestroyed()
     {
         canShoot = true;
+
+        AM.PlayInChannel($"turret_projectile-explosion", ChannelType.SFX, 2);
     }
 
     void DrawDetectionArea()
