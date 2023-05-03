@@ -10,7 +10,6 @@ Shader "Kazi/ToonShader"
         [Enum(None,0,Alpha,1,Red,8,Green,4,Blue,2,RGB,14,RGBA,15)] _ColorMask("Writing Color Mask", Int) = 15
         [MainColor] _BaseColor("Base Color", Color) = (1,1,1,1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
-        _NormalMap("Normal Map", 2D) = "black" {}
         _Smoothness("Smoothness", Range(0.0, 1.0)) = 1.0
         _ClipThreshold("Clip Threshold", Range(0.0, 1.0)) = 0.5
         _DissolveScale("DissolveScale", Float) = 50
@@ -157,11 +156,9 @@ Shader "Kazi/ToonShader"
 
             half4 frag(Varyings IN) : SV_Target
             {
-                float height, width;
                 float3 positionWS = IN.positionWSAndFogFactor.xyz;
                 float4 color = float4(0.0, 0.0, 0.0, 1.0);
                 float value;
-                _NormalMap.GetDimensions(height, width);
                 Light mainLight = GetMainLight(IN.shadowCoord);
                 int additionalLightsCount = GetAdditionalLightsCount();
                 VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normal);
