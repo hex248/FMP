@@ -21,11 +21,14 @@ public class BossAnimationScript : MonoBehaviour
         coolDown = boss.attack01Cooldown;
         ray.SetActive(false);
     }
-
+    private bool isFreezing = false;
     // Update is called once per frame
     void Update()
     {
-        
+        if (isFreezing)
+        {
+            
+        }
     }
 
     public void StartBeam()
@@ -34,12 +37,16 @@ public class BossAnimationScript : MonoBehaviour
         float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
         ray.SetActive(true);
-        ray.GetComponent<LineRenderer>().SetPosition(1, boss.currentTarget.transform.position);
+        LineRenderer line = ray.GetComponent<LineRenderer>();
+        line.SetPosition(0, ray.transform.position);
+        line.SetPosition(1, boss.currentTarget.transform.position);
+        isFreezing = true;
     }
 
     public void EndBeam()
     {
         ray.SetActive(false);
+        isFreezing = false;
     }
 
     private void LateUpdate()

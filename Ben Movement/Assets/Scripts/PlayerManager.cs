@@ -42,6 +42,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] PlayerHealthBar[] healthBars3Player;
     [SerializeField] PlayerHealthBar[] healthBars4Player;
 
+    [Header("Materials")]
+    [SerializeField] Material[] matP1;
+    [SerializeField] Material[] matP2;
+    [SerializeField] Material[] matP3;
+    [SerializeField] Material[] matP4;
+
     public bool IsMenuOpen
     {
         get
@@ -93,6 +99,29 @@ public class PlayerManager : MonoBehaviour
         //find spawn position
         player.playerMovement.transform.position = GetPlayerSpawnPoint();
 
+        switch (player.playerNumber)
+        {
+            case 2:
+                player.ChangeMaterials(matP1);
+                player.SetHat(0);
+                break;
+            case 3:
+                player.ChangeMaterials(matP2);
+                player.SetHat(1);
+                break;
+            case 4:
+                player.ChangeMaterials(matP3);
+                player.SetHat(2);
+                break;
+            case 1:
+                player.ChangeMaterials(matP4);
+                player.SetHat(3);
+                break;
+            default:
+                player.ChangeMaterials(matP1);
+                player.SetHat(0);
+                break;
+        }
 
         players.Add(player);
         playerInput = player.GetComponentInChildren<PlayerInput>();

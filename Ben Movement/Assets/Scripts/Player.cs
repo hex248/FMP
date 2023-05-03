@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     public int playerNumber;
     public PlayerHealthBar playerHealthBar;
     public PlayerHealth playerHealth;
+    [Header("Renderers to Change")]
+    public Renderer[] meshRenderer;
+    public GameObject[] hats;
 
     // Start is called before the first frame update
     void Awake()
@@ -34,6 +37,23 @@ public class Player : MonoBehaviour
         cameraFollow = GetComponentInChildren<CameraFollow>();
         playerCamera = cameraFollow.GetComponentInChildren<Camera>();
         playerHealth = GetComponentInChildren<PlayerHealth>();
+    }
+
+    public void SetHat(int index)
+    {
+        foreach(GameObject g in hats)
+        {
+            g.SetActive(false);
+        }
+        hats[index].SetActive(true);
+    }
+
+    public void ChangeMaterials(Material[] mat)
+    {
+        foreach(Renderer m in meshRenderer)
+        {
+            m.materials = mat;
+        }
     }
 
     // Update is called once per frame
