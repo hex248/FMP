@@ -153,6 +153,7 @@ public class TerrainInteractiveSnow : MonoBehaviour
                 }
                 else
                 {
+                    trailDrawer.index = trailDrawers.IndexOf(trailDrawer);
                     trailDrawers[trailDrawer.index] = trailDrawer;
                     _trailSizes[trailDrawer.index] = trailDrawer.drawSize;
                     _trailBrushes[trailDrawer.index] = trailDrawer.drawBrush;
