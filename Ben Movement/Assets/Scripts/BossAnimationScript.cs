@@ -6,6 +6,7 @@ public class BossAnimationScript : MonoBehaviour
 {
     public float movementSpeedAnimation = 1.0f;
     public GameObject arm;
+    public GameObject ray;
     private BossController boss;
     private Animator anim;
     private Rigidbody rb;
@@ -18,6 +19,7 @@ public class BossAnimationScript : MonoBehaviour
         rb = GetComponentInParent<Rigidbody>();
         boss = GetComponentInParent<BossController>();
         coolDown = boss.attack01Cooldown;
+        ray.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,11 +33,13 @@ public class BossAnimationScript : MonoBehaviour
         Vector3 direction = (boss.currentTarget.transform.position - transform.position).normalized;
         float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
+        ray.SetActive(true);
+        ray.GetComponent<LineRenderer>().SetPosition(1, boss.currentTarget.transform.position);
     }
 
     public void EndBeam()
     {
-        
+        ray.SetActive(false);
     }
 
     private void LateUpdate()
