@@ -23,7 +23,7 @@ public class BossAttack01Script : MonoBehaviour
     {
         for(int i = 0; i < Physics.OverlapBox(transform.position + Vector3.up, Vector3.one * 2.0f).Length - 1; i++)
         {
-            if (Physics.OverlapBox(transform.position + Vector3.up, Vector3.one)[i].CompareTag("Player"))
+            if (Physics.OverlapBox(transform.position + Vector3.up, Vector3.one * 2.0f)[i].CompareTag("Player"))
             {
                 playerHealth = boss.currentTarget.GetComponent<PlayerHealth>();
                 playerHealth.Damage(amount);

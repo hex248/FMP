@@ -18,20 +18,12 @@ public class TrailDrawer : MonoBehaviour
     public Texture2D drawBrush;
     public float drawDistance = 1f;
     public int index = -1;
+    public bool isEnabled = true;
 
     public ObjectType objectType;
 
-    private void OnDisable()
-    {
-        // send message to TerrainInteractiveSnow to remove this from the 
-        if (FindObjectOfType<TerrainInteractiveSnow>())
-            FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(index);
-    }
-
     private void OnDestroy()
     {
-
-
         // send message to TerrainInteractiveSnow to remove this from the 
         if (FindObjectOfType<TerrainInteractiveSnow>())
             FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(index);

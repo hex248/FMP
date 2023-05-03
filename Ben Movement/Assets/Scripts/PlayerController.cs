@@ -7,6 +7,7 @@ using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
+    AudioManager AM;
     Rigidbody rb;
     Collider mainCol;
     List<Collider> fabricCols = new List<Collider>();
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     List<Vector3> gizmosLocation = new List<Vector3>();
     Vector3 dashEnd;
     float timeSinceDash;
+    bool hasMadeDashSound;
 
     [Header("Melee Attack Settings")]
     [SerializeField] List<MeleeAttack> meleeCombo = new List<MeleeAttack>();
@@ -118,6 +120,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        AM = FindObjectOfType<AudioManager>();
         rb = GetComponent<Rigidbody>();
         mainCol = GetComponent<Collider>();
         playerManager = FindObjectOfType<PlayerManager>();
@@ -145,7 +148,6 @@ public class PlayerController : MonoBehaviour
                 ResetMeleeCombo();
                 neededMeleeComboReset = false;
                 playerAnim.ComboTimeout();
-
             }
         }
 
@@ -193,8 +195,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-
-
                 focusReticule.SetActive(true);
                 Vector3 worldPos = focusObject.transform.position + new Vector3(0f, 1.5f, 0f);
                 focusReticule.transform.position = worldPos;
@@ -516,6 +516,14 @@ public class PlayerController : MonoBehaviour
     void StartMeleeAttack()
     {
         currentMeleeComboStage = nextMeleeComboStage;
+        if (currentMeleeComboStage < 2)
+        {
+            AM.PlayInChannel($"sheep_melee-{currentMeleeComboStage+1}", ChannelType.SFX, 2);
+        }
+        else if (currentMeleeComboStage == 2)
+        {
+            AM.PlayInChannel("sheep_combo-end", ChannelType.SFX, 2);
+        }
 
         timeSinceMeleeAttackEnd = 0f;
         isMeleeAttacking = true;
@@ -624,6 +632,7 @@ public class PlayerController : MonoBehaviour
 
     void StartRangedAttack()
     {
+        AM.PlayInChannel("sheep_shoot", ChannelType.SFX, 2);
         currentRangedAttackChargeFactor = Mathf.Clamp(rangedAttackChargingTime / rangedAttack.fullChargeTime, 0f, 1f);
 
         timeSinceRangedAttackEnd = 0f;
@@ -900,10 +909,16 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalScale = 1f;
         float yScale = 1f;
+        if (timeSinceDash >= dashTime * 0.5f && !hasMadeDashSound)
+        {
+            hasMadeDashSound = true;
+            AM.PlayInChannel("sheep_dash", ChannelType.SFX, 2);
+        }
         if (timeSinceDash >= dashTime)
         {
             //finished dash
             isDashing = false;
+            hasMadeDashSound = false;
             playerAnim.EndDashAnimation();
             yScale = 1f;
             horizontalScale = 1f;
