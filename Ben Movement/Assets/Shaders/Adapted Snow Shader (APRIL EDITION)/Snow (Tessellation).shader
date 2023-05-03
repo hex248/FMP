@@ -10,7 +10,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		_Height("Height", float) = 1.0
 		_NormalMap("Normal", 2D) = "white" {}
 		_NormalMapAmount("Normal Map Amount", float) = 1
-		
+
 		_Tess("Tessellation", Range(1, 32)) = 20
 		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
 		_MaxTessDistance("Max Tess Distance", Range(0, 32)) = 20
@@ -21,43 +21,45 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 	}
 
 		SubShader
-	{
-		Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
-
-		Pass
 		{
-			Name "ForwardLit"
-			Tags{"LightMode" = "UniversalForward"}
-			HLSLPROGRAM
+			Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "UniversalMaterialType" = "Lit" "IgnoreProjector" = "True" "ShaderModel" = "4.5"}
 
-			#if defined(SHADER_API_D3D11) || defined(SHADER_API_GLES3) || defined(SHADER_API_GLCORE) || defined(SHADER_API_VULKAN) || defined(SHADER_API_METAL) || defined(SHADER_API_PSSL)
-			#define UNITY_CAN_COMPILE_TESSELLATION 1
-			#   define UNITY_domain                 domain
-			#   define UNITY_partitioning           partitioning
-			#   define UNITY_outputtopology         outputtopology
-			#   define UNITY_patchconstantfunc      patchconstantfunc
-			#   define UNITY_outputcontrolpoints    outputcontrolpoints
-			#endif
+			Pass
+			{
+				Name "ForwardLit"
+				Tags{"LightMode" = "UniversalForward"}
+				HLSLPROGRAM
 
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-			#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
-			#pragma multi_compile _ _SHADOWS_SOFT
-			#pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
-			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
-			#pragma multi_compile _ LIGHTMAP_ON
-			#pragma multi_compile _ SHADOWS_SHADOWMASK
-			#pragma multi_compile_fog
-			#pragma require tessellation
-			#pragma vertex TessellationVertexProgram
-			#pragma fragment frag
-			#pragma hull hull
-			#pragma domain domain
+				#if defined(SHADER_API_D3D11) || defined(SHADER_API_GLES3) || defined(SHADER_API_GLCORE) || defined(SHADER_API_VULKAN) || defined(SHADER_API_METAL) || defined(SHADER_API_PSSL)
+				#define UNITY_CAN_COMPILE_TESSELLATION 1
+				#   define UNITY_domain                 domain
+				#   define UNITY_partitioning           partitioning
+				#   define UNITY_outputtopology         outputtopology
+				#   define UNITY_patchconstantfunc      patchconstantfunc
+				#   define UNITY_outputcontrolpoints    outputcontrolpoints
+				#endif
 
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+				#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+				#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+				#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+				#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
+				#pragma multi_compile _ _SHADOWS_SOFT
+				#pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
+				#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+				#pragma multi_compile _ LIGHTMAP_ON
+				#pragma multi_compile _ SHADOWS_SHADOWMASK
+				#pragma multi_compile_fog
+				#pragma require tessellation
+				#pragma vertex TessellationVertexProgram
+				#pragma fragment frag
+				#pragma hull hull
+				#pragma domain domain
 
+				#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+				#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+			float _Smoothness;
+			float _ClipThreshold;
 
 			struct ControlPoint
 			{
@@ -82,6 +84,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				float4 shadowCoord  : TEXCOORD1;
 				float3 normal : NORMAL;
 				float4 color : COLOR;
+				float4 positionWSAndFogFactor   : TEXCOORD2;
 			};
 
 			TEXTURE2D(_BaseMap);
@@ -183,6 +186,8 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				OUT.normal = IN.normal;
 				OUT.shadowCoord = GetShadowCoord(vertexInput);
 				OUT.uv = TRANSFORM_TEX(IN.uv, _HeightMap);
+				float fogFactor = ComputeFogFactor(vertexInput.positionCS.z);
+				OUT.positionWSAndFogFactor = float4(vertexInput.positionWS, fogFactor);
 
 				return OUT;
 			}
@@ -207,22 +212,24 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 
 			half4 frag(Varyings IN) : SV_Target
 			{
-				Light mainLight = GetMainLight(IN.shadowCoord);
 				half height = SAMPLE_TEXTURE2D(_HeightMap, sampler_HeightMap, IN.uv).r;
 				half4 heightColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * lerp(_BottomColor, _BaseColor, round(height * round(_ShadingDetail)) / round(_ShadingDetail)) * _NormalMapAmount;
-
-				//return heightColor;
-				float value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
-				half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
-				if (value > 0.5)
+				float3 positionWS = IN.positionWSAndFogFactor.xyz;
+				float4 color = float4(0.0, 0.0, 0.0, 1.0);
+				float value;
+				Light mainLight = GetMainLight(IN.shadowCoord);
+				int additionalLightsCount = GetAdditionalLightsCount();
+				VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normal);
+				IN.normal = vertexNormalInput.normalWS.xyz;
+				value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
+				color += value * float4(mainLight.color, 1.0);
+				for (int i = 0; i < additionalLightsCount; ++i)
 				{
-					value = 1.0;
+					Light light = GetAdditionalLight(i, positionWS);
+					value = dot(IN.normal, light.direction.xyz) * light.distanceAttenuation * light.shadowAttenuation;
+					color.rgb += value * light.color;
 				}
-				else 
-				{
-					value = 0.5;
-				}
-				return color * heightColor * (value * float4(mainLight.color, 1.0));
+				return color * heightColor * SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
 			}
 
 			ENDHLSL

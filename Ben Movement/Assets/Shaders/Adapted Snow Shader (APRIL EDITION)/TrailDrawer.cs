@@ -21,6 +21,13 @@ public class TrailDrawer : MonoBehaviour
 
     public ObjectType objectType;
 
+    private void OnDisable()
+    {
+        // send message to TerrainInteractiveSnow to remove this from the 
+        if (FindObjectOfType<TerrainInteractiveSnow>())
+            FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(index);
+    }
+
     private void OnDestroy()
     {
 
