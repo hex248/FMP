@@ -94,15 +94,19 @@ public class PlayerManager : MonoBehaviour
         isPaused = false;
     }
 
-    Vector3 GetPlayerSpawnPoint()
+    Vector3 GetPlayerSpawnPoint(int index)
     {
-        return new Vector3(Random.Range(-2f, 2f), 0.5f, Random.Range(-2f, 2f));
+        float angle = -Mathf.PI + index * Mathf.PI * 0.5f;
+        float x = Mathf.Sin(angle) * 6f;
+        float z = Mathf.Cos(angle) * 6f;
+        Vector3 spawnPosition = new Vector3(x, 0.5f, z);
+        return spawnPosition;
     }
 
     public void PlayerSpawned(Player player)
     {
         //find spawn position
-        player.playerMovement.transform.position = GetPlayerSpawnPoint();
+        player.playerMovement.transform.position = GetPlayerSpawnPoint(player.playerNumber);
         
         switch (player.playerNumber)
         {   
