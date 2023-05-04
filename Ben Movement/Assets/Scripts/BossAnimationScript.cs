@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossAnimationScript : MonoBehaviour
 {
     public float movementSpeedAnimation = 1.0f;
+    public float laserSpeed = 1.0f;
     public GameObject arm;
     public GameObject ray;
     private BossController boss;
@@ -27,7 +28,17 @@ public class BossAnimationScript : MonoBehaviour
     {
         if (isFreezing)
         {
-            
+            LineRenderer line = ray.GetComponent<LineRenderer>();
+            line.SetPosition(1, Vector3.Lerp(line.GetPosition(1), boss.currentTarget.transform.position, Time.deltaTime * laserSpeed));
+            Physics.Raycast(line.GetPosition(0), line.GetPosition(1) - line.GetPosition(0), out RaycastHit hit);
+            Collider[] cols = Physics.OverlapSphere(hit.point, 2.0f);
+            foreach(Collider col in cols)
+            {
+                if (col.CompareTag("Player"))
+                {
+                    col.GetComponent<PlayerHealth>().Damage(1);
+                }
+            }
         }
     }
 
@@ -78,7 +89,7 @@ public class BossAnimationScript : MonoBehaviour
             anim.SetTrigger("attack01");
             if((previousPos - boss.currentTarget.transform.position).magnitude > 1.0f)
             {
-                arm.transform.position = boss.currentTarget.transform.position + (boss.currentTarget.transform.forward * 1.5f);
+                arm.transform.position = boss.currentTarget.transform.position - (boss.currentTarget.transform.right);
             }
             else
             {

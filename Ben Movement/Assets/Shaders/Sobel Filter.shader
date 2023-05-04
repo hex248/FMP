@@ -39,7 +39,7 @@ Shader "Kazi/Sobel Filter"
 
 			float sobel(Texture2D tex, float2 uv, float deltaX, float deltaY)
 			{
-				float2 delta = float2(deltaX / _ScreenParams.x, deltaY / _ScreenParams.y);
+				float2 delta = float2(deltaX, deltaY);
 
 				float4 hr = float4(0, 0, 0, 0);
 				float4 vt = float4(0, 0, 0, 0);

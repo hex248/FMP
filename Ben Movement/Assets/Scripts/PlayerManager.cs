@@ -77,6 +77,11 @@ public class PlayerManager : MonoBehaviour
         screenManager = FindObjectOfType<ScreenManager>();
     }
 
+    private void Awake()
+    {
+        OnPlayerListChange += DummyListener;
+    }
+
     void PauseGame()
     {
         Time.timeScale = 0f;
@@ -98,9 +103,9 @@ public class PlayerManager : MonoBehaviour
     {
         //find spawn position
         player.playerMovement.transform.position = GetPlayerSpawnPoint();
-
+        
         switch (player.playerNumber)
-        {
+        {   
             case 2:
                 player.ChangeMaterials(matP1);
                 player.SetHat(0);
@@ -122,7 +127,7 @@ public class PlayerManager : MonoBehaviour
                 player.SetHat(0);
                 break;
         }
-
+        
         players.Add(player);
         playerInput = player.GetComponentInChildren<PlayerInput>();
 
@@ -143,7 +148,7 @@ public class PlayerManager : MonoBehaviour
         inputModule.move = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.submit = InputActionReference.Create(actionMap.FindAction("Menu Select", true));
 
-
+        
 
         //re-apply correct control scheme
         playerInput.SwitchCurrentControlScheme(playerControlScheme, devices);
@@ -169,15 +174,20 @@ public class PlayerManager : MonoBehaviour
             scroller.eventSystem = player.GetComponentInChildren<MultiplayerEventSystem>();
         }
 
-        
+
 
         playerCount++;
         OnPlayerListChange();
+
+        
         StartCoroutine(screenManager.PlayerJoined(playerCount));
         player.GetComponentInChildren<PlayerController>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
 
+
         UpdateRenderTextures();
         AssignPlayerHealthBars();
+
+        
 
     }
 
@@ -253,7 +263,10 @@ public class PlayerManager : MonoBehaviour
     public delegate void OnPlayerListChangeDelegate();
     public event OnPlayerListChangeDelegate OnPlayerListChange;
 
-
+    void DummyListener()
+    {
+        //dummy
+    }
 
 
 
