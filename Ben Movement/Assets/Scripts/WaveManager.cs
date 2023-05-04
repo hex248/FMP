@@ -7,21 +7,38 @@ public class WaveManager : MonoBehaviour
     public List<float> roundDifficulties = new List<float>();
 
     public List<EnemySpawnInfo> enemySpawnOptions = new List<EnemySpawnInfo>();
-    public bool spawnNextRound;
     [SerializeField] float spawnRadius;
     int currentRound;
+
+    [SerializeField] float roundLength;
+    float timeSinceRoundStart;
+
+    [SerializeField] int infiniteDifficultyIncrease;
+    bool waveRunning;
+
+    [SerializeField] bool startGame;
 
     private void Start()
     {
         currentRound = 0;
+        waveRunning = false;
     }
 
     private void Update()
     {
-        if (spawnNextRound)
+        if(waveRunning)
         {
-            spawnNextRound = false;
-            SpawnNextRound();
+            timeSinceRoundStart += Time.deltaTime;
+            if (timeSinceRoundStart >= roundLength)
+            {
+                SpawnNextRound();
+            }
+        }
+
+        if(startGame)
+        {
+            startGame = false;
+            StartGame();
         }
     }
 
@@ -30,10 +47,12 @@ public class WaveManager : MonoBehaviour
     void SpawnNextRound()
     {
         currentRound++;
-        if(currentRound >= roundDifficulties.Count)
+        timeSinceRoundStart = 0f;
+        if (currentRound >= roundDifficulties.Count)
         {
-            Debug.Log("No More Rounds");
-            Debug.Break();
+            //no more hard coded rounds - increase by infinite difficulty increase and continue
+            float difficulty = roundDifficulties[roundDifficulties.Count - 1] + (currentRound - roundDifficulties.Count) * infiniteDifficultyIncrease;
+            SpawnRoundWithDifficulty(difficulty);
         }
         SpawnRoundWithDifficulty(roundDifficulties[currentRound - 1]);
     }
@@ -83,5 +102,12 @@ public class WaveManager : MonoBehaviour
         float z = Mathf.Cos(randomAngle) * spawnRadius;
         Vector3 spawnPosition = new Vector3(x, 0.5f, z);
         return spawnPosition;
+    }
+
+    public void StartGame()
+    {
+        currentRound = 0;
+        SpawnNextRound();
+        waveRunning = true;
     }
 }
