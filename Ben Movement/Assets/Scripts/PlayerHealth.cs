@@ -17,19 +17,32 @@ public class PlayerHealth : MonoBehaviour
     Player player;
 
     CameraFollow cameraLocation;
-
-    [Header("Vignette Setting")]
     public Volume volume;
+    
     Vignette vignette;
 
-    [SerializeField] float hurtGradientAmount;
-    [SerializeField] float hurtIntensityAmount;
+    
+    [Header("Hurt Settings")]
+    [SerializeField] float hurtVignetteGradient;
+    [SerializeField] float hurtVignetteIntensity;
+    [SerializeField] Color hurtVignetteColor;
+    [SerializeField] float hurtVignetteSmoothSpeed;
 
-    float currentTargetGradientAmount;
-    float currentTargetIntensityAmount;
+    [Header("Death Settings")]
+    [SerializeField] GameObject grave;
 
-    [SerializeField] float vignetteSmoothSpeed;
-    [SerializeField] Color vignetteColor;
+    [SerializeField] GameObject playerVisuals;
+    [SerializeField] float deathVignetteIntensity;
+    [SerializeField] float deathVignetteGradient;
+    [SerializeField] float deathVignetteSmoothSpeed;
+    [SerializeField] Color deathVignetteColor;
+
+    bool dead;
+    Color vignetteColor;
+    float vignetteSmoothSpeed;
+    float currentTargetVignetteGradient;
+    float currentTargetVignetteIntensity;
+ 
 
 
 
@@ -42,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
         cameraLocation = player.cameraFollow;
         volume = cameraLocation.GetComponentInChildren<Volume>();
         vignette = volume.profile.Add<Vignette>();
+        dead = false;
     }
 
     private void Update()
@@ -67,34 +81,47 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateVignette()
     {
-        if (invincible)
+        if(dead)
         {
-            currentTargetIntensityAmount = hurtIntensityAmount;
-            currentTargetGradientAmount = hurtGradientAmount;
+            currentTargetVignetteIntensity = deathVignetteIntensity;
+            currentTargetVignetteGradient = deathVignetteGradient;
+            vignetteColor = deathVignetteColor;
+            vignetteSmoothSpeed = deathVignetteSmoothSpeed;
+        }
+        else if (invincible)
+        {
+            currentTargetVignetteIntensity = hurtVignetteIntensity;
+            currentTargetVignetteGradient = hurtVignetteGradient;
+            vignetteColor = hurtVignetteColor;
+            vignetteSmoothSpeed = hurtVignetteSmoothSpeed;
         }
     
         else
         {
-            currentTargetIntensityAmount = 0f;
-            currentTargetGradientAmount = 0f;
+            currentTargetVignetteIntensity = 0f;
+            currentTargetVignetteGradient = 0f;
         }
     
 
         float currentIntensity = (float)vignette.intensity;
         float currentGradient = (float)vignette.smoothness;
-        vignette.intensity.Override(Mathf.MoveTowards(currentIntensity, currentTargetIntensityAmount, Time.deltaTime * vignetteSmoothSpeed * (hurtIntensityAmount / 1f)));
-        vignette.smoothness.Override(Mathf.MoveTowards(currentGradient, currentTargetGradientAmount, Time.deltaTime * vignetteSmoothSpeed * (hurtGradientAmount / 1f)));
+        vignette.intensity.Override(Mathf.MoveTowards(currentIntensity, currentTargetVignetteIntensity, Time.deltaTime * vignetteSmoothSpeed * (hurtVignetteIntensity / 1f)));
+        vignette.smoothness.Override(Mathf.MoveTowards(currentGradient, currentTargetVignetteGradient, Time.deltaTime * vignetteSmoothSpeed * (hurtVignetteGradient / 1f)));
         vignette.color.Override(vignetteColor);
     }
 
     public void Damage(int amount = 1)
     {
-        if (invincible)
+        if (invincible || dead)
             return;
 
         currentHitPoints -= amount;
 
         currentHitPoints = Mathf.Clamp(currentHitPoints, 0, maxHitPoints);
+        if(currentHitPoints == 0)
+        {
+            Die();
+        }
 
         timeSinceHit = 0f;
         invincible = true;
@@ -108,7 +135,29 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         //death logic
+        player.playerMovement.Die();
+        grave.SetActive(true);
+        grave.transform.position = transform.position;
+        playerVisuals.SetActive(false);
+        dead = true;
+
+        StartCoroutine(FadeOutShake());
+        
+
     }
+
+    IEnumerator FadeOutShake()
+    {
+        cameraLocation.CameraShake(0.2f, 2f);
+        yield return new WaitForSeconds(2f);
+        cameraLocation.CameraShake(0.1f, 1f);
+        yield return new WaitForSeconds(1f);
+        cameraLocation.CameraShake(0.05f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        cameraLocation.CameraShake(0.05f, 0.1f);
+    }
+
+    
 
     public void Heal(int amount = 1, bool overHeal = false)
     {
@@ -129,5 +178,10 @@ public class PlayerHealth : MonoBehaviour
     public int GetCurrentHitPoints()
     {
         return currentHitPoints;
+    }
+
+    public bool IsDead()
+    {
+        return dead;
     }
 }

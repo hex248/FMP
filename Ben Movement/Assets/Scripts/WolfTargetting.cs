@@ -78,6 +78,10 @@ public class WolfTargetting : MonoBehaviour
             {
                 TargetBed();
             }
+            else if(target.GetComponent<PlayerHealth>().IsDead())
+            {
+                TargetBed();
+            }
         }
         else
         {

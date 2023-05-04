@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     float timeSinceDamaged;
     bool isDamageStunned;
 
-
+    bool isDead = false;
 
     private void Start()
     {
@@ -132,6 +132,8 @@ public class PlayerController : MonoBehaviour
         fabricCols = GetComponentsInChildren<Collider>().ToList();
 
         ResetMeleeCombo();
+
+        isDead = false;
     }
     private void FixedUpdate()
     {
@@ -954,7 +956,7 @@ public class PlayerController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned);
+        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned || isDead);
     }
 
     bool isActionBuffered()
@@ -1127,5 +1129,10 @@ public class PlayerController : MonoBehaviour
     {
         isFocusing = false;
         playerParent.cameraFollow.ToPlayer();
+    }
+
+    public void Die()
+    {
+        isDead = true;
     }
 }

@@ -339,7 +339,7 @@ public class WolfController : MonoBehaviour
             Bed bed = hitColliders[i].gameObject.GetComponent<Bed>();
             if (bed != null)
             {
-                //bed.TakeDamage(attackDamage);
+                bed.TakeDamage(1, gameObject);
                 hasHitPlayer = true;
             }
         }

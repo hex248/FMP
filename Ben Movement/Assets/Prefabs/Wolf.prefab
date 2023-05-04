@@ -466,6 +466,7 @@ MonoBehaviour:
   attackMoveDistance: 4.5
   attackMoveTime: 0.375
   damageTime: 0.375
+  biteSFXDelay: 0.25
   minAttackPrepareTime: 1
   missedAttackStunTime: 3
   damagedStunnedTime: 0.6
@@ -509,8 +510,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPlayerDetectDot: 0.3
   maxPlayerFeelRange: 2
-  maxPlayerDetectRange: 16
-  maxPlayerTrackingRange: 20
+  maxPlayerDetectRange: 12
+  maxPlayerTrackingRange: 12
   raycastLayer:
     serializedVersion: 2
     m_Bits: 65
@@ -635,6 +636,7 @@ MonoBehaviour:
   drawBrush: {fileID: 2800000, guid: b10f036f07f0bf64781c519874c2f68c, type: 3}
   drawDistance: 0.3
   index: -1
+  isEnabled: 1
   objectType: 0
 --- !u!1 &7704235921465295036
 GameObject:

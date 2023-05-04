@@ -1100,11 +1100,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309487414}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4804cfc857cae7c40ad940ad0bbb5614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maximumHealth: 30
+  currentHealth: 0
+  dissolveActive: 1
+  maxDamageDissolveAmount: 0.4
+  deathDissolveRate: 0.01
+  maxTimeToTargetDissove: 1
+  triggerDeath: 0
+  damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1309487417
 BoxCollider:
   m_ObjectHideFlags: 0
