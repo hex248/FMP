@@ -18,6 +18,8 @@ public class BossController : MonoBehaviour
     [SerializeField] GameObject attack01;
     [SerializeField] GameObject shadow;
     public float attack01Cooldown = 1.0f;
+    [Header("Attack02")]
+    public GameObject laserFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,9 +51,6 @@ public class BossController : MonoBehaviour
             case 2:
                 animationScript.SetActive(true);
                 animationScript.Attack01();
-                Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-                float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                transform.eulerAngles = new Vector3(0.0f, Mathf.LerpAngle(transform.eulerAngles.y, Y - 90.0f, Time.deltaTime * moveRotationSpeed), 0.0f);
                 shadow.transform.localScale = Vector3.zero;
                 col.enabled = true;
                 break;

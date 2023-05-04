@@ -21,6 +21,7 @@ public class BossAnimationScript : MonoBehaviour
         boss = GetComponentInParent<BossController>();
         coolDown = boss.attack01Cooldown;
         ray.SetActive(false);
+        boss.laserFX.SetActive(false);
     }
     private bool isFreezing = false;
     // Update is called once per frame
@@ -30,6 +31,7 @@ public class BossAnimationScript : MonoBehaviour
         {
             LineRenderer line = ray.GetComponent<LineRenderer>();
             line.SetPosition(1, Vector3.Lerp(line.GetPosition(1), boss.currentTarget.transform.position, Time.deltaTime * laserSpeed));
+            boss.laserFX.transform.position = Vector3.Lerp(line.GetPosition(1), boss.currentTarget.transform.position, Time.deltaTime * laserSpeed);
             Physics.Raycast(line.GetPosition(0), line.GetPosition(1) - line.GetPosition(0), out RaycastHit hit);
             Collider[] cols = Physics.OverlapSphere(hit.point, 2.0f);
             foreach(Collider col in cols)
@@ -52,12 +54,14 @@ public class BossAnimationScript : MonoBehaviour
         line.SetPosition(0, ray.transform.position);
         line.SetPosition(1, boss.currentTarget.transform.position);
         isFreezing = true;
+        boss.laserFX.SetActive(true);
     }
 
     public void EndBeam()
     {
         ray.SetActive(false);
         isFreezing = false;
+        boss.laserFX.SetActive(false);
     }
 
     private void LateUpdate()
