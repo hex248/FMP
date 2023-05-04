@@ -77,6 +77,11 @@ public class PlayerManager : MonoBehaviour
         screenManager = FindObjectOfType<ScreenManager>();
     }
 
+    private void Awake()
+    {
+        OnPlayerListChange += DummyListener;
+    }
+
     void PauseGame()
     {
         Time.timeScale = 0f;
@@ -89,18 +94,22 @@ public class PlayerManager : MonoBehaviour
         isPaused = false;
     }
 
-    Vector3 GetPlayerSpawnPoint()
+    Vector3 GetPlayerSpawnPoint(int index)
     {
-        return new Vector3(Random.Range(-2f, 2f), 0.5f, Random.Range(-2f, 2f));
+        float angle = -Mathf.PI + index * Mathf.PI * 0.5f;
+        float x = Mathf.Sin(angle) * 6f;
+        float z = Mathf.Cos(angle) * 6f;
+        Vector3 spawnPosition = new Vector3(x, 0.5f, z);
+        return spawnPosition;
     }
 
     public void PlayerSpawned(Player player)
     {
         //find spawn position
-        player.playerMovement.transform.position = GetPlayerSpawnPoint();
-
+        player.playerMovement.transform.position = GetPlayerSpawnPoint(player.playerNumber);
+        
         switch (player.playerNumber)
-        {
+        {   
             case 2:
                 player.ChangeMaterials(matP1);
                 player.SetHat(0);
@@ -122,7 +131,7 @@ public class PlayerManager : MonoBehaviour
                 player.SetHat(0);
                 break;
         }
-
+        
         players.Add(player);
         playerInput = player.GetComponentInChildren<PlayerInput>();
 
@@ -143,7 +152,7 @@ public class PlayerManager : MonoBehaviour
         inputModule.move = InputActionReference.Create(actionMap.FindAction("Menu Move", true));
         inputModule.submit = InputActionReference.Create(actionMap.FindAction("Menu Select", true));
 
-
+        
 
         //re-apply correct control scheme
         playerInput.SwitchCurrentControlScheme(playerControlScheme, devices);
@@ -169,15 +178,20 @@ public class PlayerManager : MonoBehaviour
             scroller.eventSystem = player.GetComponentInChildren<MultiplayerEventSystem>();
         }
 
-        
+
 
         playerCount++;
         OnPlayerListChange();
+
+        
         StartCoroutine(screenManager.PlayerJoined(playerCount));
         player.GetComponentInChildren<PlayerController>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
 
+
         UpdateRenderTextures();
         AssignPlayerHealthBars();
+
+        
 
     }
 
@@ -253,7 +267,10 @@ public class PlayerManager : MonoBehaviour
     public delegate void OnPlayerListChangeDelegate();
     public event OnPlayerListChangeDelegate OnPlayerListChange;
 
-
+    void DummyListener()
+    {
+        //dummy
+    }
 
 
 
