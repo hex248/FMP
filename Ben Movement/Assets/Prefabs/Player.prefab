@@ -853,10 +853,16 @@ MonoBehaviour:
   maxHitPoints: 5
   invincibilityTime: 0.6
   volume: {fileID: 0}
-  hurtGradientAmount: 1
-  hurtIntensityAmount: 0.33
-  vignetteSmoothSpeed: 5
-  vignetteColor: {r: 1, g: 0, b: 0, a: 0}
+  hurtVignetteGradient: 0
+  hurtVignetteIntensity: 0
+  hurtVignetteColor: {r: 0, g: 0, b: 0, a: 0}
+  hurtVignetteSmoothSpeed: 0
+  grave: {fileID: 0}
+  playerVisuals: {fileID: 0}
+  deathVignetteIntensity: 0
+  deathVignetteGradient: 0
+  deathVignetteSmoothSpeed: 0
+  deathVignetteColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7238103672931334040
 GameObject:
   m_ObjectHideFlags: 0

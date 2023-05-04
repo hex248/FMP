@@ -4641,6 +4641,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4804cfc857cae7c40ad940ad0bbb5614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maximumHealth: 0
+  currentHealth: 0
+  dissolveActive: 1
+  maxDamageDissolveAmount: 0
+  deathDissolveRate: 0.00001
+  maxTimeToTargetDissove: 1
+  triggerDeath: 0
+  damageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1309487417
 BoxCollider:
   m_ObjectHideFlags: 0

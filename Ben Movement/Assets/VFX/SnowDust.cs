@@ -6,25 +6,30 @@ using UnityEngine.VFX;
 public class SnowDust : MonoBehaviour
 {
     VisualEffect VFX;
+    public float spawnAmount = 15.0f;
+    public Transform spawnTransform;
 
     private void Start()
     {
         VFX = GetComponent<VisualEffect>();
+        VFX.SetFloat("Spawn Amount", 0.0f);
     }
 
     private void Update()
     {
-        VFX.SetVector3("SpawnPosition", transform.position);
-        VFX.SetVector3("EmissionDirection", transform.forward * -1);
+        VFX.SetVector3("SpawnPosition", spawnTransform.position);
+        VFX.SetVector3("EmissionDirection", spawnTransform.forward * -1);
     }
 
     public void OnDash()
     {
-        VFX.SendEvent("OnDash");
+        VFX.SetFloat("Spawn Amount", spawnAmount);
+        Debug.Log("OnDash");
     }
 
     public void OnDashEnd()
     {
-        VFX.SendEvent("OnDashEnd");
+        VFX.SetFloat("Spawn Amount", 0.0f);
+        Debug.Log("OnDashEnd");
     }
 }

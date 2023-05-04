@@ -925,6 +925,7 @@ public class PlayerController : MonoBehaviour
             isDashing = false;
             hasMadeDashSound = false;
             playerAnim.EndDashAnimation();
+            dustVFX.OnDashEnd();
             yScale = 1f;
             horizontalScale = 1f;
             mainCol.enabled = true;
@@ -934,7 +935,6 @@ public class PlayerController : MonoBehaviour
 
         else if (timeSinceDash >= enableColliderTime)
         {
-
             mainCol.enabled = true;
             yScale = Mathf.SmoothStep(yMin, 1f, timeSinceDash / dashTime);
             horizontalScale = Mathf.SmoothStep(xMax, 1f, timeSinceDash / dashTime);
