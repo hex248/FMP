@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] UnityEvent<GameObject> damageEvent;
     [SerializeField] UnityEvent deathEvent;
 
-
+    WaveManager enemySpawner;
 
     void Start()
     {
@@ -79,6 +79,7 @@ public class EnemyHealth : MonoBehaviour
 
             timeSinceTargetAdjusted = 0f;
             damageEvent.Invoke(source);
+            
 
         }
     }
@@ -86,9 +87,11 @@ public class EnemyHealth : MonoBehaviour
     public void Die()
     {
         if (dissolveActive)
+        {
             StartCoroutine(DeathDissolve());
             deathEvent.Invoke();
-
+            enemySpawner.EnemyDeath();
+        }
     }
 
     void UpdateDissolve()
@@ -125,5 +128,10 @@ public class EnemyHealth : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void LinkSpawner(WaveManager spawner)
+    {
+        enemySpawner = spawner;
     }
 }
