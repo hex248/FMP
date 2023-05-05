@@ -16,7 +16,6 @@ public class BossController : MonoBehaviour
     private BossAnimationScript animationScript;
     [Header("Attack01")]
     [SerializeField] GameObject attack01;
-    [SerializeField] GameObject shadow;
     public float attack01Cooldown = 1.0f;
     [Header("Attack02")]
     public GameObject laserFX;
@@ -41,47 +40,52 @@ public class BossController : MonoBehaviour
             case 0:
                 SlowDown();
                 animationScript.SetActive(true);
-                shadow.transform.localScale = Vector3.one * slowDownCurve.Evaluate(time) * 7.5f;
+                col.enabled = true;
                 break;
             case 1:
                 MovingState();
                 animationScript.SetActive(false);
-                shadow.transform.localScale = Vector3.one * speedUpCurve.Evaluate((time - 0.75f) / 10.0f) * 7.5f;
+                col.enabled = false;
                 break;
             case 2:
                 animationScript.SetActive(true);
                 animationScript.Attack01();
-                shadow.transform.localScale = Vector3.zero;
                 col.enabled = true;
                 break;
             case 3:
                 animationScript.SetActive(true);
                 animationScript.Attack02();
-                shadow.transform.localScale = Vector3.zero;
                 col.enabled = true;
                 break;
         }
-        if(state < 2)
+        if(currentTarget.name == "Bed")
         {
-            if (currentTarget != null && Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
-            {
-                state = 1;
-            }
-            else
-            {
-                state = 0;
-            }
-        }
-        if(state != previousState)
-        {
-            time = 0.0f;
+            state = 1;
         }
         else
         {
-            if (dodgedAttacks > 2)
+            if (state < 2)
             {
-                state = 3;
-                dodgedAttacks = 0;
+                if (currentTarget != null && Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude > range)
+                {
+                    state = 1;
+                }
+                else
+                {
+                    state = 0;
+                }
+            }
+            if (state != previousState)
+            {
+                time = 0.0f;
+            }
+            else
+            {
+                if (dodgedAttacks > 2)
+                {
+                    state = 3;
+                    dodgedAttacks = 0;
+                }
             }
         }
         previousState = state;
@@ -100,7 +104,6 @@ public class BossController : MonoBehaviour
         {
             state = 2;
         }
-        col.enabled = true;
     }
 
     void MovingState()
@@ -110,6 +113,5 @@ public class BossController : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, Mathf.LerpAngle(transform.eulerAngles.y, Y - 90.0f, Time.deltaTime * moveRotationSpeed), 0.0f);
         transform.position += transform.right * moveSpeed * Time.deltaTime * speedUpCurve.Evaluate(time);
         time += Time.deltaTime;
-        col.enabled = false;
     }
 }

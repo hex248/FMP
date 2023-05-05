@@ -46,15 +46,18 @@ public class BossAnimationScript : MonoBehaviour
 
     public void StartBeam()
     {
-        Vector3 direction = (boss.currentTarget.transform.position - transform.position).normalized;
-        float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
-        ray.SetActive(true);
-        LineRenderer line = ray.GetComponent<LineRenderer>();
-        line.SetPosition(0, ray.transform.position);
-        line.SetPosition(1, boss.currentTarget.transform.position);
-        isFreezing = true;
-        boss.laserFX.SetActive(true);
+        if (boss.currentTarget != null)
+        {
+            Vector3 direction = (boss.currentTarget.transform.position - transform.position).normalized;
+            float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
+            ray.SetActive(true);
+            LineRenderer line = ray.GetComponent<LineRenderer>();
+            line.SetPosition(0, ray.transform.position);
+            line.SetPosition(1, boss.currentTarget.transform.position);
+            isFreezing = true;
+            boss.laserFX.SetActive(true);
+        }
     }
 
     public void EndBeam()
@@ -88,27 +91,30 @@ public class BossAnimationScript : MonoBehaviour
 
     public void Attack01()
     {
-        if (!arm.activeInHierarchy)
+        if(boss.currentTarget != null)
         {
-            anim.SetTrigger("attack01");
-            if((previousPos - boss.currentTarget.transform.position).magnitude > 1.0f)
+            if (!arm.activeInHierarchy)
             {
-                arm.transform.position = boss.currentTarget.transform.position - (boss.currentTarget.transform.right);
+                anim.SetTrigger("attack01");
+                if ((previousPos - boss.currentTarget.transform.position).magnitude > 1.0f)
+                {
+                    arm.transform.position = boss.currentTarget.transform.position - (boss.currentTarget.transform.right);
+                }
+                else
+                {
+                    arm.transform.position = boss.currentTarget.transform.position;
+                }
+            }
+            if (arm.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            {
+                arm.SetActive(true);
             }
             else
             {
-                arm.transform.position = boss.currentTarget.transform.position;
+                boss.dodgedAttacks++;
+                arm.SetActive(false);
+                boss.SetState(1);
             }
-        }
-        if (arm.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-        {
-            arm.SetActive(true);
-        }
-        else
-        {
-            boss.dodgedAttacks++;
-            arm.SetActive(false);
-            boss.SetState(1);
         }
     }
 
