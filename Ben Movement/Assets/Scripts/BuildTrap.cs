@@ -6,6 +6,7 @@ public class BuildTrap : MonoBehaviour
 {
     AudioManager AM;
     TeleporterManager TPM;
+    Bed bed;
 
     [SerializeField] GameObject interactControls;
     [SerializeField] GameObject hologramControls;
@@ -26,6 +27,7 @@ public class BuildTrap : MonoBehaviour
     {
         AM = FindObjectOfType<AudioManager>();
         TPM = FindObjectOfType<TeleporterManager>();
+        bed = FindObjectOfType<Bed>();
         HideInteractControls();
         HideHologramControls();
         HideHolograms();
@@ -103,6 +105,9 @@ public class BuildTrap : MonoBehaviour
         // spawn tower
         var spawned = Instantiate(prefab);
         spawned.transform.position = hologramParent.transform.position;
+        var lookDirection = (bed.transform.position - spawned.transform.position).normalized;
+        lookDirection.y = 0.0f;
+        spawned.transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
         // destroy self
         Destroy(gameObject);
     }
