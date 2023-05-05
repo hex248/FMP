@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PlayerMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    List<MenuPlayer> players = new List<MenuPlayer>();
+
+    [SerializeField] List<GameObject> playerJoinUIVisuals;
+
+
+    public void PlayerJoined(MenuPlayer player)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     
 }

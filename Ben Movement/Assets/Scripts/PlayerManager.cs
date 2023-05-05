@@ -301,6 +301,7 @@ public class PlayerManager : MonoBehaviour
     void EndGame()
     {
         //end game logic
+        Application.Quit();
     }
 
 }
