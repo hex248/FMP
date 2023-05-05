@@ -3700,7 +3700,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1028300098 stripped
 Transform:
@@ -5209,6 +5209,22 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: gracePeriodLength
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: clusterSpawnChance
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: clusterSpawnOffset
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: infiniteDifficultyIncrease
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -5218,11 +5234,11 @@ PrefabInstance:
       objectReference: {fileID: 2826765272859676530, guid: 9522a10b1f034c44fb65e5f3d0ebb550, type: 3}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.data[1].difficultyCost
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.data[1].minRoundNumberToSpawn
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
@@ -6578,7 +6594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1623277796385928882, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1623277796385928882, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
       propertyPath: m_AnchorMax.x
