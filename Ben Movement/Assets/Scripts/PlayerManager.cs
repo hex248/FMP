@@ -48,6 +48,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Material[] matP3;
     [SerializeField] Material[] matP4;
 
+    [Header("Game Settings")]
+    [SerializeField] int playersRemaining;
+
+
     public bool IsMenuOpen
     {
         get
@@ -75,6 +79,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         screenManager = FindObjectOfType<ScreenManager>();
+        playersRemaining = 0;
     }
 
     private void Awake()
@@ -181,6 +186,7 @@ public class PlayerManager : MonoBehaviour
 
 
         playerCount++;
+        playersRemaining++;
         OnPlayerListChange();
 
         
@@ -190,8 +196,6 @@ public class PlayerManager : MonoBehaviour
 
         UpdateRenderTextures();
         AssignPlayerHealthBars();
-
-        
 
     }
 
@@ -272,6 +276,23 @@ public class PlayerManager : MonoBehaviour
         //dummy
     }
 
+    public void PlayerDied()
+    {
+        playersRemaining--;
+        if(playersRemaining <= 0)
+        {
+            EndGame();
+        }
+    }
 
+    public void PlayerRevived()
+    {
+        playersRemaining++;
+    }
+
+    void EndGame()
+    {
+        //end game logic
+    }
 
 }

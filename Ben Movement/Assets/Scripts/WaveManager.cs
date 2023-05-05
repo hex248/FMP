@@ -7,11 +7,11 @@ public class WaveManager : MonoBehaviour
     
 
     
-    [SerializeField] float spawnRadius;
+    
     int currentRound;
 
     [Header("Spawn Settings")]
-
+    [SerializeField] float spawnRadius;
     public List<float> roundDifficulties = new List<float>();
     public List<EnemySpawnInfo> enemySpawnOptions = new List<EnemySpawnInfo>();
     List<EnemySpawnInfo> enemiesToSpawn = new List<EnemySpawnInfo>();

@@ -977,7 +977,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Focus();
+                if(!isDead)
+                    Focus();
             }
         }
     }
@@ -1134,5 +1135,12 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         isDead = true;
+        Unfocus();
     }
+
+    public void Revive()
+    {
+        isDead = false;
+        Unfocus();
+    }    
 }
