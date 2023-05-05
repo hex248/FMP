@@ -5,13 +5,14 @@ using UnityEngine;
 public class BuildTrap : MonoBehaviour
 {
     AudioManager AM;
+    TeleporterManager TPM;
 
     [SerializeField] GameObject interactControls;
     [SerializeField] GameObject hologramControls;
     [SerializeField] GameObject hologramParent;
 
-    [SerializeField] GameObject[] holograms;
-    [SerializeField] GameObject[] prefabs;
+    [SerializeField] List<GameObject> holograms;
+    [SerializeField] List<GameObject> prefabs;
     GameObject currentHologram;
     int hologramIDX = 0;
 
@@ -24,6 +25,7 @@ public class BuildTrap : MonoBehaviour
     private void Start()
     {
         AM = FindObjectOfType<AudioManager>();
+        TPM = FindObjectOfType<TeleporterManager>();
         HideInteractControls();
         HideHologramControls();
         HideHolograms();
@@ -137,12 +139,12 @@ public class BuildTrap : MonoBehaviour
     void CycleLeft()
     {
         hologramIDX--;
-        if (hologramIDX < 0) hologramIDX = holograms.Length - 1;
+        if (hologramIDX < 0) hologramIDX = holograms.Count - 1;
     }
 
     void CycleRight()
     {
         hologramIDX++;
-        if (hologramIDX >= holograms.Length) hologramIDX = 0;
+        if (hologramIDX >= holograms.Count) hologramIDX = 0;
     }
 }
