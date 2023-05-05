@@ -114,7 +114,7 @@ public class WolfTargetting : MonoBehaviour
 
     void AttemptFindPlayer()
     {
-        //get all players in view
+        //get all ALIVE players in view
         List<PlayerController> playersInView = new List<PlayerController>();
         foreach (PlayerController player in players)
         {
@@ -136,7 +136,7 @@ public class WolfTargetting : MonoBehaviour
                     targetIsInDirectView = (hit.collider.gameObject == player.gameObject);
                 }
 
-                if (dot > minPlayerDetectDot && targetIsInDirectView)
+                if (dot > minPlayerDetectDot && targetIsInDirectView && !player.IsDead())
                 {
                     playersInView.Add(player);
                 }

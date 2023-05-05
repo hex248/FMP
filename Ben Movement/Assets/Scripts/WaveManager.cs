@@ -184,6 +184,8 @@ public class WaveManager : MonoBehaviour
         timeSinceGraceStart = 0f;
         waveRunning = false;
         inGrace = true;
+
+        FindObjectOfType<PlayerManager>().RevivePlayers();
     }
 
     public void EnemyDeath()

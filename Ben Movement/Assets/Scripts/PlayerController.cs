@@ -1143,4 +1143,9 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         Unfocus();
     }    
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
 }
