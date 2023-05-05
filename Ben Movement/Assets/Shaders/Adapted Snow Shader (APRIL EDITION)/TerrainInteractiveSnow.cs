@@ -60,15 +60,15 @@ public class TerrainInteractiveSnow : MonoBehaviour
 
     void UpdateSnowMaterial()
     {
-        // convert array of transforms to array of positions (V4)
+        // create array of tessellation points based on trails being drawn
         Vector4[] posArray = new Vector4[100];
-        for (int i = 0; i < _trailsPositions.Count; i++)
+        var tessellationPoints = trailDrawers.FindAll(e=>e.enabled);
+        for (int i = 0; i < tessellationPoints.Count; i++)
         {
-            posArray[i] = _trailsPositions[i].position;
+            posArray[i] = tessellationPoints[i].drawTransform.position;
         }
         terrain.materialTemplate.SetVectorArray("_DrawPositions", posArray);
-
-        // set positions after (triggers an update of positions)
+        terrain.materialTemplate.SetInt("_DrawPositionNum", tessellationPoints.Count);
 
         // set the properties of the copied material based on snow asset
         terrain.materialTemplate.SetFloat("_Tess", _snowMaterial.GetFloat("_Tess"));
@@ -85,7 +85,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
         if (_index >= _trailsPositions.Count)
             _index = 0;
         var trail = _trailsPositions[_index];
-        //if (!trailDrawers[_index].isEnabled) return;
 
         Ray ray = new Ray(trail.transform.position, Vector3.down);
 
@@ -148,8 +147,6 @@ public class TerrainInteractiveSnow : MonoBehaviour
                     _trailBrushes.Add(trailDrawer.drawBrush);
                     _trailDistance.Add(trailDrawer.drawDistance);
                     trailDrawer.index = _trailsPositions.Count - 1;
-
-                    terrain.materialTemplate.SetInt("_DrawPositionNum", _trailsPositions.Count);
                 }
                 else
                 {

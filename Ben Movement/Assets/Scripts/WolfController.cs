@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class WolfController : MonoBehaviour
 {
+    TrailDrawer trailDrawer;
     Rigidbody rb;
     float timeSinceStart;
 
@@ -74,6 +75,8 @@ public class WolfController : MonoBehaviour
 
     void Start()
     {
+        trailDrawer = GetComponent<TrailDrawer>();
+        trailDrawer.enabled = false;
         rb = GetComponent<Rigidbody>();
         bed = FindObjectOfType<Bed>();
         AM = FindObjectOfType<AudioManager>();
@@ -88,8 +91,6 @@ public class WolfController : MonoBehaviour
 
     void FixedUpdate()
     {
-
-
         Vector3 offsetToTarget = currentTarget.transform.position - transform.position;
         Vector3 directionToTarget = offsetToTarget.normalized;
         float distanceToTarget = offsetToTarget.magnitude;
@@ -181,6 +182,7 @@ public class WolfController : MonoBehaviour
             {
                 wolfAnimationScript.Recover();
                 isMissedAttackStunned = false;
+                StartCoroutine(DisableTrailsAfter(1.0f));
             }
             MoveForward(0, stunMaxSpeedChange);
         }
@@ -354,6 +356,7 @@ public class WolfController : MonoBehaviour
         {
             wolfAnimationScript.AttackMissed();
             isMissedAttackStunned = true;
+            trailDrawer.enabled = true;
             timeSinceStunned = 0f;
         }
     }
@@ -382,5 +385,11 @@ public class WolfController : MonoBehaviour
         isDeathStunned = true;
         isAttacking = false;
         isPreparingAttack = false;
+    }
+
+    IEnumerator DisableTrailsAfter(float s)
+    {
+        yield return new WaitForSeconds(s);
+        trailDrawer.enabled = false;
     }
 }
