@@ -28,7 +28,7 @@ public class Turret : MonoBehaviour
     public LineRenderer detectionRadiusLineRenderer;
 
     [Header("Components")]
-    public GameObject turretOrb;
+    public GameObject projectileSpawn;
 
     [Header("Internal Variables")]
     public GameObject target;
@@ -57,7 +57,8 @@ public class Turret : MonoBehaviour
             {
                 canShoot = false;
                 AM.PlayInChannel($"turret_shooting", ChannelType.SFX, 2);
-                GameObject spawnedObj = Instantiate(projectilePrefab, turretOrb.transform.position, Quaternion.identity, projectileParent);
+                Debug.Log("turret shoot");
+                GameObject spawnedObj = Instantiate(projectilePrefab, projectileSpawn.transform.position, Quaternion.identity);
                 TurretProjectile spawnedProjectile = spawnedObj.GetComponent<TurretProjectile>();
                 spawnedProjectile.homingAmount = projectileHomingAmount;
                 spawnedProjectile.maxVelocity = projectileMaxVelocity;

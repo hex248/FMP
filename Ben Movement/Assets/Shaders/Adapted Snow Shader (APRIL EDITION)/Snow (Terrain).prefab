@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8972666271578233530}
   - component: {fileID: 8972666271578233535}
   - component: {fileID: 8070778325111318084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Snow (Terrain)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,13 +57,13 @@ Terrain:
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_ReflectionProbeUsage: 0
+  m_MaterialTemplate: {fileID: 2100000, guid: c63b3d9871bd55749945e8eed197982a, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ScaleInLightmap: 0.0256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightmapParameters: {fileID: 0}
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
@@ -91,12 +91,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _snowHeightMapUpdate: {fileID: 4800000, guid: ada7c83f630954b4596484cb42dc8c83, type: 3}
-  _stepPrint: {fileID: 2800000, guid: 1bc157368a47e394f9bdb8b92dfcca44, type: 3}
+  _stepPrint: {fileID: 2800000, guid: 17535b829c5ae7441a92e1e9b324c01d, type: 3}
   _snowMaterial: {fileID: 2100000, guid: c63b3d9871bd55749945e8eed197982a, type: 2}
+  trailDrawers: []
   _trailsPositions: []
-  _drawDistance: 3
-  _offset: 0.03
+  _trailSizes: []
+  _trailBrushes: []
+  _trailDistance: []
   _snowHeightMap: {fileID: 0}
+  _index: 0
 --- !u!65 &8070778325111318084
 BoxCollider:
   m_ObjectHideFlags: 0

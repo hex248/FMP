@@ -41,7 +41,7 @@ public class TurretProjectile : MonoBehaviour
         if(lifeTime < maxLifeTime)
         {
             lifeTime += Time.deltaTime;
-            visuals.transform.localScale = Vector3.one * (maxLifeTime - lifeTime) / maxLifeTime;
+            //visuals.transform.localScale = Vector3.one * (maxLifeTime - lifeTime) / maxLifeTime;
         }
         else
         {
@@ -50,9 +50,19 @@ public class TurretProjectile : MonoBehaviour
 
         if (!locked)
         {
-            targetRotation = Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, homingAmount * Time.deltaTime);
+            if (target)
+            {
+                targetRotation = Quaternion.LookRotation((target.transform.position + new Vector3(0, 1.5f, 0)) - transform.position, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, homingAmount * Time.deltaTime);
+                //transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, 1, Mathf.Infinity), transform.position.z);
+            }
             rb.velocity = transform.forward * velocity;
+            if (transform.position.y < 1.5f)
+            {
+                Debug.Log($"crashed into ground (y=1)");
+
+                StartCoroutine(Destroy());
+            }
         }
         else
         {
@@ -64,16 +74,19 @@ public class TurretProjectile : MonoBehaviour
     {
         if (col.gameObject.GetInstanceID() == target.GetInstanceID())
         {
+            Debug.Log("hit target");
             StartCoroutine(Destroy(col));
         }
         // if crashes into environment, and has been active for at least half a second (stops crashing into turret tower straight away)
         if (Crash(col.gameObject.layer) && lifeTime >= 1.5f)
         {
+            Debug.Log($"crashed into {col.name}");
+
             StartCoroutine(Destroy(col));
         }
     }
 
-    IEnumerator Destroy(Collider col)
+    IEnumerator Destroy(Collider col=null)
     {
         locked = true;
         GetComponent<Collider>().enabled = false;
@@ -84,18 +97,26 @@ public class TurretProjectile : MonoBehaviour
 
         // trigger vfx and decal
         GameObject particleSys = CrashVFX(transform);
-        col.GetComponent<EnemyHealth>().TakeDamage(damageAmount, this.gameObject);
+        if (col != null)
+        {
+            var enemyHealth = col.gameObject.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damageAmount, this.gameObject);
+            }
+        }
         yield return new WaitForSeconds(0.3f);
 
         // apply decal slightly after explosion starts, to hide it in the explosion
         // only apply to layers marked for crash - mostly environment
-        if (Crash(col.gameObject.layer))
+        if (col != null && Crash(col.gameObject.layer))
         {
-            CrashDecal(transform, col);
+            //CrashDecal(transform, col);
         }
 
         yield return new WaitForSeconds(2.0f);
-        
+
+        Debug.Log($"Destroy {particleSys.name}");
         Destroy(particleSys);
         Destroy(gameObject);
 
