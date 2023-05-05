@@ -285,9 +285,17 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void PlayerRevived()
+    public void RevivePlayers()
     {
-        playersRemaining++;
+        foreach(Player player in players)
+        {
+            if (player.playerHealth.IsDead())
+            {
+                playersRemaining++;
+                player.playerHealth.Revive();
+            }
+        }
+            
     }
 
     void EndGame()

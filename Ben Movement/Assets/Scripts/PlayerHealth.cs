@@ -145,13 +145,12 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(FadeOutShake());
     }
 
-    void Revive()
+    public void Revive()
     {
         player.playerMovement.Revive();
         grave.SetActive(false);
         //grave.transform.position = transform.position;
         playerVisuals.SetActive(true);
-        FindObjectOfType<PlayerManager>().PlayerRevived();
         dead = false;
         Heal(maxHitPoints);
         StartCoroutine(FadeOutShake());
