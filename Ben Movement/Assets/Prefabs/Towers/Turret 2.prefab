@@ -471,9 +471,6 @@ GameObject:
   - component: {fileID: 852299448934677348}
   - component: {fileID: 5291114090750819108}
   - component: {fileID: 6118094694363313128}
-  - component: {fileID: 1319932579870705966}
-  - component: {fileID: 3178373555496448573}
-  - component: {fileID: 8391946735243834548}
   m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
@@ -544,55 +541,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1319932579870705966
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6356306185187030381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3909233067320746374, guid: e80ff80dc10f8b845b4c69595e58b732, type: 3}
---- !u!54 &3178373555496448573
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6356306185187030381}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!114 &8391946735243834548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6356306185187030381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: turret 2
-  drawTransform: {fileID: 852299448934677348}
-  drawSize: 15
-  drawBrush: {fileID: 2800000, guid: f044d6b0ae4bbdd43b69f77bcd69c54a, type: 3}
-  drawDistance: 1
-  index: -1
-  objectType: 1
 --- !u!1 &6792961515134538346
 GameObject:
   m_ObjectHideFlags: 0
