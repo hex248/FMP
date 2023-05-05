@@ -62,7 +62,7 @@ public class BossController : MonoBehaviour
         {
             state = 1;
         }
-        else
+        else if(currentTarget.name != "Bed" && !currentTarget.GetComponent<PlayerHealth>().IsDead())
         {
             if (state < 2)
             {
