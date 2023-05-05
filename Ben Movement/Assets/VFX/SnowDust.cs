@@ -24,12 +24,10 @@ public class SnowDust : MonoBehaviour
     public void OnDash()
     {
         VFX.SetFloat("Spawn Amount", spawnAmount);
-        Debug.Log("OnDash");
     }
 
     public void OnDashEnd()
     {
         VFX.SetFloat("Spawn Amount", 0.0f);
-        Debug.Log("OnDashEnd");
     }
 }
