@@ -27,6 +27,7 @@ public class TurretProjectile : MonoBehaviour
     Quaternion targetRotation;
 
     bool locked = false;
+    
 
     private void Start()
     {
@@ -59,8 +60,6 @@ public class TurretProjectile : MonoBehaviour
             rb.velocity = transform.forward * velocity;
             if (transform.position.y < 1.5f)
             {
-                Debug.Log($"crashed into ground (y=1)");
-
                 StartCoroutine(Destroy());
             }
         }
@@ -80,8 +79,7 @@ public class TurretProjectile : MonoBehaviour
         // if crashes into environment, and has been active for at least half a second (stops crashing into turret tower straight away)
         if (Crash(col.gameObject.layer) && lifeTime >= 1.5f)
         {
-            Debug.Log($"crashed into {col.name}");
-
+            Debug.Log("hit environment");
             StartCoroutine(Destroy(col));
         }
     }
@@ -107,6 +105,7 @@ public class TurretProjectile : MonoBehaviour
         }
         yield return new WaitForSeconds(0.3f);
 
+
         // apply decal slightly after explosion starts, to hide it in the explosion
         // only apply to layers marked for crash - mostly environment
         if (col != null && Crash(col.gameObject.layer))
@@ -115,9 +114,6 @@ public class TurretProjectile : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2.0f);
-
-        Debug.Log($"Destroy {particleSys.name}");
-        Destroy(particleSys);
         Destroy(gameObject);
 
         yield return null;
