@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [Header("Renderers to Change")]
     public Renderer[] meshRenderer;
     public GameObject[] hats;
+    public GameObject[] trails;
 
     // Start is called before the first frame update
     void Awake()
@@ -50,9 +51,17 @@ public class Player : MonoBehaviour
 
     public void ChangeMaterials(Material[] mat)
     {
-        foreach(Renderer m in meshRenderer)
+        foreach (Renderer m in meshRenderer)
         {
             m.materials = mat;
+        }
+    }
+
+    public void SetTrailMaterial(Material mat)
+    {
+        foreach (GameObject m in trails)
+        {
+            m.GetComponent<TrailRenderer>().material = mat;
         }
     }
 

@@ -48,6 +48,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Material[] matP3;
     [SerializeField] Material[] matP4;
 
+    [Header("Trail Materials")]
+    [SerializeField] Material trailMatP1;
+    [SerializeField] Material trailMatP2;
+    [SerializeField] Material trailMatP3;
+    [SerializeField] Material trailMatP4;
+
     [Header("Game Settings")]
     [SerializeField] int playersRemaining;
 
@@ -117,22 +123,27 @@ public class PlayerManager : MonoBehaviour
         {   
             case 2:
                 player.ChangeMaterials(matP1);
+                player.SetTrailMaterial(trailMatP1);
                 player.SetHat(0);
                 break;
             case 3:
                 player.ChangeMaterials(matP2);
+                player.SetTrailMaterial(trailMatP2);
                 player.SetHat(1);
                 break;
             case 4:
                 player.ChangeMaterials(matP3);
+                player.SetTrailMaterial(trailMatP3);
                 player.SetHat(2);
                 break;
             case 1:
                 player.ChangeMaterials(matP4);
+                player.SetTrailMaterial(trailMatP4);
                 player.SetHat(3);
                 break;
             default:
                 player.ChangeMaterials(matP1);
+                player.SetTrailMaterial(trailMatP1);
                 player.SetHat(0);
                 break;
         }

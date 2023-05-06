@@ -72,13 +72,11 @@ public class TurretProjectile : MonoBehaviour
     {
         if (col.gameObject.GetInstanceID() == target.GetInstanceID())
         {
-            Debug.Log("hit target");
             StartCoroutine(Destroy(col));
         }
         // if crashes into environment, and has been active for at least half a second (stops crashing into turret tower straight away)
         if (Crash(col.gameObject.layer) && lifeTime >= 1.5f)
         {
-            Debug.Log("hit environment");
             StartCoroutine(Destroy(col));
         }
     }
