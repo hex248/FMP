@@ -16,13 +16,15 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player Trigger"))
         {
+            var pt = other.GetComponent<PlayerTrigger>();
+
             // teleport to other teleporter
 
             var otherTeleporter = TPM.FindNext(this);
 
-            other.transform.position = new Vector3(otherTeleporter.spawn.position.x, other.transform.position.y, otherTeleporter.spawn.position.z) + (other.transform.forward * offsetAmount);
+            pt.controller.transform.position = new Vector3(otherTeleporter.spawn.position.x, pt.controller.transform.position.y, otherTeleporter.spawn.position.z) + (pt.controller.transform.forward * offsetAmount);
 
         }
     }
