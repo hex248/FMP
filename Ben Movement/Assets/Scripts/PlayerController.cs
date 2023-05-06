@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        playerNumber = playerParent.playerNumber;
         if (isMeleeAttacking)
         {
             lastMeleeAttackingTime = 0f;
@@ -906,7 +907,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach(Collider collider in fabricCols)
         {
-            collider.enabled = on;
+            if (collider.tag != "Player Trigger") collider.enabled = on;
         }
     }
 
