@@ -50,12 +50,13 @@ MonoBehaviour:
   level: 2
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 2048
-  projectileParent: {fileID: 5422567537105359513, guid: efa2b9444243ab3468c8d25e12509ca4, type: 3}
+    m_Bits: 67584
   projectileHomingAmount: 6
   projectileMaxVelocity: 5
   projectileVelocity: 4
   projectileLifetime: 5
+  shootBufferTime: 0.35
+  damage: 0
   projectileDecay:
     serializedVersion: 2
     m_Curve:
@@ -80,7 +81,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  projectilePrefab: {fileID: 5422567537105359514, guid: efa2b9444243ab3468c8d25e12509ca4, type: 3}
+  projectilePrefab: {fileID: 5422567537105359514, guid: 843a1051e7d49c04684d7f9e732896fd, type: 3}
   crashLayer:
     serializedVersion: 2
     m_Bits: 64

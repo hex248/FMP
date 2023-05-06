@@ -45,7 +45,7 @@ public class TurretProjectile : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            StartCoroutine(Destroy());
         }
 
         if (!locked)

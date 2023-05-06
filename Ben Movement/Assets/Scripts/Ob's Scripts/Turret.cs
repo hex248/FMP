@@ -12,7 +12,6 @@ public class Turret : MonoBehaviour
     [Header("Settings")]
     Vector3 turretPos;
     public LayerMask enemyLayer;
-    public Transform projectileParent;
     public float projectileHomingAmount = 1.0f;
     public float projectileMaxVelocity = 5.0f;
     public float projectileVelocity = 5.0f;
@@ -46,7 +45,7 @@ public class Turret : MonoBehaviour
     private void Start()
     {
         AM = FindObjectOfType<AudioManager>();
-        turretPos = transform.position;
+        turretPos = visuals.transform.position;
         StartCoroutine(SpawnTurret());
     }
 
@@ -174,7 +173,6 @@ public class Turret : MonoBehaviour
             {
                 detectionRadiusLineRenderer.material.SetFloat("_Alpha", 0.0f);
             }
-            Debug.Log($"building position: {visuals.transform.position.x}, {visuals.transform.position.y}, {visuals.transform.position.z}");
 
             // if movement is 3/4
             if ((turretPos - visuals.transform.position).sqrMagnitude <= distanceToMove/4)
@@ -194,8 +192,6 @@ public class Turret : MonoBehaviour
         {
             light.SetActive(true);
         }
-
-        Debug.Log("finished building");
     }
 
     IEnumerator ShootBuffer()
