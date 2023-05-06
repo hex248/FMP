@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5579819485217325538}
   - component: {fileID: 677018925806476471}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: Turret 2 Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector2f:
       m_Array:
-      - m_Value: {x: 0.2, y: 0.5}
+      - m_Value: {x: 0.7, y: 1}
         m_Name: Lifetime
         m_Overridden: 1
     m_Vector3f:
@@ -118,11 +118,11 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 0.16666651, g: 0, b: 1, a: 0}
-          key1: {r: 1.0352942, g: 0, b: 5.992157, a: 1}
-          key2: {r: 22.716152, g: 0, b: 135.58704, a: 0.8}
-          key3: {r: 2.839519, g: 0, b: 16.94838, a: 0}
-          key4: {r: 0.16513224, g: 0, b: 1, a: 0}
+          key0: {r: 0.16666651, g: 1, b: 1, a: 0}
+          key1: {r: 0.27729678, g: 2.1185474, b: 2.1185474, a: 1}
+          key2: {r: 3.0117648, g: 23.968628, b: 23.968628, a: 0.8}
+          key3: {r: 0.2662049, g: 2.1185474, b: 2.1185474, a: 0}
+          key4: {r: 0.16513224, g: 1, b: 1, a: 0}
           key5: {r: 0, g: 0, b: 0, a: 0}
           key6: {r: 0, g: 0, b: 0, a: 0}
           key7: {r: 0, g: 0, b: 0, a: 0}

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TurretRadius
-  m_Shader: {fileID: -6465566751694194690, guid: cb1a908c9cb021e4fb08f57a0733d476, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e37af7fa0803d4e4691cbbb604a74b45, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -35,6 +35,8 @@ Material:
     - DissolveAmount: 0.33
     - Vector1_625d3f04937443c4a2a663fc8d313c47: 50
     - Vector1_650bdbb6bddf40d1b74a2549041e3851: 0.02
+    - Vector1_9897a68374424263b3a22d806c8d07a5: 1
+    - _Alpha: 1
     - _DissolveAmount: 1
     - _DissolveScale: 50
     - _DissolveWidth: 0.02
@@ -42,7 +44,7 @@ Material:
     - Color_60fad4a775ca4faeaaeac957d58f5567: {r: 1, g: 0, b: 0, a: 1}
     - Color_a7714c94590f4d64a31d6c6dd544103b: {r: 0.003921569, g: 0.003921569, b: 0.003921569, a: 1}
     - Vector2_57166861d6ee4d628139a9cc3e07c346: {r: 1, g: 2, b: 0, a: 0}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 0.16862746, g: 0.18431373, b: 0.30980393, a: 1}
     - _DissolveColor: {r: 0.003921569, g: 0.003921569, b: 0.003921569, a: 1}
     - _Tiling: {r: 10, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5422567535557537052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5422567535784580301}
   m_RootOrder: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d89a01a65e682dd4f96621b75d3c1182, type: 2}
+  - {fileID: 2100000, guid: fee369ac8bd78a245a4da24a05ed9d5f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 6752097950188773471}
   - component: {fileID: 5422567537105359512}
   m_Layer: 0
-  m_Name: Turret Projectile
+  m_Name: Turret 2 Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,9 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126ef60488419c54283e3feaf684b18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
+  damage: 1
   homingAmount: 4
-  maxVelocity: 5
+  maxVelocity: 3
   velocity: 4
   velocityDecay:
     serializedVersion: 2
@@ -193,7 +193,7 @@ MonoBehaviour:
   crashLayers:
     serializedVersion: 2
     m_Bits: 64
-  crashVFXPrefab: {fileID: 5579819485217325541, guid: 0663e91b14a0bd34b8ceb30c5eeb7847, type: 3}
+  crashVFXPrefab: {fileID: 5579819485217325541, guid: 25dbc13b699caee4d946369ff8c2ed92, type: 3}
   crashDecalPrefab: {fileID: 3993269978879355469, guid: 79d08fa704b874f408fe882b853b939f, type: 3}
   visuals: {fileID: 5422567535784580302}
 --- !u!136 &6752097950188773471
