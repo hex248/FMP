@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretProjectile : MonoBehaviour
 {
-    public float damageAmount = 1;
+    public float damage = 1;
     public float homingAmount;
     public float maxVelocity;
     [SerializeField] float velocity = 5.0f;
@@ -28,7 +28,6 @@ public class TurretProjectile : MonoBehaviour
 
     bool locked = false;
     
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -100,7 +99,7 @@ public class TurretProjectile : MonoBehaviour
             var enemyHealth = col.gameObject.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(damageAmount, this.gameObject);
+                enemyHealth.TakeDamage(damage, this.gameObject);
             }
         }
         yield return new WaitForSeconds(0.3f);

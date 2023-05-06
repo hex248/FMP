@@ -10,12 +10,15 @@ public class Turret : MonoBehaviour
     public int level = 1;
 
     [Header("Settings")]
+    Vector3 turretPos;
     public LayerMask enemyLayer;
     public Transform projectileParent;
     public float projectileHomingAmount = 1.0f;
     public float projectileMaxVelocity = 5.0f;
     public float projectileVelocity = 5.0f;
     public float projectileLifetime = 5.0f;
+    public float shootBufferTime = 0.35f;
+    public int damage;
     public AnimationCurve projectileDecay;
     public GameObject projectilePrefab;
     public LayerMask crashLayer;
@@ -24,6 +27,7 @@ public class Turret : MonoBehaviour
     public float detectionRadius = 10.0f;
     public bool drawDetectionArea = false;
     public int circleVertexCount = 50;
+    public float lineWidth = 5.0f;
     public Color lineColor = Color.green;
     public LineRenderer detectionRadiusLineRenderer;
 
@@ -34,9 +38,16 @@ public class Turret : MonoBehaviour
     public GameObject target;
     bool canShoot = true;
 
+    [Header("Visuals")]
+    public GameObject[] lights;
+    public GameObject visuals;
+    public Material lineRendererMat;
+
     private void Start()
     {
         AM = FindObjectOfType<AudioManager>();
+        turretPos = transform.position;
+        StartCoroutine(SpawnTurret());
     }
 
     void Update()
@@ -60,6 +71,7 @@ public class Turret : MonoBehaviour
                 Debug.Log("turret shoot");
                 GameObject spawnedObj = Instantiate(projectilePrefab, projectileSpawn.transform.position, Quaternion.identity);
                 TurretProjectile spawnedProjectile = spawnedObj.GetComponent<TurretProjectile>();
+                spawnedProjectile.damage = damage;
                 spawnedProjectile.homingAmount = projectileHomingAmount;
                 spawnedProjectile.maxVelocity = projectileMaxVelocity;
                 spawnedProjectile.velocityDecay = projectileDecay;
@@ -78,7 +90,7 @@ public class Turret : MonoBehaviour
 
     public void ProjectileDestroyed()
     {
-        canShoot = true;
+        StartCoroutine(ShootBuffer());
 
         AM.PlayInChannel($"turret_projectile-explosion", ChannelType.SFX, 2);
     }
@@ -86,8 +98,10 @@ public class Turret : MonoBehaviour
     void DrawDetectionArea()
     {
         detectionRadiusLineRenderer.positionCount = circleVertexCount + 1;
-        detectionRadiusLineRenderer.useWorldSpace = false;
-        detectionRadiusLineRenderer.material.color = lineColor;
+        //detectionRadiusLineRenderer.useWorldSpace = false;
+        detectionRadiusLineRenderer.material.SetColor("_Color", lineColor);
+        detectionRadiusLineRenderer.startWidth = lineWidth;
+        detectionRadiusLineRenderer.endWidth = lineWidth;
 
         float x;
         float y;
@@ -100,7 +114,7 @@ public class Turret : MonoBehaviour
             x = Mathf.Sin(Mathf.Deg2Rad * angle) * detectionRadius;
             z = Mathf.Cos(Mathf.Deg2Rad * angle) * detectionRadius;
 
-            detectionRadiusLineRenderer.SetPosition(i, new Vector3(x, 0, z));
+            detectionRadiusLineRenderer.SetPosition(i, detectionRadiusLineRenderer.transform.position + new Vector3(x, 0, z));
 
             angle += (360f / circleVertexCount);
         }
@@ -129,5 +143,64 @@ public class Turret : MonoBehaviour
         }
 
         return closestTarget;
+    }
+
+    IEnumerator SpawnTurret()
+    {
+        visuals.transform.position = new Vector3(turretPos.x, -10.0f, turretPos.z);
+        foreach (GameObject light in lights)
+        {
+            light.SetActive(false);
+        }
+
+        float moveSpeed = 5.0f;
+        float distanceToMove = (turretPos - visuals.transform.position).sqrMagnitude;
+        float dissolveSpeed = 1.5f;
+        bool fadingLR = false;
+
+        detectionRadiusLineRenderer.material = lineRendererMat;
+
+        for (;;)
+        {
+            // move towards turretPos
+
+            visuals.transform.position = Vector3.Lerp(visuals.transform.position, turretPos, moveSpeed * Time.deltaTime);
+            if (fadingLR)
+            {
+                float currentDissolve = detectionRadiusLineRenderer.material.GetFloat("_Alpha");
+                detectionRadiusLineRenderer.material.SetFloat("_Alpha", Mathf.Lerp(currentDissolve, 1.0f, dissolveSpeed * Time.deltaTime));
+            }
+            else
+            {
+                detectionRadiusLineRenderer.material.SetFloat("_Alpha", 0.0f);
+            }
+            Debug.Log($"building position: {visuals.transform.position.x}, {visuals.transform.position.y}, {visuals.transform.position.z}");
+
+            // if movement is 3/4
+            if ((turretPos - visuals.transform.position).sqrMagnitude <= distanceToMove/4)
+            {
+                // start undissolving line renderer
+                fadingLR = true;
+            }
+            if (visuals.transform.position == turretPos)
+            {
+                break;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        foreach (GameObject light in lights)
+        {
+            light.SetActive(true);
+        }
+
+        Debug.Log("finished building");
+    }
+
+    IEnumerator ShootBuffer()
+    {
+        yield return new WaitForSeconds(shootBufferTime);
+        canShoot = true;
     }
 }
