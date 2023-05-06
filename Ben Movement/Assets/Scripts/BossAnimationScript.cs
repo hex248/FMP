@@ -95,6 +95,7 @@ public class BossAnimationScript : MonoBehaviour
         {
             if (!arm.activeInHierarchy)
             {
+                EndBeam();
                 anim.SetTrigger("attack01");
                 if ((previousPos - boss.currentTarget.transform.position).magnitude > 1.0f)
                 {
@@ -125,12 +126,12 @@ public class BossAnimationScript : MonoBehaviour
 
     public void StartMoving()
     {
+        EndBeam();
         anim.SetBool("isMoving", true);
     }
 
     public void EndMoving()
     {
-        
         anim.SetBool("isMoving", false);
     }
 }

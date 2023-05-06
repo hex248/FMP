@@ -222,6 +222,21 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				VertexNormalInputs vertexNormalInput = GetVertexNormalInputs(IN.normal);
 				IN.normal = vertexNormalInput.normalWS.xyz;
 				value = dot(IN.normal, mainLight.direction.xyz) * mainLight.shadowAttenuation;
+				if (value > _ClipThreshold)
+				{
+					if (value > (1 - _Smoothness))
+					{
+						value = 1.5;
+					}
+					else
+					{
+						value = 1.0;
+					}
+				}
+				else
+				{
+					value = 0.5;
+				}
 				color += value * float4(mainLight.color, 1.0);
 				for (int i = 0; i < additionalLightsCount; ++i)
 				{

@@ -2405,11 +2405,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408282613618196914, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2410675096329678324, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2423,6 +2439,10 @@ PrefabInstance:
       propertyPath: attackVFX
       value: 
       objectReference: {fileID: 11400000, guid: a77948d889f5a2b42ba5a5530e949509, type: 2}
+    - target: {fileID: 2664428569671912064, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: lightIntensity
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 2809904524725105928, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2584,11 +2604,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Range
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1931747875349525146, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -2598,6 +2626,10 @@ PrefabInstance:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2408282613618196914, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2410675096329678324, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2606,6 +2638,10 @@ PrefabInstance:
       propertyPath: attackVFX
       value: 
       objectReference: {fileID: 11400000, guid: a77948d889f5a2b42ba5a5530e949509, type: 2}
+    - target: {fileID: 2664428569671912064, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: lightIntensity
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 2809904524725105928, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: m_RootOrder
       value: 5
