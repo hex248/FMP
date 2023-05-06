@@ -578,7 +578,6 @@ GameObject:
   - component: {fileID: 3773411997022722419}
   - component: {fileID: 7034786913792246217}
   - component: {fileID: 2230727835257421663}
-  - component: {fileID: 6945226363746938581}
   m_Layer: 6
   m_Name: teleporter
   m_TagString: Untagged
@@ -638,20 +637,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 4, z: 1.5}
   m_Center: {x: 0, y: 2, z: 0}
---- !u!136 &6945226363746938581
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4545832507115619273}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 2
-  m_Height: 10
-  m_Direction: 1
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &5132206809658538399
 GameObject:
   m_ObjectHideFlags: 0

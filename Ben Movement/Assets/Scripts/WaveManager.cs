@@ -81,6 +81,7 @@ public class WaveManager : MonoBehaviour
         waveRunning = true;
         inGrace = false;
         allEnemiesDead = false;
+        FindObjectOfType<DayNightCycleScript>().IsDay(false);
 
         timeSinceRoundStart = 0f;
         if (currentRound >= roundDifficulties.Count)
@@ -185,6 +186,7 @@ public class WaveManager : MonoBehaviour
         waveRunning = false;
         inGrace = true;
 
+        FindObjectOfType<DayNightCycleScript>().IsDay(true);
         FindObjectOfType<PlayerManager>().RevivePlayers();
     }
 
