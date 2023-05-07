@@ -179,9 +179,9 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				pos = floor(pos * 100) / 100;
 				newPos.y += pos;
 				newPos.y = clamp(newPos.y, 0.01, 1);
-				VertexPositionInputs vertexInput = GetVertexPositionInputs(newPos);
 				OUT.vertex = TransformObjectToHClip(newPos);
-				
+				VertexPositionInputs vertexInput = GetVertexPositionInputs(newPos);
+
 				OUT.color = half4(0, round(newPos.y-0.5), 0, 1);
 				OUT.normal = IN.normal;
 				OUT.shadowCoord = GetShadowCoord(vertexInput);
@@ -242,7 +242,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 				{
 					Light light = GetAdditionalLight(i, positionWS);
 					value = dot(IN.normal, light.direction.xyz) * light.distanceAttenuation * light.shadowAttenuation;
-					color.rgb += value * light.color;
+					color.rgb += abs(value) * light.color;
 				}
 				return color * heightColor * SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
 			}
