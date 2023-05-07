@@ -116,7 +116,6 @@ public class BuildTrap : MonoBehaviour
         if (other.CompareTag("Player Trigger"))
         {
             if (other.GetComponent<PlayerTrigger>().controller != interactingPlayer) return;
-            Debug.Log("player left");
             HideInteractControls();
             HideHologramControls();
             HideHolograms();

@@ -58,7 +58,6 @@ public class ColorblindFilters : MonoBehaviour
         if (!layersSetup)
         {
             gameObject.layer = LayerMask.NameToLayer($"Colorblind{player.playerNumber}"); // set layer to independent colorblind layer
-            Debug.Log($"OnlyPlayer{player.playerNumber}");
 
             UniversalAdditionalCameraData cameraData = camera.GetUniversalAdditionalCameraData(); // get camera data
             cameraData.volumeLayerMask |= (1 << LayerMask.NameToLayer("PP"));

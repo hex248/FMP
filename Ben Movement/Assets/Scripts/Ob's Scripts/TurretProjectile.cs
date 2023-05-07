@@ -27,7 +27,10 @@ public class TurretProjectile : MonoBehaviour
     Quaternion targetRotation;
 
     bool locked = false;
-    
+
+    bool exploded = false;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,7 +46,7 @@ public class TurretProjectile : MonoBehaviour
             lifeTime += Time.deltaTime;
             //visuals.transform.localScale = Vector3.one * (maxLifeTime - lifeTime) / maxLifeTime;
         }
-        else
+        else if (!exploded)
         {
             StartCoroutine(Destroy());
         }
@@ -84,6 +87,7 @@ public class TurretProjectile : MonoBehaviour
     IEnumerator Destroy(Collider col=null)
     {
         locked = true;
+        exploded = true;
         GetComponent<Collider>().enabled = false;
         visuals.SetActive(false);
 
@@ -123,15 +127,12 @@ public class TurretProjectile : MonoBehaviour
 
     GameObject CrashVFX(Transform impact)
     {
-        // vfx
         GameObject spawned = Instantiate(crashVFXPrefab, impact.position, Quaternion.LookRotation(impact.forward * -1));
 
         return spawned;
     }
     GameObject CrashDecal(Transform impact, Collider crashedCollider)
     {
-        // decal
-
         //GameObject spawned = Instantiate(crashDecalPrefab, impact.position, Quaternion.LookRotation(impact.forward), crashedCollider.transform);
         GameObject spawned = Instantiate(crashDecalPrefab, impact.position, Quaternion.LookRotation(impact.forward));
 

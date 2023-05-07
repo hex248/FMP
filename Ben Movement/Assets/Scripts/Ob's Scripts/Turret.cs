@@ -21,6 +21,7 @@ public class Turret : MonoBehaviour
     public AnimationCurve projectileDecay;
     public GameObject projectilePrefab;
     public LayerMask crashLayer;
+    public float riseSpeed = 2.5f;
 
     [Header("Detection Radius")]
     public float detectionRadius = 10.0f;
@@ -67,7 +68,6 @@ public class Turret : MonoBehaviour
             {
                 canShoot = false;
                 AM.PlayInChannel($"turret_shooting", ChannelType.SFX, 2);
-                Debug.Log("turret shoot");
                 GameObject spawnedObj = Instantiate(projectilePrefab, projectileSpawn.transform.position, Quaternion.identity);
                 TurretProjectile spawnedProjectile = spawnedObj.GetComponent<TurretProjectile>();
                 spawnedProjectile.damage = damage;
@@ -149,10 +149,10 @@ public class Turret : MonoBehaviour
         visuals.transform.position = new Vector3(turretPos.x, -10.0f, turretPos.z);
         foreach (GameObject light in lights)
         {
-            light.SetActive(false);
+            //light.SetActive(false);
         }
 
-        float moveSpeed = 5.0f;
+        
         float distanceToMove = (turretPos - visuals.transform.position).sqrMagnitude;
         float dissolveSpeed = 1.5f;
         bool fadingLR = false;
@@ -163,7 +163,7 @@ public class Turret : MonoBehaviour
         {
             // move towards turretPos
 
-            visuals.transform.position = Vector3.Lerp(visuals.transform.position, turretPos, moveSpeed * Time.deltaTime);
+            visuals.transform.position = Vector3.Lerp(visuals.transform.position, turretPos, riseSpeed * Time.deltaTime);
             if (fadingLR)
             {
                 float currentDissolve = detectionRadiusLineRenderer.material.GetFloat("_Alpha");
@@ -190,7 +190,7 @@ public class Turret : MonoBehaviour
 
         foreach (GameObject light in lights)
         {
-            light.SetActive(true);
+            //light.SetActive(true);
         }
     }
 
