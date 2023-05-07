@@ -22,7 +22,6 @@ public class PlayerManager : MonoBehaviour
     InputDevice[] devices;
 
     [Header("Rendering")]
-    [SerializeField] Material[] playerMaterials;
     [SerializeField] RenderTexture normalRenderTexture;
     [SerializeField] RenderTexture[] tallRenderTextures;
     [SerializeField] RenderTexture[] smallRenderTextures;
@@ -47,6 +46,18 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Material[] matP2;
     [SerializeField] Material[] matP3;
     [SerializeField] Material[] matP4;
+
+    [Header("Eye Materials")]
+    [SerializeField] Material eyeMatP1;
+    [SerializeField] Material eyeMatP2;
+    [SerializeField] Material eyeMatP3;
+    [SerializeField] Material eyeMatP4;
+
+    [Header("Projectile Materials")]
+    [SerializeField] Material projectileMatP1;
+    [SerializeField] Material projectileMatP2;
+    [SerializeField] Material projectileMatP3;
+    [SerializeField] Material projectileMatP4;
 
     [Header("Trail Materials")]
     [SerializeField] Material trailMatP1;
@@ -123,26 +134,36 @@ public class PlayerManager : MonoBehaviour
         {   
             case 2:
                 player.ChangeMaterials(matP1);
+                player.ChangeEyes(eyeMatP1);
+                player.SetProjectileMat(projectileMatP1);
                 player.SetTrailMaterial(trailMatP1);
                 player.SetHat(0);
                 break;
             case 3:
                 player.ChangeMaterials(matP2);
+                player.ChangeEyes(eyeMatP2);
+                player.SetProjectileMat(projectileMatP2);
                 player.SetTrailMaterial(trailMatP2);
                 player.SetHat(1);
                 break;
             case 4:
                 player.ChangeMaterials(matP3);
+                player.ChangeEyes(eyeMatP3);
+                player.SetProjectileMat(projectileMatP3);
                 player.SetTrailMaterial(trailMatP3);
                 player.SetHat(2);
                 break;
             case 1:
                 player.ChangeMaterials(matP4);
+                player.ChangeEyes(eyeMatP4);
+                player.SetProjectileMat(projectileMatP4);
                 player.SetTrailMaterial(trailMatP4);
                 player.SetHat(3);
                 break;
             default:
                 player.ChangeMaterials(matP1);
+                player.ChangeEyes(eyeMatP1);
+                player.SetProjectileMat(projectileMatP1);
                 player.SetTrailMaterial(trailMatP1);
                 player.SetHat(0);
                 break;
@@ -202,7 +223,6 @@ public class PlayerManager : MonoBehaviour
 
         
         StartCoroutine(screenManager.PlayerJoined(playerCount));
-        player.GetComponentInChildren<PlayerController>().playerVisuals.GetComponentInChildren<Renderer>().material = playerMaterials[player.playerNumber - 1];
 
 
         UpdateRenderTextures();
