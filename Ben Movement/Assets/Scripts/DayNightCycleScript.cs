@@ -16,7 +16,7 @@ public class DayNightCycleScript : MonoBehaviour
         AM = FindObjectOfType<AudioManager>();
         isDay = true;
         time = 0.5f;
-        AM.SwitchMusic("music_day");
+        AM.SwitchMusic($"music_day{Random.Range(1, 3)}");
     }
 
     public void IsDay(bool isDay = true)
@@ -25,12 +25,12 @@ public class DayNightCycleScript : MonoBehaviour
         {
             time = 0.0f;
             // check if music is currently day music
-            AM.SwitchMusic("music_day");
+            AM.SwitchMusic($"music_day{Random.Range(1, 3)}");
         }
         else
         {
             time = 0.5f;
-            if (AM.currentMusicTrack == "music_day")
+            if (AM.currentMusicTrack.Contains("music_day"))
             {
                 // switch to music_night
                 AM.SwitchMusic("music_boss"); //!USING BOSS TEMPORARILY WHILE WE WAIT FOR MORE TRACKS

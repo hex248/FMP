@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 public enum ChannelType
 {
@@ -145,8 +146,8 @@ public class AudioManager : MonoBehaviour
 
     public void SwitchMusic(string track)
     {
-        // if this track is already playing, return 
-        if (currentMusicTrack == track) return;
+        // if this type of track is already playing, return
+        if (currentMusicTrack.Contains(Regex.Replace(track, @"[0-9]", ""))) return;
 
         if (currentMusicChannel == 1)
         {

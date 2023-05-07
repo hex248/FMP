@@ -48,6 +48,11 @@ MonoBehaviour:
   type: 1
   source: {fileID: 8918479784056458319}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479784056458319
 AudioSource:
   m_ObjectHideFlags: 0
@@ -192,6 +197,11 @@ MonoBehaviour:
   type: 1
   source: {fileID: 8918479784110314663}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479784110314663
 AudioSource:
   m_ObjectHideFlags: 0
@@ -405,9 +415,12 @@ MonoBehaviour:
   - name: music_credits
     type: 0
     clip: {fileID: 8300000, guid: e9990c38b90c0c442951cbb49c6615d5, type: 3}
-  - name: music_day
+  - name: music_day1
     type: 0
     clip: {fileID: 8300000, guid: 6e0128064acf75a4eb37396138deb4b3, type: 3}
+  - name: music_day2
+    type: 0
+    clip: {fileID: 8300000, guid: 25d369533be13c34f92b4285e1176b99, type: 3}
   - name: music_boss
     type: 0
     clip: {fileID: 8300000, guid: 86f2d3a95889c9040a9ef61401e57590, type: 3}
@@ -552,6 +565,11 @@ MonoBehaviour:
   type: 0
   source: {fileID: 8918479784315555280}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479784315555280
 AudioSource:
   m_ObjectHideFlags: 0
@@ -696,6 +714,11 @@ MonoBehaviour:
   type: 0
   source: {fileID: 8918479784991062822}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479784991062822
 AudioSource:
   m_ObjectHideFlags: 0
@@ -840,6 +863,11 @@ MonoBehaviour:
   type: 1
   source: {fileID: 8918479785576509330}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479785576509330
 AudioSource:
   m_ObjectHideFlags: 0
@@ -984,6 +1012,11 @@ MonoBehaviour:
   type: 1
   source: {fileID: 8918479785587859237}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479785587859237
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1128,6 +1161,11 @@ MonoBehaviour:
   type: 1
   source: {fileID: 8918479785978720060}
   mainClip: {fileID: 0}
+  fading: 0
+  fadeStart: 0
+  fadeEnd: 0
+  fadeSpeed: 0
+  currentVolume: 0
 --- !u!82 &8918479785978720060
 AudioSource:
   m_ObjectHideFlags: 0
