@@ -240,6 +240,7 @@ MonoBehaviour:
   - {fileID: 6646714391190693750, guid: d32fa30a2e219844d9c1864625d69288, type: 3}
   interactCooldown: 0.35
   cycleCooldown: 0.15
+  interactingPlayer: {fileID: 0}
 --- !u!1 &6353503525631192066
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +345,7 @@ GameObject:
   - component: {fileID: 6388796308350406604}
   - component: {fileID: 6388796308350406607}
   - component: {fileID: 6388796308350406606}
+  - component: {fileID: 8461021645807957934}
   m_Layer: 0
   m_Name: Interact
   m_TagString: Untagged
@@ -414,6 +416,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8461021645807957934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388796308350406603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d9175bcbf6d3d43a4903b65cfb0540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6388796309600095370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,14 +1149,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d193717a7b604f746bb9471635095c94, type: 3}
---- !u!1 &82764556002014624 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6453545602357310299, guid: d193717a7b604f746bb9471635095c94, type: 3}
-  m_PrefabInstance: {fileID: 6388796308428457723}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &751495582862700314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5963972229421787617, guid: d193717a7b604f746bb9471635095c94, type: 3}
+  m_PrefabInstance: {fileID: 6388796308428457723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &82764556002014624 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6453545602357310299, guid: d193717a7b604f746bb9471635095c94, type: 3}
   m_PrefabInstance: {fileID: 6388796308428457723}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6388796309479785066
