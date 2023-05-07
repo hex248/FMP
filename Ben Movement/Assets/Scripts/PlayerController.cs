@@ -89,9 +89,10 @@ public class PlayerController : MonoBehaviour
     public int playerNumber = 1;
     PlayerAnimationScript playerAnim;
     Quaternion rotationalDirection;
-   
+    public Material projectileMat;
 
-    
+
+
     [Header("Movement Lock Settings")]
     public bool movementDashLocked;
     public bool movementMenuLocked;
@@ -678,6 +679,8 @@ public class PlayerController : MonoBehaviour
         GameObject newProjectile = Instantiate(rangedAttack.projectile);
         newProjectile.transform.position = rangedAttack.projectileSpawnPosition.position;
         newProjectile.transform.forward = currentRangedAttackDirection;
+        newProjectile.GetComponent<MeshRenderer>().material = projectileMat;
+        newProjectile.GetComponent<TrailRenderer>().material = projectileMat;
         Projectile projectileScript = newProjectile.GetComponent<Projectile>();
         if(projectileScript != null)
         {

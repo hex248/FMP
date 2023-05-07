@@ -18,9 +18,11 @@ public class Player : MonoBehaviour
     public int playerNumber;
     public PlayerHealthBar playerHealthBar;
     public PlayerHealth playerHealth;
+
     [Header("Renderers to Change")]
     public Renderer[] meshRenderer;
     public GameObject[] hats;
+    public Renderer[] eyes;
     public GameObject[] trails;
 
     // Start is called before the first frame update
@@ -56,6 +58,18 @@ public class Player : MonoBehaviour
             m.materials = mat;
         }
     }
+    public void SetProjectileMat(Material mat)
+    {
+        playerMovement.projectileMat = mat;
+    }
+
+    public void ChangeEyes(Material mat)
+    {
+        foreach (Renderer eye in eyes)
+        {
+            eye.material = mat;
+        }
+    }
 
     public void SetTrailMaterial(Material mat)
     {
@@ -64,11 +78,4 @@ public class Player : MonoBehaviour
             m.GetComponent<TrailRenderer>().material = mat;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 }
