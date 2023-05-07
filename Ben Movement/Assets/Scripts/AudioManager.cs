@@ -152,8 +152,6 @@ public class AudioManager : MonoBehaviour
         {
             // switch to channel 2
             PlayInChannel(track, ChannelType.Music, 2);
-            Debug.Log($"switching primary channel to 2");
-            Debug.Log($"playing {track} in channel 2");
 
             audioChannels[0].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 1
             audioChannels[1].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 2
@@ -164,8 +162,6 @@ public class AudioManager : MonoBehaviour
         {
             // switch to channel 1
             PlayInChannel(track, ChannelType.Music, 1);
-            Debug.Log($"switching primary channel to 1");
-            Debug.Log($"playing {track} in channel 1");
 
             audioChannels[0].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 1
             audioChannels[1].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 2

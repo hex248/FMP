@@ -52,11 +52,7 @@ public class AudioChannel : MonoBehaviour
         if (fading)
         {
             float step = ((fadeEnd - fadeStart) / fadeSpeed); // amount to change per second
-            Debug.Log($"[{name}] Step: {step} per second");
-            //float newVolume = Mathf.Clamp(source.volume + (step), fadeEnd, fadeStart);
-            float newVolume = source.volume + (step * Time.deltaTime);
-            //float newVolume = Mathf.Clamp(Mathf.Lerp(source.volume, fadeEnd, step * Time.deltaTime), fadeStart, fadeEnd); // lerp between current volume and target volume
-            Debug.Log($"[{name}] newVolume: {newVolume}");
+            float newVolume = source.volume + (step * Time.deltaTime); // add step
             // if fading in
             if (fadeEnd > fadeStart)
             {

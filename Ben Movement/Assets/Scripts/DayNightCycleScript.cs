@@ -10,7 +10,7 @@ public class DayNightCycleScript : MonoBehaviour
     bool isDay = true;
     float time = 0.0f;
     AudioManager AM;
-    // Start is called before the first frame update
+    
     void Start()
     {
         AM = FindObjectOfType<AudioManager>();
@@ -40,7 +40,6 @@ public class DayNightCycleScript : MonoBehaviour
         this.isDay = isDay;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isDay)
