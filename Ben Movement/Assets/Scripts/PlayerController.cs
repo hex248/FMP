@@ -534,6 +534,7 @@ public class PlayerController : MonoBehaviour
         doneMeleeAttackHit = false;
         if (meleeCombo[currentMeleeComboStage].vfx != null)
         {
+            meleeCombo[currentMeleeComboStage].vfx.playerNumber = playerNumber;
             meleeCombo[currentMeleeComboStage].vfx.StartEffect();
         }
         playerAnim.StartMeleeAttackAnimation(currentMeleeComboStage);

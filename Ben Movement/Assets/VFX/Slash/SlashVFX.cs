@@ -10,6 +10,9 @@ public class SlashVFX : MonoBehaviour
     public float attackDuration = 0.0f;
     public Animator hoofAnimation;
     public MeshRenderer[] hooves;
+    public Color[] mainHoofColors;
+    [ColorUsage(true, true)]
+    public Color[] secondaryHoofColors;
 
     [Header("Config")]
     public AttackVFX attackVFX;
@@ -20,6 +23,7 @@ public class SlashVFX : MonoBehaviour
     public float curveOffset;
     public ParticleSystem.MinMaxCurve emissionRate;
 
+    public int playerNumber = 1;
 
     [Header("Info")]
     public bool animating;
@@ -72,9 +76,13 @@ public class SlashVFX : MonoBehaviour
                 foreach (MeshRenderer mr in hooves)
                 {
                     mr.enabled = true;
+                    mr.material.SetColor("_MainColor", mainHoofColors[playerNumber - 1]);
+                    mr.material.SetColor("_FresnelColor", secondaryHoofColors[playerNumber - 1]);
                 }
 
                 hoofAnimation.SetTrigger("hoof");
+                // set hoof colour
+
             }
             else if (animating)
             {
@@ -94,12 +102,9 @@ public class SlashVFX : MonoBehaviour
         }
         else
         {
-            mr.material.SetColor("_mainColor", attackVFX.mainColor);
-            mr.material.SetColor("_secondaryColor", attackVFX.secondaryColor);
-            particleRenderer.material.SetColor("_Color", attackVFX.secondaryColor);
-
-            //particleRenderer.material.SetColor("_BaseMap", attackVFX.mainColor);
-            //particleRenderer.material.SetColor("_EmissionMap", attackVFX.secondaryColor);
+            mr.material.SetColor("_mainColor", attackVFX.mainColors[playerNumber-1]);
+            mr.material.SetColor("_secondaryColor", attackVFX.secondaryColors[playerNumber-1]);
+            particleRenderer.material.SetColor("_Color", attackVFX.secondaryColors[playerNumber-1]);
 
 
             if (!animating && trigger)

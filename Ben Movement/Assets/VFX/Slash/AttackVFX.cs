@@ -14,7 +14,7 @@ public class AttackVFX : ScriptableObject
     public float startOffset;
     public float targetOffset;
     [ColorUsage(true, true)]
-    public Color mainColor;
+    public Color[] mainColors;
     [ColorUsage(true, true)]
-    public Color secondaryColor;
+    public Color[] secondaryColors;
 }
