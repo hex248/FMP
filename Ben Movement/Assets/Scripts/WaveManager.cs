@@ -37,7 +37,10 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] bool startGame;
 
-    
+    PlayerManager playerManager;
+    DayNightCycleScript dayNight;
+
+
 
     private void Start()
     {
@@ -45,6 +48,8 @@ public class WaveManager : MonoBehaviour
         waveRunning = false;
         inGrace = true;
         previousEnemySpawnAngle = Mathf.PI;
+        playerManager = FindObjectOfType<PlayerManager>();
+        dayNight = FindObjectOfType<DayNightCycleScript>();
     }
 
     private void Update()
@@ -81,7 +86,7 @@ public class WaveManager : MonoBehaviour
         waveRunning = true;
         inGrace = false;
         allEnemiesDead = false;
-        FindObjectOfType<DayNightCycleScript>().IsDay(false);
+        dayNight.IsDay(false);
 
         timeSinceRoundStart = 0f;
         if (currentRound >= roundDifficulties.Count)
@@ -185,9 +190,9 @@ public class WaveManager : MonoBehaviour
         timeSinceGraceStart = 0f;
         waveRunning = false;
         inGrace = true;
+        dayNight.IsDay(true);
 
-        FindObjectOfType<DayNightCycleScript>().IsDay(true);
-        FindObjectOfType<PlayerManager>().RevivePlayers();
+        playerManager.RevivePlayers();
     }
 
     public void EnemyDeath()

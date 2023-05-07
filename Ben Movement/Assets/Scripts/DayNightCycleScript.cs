@@ -9,10 +9,14 @@ public class DayNightCycleScript : MonoBehaviour
     public float speed = 1.0f;
     bool isDay = true;
     float time = 0.0f;
+    AudioManager AM;
     // Start is called before the first frame update
     void Start()
     {
-        
+        AM = FindObjectOfType<AudioManager>();
+        isDay = true;
+        time = 0.5f;
+        AM.SwitchMusic("music_day");
     }
 
     public void IsDay(bool isDay = true)
@@ -20,10 +24,18 @@ public class DayNightCycleScript : MonoBehaviour
         if (isDay)
         {
             time = 0.0f;
+            // check if music is currently day music
+            AM.SwitchMusic("music_day");
         }
         else
         {
             time = 0.5f;
+            if (AM.currentMusicTrack == "music_day")
+            {
+                // switch to music_night
+                AM.SwitchMusic("music_boss"); //!USING BOSS TEMPORARILY WHILE WE WAIT FOR MORE TRACKS
+            }
+
         }
         this.isDay = isDay;
     }
@@ -37,7 +49,7 @@ public class DayNightCycleScript : MonoBehaviour
             {
                 time += Time.deltaTime * speed;
             }
-            sun.color = dayNightGradient.Evaluate(Mathf.Lerp(0.0f, 0.5f, time));
+            sun.color = dayNightGradient.Evaluate(Mathf.Clamp(time, 0.0f, 0.5f));
         }
         else
         {
@@ -45,7 +57,7 @@ public class DayNightCycleScript : MonoBehaviour
             {
                 time += Time.deltaTime * speed;
             }
-            sun.color = dayNightGradient.Evaluate(Mathf.Lerp(0.5f, 1.0f, time));
+            sun.color = dayNightGradient.Evaluate(Mathf.Clamp(time, 0.5f, 1.0f));
         }
     }
 }

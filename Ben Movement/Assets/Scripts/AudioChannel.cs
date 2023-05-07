@@ -10,15 +10,17 @@ public class AudioChannel : MonoBehaviour
     public AudioClip mainClip;
 
     AudioManager audioManager;
-    bool fading = false;
-    float fadeStart = 0.0f;
-    float fadeEnd = 0.0f;
-    float fadeSpeed = 0.0f;
+    public bool fading = false;
+    public float fadeStart = 0.0f;
+    public float fadeEnd = 0.0f;
+    public float fadeSpeed = 0.0f;
+    public float currentVolume;
 
     public void SetClip(AudioClip clip)
     {
         mainClip = clip;
         source.clip = mainClip;
+        Play();
     }
 
     public void Play()
@@ -46,12 +48,34 @@ public class AudioChannel : MonoBehaviour
 
     private void Update()
     {
+        currentVolume = source.volume;
         if (fading)
         {
-            float step = Mathf.Abs(fadeStart - fadeEnd) / fadeSpeed; // amount to change per second
-            float newVolume = Mathf.Clamp(Mathf.Lerp(source.volume, fadeEnd, step * Time.deltaTime), fadeStart, fadeEnd); // lerp between current volume and target volume
+            float step = ((fadeEnd - fadeStart) / fadeSpeed); // amount to change per second
+            Debug.Log($"[{name}] Step: {step} per second");
+            //float newVolume = Mathf.Clamp(source.volume + (step), fadeEnd, fadeStart);
+            float newVolume = source.volume + (step * Time.deltaTime);
+            //float newVolume = Mathf.Clamp(Mathf.Lerp(source.volume, fadeEnd, step * Time.deltaTime), fadeStart, fadeEnd); // lerp between current volume and target volume
+            Debug.Log($"[{name}] newVolume: {newVolume}");
+            // if fading in
+            if (fadeEnd > fadeStart)
+            {
+                if (newVolume >= fadeEnd)
+                {
+                    newVolume = fadeEnd;
+                    fading = false;
+                }
+            }
+            // if fading out
+            else if (fadeEnd < fadeStart)
+            {
+                if (newVolume <= fadeEnd)
+                {
+                    newVolume = fadeEnd;
+                    fading = false;
+                }
+            }
             audioManager.mixer.Find(e => e.sourceName == gameObject.name).volume = newVolume; // set new volume in mixer
-            if (newVolume == fadeEnd) fading = false;
         }
     }
 }

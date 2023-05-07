@@ -39,18 +39,20 @@ public class AudioManager : MonoBehaviour
     [Header("Settings")]
     [Range(0, 10)]
     public float musicTransitionSpeed = 1.0f;
+    public float musicVolumeDefault = 0.5f;
 
     [Header("Attributes")]
     public List<AudioChannelSettings> mixer;
     public List<AudioAsset> assets;
     public List<AudioChannel> audioChannels;
 
+    [Header("Data")]
+    public string currentMusicTrack;
+    public int currentMusicChannel = 1;
+
     private void Update()
     {
-        if (!Application.isPlaying)
-        {
-            UpdateChannelsAndMixer();
-        }
+        UpdateChannelsAndMixer();
     }
 
     void UpdateChannelsAndMixer()
@@ -104,6 +106,7 @@ public class AudioManager : MonoBehaviour
     // play by asset name
     public void PlayInChannel(string clipName, ChannelType channelType, int channelNumber)
     {
+        //Debug.Log($"playing {clipName} in {channelType.ToString()} {channelNumber}");
         // find audio asset
         AudioAsset selectedAsset = assets.Find(e => e.name == clipName);
         AudioClip clip = selectedAsset.clip;
@@ -112,7 +115,14 @@ public class AudioManager : MonoBehaviour
         // get selected channel
         AudioChannel selectedChannel = filteredChannels[channelNumber - 1];
         // play clip in selected channel
-        selectedChannel.PlayOnce(clip);
+        if (selectedChannel.type == ChannelType.Music)
+        {
+            selectedChannel.SetClip(clip);
+        }
+        else
+        {
+            selectedChannel.PlayOnce(clip);
+        }
     }
 
     // play specific AudioClip (mostly temporary use cases, just for testing when an asset does not need to be set up for the long term)
@@ -123,6 +133,44 @@ public class AudioManager : MonoBehaviour
         // get selected channel
         AudioChannel selectedChannel = filteredChannels[channelNumber - 1];
         // play clip in selected channel
-        selectedChannel.PlayOnce(clip);
+        if (selectedChannel.type == ChannelType.Music)
+        {
+            selectedChannel.SetClip(clip);
+        }
+        else
+        {
+            selectedChannel.PlayOnce(clip);
+        }
+    }
+
+    public void SwitchMusic(string track)
+    {
+        // if this track is already playing, return 
+        if (currentMusicTrack == track) return;
+
+        if (currentMusicChannel == 1)
+        {
+            // switch to channel 2
+            PlayInChannel(track, ChannelType.Music, 2);
+            Debug.Log($"switching primary channel to 2");
+            Debug.Log($"playing {track} in channel 2");
+
+            audioChannels[0].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 1
+            audioChannels[1].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 2
+            currentMusicTrack = track;
+            currentMusicChannel = 2;
+        }
+        else
+        {
+            // switch to channel 1
+            PlayInChannel(track, ChannelType.Music, 1);
+            Debug.Log($"switching primary channel to 1");
+            Debug.Log($"playing {track} in channel 1");
+
+            audioChannels[0].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 1
+            audioChannels[1].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 2
+            currentMusicTrack = track;
+            currentMusicChannel = 1;
+        }
     }
 }
