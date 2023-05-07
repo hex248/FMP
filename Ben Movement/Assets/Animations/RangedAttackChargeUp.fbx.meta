@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cae4cb77d3bf9e54a832616c9f29f5b5
+guid: 52d551e9014536c4bb8f571708c0b47c
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -7,8 +7,14 @@ ModelImporter:
       74: 5792548998315577202
     second: Sheep_Skeleton|Attack01
   - first:
+      74: 5097810873900626798
+    second: Sheep_Skeleton|Attack02
+  - first:
       74: 6086058097435553614
     second: Sheep_Skeleton|Attack03
+  - first:
+      74: -410078858051953179
+    second: Sheep_Skeleton|Hurt
   - first:
       74: -13986593675722699
     second: Sheep_Skeleton|Idle
@@ -18,6 +24,9 @@ ModelImporter:
   - first:
       74: -3501628842670390681
     second: Sheep_Skeleton|RangedAttack
+  - first:
+      74: 3844053547459437454
+    second: Sheep_Skeleton|RangedAttackChargeUp
   - first:
       74: 3342588920743207306
     second: Sheep_Skeleton|Walk
@@ -50,11 +59,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sheep_Skeleton|RangedAttack
-      takeName: Sheep_Skeleton|RangedAttack
+      name: Sheep_Skeleton|RangedAttackChargeUp
+      takeName: Sheep_Skeleton|RangedAttackChargeUp
       internalID: 0
-      firstFrame: 2
-      lastFrame: 8
+      firstFrame: 0
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

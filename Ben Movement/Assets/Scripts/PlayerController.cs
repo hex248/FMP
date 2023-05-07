@@ -617,6 +617,7 @@ public class PlayerController : MonoBehaviour
                 //start charging
                 rangedAttackChargingTime = 0f;
                 isRangedAttackCharging = true;
+                playerAnim.StartRangedAttackAnimation();
             }
             else
             {
@@ -640,11 +641,11 @@ public class PlayerController : MonoBehaviour
     {
         AM.PlayInChannel("sheep_shoot", ChannelType.SFX, 2);
         currentRangedAttackChargeFactor = Mathf.Clamp(rangedAttackChargingTime / rangedAttack.fullChargeTime, 0f, 1f);
-
+        playerAnim.SetRangedAttackStrength(rangedAttackChargingTime);
         timeSinceRangedAttackEnd = 0f;
         isRangedAttacking = true;
         doneRangedProjectileSpawn = false;
-        playerAnim.StartRangedAttackAnimation();
+        playerAnim.EndRangedAttackAnimation();
         Vector2 attackInputDirection;
         currentRangedAttackDirection = currentForwardDirection;
 

@@ -40,9 +40,19 @@ public class PlayerAnimationScript : MonoBehaviour
         anim.SetFloat("movementSpeed", rb.velocity.magnitude * movementSpeedAnimation);
     }
 
+    public void SetRangedAttackStrength(float strength)
+    {
+        anim.SetFloat("RangedAttackStrength", strength);
+    }
+
     public void StartRangedAttackAnimation()
     {
-        anim.SetTrigger("Start Ranged Attack");
+        anim.SetBool("isRangedAttacking", true);
+    }
+
+    public void EndRangedAttackAnimation()
+    {
+        anim.SetBool("isRangedAttacking", false);
     }
 
     public void StartDashAnimation()

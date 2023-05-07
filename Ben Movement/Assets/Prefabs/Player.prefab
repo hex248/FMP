@@ -827,6 +827,7 @@ MonoBehaviour:
   playerVisuals: {fileID: 4774828045323943578}
   squashAmount: 0
   playerNumber: 1
+  projectileMat: {fileID: 0}
   movementDashLocked: 0
   movementMenuLocked: 0
   movementMeleeAttackLocked: 0
@@ -2635,6 +2636,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a0912b766498b0c48a343cac5b0c96ee, type: 2}
     - target: {fileID: 2664428569671912064, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
+      propertyPath: animating
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2664428569671912064, guid: c3b172da86e693c448c07f6a5fdaa406, type: 3}
       propertyPath: attackVFX
       value: 
       objectReference: {fileID: 11400000, guid: a77948d889f5a2b42ba5a5530e949509, type: 2}
@@ -2891,11 +2896,10 @@ MonoBehaviour:
   hooves:
   - {fileID: 8808715163656603260}
   - {fileID: 31184413872624784}
+  mainHoofColors: []
+  secondaryHoofColors: []
   attackVFX: {fileID: 0}
   attackKey: 0
-  light: {fileID: 0}
-  lightIntensity: 2
-  lightRange: 1
   particleSpawner: {fileID: 0}
   curve:
     serializedVersion: 2
@@ -2921,6 +2925,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_ConstantMin: 0
     m_ConstantMax: 0
+  playerNumber: 1
   animating: 0
   trigger: 0
   timer: 0
