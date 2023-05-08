@@ -971,6 +971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6302241399346937292}
   - component: {fileID: 4214353711581597113}
+  - component: {fileID: -860919197806618406}
   - component: {fileID: -4431956482156796748}
   m_Layer: 6
   m_Name: Turret 3
@@ -1046,6 +1047,7 @@ MonoBehaviour:
   crashLayer:
     serializedVersion: 2
     m_Bits: 64
+  riseSpeed: 2.5
   detectionRadius: 5
   drawDetectionArea: 1
   circleVertexCount: 50
@@ -1059,6 +1061,18 @@ MonoBehaviour:
   - {fileID: 8152128727828070340}
   visuals: {fileID: 2927644661723764233}
   lineRendererMat: {fileID: 2100000, guid: c2b1025430e79e94bacdf4fcbc219408, type: 2}
+--- !u!114 &-860919197806618406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6646714391190693750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a83a97c11768324db5102f41e641c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &-4431956482156796748
 CapsuleCollider:
   m_ObjectHideFlags: 0

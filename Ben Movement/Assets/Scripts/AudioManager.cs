@@ -38,6 +38,7 @@ public class AudioAsset
 public class AudioManager : MonoBehaviour
 {
     [Header("Toggles")]
+    public bool musicOn = true;
     public bool dashSoundOn = true;
     public bool meleeSoundOn = true;
     public bool comboSoundOn = true;
@@ -160,28 +161,31 @@ public class AudioManager : MonoBehaviour
 
     public void SwitchMusic(string track)
     {
-        // if this type of track is already playing, return
-        if (currentMusicTrack.Contains(Regex.Replace(track, @"[0-9]", ""))) return;
-
-        if (currentMusicChannel == 1)
+        if (musicOn)
         {
-            // switch to channel 2
-            PlayInChannel(track, ChannelType.Music, 2);
+            // if this type of track is already playing, return
+            if (currentMusicTrack.Contains(Regex.Replace(track, @"[0-9]", ""))) return;
 
-            audioChannels[0].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 1
-            audioChannels[1].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 2
-            currentMusicTrack = track;
-            currentMusicChannel = 2;
-        }
-        else
-        {
-            // switch to channel 1
-            PlayInChannel(track, ChannelType.Music, 1);
+            if (currentMusicChannel == 1)
+            {
+                // switch to channel 2
+                PlayInChannel(track, ChannelType.Music, 2);
 
-            audioChannels[0].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 1
-            audioChannels[1].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 2
-            currentMusicTrack = track;
-            currentMusicChannel = 1;
+                audioChannels[0].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 1
+                audioChannels[1].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 2
+                currentMusicTrack = track;
+                currentMusicChannel = 2;
+            }
+            else
+            {
+                // switch to channel 1
+                PlayInChannel(track, ChannelType.Music, 1);
+
+                audioChannels[0].Fade(0.0f, musicVolumeDefault, musicTransitionSpeed); // fade IN channel 1
+                audioChannels[1].Fade(musicVolumeDefault, 0.0f, musicTransitionSpeed); // fade OUT channel 2
+                currentMusicTrack = track;
+                currentMusicChannel = 1;
+            }
         }
     }
 }
