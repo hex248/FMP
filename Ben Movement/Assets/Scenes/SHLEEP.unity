@@ -504,29 +504,73 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7451945340367908627, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451945340367908627, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451945340699311540, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451945341390482749, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451945341454584640, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927898, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927899, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927904, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927905, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927906, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927907, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927908, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927909, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927910, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927911, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927912, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_Name
       value: SmokeBarrier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927912, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7758515921943927913, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_RootOrder
@@ -583,6 +627,22 @@ PrefabInstance:
     - target: {fileID: 7758515921943927913, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927916, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927917, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927918, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758515921943927919, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9913322dc2c953f4d9ee38b0a5821cc4, type: 3}
@@ -2058,45 +2118,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8918479784110314663, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919845, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_Name
       value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: dashSoundOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: buildSoundOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: turretShootOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: healingSoundOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: turretExplodeOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: wolfBiteSoundOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: wolfGrowlSoundOn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: musicVolumeDefault
-      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_RootOrder

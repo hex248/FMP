@@ -214,7 +214,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -349,20 +349,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0c6d18ddd9bb04a9f84462e0237415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSoundOn: 1
+  dashSoundOn: 0
   meleeSoundOn: 1
   comboSoundOn: 1
   shootSoundOn: 1
   deathSoundOn: 1
-  wolfGrowlSoundOn: 1
-  wolfBiteSoundOn: 1
-  buildSoundOn: 1
-  healingSoundOn: 1
+  wolfGrowlSoundOn: 0
+  wolfBiteSoundOn: 0
+  buildSoundOn: 0
+  healingSoundOn: 0
   teleportSoundOn: 1
-  turretShootOn: 1
-  turretExplodeOn: 1
+  turretShootOn: 0
+  turretExplodeOn: 0
   musicTransitionSpeed: 2
-  musicVolumeDefault: 1
+  musicVolumeDefault: 0.75
   mixer:
   - sourceName: Music 1
     description: 
