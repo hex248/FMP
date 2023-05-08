@@ -127,7 +127,10 @@ public class BuildTrap : MonoBehaviour
     void Build(GameObject prefab)
     {
         // play build sound effect
-        //AM.PlayInChannel("tower_build", ChannelType.SFX, 1);
+        if (AM.buildSoundOn)
+        {
+            AM.PlayInChannel("tower_build", ChannelType.SFX, 1);
+        }
         // spawn tower
         var spawned = Instantiate(prefab);
         spawned.transform.position = hologramParent.transform.position;

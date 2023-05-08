@@ -22,7 +22,10 @@ public class HealingTrap : MonoBehaviour
         if (other.CompareTag("Player Trigger"))
         {
             // play healing sound in SFX Channel 1
-            AM.PlayInChannel("healing-trap_heal", ChannelType.SFX, 1);
+            if (AM.healingSoundOn)
+            {
+                AM.PlayInChannel("healing-trap_heal", ChannelType.SFX, 1);
+            }
             other.GetComponent<PlayerTrigger>().health.Heal(1);
         }
     }

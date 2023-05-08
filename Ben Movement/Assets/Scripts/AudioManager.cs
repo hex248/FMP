@@ -37,6 +37,20 @@ public class AudioAsset
 [ExecuteAlways]
 public class AudioManager : MonoBehaviour
 {
+    [Header("Toggles")]
+    public bool dashSoundOn = true;
+    public bool meleeSoundOn = true;
+    public bool comboSoundOn = true;
+    public bool shootSoundOn = true;
+    public bool deathSoundOn = true;
+    public bool wolfGrowlSoundOn = true;
+    public bool wolfBiteSoundOn = true;
+    public bool buildSoundOn = true;
+    public bool healingSoundOn = true;
+    public bool teleportSoundOn = true;
+    public bool turretShootOn = true;
+    public bool turretExplodeOn = true;
+
     [Header("Settings")]
     [Range(0, 10)]
     public float musicTransitionSpeed = 1.0f;

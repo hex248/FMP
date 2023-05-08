@@ -126,7 +126,10 @@ public class WolfController : MonoBehaviour
             else
             {
                 navMesh.agentTypeID = GetAgentTypeIDByName("Attacking Player");
-                AM.PlayInChannel("wolf_growl", ChannelType.SFX, 2);
+                if (AM.wolfGrowlSoundOn)
+                {
+                    AM.PlayInChannel("wolf_growl", ChannelType.SFX, 2);
+                }
             }
             //take directions from navmesh
             useNavMesh = true;
@@ -349,7 +352,10 @@ public class WolfController : MonoBehaviour
         if (hasHitPlayer)
         {
             wolfAnimationScript.AttackHit();
-            AM.PlayInChannel("wolf_bite", ChannelType.SFX, 2);
+            if (AM.wolfBiteSoundOn)
+            {
+                AM.PlayInChannel("wolf_bite", ChannelType.SFX, 2);
+            }
             isMissedAttackStunned = false;
         }
         else

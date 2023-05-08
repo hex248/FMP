@@ -523,11 +523,17 @@ public class PlayerController : MonoBehaviour
         currentMeleeComboStage = nextMeleeComboStage;
         if (currentMeleeComboStage < 2)
         {
-            AM.PlayInChannel($"sheep_melee-{currentMeleeComboStage+1}", ChannelType.SFX, 2);
+            if (AM.meleeSoundOn)
+            {
+                AM.PlayInChannel($"sheep_melee-{currentMeleeComboStage + 1}", ChannelType.SFX, 2);
+            }
         }
         else if (currentMeleeComboStage == 2)
         {
-            AM.PlayInChannel("sheep_combo-end", ChannelType.SFX, 2);
+            if (AM.comboSoundOn)
+            {
+                AM.PlayInChannel("sheep_combo-end", ChannelType.SFX, 2);
+            }
         }
 
         timeSinceMeleeAttackEnd = 0f;
@@ -639,7 +645,10 @@ public class PlayerController : MonoBehaviour
 
     void StartRangedAttack()
     {
-        AM.PlayInChannel("sheep_shoot", ChannelType.SFX, 2);
+        if (AM.shootSoundOn)
+        {
+            AM.PlayInChannel("sheep_shoot", ChannelType.SFX, 2);
+        }
         currentRangedAttackChargeFactor = Mathf.Clamp(rangedAttackChargingTime / rangedAttack.fullChargeTime, 0f, 1f);
         playerAnim.SetRangedAttackStrength(rangedAttackChargingTime);
         timeSinceRangedAttackEnd = 0f;
@@ -923,7 +932,10 @@ public class PlayerController : MonoBehaviour
         if (timeSinceDash >= dashTime * 0.5f && !hasMadeDashSound)
         {
             hasMadeDashSound = true;
-            AM.PlayInChannel("sheep_dash", ChannelType.SFX, 2);
+            if (AM.dashSoundOn)
+            {
+                AM.PlayInChannel("sheep_dash", ChannelType.SFX, 2);
+            }
         }
         if (timeSinceDash >= dashTime)
         {

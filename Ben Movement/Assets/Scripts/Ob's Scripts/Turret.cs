@@ -22,7 +22,7 @@ public class Turret : MonoBehaviour
     public GameObject projectilePrefab;
     public LayerMask crashLayer;
     public float riseSpeed = 2.5f;
-
+    
     [Header("Detection Radius")]
     public float detectionRadius = 10.0f;
     public bool drawDetectionArea = false;
@@ -67,7 +67,10 @@ public class Turret : MonoBehaviour
             if (TargetInRange() && canShoot)
             {
                 canShoot = false;
-                AM.PlayInChannel($"turret_shooting", ChannelType.SFX, 2);
+                if (AM.turretShootOn)
+                {
+                    AM.PlayInChannel($"turret_shooting", ChannelType.SFX, 2);
+                }
                 GameObject spawnedObj = Instantiate(projectilePrefab, projectileSpawn.transform.position, Quaternion.identity);
                 TurretProjectile spawnedProjectile = spawnedObj.GetComponent<TurretProjectile>();
                 spawnedProjectile.damage = damage;
@@ -91,7 +94,10 @@ public class Turret : MonoBehaviour
     {
         StartCoroutine(ShootBuffer());
 
-        AM.PlayInChannel($"turret_projectile-explosion", ChannelType.SFX, 2);
+        if (AM.turretExplodeOn)
+        {
+            AM.PlayInChannel($"turret_projectile-explosion", ChannelType.SFX, 2);
+        }
     }
 
     void DrawDetectionArea()

@@ -27,7 +27,10 @@ public class Teleporter : MonoBehaviour
     {
         if (other.CompareTag("Player Trigger"))
         {
-            AM.PlayInChannel("teleporter_teleport", ChannelType.SFX, 1);
+            if (AM.teleportSoundOn)
+            {
+                AM.PlayInChannel("teleporter_teleport", ChannelType.SFX, 1);
+            }
             var pt = other.GetComponent<PlayerTrigger>();
 
             // teleport to other teleporter
