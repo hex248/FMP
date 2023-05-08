@@ -10,10 +10,12 @@ public class DayNightCycleScript : MonoBehaviour
     bool isDay = true;
     float time = 0.0f;
     AudioManager AM;
-    
+    WaveManager WM;
+
     void Start()
     {
         AM = FindObjectOfType<AudioManager>();
+        WM = FindObjectOfType<WaveManager>();
         isDay = true;
         time = 0.5f;
         AM.SwitchMusic($"music_day{Random.Range(1, 3)}");
@@ -32,8 +34,14 @@ public class DayNightCycleScript : MonoBehaviour
             time = 0.5f;
             if (AM.currentMusicTrack.Contains("music_day"))
             {
-                // switch to music_night
-                AM.SwitchMusic("music_boss"); //!USING BOSS TEMPORARILY WHILE WE WAIT FOR MORE TRACKS
+                if (WM.currentRound-1 >= WM.music.Count)
+                {
+                    AM.SwitchMusic(WM.music[WM.music.Count - 1]);
+                }
+                else
+                {
+                    AM.SwitchMusic(WM.music[WM.currentRound - 1]);
+                }
             }
 
         }

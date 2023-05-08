@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    
-
-    
-    
-    int currentRound;
+    public int currentRound;
 
     [Header("Spawn Settings")]
     [SerializeField] float spawnRadius;
     public List<float> roundDifficulties = new List<float>();
+    public List<string> music = new List<string>();
     public List<EnemySpawnInfo> enemySpawnOptions = new List<EnemySpawnInfo>();
     List<EnemySpawnInfo> enemiesToSpawn = new List<EnemySpawnInfo>();
     [SerializeField] float maximumTimeBetweenSpawns = 1f;

@@ -2058,6 +2058,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8918479784110314663, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: m_Volume
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919845, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -2073,6 +2077,14 @@ PrefabInstance:
     - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: mixer.Array.data[0].volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: mixer.Array.data[2].volume
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: mixer.Array.data[3].volume
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_RootOrder
@@ -2121,6 +2133,10 @@ PrefabInstance:
     - target: {fileID: 8918479784991062822, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_Volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479785587859237, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: m_Volume
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ff319b725e17004e9804df896e879de, type: 3}
@@ -5199,11 +5215,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125894, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: roundLength
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: music.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: gracePeriodLength
@@ -5216,6 +5236,26 @@ PrefabInstance:
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: clusterSpawnOffset
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: music.Array.data[0]
+      value: music_night1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: music.Array.data[1]
+      value: music_night1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: music.Array.data[2]
+      value: music_night2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: music.Array.data[3]
+      value: music_night2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: music.Array.data[4]
+      value: music_boss
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: infiniteDifficultyIncrease
