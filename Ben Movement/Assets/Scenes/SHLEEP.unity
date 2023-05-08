@@ -2060,31 +2060,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8918479784110314663, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_Volume
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919845, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: dashSoundOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: buildSoundOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: turretShootOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: healingSoundOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: turretExplodeOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: wolfBiteSoundOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
+      propertyPath: wolfGrowlSoundOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: musicVolumeDefault
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: musicTransitionSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: mixer.Array.data[0].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: mixer.Array.data[2].volume
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784308919846, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: mixer.Array.data[3].volume
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_RootOrder
@@ -2092,15 +2104,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.350048
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.210689
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.0034733
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2128,14 +2140,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8918479784308919847, guid: 6ff319b725e17004e9804df896e879de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479784991062822, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8918479785587859237, guid: 6ff319b725e17004e9804df896e879de, type: 3}
-      propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

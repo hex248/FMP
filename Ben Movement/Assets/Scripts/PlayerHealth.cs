@@ -6,6 +6,8 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerHealth : MonoBehaviour
 {
+    AudioManager AM;
+
     [SerializeField] int maxHitPoints = 5;
     int currentHitPoints;
     [SerializeField] float invincibilityTime;
@@ -48,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        AM = FindObjectOfType<AudioManager>();
         currentHitPoints = maxHitPoints;
         controller = GetComponent<PlayerController>();
         anim = GetComponentInChildren<PlayerAnimationScript>();
@@ -136,6 +139,10 @@ public class PlayerHealth : MonoBehaviour
     {
         //death logic
         player.playerMovement.Die();
+        if (AM.deathSoundOn)
+        {
+            AM.PlayInChannel("sheep_death", ChannelType.SFX, 1);
+        }
         grave.SetActive(true);
         grave.transform.position = transform.position;
         playerVisuals.SetActive(false);
