@@ -21,8 +21,6 @@ public class MenuPlayer : MonoBehaviour
         menuManager = FindObjectOfType<PlayerMenuManager>();
         menuManager.PlayerJoined(this);
         isReady = false;
-
-       
     }
 
     void Start()

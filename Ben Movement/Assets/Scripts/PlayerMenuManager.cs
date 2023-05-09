@@ -36,32 +36,6 @@ public class PlayerMenuManager : MonoBehaviour
         player.playerControlScheme = playerControlScheme;
 
 
-        PlayerSetupInfo.playerCount = player.playerIndex;
-        //I know this sucks, but i rlly don't want to get into serialization with 3 days left.
-        switch (player.playerIndex)
-        {
-            case 1:
-                PlayerSetupInfo.player1ControlScheme = playerControlScheme;
-                PlayerSetupInfo.player1Devices = devices;
-                return;
-            case 2:
-                PlayerSetupInfo.player2ControlScheme = playerControlScheme;
-                PlayerSetupInfo.player2Devices = devices;
-                return;
-            case 3:
-                PlayerSetupInfo.player3ControlScheme = playerControlScheme;
-                PlayerSetupInfo.player3Devices = devices;
-                return;
-            case 4:
-                PlayerSetupInfo.player4ControlScheme = playerControlScheme;
-                PlayerSetupInfo.player4Devices = devices;
-                return;
-            default:
-                return;
-
-        }
-
-
     }
 
     public void PlayerReady(MenuPlayer player)

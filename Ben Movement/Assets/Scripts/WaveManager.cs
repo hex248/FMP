@@ -93,14 +93,6 @@ public class WaveManager : MonoBehaviour
             SpawnRoundWithDifficulty(difficulty);
         }
         SpawnRoundWithDifficulty(roundDifficulties[currentRound - 1]);
-
-        
-    }
-
-    IEnumerator ToDayDelay()
-    {
-        yield return new WaitForSeconds(3f);
-        dayNight.IsDay(true);
     }
 
     void SpawnRoundWithDifficulty(float difficulty)
@@ -195,11 +187,9 @@ public class WaveManager : MonoBehaviour
         timeSinceGraceStart = 0f;
         waveRunning = false;
         inGrace = true;
+        dayNight.IsDay(true);
 
         playerManager.RevivePlayers();
-        StartCoroutine(ToDayDelay());
-
-        
     }
 
     public void EnemyDeath()

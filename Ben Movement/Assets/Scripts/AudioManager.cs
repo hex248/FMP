@@ -51,7 +51,6 @@ public class AudioManager : MonoBehaviour
     public bool teleportSoundOn = true;
     public bool turretShootOn = true;
     public bool turretExplodeOn = true;
-    public bool pickupSoundOn = true;
 
     [Header("Settings")]
     [Range(0, 10)]

@@ -6,7 +6,7 @@
             "id": "18aded0a-34f2-4e07-aa70-d561d536c79c",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "Player Move",
                     "type": "PassThrough",
                     "id": "745f08eb-a84a-4d33-9e11-2bb4757df90b",
                     "expectedControlType": "Vector2",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dodge",
+                    "name": "Player Dodge",
                     "type": "Button",
                     "id": "2e6b073f-c704-4be7-9413-7f802bc42547",
                     "expectedControlType": "Button",
@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Ranged Attack",
+                    "name": "Player Ranged Attack",
                     "type": "Button",
                     "id": "67a68705-afa7-402a-af4b-7c2374ebc00f",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Melee Attack",
+                    "name": "Player Melee Attack",
                     "type": "Button",
                     "id": "65676db7-1e36-4f58-a0fc-eb33f5063863",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Focus",
+                    "name": "Player Focus",
                     "type": "Button",
                     "id": "497cb945-137e-4e0e-b301-980032d475bf",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Player Interact",
                     "type": "Button",
                     "id": "5804510e-978a-4f84-b672-16d149555f51",
                     "expectedControlType": "Button",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cycle Left",
+                    "name": "Player Cycle Left",
                     "type": "Button",
                     "id": "f74b4be6-a12d-4228-bb1b-36731620a314",
                     "expectedControlType": "Button",
@@ -69,7 +69,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cycle Right",
+                    "name": "Player Cycle Right",
                     "type": "Button",
                     "id": "6b66a70d-0a55-4787-ae26-9d8eae800b5f",
                     "expectedControlType": "Button",
@@ -131,7 +131,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Ranged Attack",
+                    "action": "Player Ranged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -142,7 +142,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Ranged Attack",
+                    "action": "Player Ranged Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef3de93a-bb0c-4341-b82b-0c7ed4966b7a",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Toggle Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "666088ef-b004-49a4-b1e5-2693ab585d39",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Toggle Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -259,7 +281,7 @@
                 {
                     "name": "up",
                     "id": "d7e10535-9ea2-4a20-9e92-a83b6570c518",
-                    "path": "<Gamepad>/leftStick/up",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -270,7 +292,7 @@
                 {
                     "name": "down",
                     "id": "7d566ede-773e-4907-b477-5205de5d0364",
-                    "path": "<Gamepad>/leftStick/down",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -281,7 +303,7 @@
                 {
                     "name": "left",
                     "id": "3480fa3e-fb74-4594-86de-49bcc6c4dd3f",
-                    "path": "<Gamepad>/leftStick/left",
+                    "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -292,7 +314,7 @@
                 {
                     "name": "right",
                     "id": "1199f226-1d96-4983-a610-4277d1979461",
-                    "path": "<Gamepad>/leftStick/right",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -329,7 +351,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Focus",
+                    "action": "Player Focus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -340,7 +362,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Focus",
+                    "action": "Player Focus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -351,7 +373,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Melee Attack",
+                    "action": "Player Melee Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -362,7 +384,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Melee Attack",
+                    "action": "Player Melee Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -373,7 +395,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -384,7 +406,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -395,7 +417,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -406,7 +428,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -417,7 +439,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -428,7 +450,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -439,7 +461,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -450,7 +472,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -461,7 +483,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -472,7 +494,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Move",
+                    "action": "Player Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -483,7 +505,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Dodge",
+                    "action": "Player Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -494,7 +516,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Dodge",
+                    "action": "Player Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -505,7 +527,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "Player Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -516,73 +538,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Interact",
+                    "action": "Player Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "1ec8f81e-1b4b-4178-8e1d-e0a149a624d0",
-                    "path": "<Gamepad>/rightStick/left",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Cycle Left",
+                    "action": "Player Cycle Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "ec7a0c48-6290-4d5a-b556-926578bf00a0",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Cycle Left",
+                    "action": "Player Cycle Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "72fa4a6d-8549-4ad5-8d15-65094c19b522",
-                    "path": "<Gamepad>/rightStick/right",
-                    "interactions": "Press(pressPoint=0.5)",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Cycle Right",
+                    "action": "Player Cycle Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "40ed7b3a-a9c6-427f-baa8-6b54c2746831",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Cycle Right",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ef3de93a-bb0c-4341-b82b-0c7ed4966b7a",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Toggle Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "666088ef-b004-49a4-b1e5-2693ab585d39",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Toggle Menu",
+                    "action": "Player Cycle Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
