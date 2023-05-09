@@ -65,6 +65,12 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Material trailMatP3;
     [SerializeField] Material trailMatP4;
 
+    [Header("Particle Effects")]
+    [SerializeField] GameObject particleP1;
+    [SerializeField] GameObject particleP2;
+    [SerializeField] GameObject particleP3;
+    [SerializeField] GameObject particleP4;
+
     [Header("Game Settings")]
     [SerializeField] int playersRemaining;
 
@@ -166,6 +172,7 @@ public class PlayerManager : MonoBehaviour
                 player.ChangeEyes(eyeMatP1);
                 player.SetProjectileMat(projectileMatP1);
                 player.SetTrailMaterial(trailMatP1);
+                player.SetParticles(particleP1);
                 player.SetHat(0);
                 break;
             case 3:
@@ -173,6 +180,7 @@ public class PlayerManager : MonoBehaviour
                 player.ChangeEyes(eyeMatP2);
                 player.SetProjectileMat(projectileMatP2);
                 player.SetTrailMaterial(trailMatP2);
+                player.SetParticles(particleP2);
                 player.SetHat(1);
                 break;
             case 4:
@@ -180,6 +188,7 @@ public class PlayerManager : MonoBehaviour
                 player.ChangeEyes(eyeMatP3);
                 player.SetProjectileMat(projectileMatP3);
                 player.SetTrailMaterial(trailMatP3);
+                player.SetParticles(particleP3);
                 player.SetHat(2);
                 break;
             case 1:
@@ -187,6 +196,7 @@ public class PlayerManager : MonoBehaviour
                 player.ChangeEyes(eyeMatP4);
                 player.SetProjectileMat(projectileMatP4);
                 player.SetTrailMaterial(trailMatP4);
+                player.SetParticles(particleP4);
                 player.SetHat(3);
                 break;
             default:
@@ -194,6 +204,7 @@ public class PlayerManager : MonoBehaviour
                 player.ChangeEyes(eyeMatP1);
                 player.SetProjectileMat(projectileMatP1);
                 player.SetTrailMaterial(trailMatP1);
+                player.SetParticles(particleP1);
                 player.SetHat(0);
                 break;
         }

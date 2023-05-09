@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public PlayerHealthBar playerHealthBar;
     public PlayerHealth playerHealth;
 
+    public Transform particlePosition;
+
     [Header("Renderers to Change")]
     public Renderer[] meshRenderer;
     public GameObject[] hats;
@@ -61,6 +63,11 @@ public class Player : MonoBehaviour
     public void SetProjectileMat(Material mat)
     {
         playerMovement.projectileMat = mat;
+    }
+
+    public void SetParticles(GameObject particlePrefab)
+    {
+        Instantiate(particlePrefab, particlePosition.position, Quaternion.identity, particlePosition);
     }
 
     public void ChangeEyes(Material mat)
