@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-[ExecuteAlways]
 public class FlowerParticles : MonoBehaviour
 {
     VisualEffect VFX;
