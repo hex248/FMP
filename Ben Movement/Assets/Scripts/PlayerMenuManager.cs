@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem.Samples.RebindUI;
+
 public class PlayerMenuManager : MonoBehaviour
 {
     List<MenuPlayer> players = new List<MenuPlayer>();
@@ -21,12 +25,22 @@ public class PlayerMenuManager : MonoBehaviour
         StartCoroutine(SlideInVisual(player.playerIndex));
         players.Add(player);
         unreadyPlayers++;
+
+        PlayerInput playerInput = player.GetComponentInChildren<PlayerInput>();
+
+        //save important info before it's overidden by changing the asset
+        string playerControlScheme = playerInput.currentControlScheme;
+        InputDevice[] devices = playerInput.devices.ToArray();
+
+        player.devices = devices;
+        player.playerControlScheme = playerControlScheme;
+
+
     }
 
     public void PlayerReady(MenuPlayer player)
     {
         StartCoroutine(SlideOutPromptVisual(player.playerIndex));
-
     }
 
 

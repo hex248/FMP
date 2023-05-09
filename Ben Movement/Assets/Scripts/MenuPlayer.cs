@@ -10,6 +10,9 @@ public class MenuPlayer : MonoBehaviour
     PlayerMenuManager menuManager;
     bool isReady;
 
+    public InputDevice[] devices;
+    public string playerControlScheme;
+
     void SetUp()
     {
         Debug.Log("Player Placeholder");
@@ -33,4 +36,6 @@ public class MenuPlayer : MonoBehaviour
             isReady = true;
         }
     }
+
+
 }
