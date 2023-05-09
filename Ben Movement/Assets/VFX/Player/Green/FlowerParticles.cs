@@ -20,10 +20,13 @@ public class FlowerParticles : MonoBehaviour
     
     void Update()
     {
-        VFX.SetVector3("spawnPosition", transform.position + spawnOffset);
-        VFX.SetVector3("direction", transform.right);
-        texture = flowers[index];
-        index++;
-        if (index >= flowers.Length) index = 0;
+        //VFX.SetVector3("spawnPosition", transform.position + spawnOffset);
+        //VFX.SetVector3("direction", transform.right);
+        //texture = flowers[index];
+        //index++;
+        //if (index >= flowers.Length)
+        //{
+        //    index = 0;
+        //}
     }
 }
