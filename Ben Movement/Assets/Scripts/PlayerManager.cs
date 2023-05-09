@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
 {
     [Header("Players")]
     public int playerCount = 0;
-
+    [SerializeField] GameObject playerParentPrefab;
     private List<Player> m_Players = new List<Player>();
     public List<Player> players = new List<Player>();
 
@@ -103,6 +103,8 @@ public class PlayerManager : MonoBehaviour
     {
         screenManager = FindObjectOfType<ScreenManager>();
         playersRemaining = 0;
+
+        AddJoinedPlayers();
     }
 
     private void Awake()
@@ -129,6 +131,33 @@ public class PlayerManager : MonoBehaviour
         float z = Mathf.Cos(angle) * 6f;
         Vector3 spawnPosition = new Vector3(x, 0.5f, z);
         return spawnPosition;
+    }
+
+    void AddJoinedPlayers()
+    {
+        int joinedPlayerCount = PlayerSetupInfo.playerCount;
+        
+        if(joinedPlayerCount >= 1)
+        {
+            GameObject player = Instantiate(playerParentPrefab);
+            player.GetComponentInChildren<PlayerInput>().SwitchCurrentControlScheme(PlayerSetupInfo.player1Devices); 
+
+        }
+        if(joinedPlayerCount >= 2)
+        {
+            GameObject player = Instantiate(playerParentPrefab);
+            player.GetComponentInChildren<PlayerInput>().SwitchCurrentControlScheme(PlayerSetupInfo.player2Devices);
+        }
+        if (joinedPlayerCount >= 3)
+        {
+            GameObject player = Instantiate(playerParentPrefab);
+            player.GetComponentInChildren<PlayerInput>().SwitchCurrentControlScheme(PlayerSetupInfo.player3Devices);
+        }
+        if (joinedPlayerCount == 4)
+        {
+            GameObject player = Instantiate(playerParentPrefab);
+            player.GetComponentInChildren<PlayerInput>().SwitchCurrentControlScheme(PlayerSetupInfo.player4Devices);
+        }
     }
 
     public void PlayerSpawned(Player player)

@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     bool isRangedAttackCharging;
     float rangedAttackChargingTime;
     float currentRangedAttackChargeFactor;
+    [SerializeField] GameObject orbPreview;
 
     //bool neededRangedComboReset;
     //int currentRangedComboStage = 0;
@@ -172,13 +173,18 @@ public class PlayerController : MonoBehaviour
         if(isRangedAttackCharging)
         {
             rangedAttackChargingTime += Time.deltaTime;
+
+            orbPreview.SetActive(true);
+            orbPreview.transform.localScale = Mathf.Min((rangedAttackChargingTime / rangedAttack.fullChargeTime), 1f) * Vector3.one * 0.005f;
         }
         else
         {
             rangedAttackChargingTime = 0f;
+            orbPreview.SetActive(false);
+            orbPreview.transform.localScale = Vector3.zero;
         }
 
-        if(isDamageStunned)
+        if (isDamageStunned)
         {
             timeSinceDamaged += Time.deltaTime;
             if(timeSinceDamaged >= damageStunTime)
