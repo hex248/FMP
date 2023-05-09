@@ -139,6 +139,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), currentForwardDirection);
+
         playerNumber = playerParent.playerNumber;
         if (isMeleeAttacking)
         {
@@ -462,15 +464,15 @@ public class PlayerController : MonoBehaviour
 
     void DoMovement(Vector3 direction, float speed)
     {
+        direction = (new Vector3(direction.x, 0f, direction.z)).normalized;
         if (direction.magnitude >= 1f)
         {
             direction = direction.normalized;
 
         }
-        if(direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f)
         {
-            mostRecentMoveDirection = direction;
-
+            mostRecentMoveDirection = direction.normalized;
         }
 
         
@@ -745,15 +747,17 @@ public class PlayerController : MonoBehaviour
     Vector3 GetDashEndPoint()
     {
         Vector2 dashInputDirection;
+        Vector3 dashDirection = Vector3.zero;
         if (movementInput.magnitude > 0.1f)
         {
             dashInputDirection = movementInput.normalized;
+            dashDirection = GetRotatedDirectionFromInput(dashInputDirection);
         }
         else
         {
-            dashInputDirection = Vector2.zero;
+            dashDirection = currentForwardDirection.normalized;
         }
-        Vector3 dashDirection = GetRotatedDirectionFromInput(dashInputDirection);
+
         //Vector3 dashDirection = mostRecentMoveDirection;
         Vector3 totalDashVector = dashDirection * (dashSpeed * dashTime);
         bool foundDashLocation = false;
