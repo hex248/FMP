@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class DreamEssencePickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int essenceAmount = 10;
+    public float bobAmount = 10f;
+    public float bobSpeed = 1.0f;
+
+    EssenceManager EM;
+    AudioManager AM;
+
+    private void Start()
     {
-        
+        EM = FindObjectOfType<EssenceManager>();
+        AM = FindObjectOfType<AudioManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        transform.position = new Vector3(transform.position.x, 2.0f + bobAmount/100 * Mathf.Sin(Time.time * bobSpeed), transform.position.z);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            EM.Essence += essenceAmount;
+            if (AM.pickupSoundOn)
+            {
+                // REMINDER TO REPLACE THIS SOUND EFFECT
+                AM.PlayInChannel("pickup_ding", ChannelType.SFX, 2);
+            }
+            Destroy(this.gameObject);
+        }
     }
 }
