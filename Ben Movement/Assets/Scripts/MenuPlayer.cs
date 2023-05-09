@@ -8,6 +8,7 @@ public class MenuPlayer : MonoBehaviour
     public int playerIndex;
     public PlayerInput playerInput;
     PlayerMenuManager menuManager;
+    bool isReady;
 
     void SetUp()
     {
@@ -16,10 +17,20 @@ public class MenuPlayer : MonoBehaviour
         playerIndex = playerInput.playerIndex + 1;
         menuManager = FindObjectOfType<PlayerMenuManager>();
         menuManager.PlayerJoined(this);
+        isReady = false;
     }
 
     void Start()
     {
         SetUp();
+    }
+
+    public void ReadyUp(InputAction.CallbackContext context)
+    {
+        if (!isReady && context.performed)
+        {
+            menuManager.PlayerReady(this);
+            isReady = true;
+        }
     }
 }
