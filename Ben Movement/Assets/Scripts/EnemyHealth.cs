@@ -27,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
     float dissolveSmoothFac;
 
     public bool triggerDeath = false;
+    bool isDead;
 
     [SerializeField] UnityEvent<GameObject> damageEvent;
     [SerializeField] UnityEvent deathEvent;
@@ -36,7 +37,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maximumHealth;
-
+        isDead = false;
         skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
         if (skinnedMeshRenderers != null)
             foreach(SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
@@ -66,9 +67,10 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, maximumHealth);
 
-        if (currentHealth == 0f)
+        if (currentHealth == 0f && !isDead)
         {
             Die();
+            isDead = true;
         }
         else
         {
