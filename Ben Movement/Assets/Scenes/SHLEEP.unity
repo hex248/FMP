@@ -7371,6 +7371,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 377110495260713309, guid: 403ddcdcaedccc6479be7db4671a522b, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 377110495260713309, guid: 403ddcdcaedccc6479be7db4671a522b, type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 377110495260713310, guid: 403ddcdcaedccc6479be7db4671a522b, type: 3}
       propertyPath: eyeMatP1
       value: 
@@ -7403,6 +7411,10 @@ PrefabInstance:
       propertyPath: projectileMatP4
       value: 
       objectReference: {fileID: 2100000, guid: f350f45d1e1f65443aa8c3b5118f94dd, type: 2}
+    - target: {fileID: 377110495260713310, guid: 403ddcdcaedccc6479be7db4671a522b, type: 3}
+      propertyPath: playerParentPrefab
+      value: 
+      objectReference: {fileID: 8290857135938718274, guid: a67335c392f9d7cf8b208b5fc6aafa8f, type: 3}
     - target: {fileID: 377110495260713310, guid: 403ddcdcaedccc6479be7db4671a522b, type: 3}
       propertyPath: healthBars1Player.Array.data[0]
       value: 
@@ -7591,6 +7603,22 @@ PrefabInstance:
     - target: {fileID: 1623277796678833148, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623277796962180673, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
+      propertyPath: playerScreens.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623277796962180673, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
+      propertyPath: playerScreens.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623277796962180673, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
+      propertyPath: playerScreens.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1623277796962180673, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
+      propertyPath: playerScreens.Array.data[3]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1930997739435029966, guid: d5c8e5685d6030249b5eac5b3071a852, type: 3}
       propertyPath: m_SizeDelta.x
