@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0c6d18ddd9bb04a9f84462e0237415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicOn: 1
   dashSoundOn: 0
   meleeSoundOn: 1
   comboSoundOn: 1
@@ -361,6 +362,7 @@ MonoBehaviour:
   teleportSoundOn: 1
   turretShootOn: 0
   turretExplodeOn: 0
+  pickupSoundOn: 1
   musicTransitionSpeed: 2
   musicVolumeDefault: 0.75
   mixer:
@@ -481,6 +483,9 @@ MonoBehaviour:
   - name: teleporter_teleport
     type: 1
     clip: {fileID: 8300000, guid: b72f06b0c150eba4f89a002ef87e5213, type: 3}
+  - name: pickup_pop
+    type: 1
+    clip: {fileID: 8300000, guid: bf87c1d8415be1a489e6a9e61adfcbeb, type: 3}
   - name: turret_shooting
     type: 1
     clip: {fileID: 8300000, guid: 1f9ac667b60e07c4b8b142433f7783bb, type: 3}
