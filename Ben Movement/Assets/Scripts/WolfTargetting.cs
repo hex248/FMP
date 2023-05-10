@@ -115,15 +115,10 @@ public class WolfTargetting : MonoBehaviour
     void AttemptFindPlayer()
     {
         //get all ALIVE players in view
-
         List<PlayerController> playersInView = new List<PlayerController>();
         foreach (PlayerController player in players)
         {
-            Vector3 playerPos = new Vector3(player.transform.position.x, 0f, player.transform.position.z);
-            Vector3 pos = new Vector3(transform.position.x, 0f, transform.position.z);
-            Vector3 offset = (playerPos - pos);
-
-
+            Vector3 offset = (player.transform.position - transform.position);
             if(offset.magnitude <= maxPlayerFeelRange)
             {
                 playersInView.Add(player);
@@ -135,14 +130,11 @@ public class WolfTargetting : MonoBehaviour
                 bool targetIsInDirectView = false;
                 Vector3 raycastStart = transform.position + new Vector3(0f, 0.5f, 0f);
                 RaycastHit hit;
-                Physics.Raycast(raycastStart, offset.normalized, out hit, maxPlayerDetectRange + 0.1f, raycastLayer, QueryTriggerInteraction.Ignore);
+                Physics.Raycast(raycastStart, offset.normalized, out hit, maxPlayerDetectRange + 0.1f, raycastLayer);
                 if (hit.collider != null)
                 {
                     targetIsInDirectView = (hit.collider.gameObject == player.gameObject);
-                    Debug.Log(hit.collider.gameObject);
                 }
-                Debug.Log("in view - " + targetIsInDirectView);
-                
 
                 if (dot > minPlayerDetectDot && targetIsInDirectView && !player.IsDead())
                 {
@@ -153,8 +145,6 @@ public class WolfTargetting : MonoBehaviour
 
         if (playersInView.Count == 0)
             return;
-
-        Debug.Log("There are players in view!");
 
         //select closest to target
         float closestDistance = Mathf.Infinity;

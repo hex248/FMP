@@ -91,7 +91,7 @@ public class MeshInteractiveSnowScript : MonoBehaviour
             if (hit.collider.name == gameObject.name)
             {
                 Vector2 hitTextureCoord = hit.textureCoord;
-                //Debug.Log(hitTextureCoord);
+                Debug.Log(hitTextureCoord);
                 float angle = trail.transform.rotation.eulerAngles.y; // texture rotation angle
 
                 _heightMapUpdate.SetVector(DrawPosition, hitTextureCoord);
