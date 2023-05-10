@@ -39,10 +39,4 @@ public class TrailDrawer : MonoBehaviour
         if (FindObjectOfType<MeshInteractiveSnowScript>())
             FindObjectOfType<MeshInteractiveSnowScript>().RemoveObject(index);
     }
-
-    private void OnDisable()
-    {
-        if (FindObjectOfType<TerrainInteractiveSnow>())
-            FindObjectOfType<TerrainInteractiveSnow>().RemoveObject(index);
-    }
 }
