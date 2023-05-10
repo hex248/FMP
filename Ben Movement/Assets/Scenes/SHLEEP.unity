@@ -5935,6 +5935,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: roundDifficulties.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: roundDifficulties.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
@@ -5944,7 +5948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: roundDifficulties.Array.data[2]
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: roundDifficulties.Array.data[3]
@@ -5964,7 +5968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.data[1].minRoundNumberToSpawn
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
