@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
     public bool interacting = false;
     public bool cycleLeftPressed = false;
     public bool cycleRightPressed = false;
+    public bool building = false;
 
 
     [Header("Visuals Settings")]
@@ -170,7 +171,7 @@ public class PlayerController : MonoBehaviour
             lastRangedAttackingTime += Time.deltaTime;
         }
 
-        if(isRangedAttackCharging)
+        if (isRangedAttackCharging)
         {
             rangedAttackChargingTime += Time.deltaTime;
 
@@ -187,7 +188,7 @@ public class PlayerController : MonoBehaviour
         if (isDamageStunned)
         {
             timeSinceDamaged += Time.deltaTime;
-            if(timeSinceDamaged >= damageStunTime)
+            if (timeSinceDamaged >= damageStunTime)
             {
                 isDamageStunned = false;
             }
@@ -217,7 +218,7 @@ public class PlayerController : MonoBehaviour
         {
             focusReticule.SetActive(false);
         }
-        
+
         movementDashLocked = isDashing;
         movementMeleeAttackLocked = isMeleeAttacking;
         movementRangedAttackLocked = isRangedAttacking || isRangedAttackCharging;
@@ -315,12 +316,12 @@ public class PlayerController : MonoBehaviour
         if (isMeleeAttacking)
         {
             DoMeleeAttackMove();
-            if(timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].damageTime && doneMeleeAttackHit == false)
+            if (timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].damageTime && doneMeleeAttackHit == false)
             {
                 DoMeleeAttackHit();
             }
         }
-        else if(isRangedAttacking)
+        else if (isRangedAttacking)
         {
             DoRangedAttackMove();
             if (timeSinceRangedAttackEnd >= rangedAttack.projectileSpawnTime && doneRangedProjectileSpawn == false)
@@ -341,6 +342,20 @@ public class PlayerController : MonoBehaviour
                     RotateTowardsDirection(currentForwardDirection);
                 }
             }
+        }
+
+        if (!interacting)
+        {
+            building = false;
+
+        }
+        if (building)
+        {
+            interacting = false;
+            //clear buffer after building
+            dashBuffered = false;
+            meleeAttackBuffered = false;
+            rangedAttackBuffered = false;
         }
     }
 
@@ -390,10 +405,10 @@ public class PlayerController : MonoBehaviour
             {
                 interacting = true;
             }
-        }
-        else
-        {
-            interacting = false;
+            else
+            {
+                interacting = false;
+            }
         }
     }
 
@@ -403,7 +418,7 @@ public class PlayerController : MonoBehaviour
 
         if (performed)
         {
-            if (!isMovementLocked() && !isActionBuffered())
+            if(interacting)
             {
                 cycleLeftPressed = true;
             }
@@ -420,7 +435,7 @@ public class PlayerController : MonoBehaviour
 
         if (performed)
         {
-            if (!isMovementLocked() && !isActionBuffered())
+            if (interacting)
             {
                 cycleRightPressed = true;
             }
@@ -428,6 +443,23 @@ public class PlayerController : MonoBehaviour
         else
         {
             cycleRightPressed = false;
+        }
+    }
+
+    public void OnBuild(InputAction.CallbackContext context)
+    {
+        bool performed = context.performed;
+
+        if (performed)
+        {
+            if (interacting)
+            {
+                building = true;
+            }
+            else
+            {
+                building = false;
+            }
         }
     }
 
@@ -984,7 +1016,7 @@ public class PlayerController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned || isDead);
+        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned || isDead || interacting || building);
     }
 
     bool isActionBuffered()
