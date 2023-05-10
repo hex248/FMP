@@ -8,12 +8,10 @@ public class DreamEssencePickup : MonoBehaviour
     public float bobAmount = 10f;
     public float bobSpeed = 1.0f;
 
-    EssenceManager EM;
     AudioManager AM;
 
     private void Start()
     {
-        EM = FindObjectOfType<EssenceManager>();
         AM = FindObjectOfType<AudioManager>();
     }
 
@@ -26,7 +24,7 @@ public class DreamEssencePickup : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            EM.Essence += essenceAmount;
+            Essence.instance.balance += essenceAmount;
             if (AM.pickupSoundOn)
             {
                 AM.PlayInChannel("pickup_pop", ChannelType.SFX, 2);

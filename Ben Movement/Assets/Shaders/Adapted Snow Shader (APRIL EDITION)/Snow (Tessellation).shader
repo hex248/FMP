@@ -11,7 +11,7 @@ Shader "InteractiveSnow/Snow (Tessellation)"
 		_NormalMap("Normal", 2D) = "white" {}
 		_NormalMapAmount("Normal Map Amount", float) = 1
 
-		_Tess("Tessellation", Range(1, 32)) = 20
+		_Tess("Tessellation", Range(1, 100)) = 20
 		_MinTessDistance("Min Tess Distance", Range(0, 32)) = 20
 		_MaxTessDistance("Max Tess Distance", Range(0, 32)) = 20
 		_ShadingDetail("Shading Detail", int) = 5
