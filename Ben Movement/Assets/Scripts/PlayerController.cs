@@ -160,14 +160,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(!interacting)
-        {
-            building = false;
-        }
-        if(building)
-        {
-            interacting = false;
-        }
+
 
         if (isRangedAttacking)
         {
@@ -178,7 +171,7 @@ public class PlayerController : MonoBehaviour
             lastRangedAttackingTime += Time.deltaTime;
         }
 
-        if(isRangedAttackCharging)
+        if (isRangedAttackCharging)
         {
             rangedAttackChargingTime += Time.deltaTime;
 
@@ -195,7 +188,7 @@ public class PlayerController : MonoBehaviour
         if (isDamageStunned)
         {
             timeSinceDamaged += Time.deltaTime;
-            if(timeSinceDamaged >= damageStunTime)
+            if (timeSinceDamaged >= damageStunTime)
             {
                 isDamageStunned = false;
             }
@@ -225,7 +218,7 @@ public class PlayerController : MonoBehaviour
         {
             focusReticule.SetActive(false);
         }
-        
+
         movementDashLocked = isDashing;
         movementMeleeAttackLocked = isMeleeAttacking;
         movementRangedAttackLocked = isRangedAttacking || isRangedAttackCharging;
@@ -323,12 +316,12 @@ public class PlayerController : MonoBehaviour
         if (isMeleeAttacking)
         {
             DoMeleeAttackMove();
-            if(timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].damageTime && doneMeleeAttackHit == false)
+            if (timeSinceMeleeAttackEnd >= meleeCombo[currentMeleeComboStage].damageTime && doneMeleeAttackHit == false)
             {
                 DoMeleeAttackHit();
             }
         }
-        else if(isRangedAttacking)
+        else if (isRangedAttacking)
         {
             DoRangedAttackMove();
             if (timeSinceRangedAttackEnd >= rangedAttack.projectileSpawnTime && doneRangedProjectileSpawn == false)
@@ -349,6 +342,20 @@ public class PlayerController : MonoBehaviour
                     RotateTowardsDirection(currentForwardDirection);
                 }
             }
+        }
+
+        if (!interacting)
+        {
+            building = false;
+
+        }
+        if (building)
+        {
+            interacting = false;
+            //clear buffer after building
+            dashBuffered = false;
+            meleeAttackBuffered = false;
+            rangedAttackBuffered = false;
         }
     }
 
@@ -1009,7 +1016,7 @@ public class PlayerController : MonoBehaviour
 
     bool isMovementLocked()
     {
-        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned || isDead || interacting);
+        return (movementDashLocked || playerManager.isPaused || movementMeleeAttackLocked || movementRangedAttackLocked || isDamageStunned || isDead || interacting || building);
     }
 
     bool isActionBuffered()
