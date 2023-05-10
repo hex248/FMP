@@ -85,12 +85,16 @@ public class WaveManager : MonoBehaviour
         dayNight.IsDay(false);
 
         timeSinceRoundStart = 0f;
-        if (currentRound == roundDifficulties.Count - 1)
+
+        
+
+        if (currentRound == roundDifficulties.Count)
         {
             //boss round
+            Debug.Log("boss round!");
             SpawnRoundWithDifficulty(roundDifficulties[currentRound - 1], true);
         }
-        else if(currentRound >= roundDifficulties.Count)
+        else if(currentRound > roundDifficulties.Count)
         {
             //ran out of rounds
         }
@@ -112,7 +116,6 @@ public class WaveManager : MonoBehaviour
 
     void SpawnRoundWithDifficulty(float difficulty, bool includeBosses)
     {
-        Debug.Log("Round " + currentRound + " has difficulty " + difficulty);
         float difficultyLeftToDistribute = difficulty;
 
         enemiesToSpawn = new List<EnemySpawnInfo>();
@@ -183,8 +186,8 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-                int randomIndex = Random.Range(0, difficultyPossibleSpawnOptions.Count);
-                EnemySpawnInfo enemyToSpawn = difficultyPossibleSpawnOptions[randomIndex];
+                int randomIndex = Random.Range(0, bossFilteredSpawnOptions.Count);
+                EnemySpawnInfo enemyToSpawn = bossFilteredSpawnOptions[randomIndex];
                 if(enemyToSpawn.enemyType == EnemySpawnInfo.EnemyType.Regular)
                 {
                     difficultyLeftToDistribute -= enemyToSpawn.difficultyCost;
