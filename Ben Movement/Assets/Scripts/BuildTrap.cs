@@ -25,6 +25,8 @@ public class BuildTrap : MonoBehaviour
 
     public PlayerController interactingPlayer;
 
+    bool hasBeenBuilt = false;
+
     private void Start()
     {
         AM = FindObjectOfType<AudioManager>();
@@ -73,7 +75,7 @@ public class BuildTrap : MonoBehaviour
         {
             PlayerTrigger pt = other.GetComponent<PlayerTrigger>();
             if (pt.controller != interactingPlayer) return;
-            ShowInteractControls();
+            //ShowInteractControls();
             // if is interacting
             if (pt.controller.interacting)
             {
@@ -84,11 +86,23 @@ public class BuildTrap : MonoBehaviour
                     {
                         ShowHolograms();
                         ShowHologramControls();
+                        HideInteractControls();
                     }
-                    else // if interacting while holograms shown:
-                    {
-                        Build(prefabs[hologramIDX]);
-                    }
+                }
+            }
+            else
+            {
+                HideHologramControls();
+                HideHolograms();
+                ShowInteractControls();
+            }
+
+            if (pt.controller.building)
+            {
+                if(!hasBeenBuilt)
+                {
+                    Build(prefabs[hologramIDX]);
+                    hasBeenBuilt = true;
                 }
             }
 
@@ -118,6 +132,7 @@ public class BuildTrap : MonoBehaviour
             if (other.GetComponent<PlayerTrigger>().controller != interactingPlayer) return;
             HideInteractControls();
             HideHologramControls();
+
             HideHolograms();
             interactingPlayer = null;
             
