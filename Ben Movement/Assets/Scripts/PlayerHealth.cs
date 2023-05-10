@@ -145,6 +145,8 @@ public class PlayerHealth : MonoBehaviour
         }
         grave.SetActive(true);
         grave.transform.position = transform.position;
+
+        grave.transform.rotation = Quaternion.LookRotation((new Vector3(-1f, 0f, -1f)).normalized, transform.up);
         playerVisuals.SetActive(false);
         FindObjectOfType<PlayerManager>().PlayerDied();
         dead = true;
