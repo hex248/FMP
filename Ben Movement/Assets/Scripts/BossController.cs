@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossController : MonoBehaviour
 {
@@ -19,10 +20,33 @@ public class BossController : MonoBehaviour
     public float attack01Cooldown = 1.0f;
     [Header("Attack02")]
     public GameObject laserFX;
+    [Header("Navmesh Settings")]
+    private NavMeshAgent navMesh;
+
+    int GetAgentTypeIDByName(string agentTypeName)
+    {
+        int count = NavMesh.GetSettingsCount();
+        string[] agentTypeNames = new string[count + 2];
+        for (var i = 0; i < count; i++)
+        {
+            int id = NavMesh.GetSettingsByIndex(i).agentTypeID;
+            string name = NavMesh.GetSettingsNameFromID(id);
+            if (name == agentTypeName)
+            {
+                return id;
+            }
+        }
+        return -1;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         animationScript = GetComponentInChildren<BossAnimationScript>();
+        navMesh = GetComponent<NavMeshAgent>();
+        navMesh.updatePosition = false;
+        navMesh.updateRotation = false;
+        navMesh.agentTypeID = GetAgentTypeIDByName("Attacking Player");
     }
 
     private int state = 0;
@@ -83,7 +107,14 @@ public class BossController : MonoBehaviour
             {
                 if (dodgedAttacks > 2)
                 {
-                    state = 3;
+                    if (Vector3.Scale(currentTarget.transform.position - transform.position, Vector3.one - Vector3.up).magnitude < range)
+                    {
+                        state = 3;
+                    }
+                    else
+                    {
+                        state = 1;
+                    }
                     dodgedAttacks = 0;
                 }
             }
@@ -98,6 +129,10 @@ public class BossController : MonoBehaviour
 
     void SlowDown()
     {
+        navMesh.destination = currentTarget.transform.position;
+        Vector3 direction = currentTarget.transform.position - transform.position;
+        float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0.0f, Mathf.LerpAngle(transform.eulerAngles.y, Y - 90.0f, Time.deltaTime * moveRotationSpeed), 0.0f);
         transform.position += transform.right * moveSpeed * Time.deltaTime * slowDownCurve.Evaluate(time);
         time += Time.deltaTime;
         if (time > 1.0f && state == previousState && state != 3)
@@ -108,7 +143,16 @@ public class BossController : MonoBehaviour
 
     void MovingState()
     {
-        Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
+        navMesh.destination = currentTarget.transform.position;
+        Vector3 direction;
+        if (currentTarget.name == "Bed")
+        {
+            direction = (currentTarget.transform.position - transform.position).normalized;
+        }
+        else
+        {
+            direction = navMesh.desiredVelocity.normalized;
+        }
         float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
         transform.eulerAngles = new Vector3(0.0f, Mathf.LerpAngle(transform.eulerAngles.y, Y - 90.0f, Time.deltaTime * moveRotationSpeed), 0.0f);
         transform.position += transform.right * moveSpeed * Time.deltaTime * speedUpCurve.Evaluate(time);

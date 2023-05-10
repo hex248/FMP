@@ -6,6 +6,7 @@ public class BossAnimationScript : MonoBehaviour
 {
     public float movementSpeedAnimation = 1.0f;
     public float laserSpeed = 1.0f;
+    public GameObject telegraph;
     public GameObject arm;
     public GameObject ray;
     private BossController boss;
@@ -42,6 +43,15 @@ public class BossAnimationScript : MonoBehaviour
                 }
             }
         }
+    }
+    public void StartTelegraph()
+    {
+        telegraph.SetActive(true);
+    }
+
+    public void EndTelegraph()
+    {
+        telegraph.SetActive(false);
     }
 
     public void StartBeam()
