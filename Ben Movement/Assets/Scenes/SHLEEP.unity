@@ -995,6 +995,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 9044635533411423430, guid: ac8ac45e9c9246046a8cf94c1cd67152, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c63b3d9871bd55749945e8eed197982a, type: 2}
     - target: {fileID: 9044635533411423431, guid: ac8ac45e9c9246046a8cf94c1cd67152, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2776,8 +2780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcc312b5b2261c419ad08e765091326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEssence: 50
-  essence: 0
+  maxBalance: 0
+  balance: 0
 --- !u!4 &648534553
 Transform:
   m_ObjectHideFlags: 0
