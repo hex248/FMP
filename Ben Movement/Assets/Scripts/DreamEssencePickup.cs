@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DreamEssencePickup : MonoBehaviour
 {
-    public int essenceAmount = 10;
+    public int essenceAmount = 1;
     public float bobAmount = 10f;
     public float bobSpeed = 1.0f;
 
@@ -29,8 +29,7 @@ public class DreamEssencePickup : MonoBehaviour
             EM.Essence += essenceAmount;
             if (AM.pickupSoundOn)
             {
-                // REMINDER TO REPLACE THIS SOUND EFFECT
-                AM.PlayInChannel("pickup_ding", ChannelType.SFX, 2);
+                AM.PlayInChannel("pickup_pop", ChannelType.SFX, 2);
             }
             Destroy(this.gameObject);
         }

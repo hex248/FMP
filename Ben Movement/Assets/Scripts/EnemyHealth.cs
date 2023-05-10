@@ -34,6 +34,10 @@ public class EnemyHealth : MonoBehaviour
 
     WaveManager enemySpawner;
 
+    public int essenceDropAmount;
+    public int essenceParticleCount = 1;
+    [SerializeField] GameObject essencePrefab;
+
     void Start()
     {
         currentHealth = maximumHealth;
@@ -91,10 +95,21 @@ public class EnemyHealth : MonoBehaviour
         if (dissolveActive)
         {
             StartCoroutine(DeathDissolve());
+            SpawnEssence();
             deathEvent.Invoke();
             enemySpawner.EnemyDeath();
         }
     }
+
+    public void SpawnEssence()
+    {
+        for (int i = 0; i < essenceParticleCount; i++)
+        {
+            GameObject spawnedObj = Instantiate(essencePrefab, transform.position, Quaternion.identity, GameObject.Find("All Essence Drops").transform);
+            spawnedObj.GetComponent<DreamEssencePickup>().essenceAmount = essenceDropAmount;
+        }
+    }
+
 
     void UpdateDissolve()
     {

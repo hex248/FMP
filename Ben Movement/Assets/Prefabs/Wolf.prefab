@@ -429,6 +429,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  essenceDropAmount: 1
+  essencePrefab: {fileID: 3850395887379244230, guid: b557fcad6d8c6274194c0d07051400e3, type: 3}
 --- !u!54 &7704235920015397538
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -625,7 +627,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7704235920015397536}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e68d640db1d2063429c231cb027c28d4, type: 3}
   m_Name: 
