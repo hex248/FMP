@@ -51,10 +51,12 @@ public class BuildTrap : MonoBehaviour
 
             currentHologram = holograms[hologramIDX];
             holograms[hologramIDX].SetActive(true);
-            buildCostText.text = $"{costs[hologramIDX]}";
-            // if players have enough essence, set to green
-            // otherwise set to red
+            int towerCost = costs[hologramIDX];
+            buildCostText.text = $"{towerCost}";
 
+            if (towerCost > Essence.instance.balance) buildCostText.color = Color.red;
+            else buildCostText.color = Color.green;
+            
             var lookDirection = (bed.transform.position - holograms[hologramIDX].transform.position).normalized;
             lookDirection.y = 0.0f;
             holograms[hologramIDX].transform.rotation = Quaternion.LookRotation(lookDirection, Vector3.up);
@@ -103,10 +105,11 @@ public class BuildTrap : MonoBehaviour
                 ShowInteractControls();
             }
 
-            if (pt.controller.building)
+            if (pt.controller.building && Essence.instance.balance >= costs[hologramIDX])
             {
                 if(!hasBeenBuilt)
                 {
+                    Essence.instance.balance -= costs[hologramIDX];
                     Build(prefabs[hologramIDX]);
                     hasBeenBuilt = true;
                 }
