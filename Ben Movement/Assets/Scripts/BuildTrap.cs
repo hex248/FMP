@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BuildTrap : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class BuildTrap : MonoBehaviour
 
     [SerializeField] GameObject interactControls;
     [SerializeField] GameObject hologramControls;
+    [SerializeField] TextMeshProUGUI buildCostText;
     [SerializeField] GameObject hologramParent;
 
     [SerializeField] List<GameObject> holograms;
     [SerializeField] List<GameObject> prefabs;
+    [SerializeField] List<int> costs;
     GameObject currentHologram;
     int hologramIDX = 0;
 
@@ -48,6 +51,9 @@ public class BuildTrap : MonoBehaviour
 
             currentHologram = holograms[hologramIDX];
             holograms[hologramIDX].SetActive(true);
+            buildCostText.text = $"{costs[hologramIDX]}";
+            // if players have enough essence, set to green
+            // otherwise set to red
 
             var lookDirection = (bed.transform.position - holograms[hologramIDX].transform.position).normalized;
             lookDirection.y = 0.0f;
