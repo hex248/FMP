@@ -183,7 +183,7 @@ public class MeshInteractiveSnowScript : MonoBehaviour
     IEnumerator RemoveObjectCoroutine(int removeIDX)
     {
         yield return new WaitForEndOfFrame();
-        if (trailDrawers[removeIDX] != null)
+        if (_trailBrushes[removeIDX] != null)
         {
             trailDrawers.RemoveAt(removeIDX);
             _trailsPositions.RemoveAt(removeIDX);
