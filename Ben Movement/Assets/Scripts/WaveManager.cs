@@ -135,11 +135,22 @@ public class WaveManager : MonoBehaviour
             {
                 int randomIndex = Random.Range(0, difficultyPossibleSpawnOptions.Count);
                 EnemySpawnInfo enemyToSpawn = difficultyPossibleSpawnOptions[randomIndex];
-                difficultyLeftToDistribute -= enemyToSpawn.difficultyCost;
+                if(enemyToSpawn.enemyType == EnemySpawnInfo.EnemyType.Regular)
+                {
+                    difficultyLeftToDistribute -= enemyToSpawn.difficultyCost;
 
-                enemiesToSpawn.Add(enemyToSpawn);
-                
-                enemiesRemaining++;
+                    enemiesToSpawn.Add(enemyToSpawn);
+
+                    enemiesRemaining++;
+                }
+                else if(enemyToSpawn.enemyType == EnemySpawnInfo.EnemyType.Boss)
+                {
+                    difficultyLeftToDistribute = 0.0f;
+
+                    enemiesToSpawn.Add(enemyToSpawn);
+
+                    enemiesRemaining++;
+                }
             }
         }
 
