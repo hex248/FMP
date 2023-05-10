@@ -47,23 +47,10 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 1
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 377110495260713310}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: CreatePlayer
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.PlayerInput,
-            Unity.InputSystem
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -118,13 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 0
+  playerParentPrefab: {fileID: 8290857135938718274, guid: a67335c392f9d7cf8b208b5fc6aafa8f, type: 3}
   players: []
   actionAsset: {fileID: -944628639613478452, guid: 1f478376e5c1ca741b15348663491b1b, type: 3}
-  playerMaterials:
-  - {fileID: 2100000, guid: d8333db8c3064e249bc6075d76aef8c4, type: 2}
-  - {fileID: 2100000, guid: 4644cb8f4e32ed54684e8d6ff752b049, type: 2}
-  - {fileID: 2100000, guid: dd6c5e6884fdcc5b1b8455dec09166ff, type: 2}
-  - {fileID: 2100000, guid: 94e010954945e164cbd143e8037bfb27, type: 2}
   normalRenderTexture: {fileID: 8400000, guid: 202cbbb04fb922a42adfa56199469584, type: 2}
   tallRenderTextures:
   - {fileID: 8400000, guid: a4133fce24c54aa47ace58d84fb17abd, type: 2}
@@ -165,9 +148,21 @@ MonoBehaviour:
   matP4:
   - {fileID: 2100000, guid: f263789040b64f14294c35b967e40e06, type: 2}
   - {fileID: 2100000, guid: a15ebce374afca8468694782fc300cf3, type: 2}
+  eyeMatP1: {fileID: 2100000, guid: 7e3a62f3febbff2428c60c36f3ed85ab, type: 2}
+  eyeMatP2: {fileID: 2100000, guid: 90179883d9b83c8488a1755717192678, type: 2}
+  eyeMatP3: {fileID: 2100000, guid: 5141d8107e05f2b499fb48c91c7b2609, type: 2}
+  eyeMatP4: {fileID: 2100000, guid: 642751c02efb29f439b1d3ab73ff2096, type: 2}
+  projectileMatP1: {fileID: 2100000, guid: 927a9ffc499151c45954271e473db991, type: 2}
+  projectileMatP2: {fileID: 2100000, guid: 759b7dfcd4490f3468aeeb9698b77aa1, type: 2}
+  projectileMatP3: {fileID: 2100000, guid: ce10a76dad41d1945911c1850b6dccd6, type: 2}
+  projectileMatP4: {fileID: 2100000, guid: f350f45d1e1f65443aa8c3b5118f94dd, type: 2}
   trailMatP1: {fileID: 2100000, guid: 3dd12ad21bd1f8042adc841ad39491cd, type: 2}
   trailMatP2: {fileID: 2100000, guid: 84f4285ae5560ab46b485cab16c056c6, type: 2}
   trailMatP3: {fileID: 2100000, guid: 7d46746eab3de014194c0a4acf1d9674, type: 2}
   trailMatP4: {fileID: 2100000, guid: 2753ac21f6b52954d8d41ad92e5c62f9, type: 2}
+  particleP1: {fileID: 1411544955726759186, guid: f3e44691faba3d5488dc48757a95fb54, type: 3}
+  particleP2: {fileID: 1411544955726759186, guid: f3e44691faba3d5488dc48757a95fb54, type: 3}
+  particleP3: {fileID: 1819945828146019005, guid: 4e925e45f81063847af65dc235597266, type: 3}
+  particleP4: {fileID: 1411544955726759186, guid: f3e44691faba3d5488dc48757a95fb54, type: 3}
   playersRemaining: 0
   isPaused: 0
