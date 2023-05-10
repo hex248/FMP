@@ -29,7 +29,6 @@ public class WaveManager : MonoBehaviour
     float timeSinceGraceStart;
     bool inGrace = true;
 
-    [SerializeField] int infiniteDifficultyIncrease;
     bool waveRunning;
 
     [SerializeField] bool startGame;
@@ -86,15 +85,23 @@ public class WaveManager : MonoBehaviour
         dayNight.IsDay(false);
 
         timeSinceRoundStart = 0f;
-        if (currentRound >= roundDifficulties.Count)
+        if (currentRound == roundDifficulties.Count - 1)
         {
-            //no more hard coded rounds - increase by infinite difficulty increase and continue
-            float difficulty = roundDifficulties[roundDifficulties.Count - 1] + (currentRound - roundDifficulties.Count) * infiniteDifficultyIncrease;
-            SpawnRoundWithDifficulty(difficulty);
+            //boss round
+            SpawnRoundWithDifficulty(roundDifficulties[currentRound - 1], true);
         }
-        SpawnRoundWithDifficulty(roundDifficulties[currentRound - 1]);
+        else if(currentRound >= roundDifficulties.Count)
+        {
+            //ran out of rounds
+        }
+        else
+        {
+            //standard round
+            SpawnRoundWithDifficulty(roundDifficulties[currentRound - 1], false);
 
-        
+        }
+
+
     }
 
     IEnumerator ToDayDelay()
@@ -103,7 +110,7 @@ public class WaveManager : MonoBehaviour
         dayNight.IsDay(true);
     }
 
-    void SpawnRoundWithDifficulty(float difficulty)
+    void SpawnRoundWithDifficulty(float difficulty, bool includeBosses)
     {
         Debug.Log("Round " + currentRound + " has difficulty " + difficulty);
         float difficultyLeftToDistribute = difficulty;
@@ -126,8 +133,51 @@ public class WaveManager : MonoBehaviour
                 }
             }
 
+            List<EnemySpawnInfo> bossFilteredSpawnOptions = new List<EnemySpawnInfo>();
+           
+            if (includeBosses)
+            {
+                //if it is a boss round check if there is a boss option
+                bool hasBossOption = false;
+                foreach (EnemySpawnInfo enemySpawnInfo in difficultyPossibleSpawnOptions)
+                {
+                    if (enemySpawnInfo.enemyType == EnemySpawnInfo.EnemyType.Boss)
+                    {
+                        hasBossOption = true;
+                    }
+                }
+                //if there is, only include the boss options
+                if(hasBossOption)
+                {
+                    foreach (EnemySpawnInfo enemySpawnInfo in difficultyPossibleSpawnOptions)
+                    {
+                        if (enemySpawnInfo.enemyType == EnemySpawnInfo.EnemyType.Boss)
+                        {
+                            bossFilteredSpawnOptions.Add(enemySpawnInfo);
+                        }
+                    }
+                }
+                //otherwise just use the same list
+                else
+                {
+                    bossFilteredSpawnOptions = difficultyPossibleSpawnOptions;
+                }
+            }
+            //if it is not a boss round filter out all boss options
+            else
+            {
+                foreach (EnemySpawnInfo enemySpawnInfo in difficultyPossibleSpawnOptions)
+                {
+                    if (enemySpawnInfo.enemyType != EnemySpawnInfo.EnemyType.Boss)
+                    {
+                        bossFilteredSpawnOptions.Add(enemySpawnInfo);
+                    }
+                }
+            }
+            
+
             //if there are no options to spawn, quit out 
-            if(difficultyPossibleSpawnOptions.Count == 0)
+            if(bossFilteredSpawnOptions.Count == 0)
             {
                 difficultyLeftToDistribute = 0;
             }
