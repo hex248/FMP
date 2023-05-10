@@ -5975,12 +5975,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: enemySpawnOptions.Array.data[1].enemyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.data[1].enemyPrefab
       value: 
       objectReference: {fileID: 2826765272859676530, guid: 9522a10b1f034c44fb65e5f3d0ebb550, type: 3}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.data[1].difficultyCost
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: enemySpawnOptions.Array.data[1].minRoundNumberToSpawn
