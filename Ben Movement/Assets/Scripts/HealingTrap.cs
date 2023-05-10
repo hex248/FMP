@@ -9,16 +9,25 @@ public class HealingTrap : MonoBehaviour
     [Header("Visuals")]
     public GameObject[] lights;
     public GameObject visuals;
+    [SerializeField] GameObject healPack;
+    [SerializeField] float cooldown;
+    float timeSinceHealingUsed;
+    float targetScale;
+
     Vector3 towerPos;
+    bool hasHealing;
     void Start()
     {
         AM = FindObjectOfType<AudioManager>();
         towerPos = visuals.transform.position;
         StartCoroutine(SpawnTurret());
+        targetScale = 2f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!hasHealing)
+            return;
         if (other.CompareTag("Player Trigger"))
         {
             // play healing sound in SFX Channel 1
@@ -27,7 +36,35 @@ public class HealingTrap : MonoBehaviour
                 AM.PlayInChannel("healing-trap_heal", ChannelType.SFX, 1);
             }
             other.GetComponent<PlayerTrigger>().health.Heal(1);
+            hasHealing = false;
+            targetScale = 0f;
+
         }
+    }
+
+    void Update()
+    {
+        healPack.transform.localScale = Vector3.MoveTowards(healPack.transform.localScale, targetScale * Vector3.one, Time.deltaTime * 10f);
+        if (!hasHealing)
+        {
+            timeSinceHealingUsed += Time.deltaTime;
+            if(timeSinceHealingUsed >= cooldown)
+            {
+                RespawnHealing();
+                
+            }
+            
+        }
+        else
+        {
+            timeSinceHealingUsed = 0f;
+        }
+    }
+
+    void RespawnHealing()
+    {
+        hasHealing = true;
+        targetScale = 2f;
     }
 
     IEnumerator SpawnTurret()

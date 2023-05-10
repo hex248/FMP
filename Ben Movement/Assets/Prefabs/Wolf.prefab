@@ -477,7 +477,7 @@ MonoBehaviour:
   hitboxSize: {x: 0.9, y: 1.45, z: 2}
   attackLayerMask:
     serializedVersion: 2
-    m_Bits: 65601
+    m_Bits: 65536
   attackForce: 5
   wolfVisuals: {fileID: 7704235921465295036}
   maxAttackRange: 3.5
@@ -485,7 +485,7 @@ MonoBehaviour:
   targetPlayer: 1
   raycastLayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 65600
 --- !u!65 &1577664589033795166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   maxPlayerTrackingRange: 12
   raycastLayer:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 65600
   targetsOnHit: 0
   alertObject: {fileID: 5610744101281308897}
   alertScaleCurve:
