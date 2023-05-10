@@ -99,10 +99,13 @@ public class WolfController : MonoBehaviour
         RaycastHit hit;
         float minDistanceToTargetCollider = Mathf.Infinity;
         Vector3 raycastStart = transform.position + new Vector3(0f, 0.5f, 0f);
-        Physics.Raycast(raycastStart, directionToTarget, out hit, Mathf.Infinity, raycastLayer);
+        Physics.Raycast(raycastStart, directionToTarget, out hit, Mathf.Infinity, raycastLayer, QueryTriggerInteraction.Ignore);
+
+
 
         if (hit.collider != null)
         {
+            
             targetIsInDirectView = (hit.collider.gameObject == currentTarget);
             minDistanceToTargetCollider = (hit.point - transform.position).magnitude;
         }
@@ -254,7 +257,9 @@ public class WolfController : MonoBehaviour
 
     void RotateTowardsTarget()
     {
-        Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+        Quaternion targetRotation = Quaternion.identity;
+        if (moveDirection.magnitude >= 0f)
+            targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
 
         rotationalDirection = Quaternion.Lerp(wolfVisuals.transform.rotation, targetRotation, moveRotationSpeed * Time.deltaTime);
         transform.rotation = rotationalDirection;
