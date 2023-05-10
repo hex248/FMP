@@ -748,6 +748,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6b66a70d-0a55-4787-ae26-9d8eae800b5f
     m_ActionName: Player/Player Cycle Right[/XInputControllerWindows/rightShoulder,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 62c28b82-ff02-4120-88fc-55e6adc35ee5
+    m_ActionName: Player/Build[/Keyboard/x,/DualShock4GamepadHID/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
@@ -770,7 +774,7 @@ MonoBehaviour:
   dashTime: 0.2
   environmentLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 262208
   dashCheckRadius: 0.01
   dashCheckResolution: 0.01
   playerColliderRadius: 0.3
@@ -825,6 +829,7 @@ MonoBehaviour:
   interacting: 0
   cycleLeftPressed: 0
   cycleRightPressed: 0
+  building: 0
   playerVisuals: {fileID: 4774828045323943578}
   squashAmount: 0
   playerNumber: 1
