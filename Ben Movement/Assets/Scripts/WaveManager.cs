@@ -36,6 +36,9 @@ public class WaveManager : MonoBehaviour
     PlayerManager playerManager;
     DayNightCycleScript dayNight;
 
+    [Header("Bed Settings")]
+    [SerializeField] Bed bed;
+
 
 
     private void Start()
@@ -63,6 +66,7 @@ public class WaveManager : MonoBehaviour
             timeSinceRoundStart += Time.deltaTime;
             if (allEnemiesDead)
             {
+                bed.FullHeal();
                 EnterGrace();
             }
         }

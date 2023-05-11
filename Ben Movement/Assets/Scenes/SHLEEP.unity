@@ -1436,6 +1436,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350947729}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &352941279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+  m_PrefabInstance: {fileID: 2065625928}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4804cfc857cae7c40ad940ad0bbb5614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &355072589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6097,6 +6108,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
+      propertyPath: bed
+      value: 
+      objectReference: {fileID: 352941279}
+    - target: {fileID: 2063952455067125895, guid: 1f607e6224014a0428de7dfa7a1f87a2, type: 3}
       propertyPath: roundLength
       value: 10
       objectReference: {fileID: 0}
@@ -7446,6 +7461,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2652853934984067040, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
       propertyPath: m_AffectedAgents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2652853934984067052, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
