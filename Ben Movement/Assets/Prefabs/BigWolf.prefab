@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 724161253}
   - component: {fileID: 5922836131176838308}
   m_Layer: 11
-  m_Name: Big Wolf
+  m_Name: BigWolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2369430c932ce1748aeb8473d7f9e792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 100
+  maximumHealth: 300
   currentHealth: 0
   dissolveActive: 1
   maxDamageDissolveAmount: 0.3
@@ -460,13 +460,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaddf015be2dc34789ad23a1664f380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  moveRotationSpeed: 5
-  aimRotationSpeed: 10
+  moveSpeed: 1.5
+  moveRotationSpeed: 4
+  aimRotationSpeed: 6
   inRangeMoveSpeed: 0
   stunMaxSpeedChange: 0.2
   attackTime: 0.375
-  attackMoveDistance: 4.5
+  attackMoveDistance: 7
   attackMoveTime: 0.375
   damageTime: 0.375
   biteSFXDelay: 0.25
@@ -480,7 +480,7 @@ MonoBehaviour:
     m_Bits: 65600
   attackForce: 5
   wolfVisuals: {fileID: 7704235921465295036}
-  maxAttackRange: 3.5
+  maxAttackRange: 6.5
   currentTarget: {fileID: 0}
   targetPlayer: 1
   raycastLayer:
@@ -497,8 +497,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.8, z: 1.4247212}
-  m_Center: {x: 0, y: 1.15, z: 0.06480813}
+  m_Size: {x: 0.9, y: 1.8, z: 1.6795051}
+  m_Center: {x: 0, y: 1.15, z: -0.062583774}
 --- !u!114 &724161248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,7 +666,7 @@ Transform:
   m_GameObject: {fileID: 7704235921465295036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.2}
   m_Children:
   - {fileID: 3639698405639444505}
   - {fileID: 3346502488342892507}
@@ -848,7 +848,7 @@ PrefabInstance:
     - target: {fileID: -924529989670932514, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ce4c35a669677be42b9c66d64c925ebf, type: 2}
+      objectReference: {fileID: 2100000, guid: e3c84d062acc4f14db6b201065e5446d, type: 2}
     - target: {fileID: -91681808587120018, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -872,7 +872,7 @@ PrefabInstance:
     - target: {fileID: 2321523695958950486, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0564e2fa4bc0b5e489932b57e8d0a546, type: 2}
+      objectReference: {fileID: 2100000, guid: 87c9b197af03f0d4e8e5721e004ce5c6, type: 2}
     - target: {fileID: 2695344258441088040, guid: d3f400c657cb9dd4b91a402d72b51f37, type: 3}
       propertyPath: m_Layer
       value: 11
