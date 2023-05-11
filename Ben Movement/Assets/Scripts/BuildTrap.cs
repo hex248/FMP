@@ -26,6 +26,7 @@ public class BuildTrap : MonoBehaviour
     public float interactCooldown = 1.0f;
     public float cycleCooldown = 0.25f;
 
+    public PlayerTrigger interactingPlayerTrigger;
     public PlayerController interactingPlayer;
 
     bool hasBeenBuilt = false;
@@ -42,6 +43,20 @@ public class BuildTrap : MonoBehaviour
 
     private void Update()
     {
+        if (interactingPlayer != null)
+        {
+            // set control icons
+            Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").type);
+            Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray());
+            var bindings = interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray();
+            foreach (var bind in bindings)
+            {
+                Debug.Log(bind.path);
+            }
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindingMask);
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings[0]);
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").activeControl.path);
+        }
         timeSinceInteract += Time.deltaTime;
         timeSinceCycleLeft += Time.deltaTime;
         timeSinceCycleRight += Time.deltaTime;
@@ -72,6 +87,7 @@ public class BuildTrap : MonoBehaviour
             if (interactingPlayer == null)
             {
                 PlayerTrigger pt = other.GetComponent<PlayerTrigger>();
+                interactingPlayerTrigger = pt;
                 interactingPlayer = pt.controller;
                 pt.controller.inInteractRange = true;
             }
@@ -148,6 +164,7 @@ public class BuildTrap : MonoBehaviour
 
 
             HideHolograms();
+            interactingPlayerTrigger = null;
             interactingPlayer = null;
             
         }
