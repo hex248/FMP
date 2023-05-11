@@ -86,6 +86,7 @@ public class Bed : MonoBehaviour
     public void FullHeal()
     {
         currentHealth = maximumHealth;
+        TakeDamage(0, this.gameObject);
     }
 
     public void Die()
