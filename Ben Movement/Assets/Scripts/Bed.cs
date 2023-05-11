@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Bed : MonoBehaviour
 {
@@ -81,6 +82,11 @@ public class Bed : MonoBehaviour
             
 
         }
+    }
+
+    public void SwitchScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     public void FullHeal()

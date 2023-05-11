@@ -7712,15 +7712,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
       propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
-      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 352941279}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
       propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Bed, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: BedDead
+      objectReference: {fileID: 0}
+    - target: {fileID: 2652853934984067042, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
+      propertyPath: deathEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2652853934984067052, guid: c4a47fc8b9b58b047835c483a733ee7f, type: 3}
       propertyPath: m_Name
