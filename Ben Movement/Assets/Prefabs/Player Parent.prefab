@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attatchedPlayer: {fileID: 7400810581997761881}
+  setting: 2
 --- !u!1 &349178219052224104
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attatchedPlayer: {fileID: 7400810581997761881}
+  setting: 3
 --- !u!1 &398658816614804263
 GameObject:
   m_ObjectHideFlags: 0
@@ -4504,6 +4506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attatchedPlayer: {fileID: 7400810581997761881}
+  setting: 1
 --- !u!1 &6680074705661835502
 GameObject:
   m_ObjectHideFlags: 0
@@ -5423,6 +5426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attatchedPlayer: {fileID: 7400810581997761881}
+  setting: 4
 --- !u!1 &7342369439440340530
 GameObject:
   m_ObjectHideFlags: 0
@@ -6185,6 +6189,10 @@ MonoBehaviour:
   trails:
   - {fileID: 5869364708815656114}
   - {fileID: 1980792252082545253}
+  healthModifier: 0
+  speedMultiplier: 0
+  damageMultiplier: 0
+  invincibilityTimeMultiplier: 0
 --- !u!1 &8341950303912210966
 GameObject:
   m_ObjectHideFlags: 0
@@ -7186,19 +7194,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134977, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -7666,7 +7674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417742331850009, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Value
-      value: 1.0000015
+      value: 1.0000007
       objectReference: {fileID: 0}
     - target: {fileID: 2727417742331850009, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Colors.m_PressedColor.b

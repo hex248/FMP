@@ -27,6 +27,13 @@ public class Player : MonoBehaviour
     public Renderer[] eyes;
     public GameObject[] trails;
 
+    [Header("Player Difficulty Modifiers")]
+    public int healthModifier;
+    public float speedMultiplier;
+    public float damageMultiplier;
+    public float invincibilityTimeMultiplier;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -42,11 +49,16 @@ public class Player : MonoBehaviour
         cameraFollow = GetComponentInChildren<CameraFollow>();
         playerCamera = cameraFollow.GetComponentInChildren<Camera>();
         playerHealth = GetComponentInChildren<PlayerHealth>();
+
+        healthModifier = 0;
+        speedMultiplier = 1f;
+        damageMultiplier = 1f;
+        invincibilityTimeMultiplier = 1f;
     }
 
     public void SetHat(int index)
     {
-        foreach(GameObject g in hats)
+        foreach (GameObject g in hats)
         {
             g.SetActive(false);
         }
@@ -83,6 +95,41 @@ public class Player : MonoBehaviour
         foreach (GameObject m in trails)
         {
             m.GetComponent<TrailRenderer>().material = mat;
+        }
+    }
+
+    public void ChangeDifficultySetting(Setting setting, int modfier)
+    {
+        switch (setting)
+        {
+            case Setting.Health:
+                healthModifier = modfier;
+                return;
+
+            default:
+                return;
+        }
+    }
+
+    public void ChangeDifficultySetting(Setting setting, float multiplier)
+    {
+        switch (setting)
+        {
+
+            case Setting.Speed:
+                speedMultiplier = multiplier;
+                return;
+
+            case Setting.Damage:
+                damageMultiplier = multiplier;
+                return;
+
+            case Setting.Invincibility:
+                invincibilityTimeMultiplier = multiplier;
+                return;
+
+            default:
+                return;
         }
     }
 }
