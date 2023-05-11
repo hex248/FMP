@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
     public bool cycleLeftPressed = false;
     public bool cycleRightPressed = false;
     public bool building = false;
+    public bool inInteractRange = false;
 
 
     [Header("Visuals Settings")]
@@ -410,7 +411,7 @@ public class PlayerController : MonoBehaviour
     {
         bool triggered = context.action.triggered;
 
-        if (triggered)
+        if (triggered && inInteractRange)
         {
             if (!isMovementLocked() && !isActionBuffered())
             {
