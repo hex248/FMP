@@ -508,7 +508,7 @@ public class PlayerController : MonoBehaviour
         }
 
         
-        Vector3 desiredVelocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z * speed);
+        Vector3 desiredVelocity = new Vector3(direction.x * speed * playerParent.speedMultiplier, rb.velocity.y, direction.z * speed * playerParent.speedMultiplier);
         //TODO - Smooth out input rather than just setting directly? Might not be what we want though
         rb.velocity = desiredVelocity;
 
@@ -646,7 +646,7 @@ public class PlayerController : MonoBehaviour
             EnemyHealth enemy = hitColliders[i].gameObject.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.TakeDamage(meleeCombo[currentMeleeComboStage].damage, playerParent.gameObject);
+                enemy.TakeDamage(meleeCombo[currentMeleeComboStage].damage * playerParent.damageMultiplier, playerParent.gameObject);
             }
         }
     }

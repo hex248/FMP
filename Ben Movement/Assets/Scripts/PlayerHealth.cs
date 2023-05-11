@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -44,8 +45,8 @@ public class PlayerHealth : MonoBehaviour
     float vignetteSmoothSpeed;
     float currentTargetVignetteGradient;
     float currentTargetVignetteIntensity;
- 
 
+    int hpFromFull;
 
 
     private void Start()
@@ -63,6 +64,21 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
+        if (maxHitPoints != (5 + player.healthModifier))
+        {
+            //max hp changed
+            maxHitPoints = (5 + player.healthModifier);
+            currentHitPoints = maxHitPoints;
+        }
+
+        if (invincibilityTime != 0.6 * player.invincibilityTimeMultiplier)
+        {
+            //invincibility time changed 
+            invincibilityTime = 0.6f * player.invincibilityTimeMultiplier;
+        }
+
+
+
         if (invincible)
         {
             timeSinceHit += Time.deltaTime;
