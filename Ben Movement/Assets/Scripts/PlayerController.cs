@@ -558,7 +558,6 @@ public class PlayerController : MonoBehaviour
     public void OnMeleeAttackButtonPressed(InputAction.CallbackContext context)
     {
         bool triggered = context.action.triggered;
-        Debug.Log("ATTACK!");
         if (triggered)
         {
             if(!isMovementLocked() && !isActionBuffered())
