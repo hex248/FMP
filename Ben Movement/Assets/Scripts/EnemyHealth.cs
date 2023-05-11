@@ -76,7 +76,7 @@ public class EnemyHealth : MonoBehaviour
             Die();
             isDead = true;
         }
-        else
+        else if(!isDead)
         {
             healthFactor = 1 - currentHealth / maximumHealth;
 

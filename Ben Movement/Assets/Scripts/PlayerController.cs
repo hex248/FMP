@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
         movementMeleeAttackLocked = isMeleeAttacking;
         movementRangedAttackLocked = isRangedAttacking || isRangedAttackCharging;
 
-
+        
 
         if (!isMovementLocked() && !isActionBuffered() && isFocusing == false)
         {
@@ -247,7 +247,8 @@ public class PlayerController : MonoBehaviour
             {
                 playerAnim.isMoving = true;
 
-                if (neededMeleeComboReset)
+                
+                if (neededMeleeComboReset && lastMeleeAttackingTime >= 0.3f)
                 {
                     neededMeleeComboReset = false;
                     ResetMeleeCombo();
@@ -266,7 +267,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerAnim.isMoving = true;
 
-                if (neededMeleeComboReset)
+                if (neededMeleeComboReset && lastMeleeAttackingTime >= 0.3f)
                 {
                     neededMeleeComboReset = false;
                     ResetMeleeCombo();
@@ -292,7 +293,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (meleeAttackBuffered)
             {
-                StartMeleeAttack();
+                //StartMeleeAttack();
             }
             else if (rangedAttackBuffered)
             {
@@ -557,11 +558,13 @@ public class PlayerController : MonoBehaviour
     public void OnMeleeAttackButtonPressed(InputAction.CallbackContext context)
     {
         bool triggered = context.action.triggered;
+        Debug.Log("ATTACK!");
         if (triggered)
         {
             if(!isMovementLocked() && !isActionBuffered())
             {
                 StartMeleeAttack();
+                
             }
             else
             {
