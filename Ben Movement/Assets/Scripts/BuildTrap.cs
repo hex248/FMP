@@ -73,6 +73,7 @@ public class BuildTrap : MonoBehaviour
             {
                 PlayerTrigger pt = other.GetComponent<PlayerTrigger>();
                 interactingPlayer = pt.controller;
+                pt.controller.inInteractRange = true;
             }
         }
     }
@@ -141,6 +142,10 @@ public class BuildTrap : MonoBehaviour
             if (other.GetComponent<PlayerTrigger>().controller != interactingPlayer) return;
             HideInteractControls();
             HideHologramControls();
+
+
+            interactingPlayer.inInteractRange = false;
+
 
             HideHolograms();
             interactingPlayer = null;
