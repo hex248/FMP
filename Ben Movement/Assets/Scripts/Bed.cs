@@ -83,6 +83,11 @@ public class Bed : MonoBehaviour
         }
     }
 
+    public void FullHeal()
+    {
+        currentHealth = maximumHealth;
+    }
+
     public void Die()
     {
         if (dissolveActive)
