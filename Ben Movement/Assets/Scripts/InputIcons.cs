@@ -67,7 +67,6 @@ public class InputIcons : MonoBehaviour
                 case "rightStickPress": return rightStickPress;
                 default: return null;
             }
-            return null;
         }
     }
 }

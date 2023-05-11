@@ -46,16 +46,50 @@ public class BuildTrap : MonoBehaviour
         if (interactingPlayer != null)
         {
             // set control icons
-            Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").type);
-            Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray());
-            var bindings = interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray();
-            foreach (var bind in bindings)
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.controlSchemes);
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.devices);
+            string deviceName = "";
+            string deviceManufacturer = "";
+            string controlPath = "";
+            var devices = interactingPlayerTrigger.player.playerInput.currentActionMap.devices;
+            foreach (var device in devices)
             {
-                Debug.Log(bind.path);
+                deviceName = device.name;
+                deviceManufacturer = device.description.manufacturer;
             }
-            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindingMask);
-            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings[0]);
-            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").activeControl.path);
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").type);
+            var bindings = interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray();
+            foreach(var binding in bindings)
+            {
+                if (binding.path.Contains(deviceName))
+                {
+                    controlPath = binding.path.Split('/')[1];
+                }
+            }
+            Debug.Log($"{deviceName}: {controlPath}");
+
+            InputIcons.Icons icons = InputIcons.instance.keyboard; // keyboard is default
+
+            switch (deviceName)
+            {
+                case "Keyboard":
+                    icons = InputIcons.instance.keyboard;
+                    break;
+                case "Gamepad":
+                    switch(deviceManufacturer)
+                    {
+                        case "Sony Interactive Entertainment":
+                            icons = InputIcons.instance.ps4;
+                            break;
+                        case "Microsoft":
+                            icons = InputIcons.instance.xbox;
+                            break;
+                    }
+                break;
+            }
+
+            Sprite interactSprite = icons.GetSprite(controlPath);
+            Debug.Log(interactSprite);
         }
         timeSinceInteract += Time.deltaTime;
         timeSinceCycleLeft += Time.deltaTime;
