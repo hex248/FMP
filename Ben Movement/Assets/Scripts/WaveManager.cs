@@ -55,7 +55,6 @@ public class WaveManager : MonoBehaviour
     {
         if(inGrace)
         {
-            bed.FullHeal();
             timeSinceGraceStart += Time.deltaTime;
             if(timeSinceGraceStart >= gracePeriodLength)
             {
@@ -67,6 +66,7 @@ public class WaveManager : MonoBehaviour
             timeSinceRoundStart += Time.deltaTime;
             if (allEnemiesDead)
             {
+                bed.FullHeal();
                 EnterGrace();
             }
         }
