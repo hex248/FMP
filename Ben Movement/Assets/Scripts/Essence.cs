@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Essence : MonoBehaviour
 {
     public static Essence instance;
     public int maxBalance;
     public int balance;
+
+    [SerializeField] TextMeshProUGUI essenceTextUI;
     public int Balance
     {
         get { return balance; }
@@ -17,5 +20,10 @@ public class Essence : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+    }
+
+    private void Update()
+    {
+        essenceTextUI.text = $"{balance}";
     }
 }

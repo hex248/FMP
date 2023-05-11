@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
 
         ResetMeleeCombo();
 
+
         isDead = false;
     }
     private void FixedUpdate()
@@ -194,7 +195,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(isDead)
+        {
+            Vector3 moveDirection = Vector3.zero;
+            DoMovement(moveDirection, 0f);
+            rb.isKinematic = true;
 
+        }
+        else
+        {
+            rb.isKinematic = false;
+        }
 
         if (isFocusing)
         {

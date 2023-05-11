@@ -7186,19 +7186,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134976, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2727417740366134977, guid: d94f02c9f9fce0a109fccf04f0fc74e6, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
@@ -8590,6 +8590,10 @@ PrefabInstance:
       propertyPath: focusReticule
       value: 
       objectReference: {fileID: 4391128745792466567}
+    - target: {fileID: 4516365663885039616, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
+      propertyPath: deadConstraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 5199998641288563447, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -8716,27 +8720,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8606789150455874014, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: 0.0000016251579
+      value: 0.0000016372651
       objectReference: {fileID: 0}
     - target: {fileID: 8606789150455874014, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.00021743774
+      value: 0.00021738792
       objectReference: {fileID: 0}
     - target: {fileID: 8606789150455874014, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: -0.00021594507
+      value: -0.00023122388
       objectReference: {fileID: 0}
     - target: {fileID: 8606789150455874014, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.0067775417
+      value: 0.00677762
       objectReference: {fileID: 0}
     - target: {fileID: 8606789150455874014, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.0057423795
+      value: 0.005742429
       objectReference: {fileID: 0}
     - target: {fileID: 8606789150455874014, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.0022935944
+      value: 0.002308873
       objectReference: {fileID: 0}
     - target: {fileID: 8808715163656603260, guid: f6993c39605f3df109e8a8d5020edba3, type: 3}
       propertyPath: m_Materials.Array.data[0]
