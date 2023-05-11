@@ -36,6 +36,9 @@ public class WaveManager : MonoBehaviour
     PlayerManager playerManager;
     DayNightCycleScript dayNight;
 
+    [Header("Bed Settings")]
+    [SerializeField] Bed bed;
+
 
 
     private void Start()
@@ -52,6 +55,7 @@ public class WaveManager : MonoBehaviour
     {
         if(inGrace)
         {
+            bed.FullHeal();
             timeSinceGraceStart += Time.deltaTime;
             if(timeSinceGraceStart >= gracePeriodLength)
             {
