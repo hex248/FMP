@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealthBar : MonoBehaviour
 {
     int health;
+    
     public int Health
     {
         get
@@ -30,6 +31,8 @@ public class PlayerHealthBar : MonoBehaviour
     Player player;
     PlayerHealth playerHealth;
 
+    List<GameObject> toRemove = new List<GameObject>();
+
 
     void UpdateHealthBar()
     {
@@ -42,13 +45,13 @@ public class PlayerHealthBar : MonoBehaviour
                 currentHitPointObjects.Add(loopTransform.gameObject);
             }
         }*/
-
-        int loopLength = Mathf.Max(currentHitPointObjects.Count, health);
+        toRemove = new List<GameObject>();
+        int loopLength = Mathf.Max(currentHitPointObjects.Count, Health);
         for(int i = 0; i < loopLength; i++)
         {
             if(i < currentHitPointObjects.Count)
             {
-                if(i < health)
+                if(i < Health)
                 {
                     //keep object
                 }
@@ -56,11 +59,11 @@ public class PlayerHealthBar : MonoBehaviour
                 else
                 {
                     Destroy(currentHitPointObjects[i]);
-                    currentHitPointObjects.Remove(currentHitPointObjects[i]);
+                    toRemove.Add(currentHitPointObjects[i]);
                 }
 
             }
-            else if(i < health)
+            else if(i < Health)
             {
                 GameObject newHP = Instantiate(hitPointPrefab);
                 newHP.transform.SetParent(transform);
@@ -68,8 +71,14 @@ public class PlayerHealthBar : MonoBehaviour
             }
         }
 
+        foreach(GameObject remove in toRemove)
+        {
+            currentHitPointObjects.Remove(remove);
+        }
+
 
     }
+
 
     public void Init(Player inPlayer)
     {
