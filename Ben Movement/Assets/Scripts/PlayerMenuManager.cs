@@ -16,6 +16,11 @@ public class PlayerMenuManager : MonoBehaviour
 
     [SerializeField] AnimationCurve playerJoinAnimationSpeed;
 
+    bool onStartingScreen = true;
+
+    [SerializeField] GameObject startingScreen;
+    [SerializeField] GameObject joinScreen;
+
     int unreadyPlayers = 0;
     bool startingGame;
 
@@ -25,6 +30,13 @@ public class PlayerMenuManager : MonoBehaviour
         StartCoroutine(SlideInVisual(player.playerIndex));
         players.Add(player);
         unreadyPlayers++;
+
+        if(onStartingScreen)
+        {
+            onStartingScreen = false;
+            startingScreen.SetActive(false);
+            joinScreen.SetActive(true);
+        }
 
         PlayerInput playerInput = player.GetComponentInChildren<PlayerInput>();
 
@@ -125,7 +137,10 @@ public class PlayerMenuManager : MonoBehaviour
     private void Start()
     {
         startingGame = false;
-        foreach(GameObject playerJoinVisual in playerJoinUIVisuals)
+        onStartingScreen = true;
+        startingScreen.SetActive(true);
+        joinScreen.SetActive(false);
+        foreach (GameObject playerJoinVisual in playerJoinUIVisuals)
         {
             playerJoinVisual.SetActive(false);
         }
