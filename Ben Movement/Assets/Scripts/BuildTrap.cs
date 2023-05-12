@@ -32,10 +32,14 @@ public class BuildTrap : MonoBehaviour
 
     bool hasBeenBuilt = false;
 
-    public Sprite interactSprite;
-    public Sprite cycleLeftSprite;
-    public Sprite cycleRightSprite;
-    public Sprite buildSprite;
+    Sprite interactSprite;
+    [SerializeField] Renderer interactRenderer; 
+    Sprite cycleLeftSprite;
+    [SerializeField] Renderer cycleLeftRenderer;
+    Sprite cycleRightSprite;
+    [SerializeField] Renderer cycleRightRenderer;
+    Sprite buildSprite;
+    [SerializeField] Renderer buildRenderer;
 
     private void Start()
     {
@@ -89,16 +93,23 @@ public class BuildTrap : MonoBehaviour
                     icons = InputIcons.instance.keyboard;
                     break;
                 case "Xbox Controller":
-                    icons = InputIcons.instance.keyboard;
+                    icons = InputIcons.instance.xbox;
                     break;
                 case "Playstation":
-                    icons = InputIcons.instance.keyboard;
+                    icons = InputIcons.instance.ps4;
+                    break;
+                default:
+                    icons = InputIcons.instance.xbox;
                     break;
             }
             interactSprite = icons.GetSprite(player.interactPath);
+            interactRenderer.material.mainTexture = interactSprite.texture;
             cycleLeftSprite = icons.GetSprite(player.cycleLeftPath);
+            cycleLeftRenderer.material.mainTexture = cycleLeftSprite.texture;
             cycleRightSprite = icons.GetSprite(player.cycleRightPath);
+            cycleRightRenderer.material.mainTexture = cycleRightSprite.texture;
             buildSprite = icons.GetSprite(player.buildPath);
+            buildRenderer.material.mainTexture = buildSprite.texture;
         }
         timeSinceInteract += Time.deltaTime;
         timeSinceCycleLeft += Time.deltaTime;

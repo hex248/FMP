@@ -662,7 +662,12 @@ MonoBehaviour:
   costs: 050000000300000008000000
   interactCooldown: 0.35
   cycleCooldown: 0.15
+  interactingPlayerTrigger: {fileID: 0}
   interactingPlayer: {fileID: 0}
+  interactRenderer: {fileID: 6388796308350406606}
+  cycleLeftRenderer: {fileID: 2910782149186045173}
+  cycleRightRenderer: {fileID: 3013481810152778903}
+  buildRenderer: {fileID: 4986577643776208212}
 --- !u!1 &6353503525631192066
 GameObject:
   m_ObjectHideFlags: 0
