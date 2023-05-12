@@ -1334,9 +1334,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048
-  projectileHomingAmount: 6
-  projectileMaxVelocity: 10
-  projectileVelocity: 10
+  projectileHomingAmount: 24
+  projectileMaxVelocity: 100
+  projectileVelocity: 100
   projectileLifetime: 5
   shootBufferTime: 1
   damage: 50
@@ -1353,13 +1353,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.22083333
     - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2.418524
-      outSlope: -2.418524
+      time: 0.98568726
+      value: 0.99972534
+      inSlope: -0.0054141986
+      outSlope: -0.0054141986
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.04583335
+      inWeight: 0.23686807
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
