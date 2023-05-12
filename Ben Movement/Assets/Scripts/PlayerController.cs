@@ -750,7 +750,7 @@ public class PlayerController : MonoBehaviour
         {
             if(currentRangedAttackChargeFactor != 1f)
             {
-                projectileScript.damage = rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
+                projectileScript.damage = playerParent.damageMultiplier * rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.force = rangedAttack.baseForce * Mathf.Lerp(1f, rangedAttack.fullChargeForceMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.scaleMultiplier = Mathf.Lerp(1f, rangedAttack.fullChargeScaleFactor, currentRangedAttackChargeFactor);
                 projectileScript.projectileSpeed *= Mathf.Lerp(1f, rangedAttack.fullChargeSpeedMultiplier, currentRangedAttackChargeFactor);
@@ -758,7 +758,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 //mabye add bonus?
-                projectileScript.damage = rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
+                projectileScript.damage = playerParent.damageMultiplier * rangedAttack.baseDamage * Mathf.Lerp(1f, rangedAttack.fullChargeDamageMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.force = rangedAttack.baseForce * Mathf.Lerp(1f, rangedAttack.fullChargeForceMultiplier, currentRangedAttackChargeFactor);
                 projectileScript.scaleMultiplier = Mathf.Lerp(1f, rangedAttack.fullChargeScaleFactor, currentRangedAttackChargeFactor);
                 projectileScript.projectileSpeed *= Mathf.Lerp(1f, rangedAttack.fullChargeSpeedMultiplier, currentRangedAttackChargeFactor);
