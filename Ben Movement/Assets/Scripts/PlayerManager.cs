@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.InputSystem.Samples.RebindUI;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerManager : MonoBehaviour
@@ -352,7 +353,7 @@ public class PlayerManager : MonoBehaviour
         playersRemaining--;
         if(playersRemaining <= 0)
         {
-            EndGame();
+            EndGame("Credits");
         }
     }
 
@@ -369,10 +370,11 @@ public class PlayerManager : MonoBehaviour
             
     }
 
-    void EndGame()
+    public void EndGame(string sceneName)
     {
+        SceneManager.LoadScene(sceneName);
         //end game logic
-        Application.Quit();
+        //Application.Quit();
     }
 
 }
