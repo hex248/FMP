@@ -43,6 +43,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77ae4d416aeae94a87fd9fe4b2b5686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rebindableControls:
+    player1:
+      interactPath: buttonNorth
+      cycleLeftPath: leftShoulder
+      cycleRightPath: rightShoulder
+      buildPath: buttonWest
+    player2:
+      interactPath: buttonNorth
+      cycleLeftPath: leftShoulder
+      cycleRightPath: rightShoulder
+      buildPath: buttonWest
+    player3:
+      interactPath: buttonNorth
+      cycleLeftPath: leftShoulder
+      cycleRightPath: rightShoulder
+      buildPath: buttonWest
+    player4:
+      interactPath: buttonNorth
+      cycleLeftPath: leftShoulder
+      cycleRightPath: rightShoulder
+      buildPath: buttonWest
   ps4:
     buttonSouth: {fileID: 21300000, guid: 2da2d15ce082e12448ac493c55a33f0f, type: 3}
     buttonNorth: {fileID: 21300000, guid: 47b0c8cbcd450124abdb1b62fb7f5806, type: 3}
