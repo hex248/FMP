@@ -1,0 +1,513 @@
+ffmpeg version git-2019-11-13-a7245ad Copyright (c) 2000-2019 the FFmpeg developers
+  built with gcc 9.2.1 (GCC) 20191010
+  configuration: --enable-gpl --enable-version3 --enable-sdl2 --enable-fontconfig --enable-gnutls --enable-iconv --enable-libass --enable-libdav1d --enable-libbluray --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libopus --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libtheora --enable-libtwolame --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libzimg --enable-lzma --enable-zlib --enable-gmp --enable-libvidstab --enable-libvorbis --enable-libvo-amrwbenc --enable-libmysofa --enable-libspeex --enable-libxvid --enable-libaom --enable-libmfx --enable-ffnvcodec --enable-cuvid --enable-d3d11va --enable-nvenc --enable-nvdec --enable-dxva2 --enable-avisynth --enable-libopenmpt --enable-amf
+  libavutil      56. 35.101 / 56. 35.101
+  libavcodec     58. 62.100 / 58. 62.100
+  libavformat    58. 35.100 / 58. 35.100
+  libavdevice    58.  9.100 / 58.  9.100
+  libavfilter     7. 66.100 /  7. 66.100
+  libswscale      5.  6.100 /  5.  6.100
+  libswresample   3.  6.100 /  3.  6.100
+  libpostproc    55.  6.100 / 55.  6.100
+Splitting the commandline.
+Reading option '-v' ... matched as option 'v' (set logging level) with argument 'debug'.
+Reading option '-nostdin' ... matched as option 'stdin' (enable or disable interaction on standard input) with argument 0.
+Reading option '-progress' ... matched as option 'progress' (write program-readable progress information) with argument 'C:/Users/Adit/AppData/Local/Temp/KritaFFmpegProgress.lcmkbn'.
+Reading option '-r' ... matched as option 'r' (set frame rate (Hz value, fraction or abbreviation)) with argument '24'.
+Reading option '-start_number' ... matched as AVOption 'start_number' with argument '0'.
+Reading option '-i' ... matched as input url with argument 'E:/FMP/Kazi's Stuffs/Animations/LaserFX%04d.png'.
+Reading option '-crf' ... matched as AVOption 'crf' with argument '23'.
+Reading option '-preset' ... matched as AVOption 'preset' with argument 'medium'.
+Reading option '-profile:v' ... matched as option 'profile' (set profile) with argument 'baseline'.
+Reading option '-pix_fmt' ... matched as option 'pix_fmt' (set pixel format) with argument 'yuv420p'.
+Reading option '-y' ... matched as option 'y' (overwrite output files) with argument '1'.
+Reading option 'E:/FMP/Kazi's Stuffs/Animations/Wake Up.mp4' ... matched as output url.
+Finished splitting the commandline.
+Parsing a group of options: global .
+Applying option v (set logging level) with argument debug.
+Applying option nostdin (enable or disable interaction on standard input) with argument 0.
+Applying option progress (write program-readable progress information) with argument C:/Users/Adit/AppData/Local/Temp/KritaFFmpegProgress.lcmkbn.
+[file @ 000001b27534df80] Setting default whitelist 'file,crypto'
+Applying option y (overwrite output files) with argument 1.
+Successfully parsed a group of options.
+Parsing a group of options: input url E:/FMP/Kazi's Stuffs/Animations/LaserFX%04d.png.
+Applying option r (set frame rate (Hz value, fraction or abbreviation)) with argument 24.
+Successfully parsed a group of options.
+Opening an input file: E:/FMP/Kazi's Stuffs/Animations/LaserFX%04d.png.
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0000.png' for reading
+[file @ 000001b275391980] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275399b40] Statistics: 48917 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0001.png' for reading
+[file @ 000001b2753a5d80] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b2753997c0] Statistics: 48917 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0002.png' for reading
+[file @ 000001b2753997c0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b2753998c0] Statistics: 48917 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0003.png' for reading
+[file @ 000001b275399880] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275399a80] Statistics: 57429 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0004.png' for reading
+[file @ 000001b275399a80] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275391980] Statistics: 57429 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0005.png' for reading
+[file @ 000001b275391980] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275391b80] Statistics: 57429 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0006.png' for reading
+[file @ 000001b275391b80] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275392c40] Statistics: 63735 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0007.png' for reading
+[file @ 000001b275392c40] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275392d40] Statistics: 63735 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0008.png' for reading
+[file @ 000001b275392d00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275392f00] Statistics: 63735 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0009.png' for reading
+[file @ 000001b275392f00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275392fc0] Statistics: 65142 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0010.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65142 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0011.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65142 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0012.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65007 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0013.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65007 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0014.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65007 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0015.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 66389 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0016.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 66389 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0017.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 66389 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0018.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65462 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0019.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65462 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0020.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 65462 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0021.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 62332 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0022.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 62332 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0023.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 62332 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0024.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0025.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0026.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0027.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0028.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0029.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0030.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0031.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0032.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0033.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0034.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0035.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0036.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0037.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0038.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0039.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0040.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0041.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0042.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0043.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0044.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0045.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0046.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0047.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0048.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0049.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0050.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0051.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0052.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0053.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0054.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0055.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0056.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0057.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0058.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0059.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0060.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0061.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0062.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0063.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0064.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0065.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0066.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0067.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0068.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0069.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0070.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0071.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0072.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0073.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0074.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0075.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0076.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0077.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0078.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0079.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0080.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0081.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0082.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0083.png' for reading
+[file @ 000001b275392fc0] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b275393180] Statistics: 59294 bytes read, 0 seeks
+[image2 @ 000001b27538e200] Probe buffer size limit of 5000000 bytes reached
+Input #0, image2, from 'E:/FMP/Kazi's Stuffs/Animations/LaserFX%04d.png':
+  Duration: 00:00:04.04, start: 0.000000, bitrate: N/A
+    Stream #0:0, 84, 1/25: Video: png, 1 reference frame, rgba(pc), 1920x1080 [SAR 3937:3937 DAR 16:9], 0/1, 25 fps, 25 tbr, 25 tbn, 25 tbc
+Successfully opened the file.
+Parsing a group of options: output url E:/FMP/Kazi's Stuffs/Animations/Wake Up.mp4.
+Applying option profile:v (set profile) with argument baseline.
+Applying option pix_fmt (set pixel format) with argument yuv420p.
+Successfully parsed a group of options.
+Opening an output file: E:/FMP/Kazi's Stuffs/Animations/Wake Up.mp4.
+[file @ 000001b2753a8000] Setting default whitelist 'file,crypto'
+Successfully opened the file.
+detected 6 logical cores
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> h264 (libx264))
+cur_dts is invalid st:0 (0) [init:0 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 6 times
+[graph 0 input from stream 0:0 @ 000001b2753a9480] Setting 'video_size' to value '1920x1080'
+[graph 0 input from stream 0:0 @ 000001b2753a9480] Setting 'pix_fmt' to value '26'
+[graph 0 input from stream 0:0 @ 000001b2753a9480] Setting 'time_base' to value '1/24'
+[graph 0 input from stream 0:0 @ 000001b2753a9480] Setting 'pixel_aspect' to value '3937/3937'
+[graph 0 input from stream 0:0 @ 000001b2753a9480] Setting 'sws_param' to value 'flags=2'
+[graph 0 input from stream 0:0 @ 000001b2753a9480] Setting 'frame_rate' to value '24/1'
+[graph 0 input from stream 0:0 @ 000001b2753a9480] w:1920 h:1080 pixfmt:rgba tb:1/24 fr:24/1 sar:3937/3937 sws_param:flags=2
+[format @ 000001b2753a5cc0] Setting 'pix_fmts' to value 'yuv420p'
+[auto_scaler_0 @ 000001b27614e6c0] Setting 'flags' to value 'bicubic'
+[auto_scaler_0 @ 000001b27614e6c0] w:iw h:ih flags:'bicubic' interl:0
+[format @ 000001b2753a5cc0] auto-inserting filter 'auto_scaler_0' between the filter 'Parsed_null_0' and the filter 'format'
+[AVFilterGraph @ 000001b276377800] query_formats: 4 queried, 2 merged, 1 already done, 0 delayed
+[auto_scaler_0 @ 000001b27614e6c0] w:1920 h:1080 fmt:rgba sar:3937/3937 -> w:1920 h:1080 fmt:yuv420p sar:1/1 flags:0x4
+[libx264 @ 000001b2753a6240] using mv_range_thread = 56
+[libx264 @ 000001b2753a6240] using SAR=1/1
+[libx264 @ 000001b2753a6240] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX XOP FMA3 BMI1
+[libx264 @ 000001b2753a6240] profile Constrained Baseline, level 4.0, 4:2:0, 8-bit
+[libx264 @ 000001b2753a6240] 264 - core 158 - H.264/MPEG-4 AVC codec - Copyleft 2003-2019 - http://www.videolan.org/x264.html - options: cabac=0 ref=3 deblock=1:0:0 analyse=0x1:0x111 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=9 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=0 keyint=250 keyint_min=24 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to 'E:/FMP/Kazi's Stuffs/Animations/Wake Up.mp4':
+  Metadata:
+    encoder         : Lavf58.35.100
+    Stream #0:0, 0, 1/12288: Video: h264 (libx264), 1 reference frame (avc1 / 0x31637661), yuv420p, 1920x1080 [SAR 1:1 DAR 16:9], 0/1, q=-1--1, 24 fps, 12288 tbn, 24 tbc
+    Metadata:
+      encoder         : Lavc58.62.100 libx264
+    Side data:
+      cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+Clipping frame in rate conversion by 0.000008
+cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 25 times
+frame=   27 fps=0.0 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 21 times
+frame=   49 fps= 48 q=0.0 size=       0kB time=00:00:00.00 bitrate=N/A speed=   0x    cur_dts is invalid st:0 (0) [init:1 i_done:0 finish:0] (this is harmless if it occurs once at the start per stream)
+    Last message repeated 1 times
+[libx264 @ 000001b2753a6240] frame=   0 QP=11.25 NAL=3 Slice:I Poc:0   I:8160 P:0    SKIP:0    size=11413 bytes
+[libx264 @ 000001b2753a6240] frame=   1 QP=14.70 NAL=2 Slice:P Poc:2   I:8    P:42   SKIP:8110 size=175 bytes
+[libx264 @ 000001b2753a6240] frame=   2 QP=11.00 NAL=2 Slice:P Poc:4   I:2    P:3    SKIP:8155 size=24 bytes
+[libx264 @ 000001b2753a6240] frame=   3 QP=18.21 NAL=2 Slice:P Poc:6   I:420  P:62   SKIP:7678 size=5381 bytes
+[libx264 @ 000001b2753a6240] frame=   4 QP=11.00 NAL=2 Slice:P Poc:8   I:7    P:18   SKIP:8135 size=80 bytes
+[libx264 @ 000001b2753a6240] frame=   5 QP=11.00 NAL=2 Slice:P Poc:10  I:0    P:2    SKIP:8158 size=17 bytes
+[libx264 @ 000001b2753a6240] frame=   6 QP=18.48 NAL=2 Slice:P Poc:12  I:499  P:92   SKIP:7569 size=8058 bytes
+[libx264 @ 000001b2753a6240] frame=   7 QP=10.70 NAL=2 Slice:P Poc:14  I:17   P:28   SKIP:8115 size=147 bytes
+[libx264 @ 000001b2753a6240] frame=   8 QP=11.64 NAL=2 Slice:P Poc:16  I:1    P:1    SKIP:8158 size=24 bytes
+[libx264 @ 000001b2753a6240] frame=   9 QP=19.52 NAL=2 Slice:P Poc:18  I:403  P:84   SKIP:7673 size=7233 bytes
+[libx264 @ 000001b2753a6240] frame=  10 QP=13.99 NAL=2 Slice:P Poc:20  I:13   P:30   SKIP:8117 size=127 bytes
+[libx264 @ 000001b2753a6240] frame=  11 QP=11.00 NAL=2 Slice:P Poc:22  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  12 QP=22.44 NAL=2 Slice:P Poc:24  I:268  P:158  SKIP:7734 size=5755 bytes
+[libx264 @ 000001b2753a6240] frame=  13 QP=10.27 NAL=2 Slice:P Poc:26  I:13   P:24   SKIP:8123 size=137 bytes
+[libx264 @ 000001b2753a6240] frame=  14 QP=9.66 NAL=2 Slice:P Poc:28  I:1    P:2    SKIP:8157 size=28 bytes
+[libx264 @ 000001b2753a6240] frame=  15 QP=14.55 NAL=2 Slice:P Poc:30  I:282  P:154  SKIP:7724 size=6154 bytes
+[libx264 @ 000001b2753a6240] frame=  16 QP=11.14 NAL=2 Slice:P Poc:32  I:24   P:18   SKIP:8118 size=150 bytes
+[libx264 @ 000001b2753a6240] frame=  17 QP=5.96 NAL=2 Slice:P Poc:34  I:5    P:3    SKIP:8152 size=55 bytes
+[libx264 @ 000001b2753a6240] frame=  18 QP=19.68 NAL=2 Slice:P Poc:36  I:291  P:147  SKIP:7722 size=5606 bytes
+[libx264 @ 000001b2753a6240] frame=  19 QP=12.75 NAL=2 Slice:P Poc:38  I:19   P:7    SKIP:8134 size=110 bytes
+[libx264 @ 000001b2753a6240] frame=  20 QP=11.60 NAL=2 Slice:P Poc:40  I:2    P:1    SKIP:8157 size=37 bytes
+[libx264 @ 000001b2753a6240] frame=  21 QP=16.61 NAL=2 Slice:P Poc:42  I:321  P:154  SKIP:7685 size=5364 bytes
+[libx264 @ 000001b2753a6240] frame=  22 QP=11.40 NAL=2 Slice:P Poc:44  I:10   P:16   SKIP:8134 size=125 bytes
+[libx264 @ 000001b2753a6240] frame=  23 QP=8.36 NAL=2 Slice:P Poc:46  I:1    P:3    SKIP:8156 size=28 bytes
+[libx264 @ 000001b2753a6240] frame=  24 QP=16.14 NAL=2 Slice:P Poc:48  I:250  P:97   SKIP:7813 size=6400 bytes
+[libx264 @ 000001b2753a6240] frame=  25 QP=19.06 NAL=2 Slice:P Poc:50  I:5    P:22   SKIP:8133 size=184 bytes
+frame=   76 fps= 50 q=28.0 size=       0kB time=00:00:01.04 bitrate=   0.4kbits/s speed=0.684x    [libx264 @ 000001b2753a6240] frame=  26 QP=13.24 NAL=2 Slice:P Poc:52  I:1    P:2    SKIP:8157 size=27 bytes
+[libx264 @ 000001b2753a6240] frame=  27 QP=16.48 NAL=2 Slice:P Poc:54  I:0    P:3    SKIP:8157 size=29 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0084.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  28 QP=16.48 NAL=2 Slice:P Poc:56  I:0    P:1    SKIP:8159 size=17 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0085.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  29 QP=16.48 NAL=2 Slice:P Poc:58  I:0    P:1    SKIP:8159 size=18 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0086.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  30 QP=16.48 NAL=2 Slice:P Poc:60  I:0    P:1    SKIP:8159 size=18 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0087.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  31 QP=11.00 NAL=2 Slice:P Poc:62  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0088.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  32 QP=11.00 NAL=2 Slice:P Poc:64  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0089.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  33 QP=11.00 NAL=2 Slice:P Poc:66  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0090.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  34 QP=11.00 NAL=2 Slice:P Poc:68  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0091.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  35 QP=11.00 NAL=2 Slice:P Poc:70  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0092.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  36 QP=11.00 NAL=2 Slice:P Poc:72  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0093.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  37 QP=11.00 NAL=2 Slice:P Poc:74  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0094.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  38 QP=11.00 NAL=2 Slice:P Poc:76  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0095.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  39 QP=11.00 NAL=2 Slice:P Poc:78  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0096.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  40 QP=11.00 NAL=2 Slice:P Poc:80  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0097.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  41 QP=11.00 NAL=2 Slice:P Poc:82  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0098.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  42 QP=11.00 NAL=2 Slice:P Poc:84  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0099.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  43 QP=11.00 NAL=2 Slice:P Poc:86  I:0    P:0    SKIP:8160 size=12 bytes
+[image2 @ 000001b27538e200] Opening 'E:/FMP/Kazi's Stuffs/Animations/LaserFX0100.png' for reading
+[file @ 000001b27642aa00] Setting default whitelist 'file,crypto'
+[AVIOContext @ 000001b276483b40] Statistics: 59294 bytes read, 0 seeks
+[libx264 @ 000001b2753a6240] frame=  44 QP=11.00 NAL=2 Slice:P Poc:88  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  45 QP=11.00 NAL=2 Slice:P Poc:90  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  46 QP=11.00 NAL=2 Slice:P Poc:92  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  47 QP=11.00 NAL=2 Slice:P Poc:94  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  48 QP=11.00 NAL=2 Slice:P Poc:96  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  49 QP=11.00 NAL=2 Slice:P Poc:98  I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  50 QP=11.00 NAL=2 Slice:P Poc:100 I:0    P:0    SKIP:8160 size=12 bytes
+[out_0_0 @ 000001b2753999c0] EOF on sink link out_0_0:default.
+No more output streams to write to, finishing.
+[libx264 @ 000001b2753a6240] frame=  51 QP=11.00 NAL=2 Slice:P Poc:102 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  52 QP=11.00 NAL=2 Slice:P Poc:104 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  53 QP=11.00 NAL=2 Slice:P Poc:106 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  54 QP=11.00 NAL=2 Slice:P Poc:108 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  55 QP=11.00 NAL=2 Slice:P Poc:110 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  56 QP=11.00 NAL=2 Slice:P Poc:112 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  57 QP=11.00 NAL=2 Slice:P Poc:114 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  58 QP=11.00 NAL=2 Slice:P Poc:116 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  59 QP=11.00 NAL=2 Slice:P Poc:118 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  60 QP=11.00 NAL=2 Slice:P Poc:120 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  61 QP=11.00 NAL=2 Slice:P Poc:122 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  62 QP=11.00 NAL=2 Slice:P Poc:124 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  63 QP=11.00 NAL=2 Slice:P Poc:126 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  64 QP=11.00 NAL=2 Slice:P Poc:128 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  65 QP=11.00 NAL=2 Slice:P Poc:130 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  66 QP=11.00 NAL=2 Slice:P Poc:132 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  67 QP=11.00 NAL=2 Slice:P Poc:134 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  68 QP=11.00 NAL=2 Slice:P Poc:136 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  69 QP=11.00 NAL=2 Slice:P Poc:138 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  70 QP=11.00 NAL=2 Slice:P Poc:140 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  71 QP=11.00 NAL=2 Slice:P Poc:142 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  72 QP=11.00 NAL=2 Slice:P Poc:144 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  73 QP=11.00 NAL=2 Slice:P Poc:146 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  74 QP=11.00 NAL=2 Slice:P Poc:148 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  75 QP=11.00 NAL=2 Slice:P Poc:150 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  76 QP=11.00 NAL=2 Slice:P Poc:152 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  77 QP=11.00 NAL=2 Slice:P Poc:154 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  78 QP=11.00 NAL=2 Slice:P Poc:156 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  79 QP=11.00 NAL=2 Slice:P Poc:158 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  80 QP=11.00 NAL=2 Slice:P Poc:160 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  81 QP=11.00 NAL=2 Slice:P Poc:162 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  82 QP=11.00 NAL=2 Slice:P Poc:164 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  83 QP=11.00 NAL=2 Slice:P Poc:166 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  84 QP=11.00 NAL=2 Slice:P Poc:168 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  85 QP=11.00 NAL=2 Slice:P Poc:170 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  86 QP=11.00 NAL=2 Slice:P Poc:172 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  87 QP=11.00 NAL=2 Slice:P Poc:174 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  88 QP=11.00 NAL=2 Slice:P Poc:176 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  89 QP=11.00 NAL=2 Slice:P Poc:178 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  90 QP=11.00 NAL=2 Slice:P Poc:180 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  91 QP=11.00 NAL=2 Slice:P Poc:182 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  92 QP=11.00 NAL=2 Slice:P Poc:184 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  93 QP=11.00 NAL=2 Slice:P Poc:186 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  94 QP=11.00 NAL=2 Slice:P Poc:188 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  95 QP=11.00 NAL=2 Slice:P Poc:190 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  96 QP=11.00 NAL=2 Slice:P Poc:192 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  97 QP=11.00 NAL=2 Slice:P Poc:194 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  98 QP=11.00 NAL=2 Slice:P Poc:196 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame=  99 QP=12.00 NAL=2 Slice:P Poc:198 I:0    P:0    SKIP:8160 size=12 bytes
+[libx264 @ 000001b2753a6240] frame= 100 QP=13.00 NAL=2 Slice:P Poc:200 I:0    P:0    SKIP:8160 size=12 bytes
+frame=  101 fps= 45 q=-1.0 Lsize=      64kB time=00:00:04.16 bitrate= 126.0kbits/s speed=1.86x    
+[AVIOContext @ 000001b27538e0c0] Statistics: 0 seeks, 4 writeouts
+video:63kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 1.925855%
+Input file #0 (E:/FMP/Kazi's Stuffs/Animations/LaserFX%04d.png):
+  Input stream #0:0 (video): 101 packets read (6048877 bytes); 101 frames decoded; 
+  Total: 101 packets (6048877 bytes) demuxed
+Output file #0 (E:/FMP/Kazi's Stuffs/Animations/Wake Up.mp4):
+  Output stream #0:0 (video): 101 frames encoded; 101 packets muxed (64387 bytes); 
+  Total: 101 packets (64387 bytes) muxed
+101 frames successfully decoded, 0 decoding errors
+[AVIOContext @ 000001b2753a80c0] Statistics: 2 seeks, 4 writeouts
+[libx264 @ 000001b2753a6240] frame I:1     Avg QP:11.25  size: 11413
+[libx264 @ 000001b2753a6240] frame P:100   Avg QP:11.93  size:   524
+[libx264 @ 000001b2753a6240] mb I  I16..4: 98.5%  0.0%  1.5%
+[libx264 @ 000001b2753a6240] mb P  I16..4:  0.3%  0.0%  0.1%  P16..4:  0.1%  0.0%  0.0%  0.0%  0.0%    skip:99.5%
+[libx264 @ 000001b2753a6240] coded y,uvDC,uvAC intra: 4.3% 8.7% 8.1% inter: 0.0% 0.0% 0.0%
+[libx264 @ 000001b2753a6240] i16 v,h,dc,p: 96%  2%  1%  0%
+[libx264 @ 000001b2753a6240] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 22% 20% 41%  3%  2%  3%  4%  2%  3%
+[libx264 @ 000001b2753a6240] i8c dc,h,v,p: 90%  5%  5%  1%
+[libx264 @ 000001b2753a6240] ref P L0: 83.8% 13.7%  2.5%
+[libx264 @ 000001b2753a6240] kb/s:121.23
