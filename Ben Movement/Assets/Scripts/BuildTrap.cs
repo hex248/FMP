@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 
 public class BuildTrap : MonoBehaviour
@@ -49,43 +50,64 @@ public class BuildTrap : MonoBehaviour
             //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.controlSchemes);
             //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.devices);
             string deviceName = "";
-            string deviceManufacturer = "";
+            string deviceType = "";
             string controlPath = "";
-            var devices = interactingPlayerTrigger.player.playerInput.currentActionMap.devices;
+            //interactingPlayerTrigger.player.playerInput.currentActionMap
+            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.asset.bindings.ToList());
+            var devices = interactingPlayerTrigger.player.playerInput.actions.devices;
             foreach (var device in devices)
             {
-                deviceName = device.name;
-                deviceManufacturer = device.description.manufacturer;
+                // set deviceName
+                deviceName = device.displayName;
+                deviceType = interactingPlayerTrigger.player.playerInput.currentControlScheme;
             }
             //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").type);
-            var bindings = interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray();
+            var bindings1 = interactingPlayerTrigger.player.playerInput.currentActionMap.asset.bindings;
+            foreach (var b in bindings1)
+            {
+                if (b.action == "Interact")
+                {
+                    if (b.path.Contains(deviceType))
+                    {
+                        controlPath = b.path.Split('/')[1];
+                        Debug.Log($"{b.action} bind is {controlPath}");
+                    }
+                }
+            }
+            /*
+            var bindings = interactingPlayerTrigger.player.playerInput.actions.FindAction("Interact").bindings.ToArray();
             foreach(var binding in bindings)
             {
-                if (binding.path.Contains(deviceName))
+                Debug.Log($"Binding path: {binding.path}");
+                if (binding.path.Contains(deviceType))
                 {
                     controlPath = binding.path.Split('/')[1];
                 }
             }
-            Debug.Log($"{deviceName}: {controlPath}");
+            */
+            Debug.Log($"{deviceType} ({deviceName}): {controlPath}");
 
             InputIcons.Icons icons = InputIcons.instance.keyboard; // keyboard is default
 
-            switch (deviceName)
+            switch (deviceType)
             {
                 case "Keyboard":
                     icons = InputIcons.instance.keyboard;
                     break;
                 case "Gamepad":
-                    switch(deviceManufacturer)
+                    switch(deviceName)
                     {
-                        case "Sony Interactive Entertainment":
+                        case "Playstation Controller":
                             icons = InputIcons.instance.ps4;
                             break;
-                        case "Microsoft":
+                        case "Xbox Controller":
+                            icons = InputIcons.instance.xbox;
+                            break;
+                        default:
                             icons = InputIcons.instance.xbox;
                             break;
                     }
-                break;
+                    break;
             }
 
             Sprite interactSprite = icons.GetSprite(controlPath);
