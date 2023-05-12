@@ -29,7 +29,7 @@ public class Credits : MonoBehaviour
     {
         dist = 0f;
         yield return new WaitForSeconds(3f);
-        while (dist < 4800f)
+        while (dist < 11000f)
         {
             currentPos = startPos;
             dist += Time.deltaTime * creditsSpeed;

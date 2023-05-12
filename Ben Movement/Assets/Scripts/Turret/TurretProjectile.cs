@@ -56,7 +56,7 @@ public class TurretProjectile : MonoBehaviour
             if (target)
             {
                 targetRotation = Quaternion.LookRotation((target.transform.position + new Vector3(0, 1.5f, 0)) - transform.position, Vector3.up);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, homingAmount * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, homingAmount * Time.deltaTime);
                 //transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, 1, Mathf.Infinity), transform.position.z);
             }
             rb.velocity = transform.forward * velocity;

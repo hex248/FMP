@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using TMPro;
 
 public class BuildTrap : MonoBehaviour
@@ -31,6 +32,15 @@ public class BuildTrap : MonoBehaviour
 
     bool hasBeenBuilt = false;
 
+    Sprite interactSprite;
+    [SerializeField] Renderer interactRenderer; 
+    Sprite cycleLeftSprite;
+    [SerializeField] Renderer cycleLeftRenderer;
+    Sprite cycleRightSprite;
+    [SerializeField] Renderer cycleRightRenderer;
+    Sprite buildSprite;
+    [SerializeField] Renderer buildRenderer;
+
     private void Start()
     {
         AM = FindObjectOfType<AudioManager>();
@@ -45,51 +55,61 @@ public class BuildTrap : MonoBehaviour
     {
         if (interactingPlayer != null)
         {
+            // get player device type
+            string deviceType = "";
+
+            var devices = interactingPlayerTrigger.player.playerInput.actions.devices;
+            foreach(var d in devices)
+            {
+                deviceType = d.displayName;
+                Debug.Log(deviceType);
+            }
+
             // set control icons
-            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.controlSchemes);
-            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.devices);
-            string deviceName = "";
-            string deviceManufacturer = "";
-            string controlPath = "";
-            var devices = interactingPlayerTrigger.player.playerInput.currentActionMap.devices;
-            foreach (var device in devices)
-            {
-                deviceName = device.name;
-                deviceManufacturer = device.description.manufacturer;
-            }
-            //Debug.Log(interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").type);
-            var bindings = interactingPlayerTrigger.player.playerInput.currentActionMap.FindAction("Interact").bindings.ToArray();
-            foreach(var binding in bindings)
-            {
-                if (binding.path.Contains(deviceName))
-                {
-                    controlPath = binding.path.Split('/')[1];
-                }
-            }
-            Debug.Log($"{deviceName}: {controlPath}");
 
-            InputIcons.Icons icons = InputIcons.instance.keyboard; // keyboard is default
+            // get player controls
+            var player = InputIcons.instance.rebindableControls.player1;
+            switch (interactingPlayer.playerNumber)
+            {
+                case 1:
+                    player = InputIcons.instance.rebindableControls.player1;
+                    break;
+                case 2:
+                    player = InputIcons.instance.rebindableControls.player2;
+                    break;
+                case 3:
+                    player = InputIcons.instance.rebindableControls.player3;
+                    break;
+                case 4:
+                    player = InputIcons.instance.rebindableControls.player4;
+                    break;
+            }
 
-            switch (deviceName)
+            // get correct icon set based on device type
+            var icons = InputIcons.instance.keyboard;
+            switch (deviceType)
             {
                 case "Keyboard":
                     icons = InputIcons.instance.keyboard;
                     break;
-                case "Gamepad":
-                    switch(deviceManufacturer)
-                    {
-                        case "Sony Interactive Entertainment":
-                            icons = InputIcons.instance.ps4;
-                            break;
-                        case "Microsoft":
-                            icons = InputIcons.instance.xbox;
-                            break;
-                    }
-                break;
+                case "Xbox Controller":
+                    icons = InputIcons.instance.xbox;
+                    break;
+                case "Playstation":
+                    icons = InputIcons.instance.ps4;
+                    break;
+                default:
+                    icons = InputIcons.instance.xbox;
+                    break;
             }
-
-            Sprite interactSprite = icons.GetSprite(controlPath);
-            Debug.Log(interactSprite);
+            interactSprite = icons.GetSprite(player.interactPath);
+            interactRenderer.material.mainTexture = interactSprite.texture;
+            cycleLeftSprite = icons.GetSprite(player.cycleLeftPath);
+            cycleLeftRenderer.material.mainTexture = cycleLeftSprite.texture;
+            cycleRightSprite = icons.GetSprite(player.cycleRightPath);
+            cycleRightRenderer.material.mainTexture = cycleRightSprite.texture;
+            buildSprite = icons.GetSprite(player.buildPath);
+            buildRenderer.material.mainTexture = buildSprite.texture;
         }
         timeSinceInteract += Time.deltaTime;
         timeSinceCycleLeft += Time.deltaTime;

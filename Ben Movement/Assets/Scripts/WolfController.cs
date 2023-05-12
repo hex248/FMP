@@ -72,6 +72,7 @@ public class WolfController : MonoBehaviour
     bool useNavMesh;
 
     AudioManager AM;
+    bool targetIsInDirectView;
 
     void Start()
     {
@@ -94,7 +95,7 @@ public class WolfController : MonoBehaviour
         Vector3 offsetToTarget = currentTarget.transform.position - transform.position;
         Vector3 directionToTarget = offsetToTarget.normalized;
         float distanceToTarget = offsetToTarget.magnitude;
-        bool targetIsInDirectView = false;
+        targetIsInDirectView = false;
 
         RaycastHit hit;
         float minDistanceToTargetCollider = Mathf.Infinity;
@@ -153,6 +154,10 @@ public class WolfController : MonoBehaviour
                 {
                     //can see target
                     PrepareAttack();
+                }
+                else
+                {
+                    RotateTowardsTarget();
                 }
 
 

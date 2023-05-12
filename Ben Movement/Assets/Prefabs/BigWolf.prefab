@@ -310,6 +310,36 @@ Transform:
   m_Father: {fileID: 1454328748788817911}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5078457611558611103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4461485510064701252}
+  m_Layer: 11
+  m_Name: Raycast Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4461485510064701252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078457611558611103}
+  m_LocalRotation: {x: 3.7001767e-17, y: -0.5205493, z: -0.85383165, w: 3.7001774e-17}
+  m_LocalPosition: {x: 0, y: 0.0101, z: 0}
+  m_LocalScale: {x: 0.01098901, y: 0.010989012, z: 0.011904762}
+  m_Children: []
+  m_Father: {fileID: 1830208725967530531}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5364760463129289898
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +517,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5596899371544892523}
+  - {fileID: 4461485510064701252}
   m_Father: {fileID: 1454328748788817911}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -547,7 +578,7 @@ Transform:
   m_GameObject: {fileID: 7193890952189679059}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0.7, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 1454328748788817911}
   - {fileID: 7843836584228778752}
@@ -754,7 +785,7 @@ MonoBehaviour:
   missedAttackStunTime: 3
   damagedStunnedTime: 0.6
   hitboxOffset: {x: 0, y: 1.2, z: 0.75}
-  hitboxSize: {x: 0.9, y: 1.45, z: 2}
+  hitboxSize: {x: 1.4, y: 1.45, z: 2.27}
   attackLayerMask:
     serializedVersion: 2
     m_Bits: 65600
@@ -914,10 +945,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Wolf
-  drawTransform: {fileID: 0}
+  drawTransform: {fileID: 4461485510064701252}
   drawSize: 5
-  drawBrush: {fileID: 2800000, guid: b10f036f07f0bf64781c519874c2f68c, type: 3}
-  drawDistance: 0.3
+  drawBrush: {fileID: 2800000, guid: c0f513b7f8667fa49a1c1127cf88baae, type: 3}
+  drawDistance: 0.8
   index: -1
   isEnabled: 1
   objectType: 0
@@ -980,7 +1011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8892453881196700085}
   m_LocalRotation: {x: 0.000000008551491, y: 0.1956353, z: 0.9806768, w: 0.000000042866745}
-  m_LocalPosition: {x: 0.00020341396, y: 0.017838757, z: -0.0017993624}
+  m_LocalPosition: {x: 0.0002, y: 0.01786, z: -0.00188}
   m_LocalScale: {x: -1, y: -1, z: -0.70415425}
   m_Children: []
   m_Father: {fileID: 2032139185683597786}
@@ -1013,7 +1044,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 63a5610e8e318fb4891c99c527393f4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
