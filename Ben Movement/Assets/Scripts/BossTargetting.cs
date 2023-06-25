@@ -76,6 +76,10 @@ public class BossTargetting : MonoBehaviour
             {
                 TargetBed();
             }
+            else if (target.GetComponent<PlayerHealth>().IsDead())
+            {
+                TargetBed();
+            }
         }
         else
         {

@@ -58,6 +58,11 @@ public class Bed : MonoBehaviour
         UpdateDissolve();
     }
 
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     public void TakeDamage(float damage, GameObject source)
     {
         damage = Mathf.Max(damage, 0f);

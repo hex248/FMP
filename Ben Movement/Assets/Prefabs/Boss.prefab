@@ -24,12 +24,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866065441}
-  m_LocalRotation: {x: -0, y: -0, z: 0.000000026495183, w: 1}
-  m_LocalPosition: {x: 5.29, y: -0.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.00000001063169, y: -0.000000057036623, z: 0.39922515, w: 0.91685295}
+  m_LocalPosition: {x: 0.0010890443, y: 0.0024580376, z: 0}
+  m_LocalScale: {x: 0.0023582808, y: 0.0023582801, z: 0.0023582806}
   m_Children: []
-  m_Father: {fileID: 2826765272859676529}
-  m_RootOrder: 2
+  m_Father: {fileID: 2205661109697726598}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &866065443
 LineRenderer:
@@ -72,8 +72,8 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
-  - {x: -4.2, y: 8, z: -14.46}
-  - {x: -9.49, y: -0.96, z: -19.25}
+  - {x: -0.5, y: 8, z: -0.5}
+  - {x: -5, y: -0.96, z: -5}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 4.52549
@@ -280,12 +280,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2826765272859676530}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: -3.424899, y: 0, z: -13.561536}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 2826765273015808973}
   - {fileID: 2355393002957013444}
-  - {fileID: 866065442}
   - {fileID: 2355393002721146302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -302,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2369430c932ce1748aeb8473d7f9e792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 200
+  maximumHealth: 1000
   currentHealth: 0
   dissolveActive: 1
   maxDamageDissolveAmount: 0.3
@@ -311,10 +310,34 @@ MonoBehaviour:
   triggerDeath: 0
   damageEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2826765272859676531}
+        m_TargetAssemblyTypeName: BossController, Assembly-CSharp
+        m_MethodName: RecieveDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   deathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2826765272859676531}
+        m_TargetAssemblyTypeName: BossController, Assembly-CSharp
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   essenceDropAmount: 2
   essenceParticleCount: 10
   essencePrefab: {fileID: 3850395887379244230, guid: b557fcad6d8c6274194c0d07051400e3, type: 3}
@@ -483,9 +506,11 @@ MonoBehaviour:
   range: 10
   currentTarget: {fileID: 0}
   col: {fileID: 2826765272859676535}
+  animationScript: {fileID: 0}
   attack01: {fileID: 3169366286484495230}
   attack01Cooldown: 1
   laserFX: {fileID: 3169366286586228484}
+  deathFX: {fileID: 278696826640259037, guid: 15cf27fb5c4060e42b3ae621e508904f, type: 3}
   dodgedAttacks: 0
 --- !u!54 &2826765272859676532
 Rigidbody:
@@ -514,8 +539,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.3274283, y: 7.145687, z: 5.2075567}
-  m_Center: {x: -0.64880186, y: -5.087155, z: 0.06480784}
+  m_Size: {x: 4.6583443, y: 9.873852, z: 5.6977773}
+  m_Center: {x: -0.81425935, y: 5.35, z: -0.020975297}
 --- !u!195 &2826765272859676533
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -535,7 +560,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 9
-  m_BaseOffset: 0
+  m_BaseOffset: -0.45
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &2826765273015808972
@@ -562,7 +587,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2826765273015808972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8.91, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2355393001436972733}
@@ -816,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13a8c07bda051ce4c8b17a57ff78839d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.91
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 13a8c07bda051ce4c8b17a57ff78839d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1005,7 +1030,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4643dab31c78c1c4f9599edbf519e2a2, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4643dab31c78c1c4f9599edbf519e2a2, type: 3}
       propertyPath: m_LocalScale.x
@@ -1021,15 +1046,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4643dab31c78c1c4f9599edbf519e2a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4643dab31c78c1c4f9599edbf519e2a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.19689
+      value: -0.28689
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4643dab31c78c1c4f9599edbf519e2a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4643dab31c78c1c4f9599edbf519e2a2, type: 3}
       propertyPath: m_LocalRotation.w

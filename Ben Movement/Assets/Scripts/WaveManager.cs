@@ -78,7 +78,8 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    
+    [HideInInspector]
+    public bool bossRound;
 
     void SpawnNextRound()
     {

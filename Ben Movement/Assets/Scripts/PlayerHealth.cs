@@ -155,6 +155,7 @@ public class PlayerHealth : MonoBehaviour
     {
         //death logic
         player.playerMovement.Die();
+        dead = true;
         if (AM.deathSoundOn)
         {
             AM.PlayInChannel("sheep_death", ChannelType.SFX, 1);
@@ -165,7 +166,6 @@ public class PlayerHealth : MonoBehaviour
         grave.transform.rotation = Quaternion.LookRotation((new Vector3(-1f, 0f, -1f)).normalized, transform.up);
         playerVisuals.SetActive(false);
         FindObjectOfType<PlayerManager>().PlayerDied();
-        dead = true;
 
         StartCoroutine(FadeOutShake());
     }

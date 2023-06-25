@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AnimatedMaterial : MonoBehaviour
 {
+    public enum Type { Looping, Once};
+    public Type type = Type.Looping;
     public Material mat;
     public Texture[] frames;
     public float FPS = 24;
@@ -31,7 +33,14 @@ public class AnimatedMaterial : MonoBehaviour
             }
             else
             {
-                i = 0;
+                if(type == Type.Looping)
+                {
+                    i = 0;
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
             mat.mainTexture = frames[i];
             time = 0.0f;

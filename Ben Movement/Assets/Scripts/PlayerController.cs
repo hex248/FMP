@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashCheckRadius = 0.1f;
     [SerializeField] float dashCheckResolution = 0.05f;
     [SerializeField] float playerColliderRadius = 0.25f;
-    [SerializeField] SnowDust dustVFX;
 
     bool isDashing;
     float yMin;
@@ -961,8 +960,6 @@ public class PlayerController : MonoBehaviour
         Vector3 offset = new Vector3(dashEndLocation.x, 0f, dashEndLocation.z) - transform.position;
         currentDashDirection = offset.normalized;
 
-        dustVFX.OnDash();
-
         float finishAfterPercent = offset.magnitude / (dashSpeed * dashTime);
         //dumb solution to occasional clipping, if it works it works
         enableColliderTime = finishAfterPercent * dashTime - 0.01f;
@@ -999,7 +996,6 @@ public class PlayerController : MonoBehaviour
             isDashing = false;
             hasMadeDashSound = false;
             playerAnim.EndDashAnimation();
-            dustVFX.OnDashEnd();
             yScale = 1f;
             horizontalScale = 1f;
             mainCol.enabled = true;

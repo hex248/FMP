@@ -43,16 +43,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa1fca6bbf079444993caf23120bd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRound: 0
+  spawnRadius: 60
   roundDifficulties:
   - 3
   - 5
-  - 5
-  - 10
+  - 8
+  - 12
   - 15
+  music:
+  - music_night1
+  - music_night1
+  - music_night2
+  - music_night2
+  - music_boss
   enemySpawnOptions:
   - enemyPrefab: {fileID: 7704235920015397536, guid: 71abe1017c0daac489ed31bc756522fd, type: 3}
     minRoundNumberToSpawn: 0
+    enemyType: 0
     difficultyCost: 1
-  spawnRadius: 60
-  roundLength: 0
-  infiniteDifficultyIncrease: 0
+  - enemyPrefab: {fileID: 7704235920015397536, guid: a059633fb37c5764d9bedd3bc6947cd1, type: 3}
+    minRoundNumberToSpawn: 3
+    enemyType: 0
+    difficultyCost: 3
+  - enemyPrefab: {fileID: 2826765272859676530, guid: 9522a10b1f034c44fb65e5f3d0ebb550, type: 3}
+    minRoundNumberToSpawn: 5
+    enemyType: 1
+    difficultyCost: 15
+  maximumTimeBetweenSpawns: 1
+  spawnPeriodLength: 5
+  clusterSpawnChance: 0.6
+  clusterSpawnOffset: 0.01
+  gracePeriodLength: 10
+  startGame: 0
+  bed: {fileID: 0}

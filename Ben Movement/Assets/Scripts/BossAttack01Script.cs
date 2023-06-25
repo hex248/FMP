@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossAttack01Script : MonoBehaviour
 {
     private PlayerHealth playerHealth;
+    private Bed bed;
     private BossController boss;
     public SphereCollider col;
     // Start is called before the first frame update
@@ -28,7 +29,17 @@ public class BossAttack01Script : MonoBehaviour
                 playerHealth = boss.currentTarget.GetComponent<PlayerHealth>();
                 playerHealth.Damage(amount);
             }
+            else if(Physics.OverlapBox(transform.position + Vector3.up, Vector3.one * 2.0f)[i].CompareTag("Bed"))
+            {
+                bed = boss.currentTarget.GetComponent<Bed>();
+                bed.TakeDamage(amount, gameObject);
+            }
         }
+    }
+
+    public void Avoided()
+    {
+        boss.animationScript.Avoided();
     }
 
     private void OnDrawGizmos()

@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &278696826640259037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2164112836647952887}
+  - component: {fileID: 1500882511919681347}
+  - component: {fileID: 4988933882110205485}
+  - component: {fileID: 784524003913076334}
+  - component: {fileID: 4645346021678243782}
+  m_Layer: 11
+  m_Name: ExplodeFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2164112836647952887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278696826640259037}
+  m_LocalRotation: {x: 0.46193978, y: 0.33141357, z: -0.19134171, w: 0.8001032}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 11.271, y: 11.271, z: 11.271}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 60, y: 45, z: 0}
+--- !u!33 &1500882511919681347
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278696826640259037}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4988933882110205485
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278696826640259037}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c93cc2f287cbf6d479e0ddad0f626d30, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &784524003913076334
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278696826640259037}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4645346021678243782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278696826640259037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f94e0c02683e34db8e826fe26526cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  mat: {fileID: 2100000, guid: c93cc2f287cbf6d479e0ddad0f626d30, type: 2}
+  frames:
+  - {fileID: 2800000, guid: aa7a5ad6965bc344aa75cb82e9c6d077, type: 3}
+  - {fileID: 2800000, guid: cf32c5b853082ff4c986736ea20d8175, type: 3}
+  - {fileID: 2800000, guid: ea4d9b7a605a4f74a87eba701073c6f9, type: 3}
+  - {fileID: 2800000, guid: 510143a1f668e8b4fa85c16d8af9520a, type: 3}
+  - {fileID: 2800000, guid: d48b6d2fe7fca5f44b45d1a6e20f905d, type: 3}
+  - {fileID: 2800000, guid: 76107d5c7bbf1ec45bfc3971de0e32f0, type: 3}
+  - {fileID: 2800000, guid: bd503ced8084bd143af95474f68da9c5, type: 3}
+  - {fileID: 2800000, guid: b7619e477e59f504ab7dd8029059ef52, type: 3}
+  - {fileID: 2800000, guid: 03a6b328d19ec9f4aae9e1c0140d8dda, type: 3}
+  - {fileID: 2800000, guid: ce4c9436241f271428792c5eace5e8b2, type: 3}
+  - {fileID: 2800000, guid: 7c9d34ad02b91fb42b6a2b6c48e94e75, type: 3}
+  - {fileID: 2800000, guid: d2cbc6f09d8cf4a4eb28bf69c0fc8420, type: 3}
+  - {fileID: 2800000, guid: 3c7a0a40b3a496847b155cf228166f0d, type: 3}
+  - {fileID: 2800000, guid: 90c2f4cb1f27dda448108cf8fa11dd85, type: 3}
+  FPS: 24

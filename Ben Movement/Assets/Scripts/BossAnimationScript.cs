@@ -31,7 +31,6 @@ public class BossAnimationScript : MonoBehaviour
         if (isFreezing)
         {
             LineRenderer line = ray.GetComponent<LineRenderer>();
-            line.SetPosition(1, Vector3.Lerp(line.GetPosition(1), boss.currentTarget.transform.position, Time.deltaTime * laserSpeed));
             boss.laserFX.transform.position = Vector3.Lerp(line.GetPosition(1), boss.currentTarget.transform.position, Time.deltaTime * laserSpeed);
             Physics.Raycast(line.GetPosition(0), line.GetPosition(1) - line.GetPosition(0), out RaycastHit hit);
             Collider[] cols = Physics.OverlapSphere(hit.point, 2.0f);
@@ -40,6 +39,14 @@ public class BossAnimationScript : MonoBehaviour
                 if (col.CompareTag("Player"))
                 {
                     col.GetComponent<PlayerHealth>().Damage(1);
+                    isFreezing = false;
+                    break;
+                }
+                else if (col.CompareTag("Bed"))
+                {
+                    col.GetComponent<Bed>().TakeDamage(3, gameObject);
+                    isFreezing = false;
+                    break;
                 }
             }
         }
@@ -47,6 +54,9 @@ public class BossAnimationScript : MonoBehaviour
     public void StartTelegraph()
     {
         telegraph.SetActive(true);
+        Vector3 direction = (boss.currentTarget.transform.position - transform.position).normalized;
+        float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
     }
 
     public void EndTelegraph()
@@ -58,9 +68,6 @@ public class BossAnimationScript : MonoBehaviour
     {
         if (boss.currentTarget != null)
         {
-            Vector3 direction = (boss.currentTarget.transform.position - transform.position).normalized;
-            float Y = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            boss.transform.eulerAngles = new Vector3(0.0f, Y - 90.0f, 0.0f);
             ray.SetActive(true);
             LineRenderer line = ray.GetComponent<LineRenderer>();
             line.SetPosition(0, ray.transform.position);
@@ -95,6 +102,11 @@ public class BossAnimationScript : MonoBehaviour
         }
     }
 
+    public void Hurt()
+    {
+        anim.SetTrigger("hurt");
+    }
+
     int previousHealth;
 
     PlayerHealth target;
@@ -122,11 +134,15 @@ public class BossAnimationScript : MonoBehaviour
             }
             else
             {
-                boss.dodgedAttacks++;
                 arm.SetActive(false);
-                boss.SetState(1);
+                boss.SetState(0);
             }
         }
+    }
+
+    public void Avoided()
+    {
+        boss.dodgedAttacks++;
     }
 
     public void SetActive(bool active)

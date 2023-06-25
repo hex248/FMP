@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    public GameObject endGameTimeline;
+
     [Header("Players")]
     public int playerCount = 0;
     [SerializeField] GameObject playerParentPrefab;
@@ -104,7 +106,7 @@ public class PlayerManager : MonoBehaviour
     {
         screenManager = FindObjectOfType<ScreenManager>();
         playersRemaining = 0;
-
+        endGameTimeline.SetActive(false);
         AddJoinedPlayers();
     }
 
@@ -351,9 +353,9 @@ public class PlayerManager : MonoBehaviour
     public void PlayerDied()
     {
         playersRemaining--;
-        if(playersRemaining <= 0)
+        if(playersRemaining <= 0 || FindObjectOfType<Bed>().GetCurrentHealth() <= 0.0f || FindObjectOfType<WaveManager>().bossRound)
         {
-            EndGame("Credits");
+            endGameTimeline.SetActive(true);
         }
     }
 
