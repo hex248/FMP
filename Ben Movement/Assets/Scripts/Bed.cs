@@ -31,6 +31,8 @@ public class Bed : MonoBehaviour
     [SerializeField] UnityEvent<GameObject> damageEvent;
     [SerializeField] UnityEvent deathEvent;
 
+    private GameObject currentAttacker;
+
     void Start()
     {
         currentHealth = maximumHealth;
@@ -58,6 +60,16 @@ public class Bed : MonoBehaviour
         UpdateDissolve();
     }
 
+    public GameObject GetAttacker()
+    {
+        return currentAttacker;
+    }
+
+    public void ResetAttacker()
+    {
+        currentAttacker = null;
+    }
+
     public float GetCurrentHealth()
     {
         return currentHealth;
@@ -82,6 +94,7 @@ public class Bed : MonoBehaviour
             dissolveDistance = Mathf.Abs(currentDissolveAmount - targetDissolveAmount);
 
             timeSinceTargetAdjusted = 0f;
+            currentAttacker = source;
             damageEvent.Invoke(source);
             
 

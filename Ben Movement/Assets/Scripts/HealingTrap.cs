@@ -7,6 +7,7 @@ public class HealingTrap : MonoBehaviour
     AudioManager AM;
 
     [Header("Visuals")]
+    public Material heal;
     public GameObject[] lights;
     public GameObject visuals;
     [SerializeField] GameObject healPack;
@@ -22,6 +23,11 @@ public class HealingTrap : MonoBehaviour
         towerPos = visuals.transform.position;
         StartCoroutine(SpawnTurret());
         targetScale = 2f;
+    }
+
+    private void OnEnable()
+    {
+        timeSinceHealingUsed = cooldown;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,6 +65,7 @@ public class HealingTrap : MonoBehaviour
         {
             timeSinceHealingUsed = 0f;
         }
+        heal.SetColor("_EmissionColor", Color.Lerp(heal.GetColor("_EmissionColor"), new Color(0.0f, 191.0f / 255.0f, 11.0f / 255.0f) * ((timeSinceHealingUsed / cooldown) + (targetScale / 2.0f)) * Mathf.Pow(2.0f, 2.7f), Time.deltaTime * 10f));
     }
 
     void RespawnHealing()

@@ -16,10 +16,12 @@ public class PlayerController : MonoBehaviour
 
     [Header("Move Settings")]
     [SerializeField] float moveSpeed;
+    [SerializeField] GameObject arrow;
     Vector2 movementInput;
     
     private Vector3 currentForwardDirection;
     private Vector3 mostRecentMoveDirection;
+    private Bed bed;
     bool isWalking;
     
     [Header("Dash Settings")]
@@ -135,7 +137,7 @@ public class PlayerController : MonoBehaviour
         fabricCols = GetComponentsInChildren<Collider>().ToList();
 
         ResetMeleeCombo();
-
+        bed = FindObjectOfType<Bed>();
 
         isDead = false;
     }
@@ -368,6 +370,21 @@ public class PlayerController : MonoBehaviour
             dashBuffered = false;
             meleeAttackBuffered = false;
             rangedAttackBuffered = false;
+        }
+        if(bed.GetCurrentHealth() > 0.0f)
+        {
+            if (!bed.GetComponentInChildren<Renderer>().isVisible && bed.GetAttacker() != null)
+            {
+                arrow.SetActive(true);
+                Vector3 direction = transform.position - bed.GetAttacker().transform.position;
+                arrow.transform.rotation = Quaternion.Euler(0.0f, Mathf.Atan2(direction.z, -direction.x) * Mathf.Rad2Deg + 90.0f, 0.0f);
+            }
+            else if(bed.GetComponentInChildren<Renderer>().isVisible)
+            {
+                arrow.SetActive(false);
+                bed.ResetAttacker();
+            }
+            //if(direction.magnitude)
         }
     }
 
@@ -1188,10 +1205,6 @@ public class PlayerController : MonoBehaviour
                     }
                     return enemiesInViewCone[currentMinIndex].gameObject;
                 }
-
-                
-
-                
             }
         }
     }
