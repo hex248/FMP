@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     [Header("Projectile Movement Settings")]
     public float projectileSpeed;
     public float homingAmount;
+    public float lifeTime = 5.0f;
     public GameObject currentTarget;
     [Header("Attack Settings")]
     public float damage;
@@ -57,6 +58,14 @@ public class Projectile : MonoBehaviour
     {
         //RotateTowardsTarget();
         MoveForward(projectileSpeed);
+        if(lifeTime > 0.0f)
+        {
+            lifeTime -= Time.deltaTime;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void MoveForward(float speed)
