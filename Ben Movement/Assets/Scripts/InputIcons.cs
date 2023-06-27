@@ -59,6 +59,7 @@ public class InputIcons : MonoBehaviour
         public Sprite rightStick;
         public Sprite leftStickPress;
         public Sprite rightStickPress;
+        public Sprite emptySprite;
 
         public Sprite GetSprite(string controlPath)
         {
@@ -85,7 +86,7 @@ public class InputIcons : MonoBehaviour
                 case "rightStick": return rightStick;
                 case "leftStickPress": return leftStickPress;
                 case "rightStickPress": return rightStickPress;
-                default: return null;
+                default: return emptySprite;
             }
         }
     }
