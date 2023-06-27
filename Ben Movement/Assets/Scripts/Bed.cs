@@ -62,7 +62,14 @@ public class Bed : MonoBehaviour
 
     public GameObject GetAttacker()
     {
-        return currentAttacker;
+        if(currentHealth < maximumHealth)
+        {
+            return currentAttacker;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void ResetAttacker()
